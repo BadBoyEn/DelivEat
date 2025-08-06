@@ -5,3 +5,4 @@ function CardSignUp () {
        <Card/>
     )
 }
+export default CardSignUp;

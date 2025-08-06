@@ -4,3 +4,4 @@ function TitleSignUp () {
       signup
     )
 }
+export default TitleSignUp;
