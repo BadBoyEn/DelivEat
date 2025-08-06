@@ -1,9 +1,13 @@
 import react from 'react';
-import Card from 'Card.js';
+import SignUp from '.Components/SignUp.js';
 function App() {
   return (
      <>
-     <Card/>
+      <AppTheme {...props}>
+      <CssBaseline enableColorScheme />
+      <ColorModeSelect sx={{ position: 'fixed', top: '1rem', right: '1rem' }} />
+      <SignUp/>
+    </AppTheme>
      </>
   )
 }
