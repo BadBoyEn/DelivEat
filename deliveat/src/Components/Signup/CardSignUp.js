@@ -1,8 +1,12 @@
 import react from 'react';
-import Card from '../Card'
+import SignupForm from './SignupForm';
+import TitleSignUp from './TitleSignUp';
 function CardSignUp () {
     return (
-       <Card/>
+        <>
+       <TitleSignUp/>
+       <SignupForm/>
+       </>
     )
 }
 export default CardSignUp;
