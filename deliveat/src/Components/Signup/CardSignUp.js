@@ -1,6 +1,6 @@
 import react from 'react';
-import Card from 'Card.js'
-function SignUp () {
+import Card from '../Card'
+function CardSignUp () {
     return (
        <Card/>
     )
