@@ -3,8 +3,6 @@ import { Box, FormControl, FormLabel, TextField } from '@mui/material';
 import './SignupForm.css';
 
 function SignupForm({
-    nameError,
-    nameErrorMessage,
     emailError,
     emailErrorMessage,
     passwordError,
@@ -13,25 +11,13 @@ function SignupForm({
     }){
     return (
         <>
-        {/* ACQUISIZIONE NOME */}
-        <FormControl>
-            <FormLabel htmlFor="name">Full name</FormLabel>
-            <TextField
-                autoComplete="name"
-                name="name"
-                required
-                fullWidth
-                id="name"
-                placeholder="Zio Paperone"
-                error={nameError}
-                helperText={nameErrorMessage}
-                color={nameError ? 'error' : 'primary'}
-            /> {/* DA TOGLIERE! */}   
-        </FormControl>
-
+        <box
+            component="form"
+            onSubmit={handleSubmit}
+            className="form-container"
+        >
         {/* ACQUISIZIONE EMAIL */} 
-
-        <FormControl>
+        <FormControl className="form-control"> 
             <FormLabel htmlFor="email">Email</FormLabel>
             <TextField
                 required
@@ -43,12 +29,12 @@ function SignupForm({
                 variant="outlined"
                 error={emailError}
                 helperText={emailErrorMessage}
-                color={passwordError ? 'error' : 'primary'} />
+                color={emailError ? 'error' : 'primary'} />
         </FormControl>
         
         {/* ACQUISIZIONE PASSWORD */} 
 
-        <FormControl>
+        <FormControl className="form-control">
             <FormLabel htmlFor="password">Password</FormLabel>
             <TextField
                 required
@@ -63,7 +49,7 @@ function SignupForm({
                 helperText={passwordErrorMessage}
                 color={passwordError ? 'error' : 'primary'} />
         </FormControl>
-
+        </box>
         </>
     );
 }

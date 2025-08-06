@@ -5,6 +5,6 @@
 }
 
 .form-control label {
-  font-weight: 500;
-  margin-bottom: 4px;
+  font-size: 1vw;       /* 400 normale, 500 medio, 700 grassetto */
+  margin-bottom: 0.3vw;
 }

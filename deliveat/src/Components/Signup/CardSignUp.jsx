@@ -48,18 +48,17 @@ function CardSignUp () {
     }
   };
 
-    return (
-        <div className="card-container">
-        <TitleSignUp />
-
-        <SignupForm
-            emailError={emailError}
-            emailErrorMessage={emailErrorMessage}
-            passwordError={passwordError}
-            passwordErrorMessage={passwordErrorMessage}
-            handleSubmit={handleSubmit}
-        />
-        <ActionSignUp validateInputs={validateInputs} />
+  return (
+    <div className="card-container">
+      <TitleSignUp />
+      <SignupForm
+        emailError={emailError}
+        emailErrorMessage={emailErrorMessage}
+        passwordError={passwordError}
+        passwordErrorMessage={passwordErrorMessage}
+        handleSubmit={handleSubmit}
+      />
+      <ActionSignUp validateInputs={validateInputs} />
     </div>
   );
 }
