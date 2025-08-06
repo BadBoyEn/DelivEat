@@ -1,7 +1,19 @@
 import react from 'react';
-function ActionSignUp () {
+import {Button} from '@mui/material';
+import './ActionSignUp.css';
+
+function ActionSignUp ({validateInputs}) {
     return (
-        bottone
-    )
+        <Button
+            type="submit"
+            variant="contained"
+            className="sub-btn"
+            onClick={validateInputs}
+            fullWidth >
+        
+        Sign Up
+
+        </Button>
+    );
 }
 export default ActionSignUp;

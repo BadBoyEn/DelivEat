@@ -1,0 +1,11 @@
+.title-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.title-text {
+  font-weight: bold;
+  font-size: clamp(2rem, 10vw, 2.15rem); /* 2.15 -> 34,4  [1:16] */
+  margin: 0; 
+}
