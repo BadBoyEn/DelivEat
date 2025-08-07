@@ -19,7 +19,7 @@ export default function SignUp(props) {
       <SignUpContainer direction="column" justifyContent="center">
       <Card variant="outlined" sx={{ p: 3, position: 'relative', overflow: 'visible' }}>  
           <SitemarkIcon />
-          <Box sx={{ position: 'absolute', top: 5, right: 5, bgcolor: 'background.paper' }}>
+          <Box sx={{ position: 'absolute', top: 5, right: 2, bgcolor: 'background.paper' }}>
             <ColorModeSelect />
           </Box>
           <Typography component="h1" variant="h4.5" sx={{  }}>
