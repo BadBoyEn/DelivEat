@@ -1,15 +1,9 @@
-import react from 'react';
-
-import CssBaseline from  '@mui/material/CssBaseline';
-import CardSignUp from './Components/Signup/CardSignUp'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import SignUp from './components/SignUpCard';
 
 function App() {
-  return (
-     <>
-     <h1>Benvenuto nel portale di delivering</h1>
-     <CssBaseline/>
-     <CardSignUp/>
-     </>
-  )
+  return <SignUp />
 }
-export default App;
+
+export default App
