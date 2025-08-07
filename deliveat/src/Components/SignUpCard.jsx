@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Button, Checkbox, CssBaseline, Divider, FormControl, FormControlLabel, FormLabel, Link, TextField, Typography } from '@mui/material';
+import { Box, Button, CssBaseline, Divider, FormControl, FormLabel, Link, TextField, Typography } from '@mui/material';
 import { Card, SignUpContainer } from './SignUpContainer';
 import { useSignUpLogic } from './SignUpLogic';
 import { GoogleIcon, SitemarkIcon } from './CustomIcons';
