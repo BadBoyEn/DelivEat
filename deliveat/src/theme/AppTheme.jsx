@@ -18,7 +18,6 @@ export default function AppTheme({ children }) {
     },
   }), [mode]);
 
-  // ✅ Inietta dinamicamente il CSS dal path pubblico
   useEffect(() => {
     const id = 'theme-style';
     const existing = document.getElementById(id);
