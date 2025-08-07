@@ -1,14 +1,14 @@
 body {
-  background-color: #f5f5f5;
+  background-color:#f5f5f5 ;
   color: #1a1a1a;
 }
 
 .container {
-  background: radial-gradient(ellipse at 50% 50%, hsl(0, 100%, 97%), hsl(0, 0%, 100%));
+  background: radial-gradient(ellipse at 50% 50%, white(0, 100%, 97%), white(0, 0%, 100%));
 }
 
 .card {
-  background-color: #ffffff;
+  background-color: white;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 

@@ -6,14 +6,12 @@
 }
 
 .card {
-<<<<<<< HEAD
+
   padding: 2rem;
   gap: 1rem;
   width: clamp(150px, 70vw, 550px);
-=======
   width: 90%;
   max-width: 420px;
->>>>>>> 3069b8c27fc39acdb44cb912034da2ac65ac6118
   margin: auto;
   display: flex;
   flex-direction: column;
