@@ -1,6 +1,6 @@
 import * as React from 'react';
 import SvgIcon from '@mui/material/SvgIcon';
-import DelivEat_logo from '../assets/DelivEat_logo2.png';
+import DelivEat_logo from '../Images/DelivEat_logo.png';
 
 export function SitemarkIcon() {
   return (

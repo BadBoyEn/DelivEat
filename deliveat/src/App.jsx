@@ -1,6 +1,4 @@
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import SignUp from './components/SignUpCard';
+import SignUp from './Components/SignUpCard';
 
 function App() {
   return <SignUp />
