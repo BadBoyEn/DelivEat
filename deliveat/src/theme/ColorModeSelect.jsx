@@ -7,7 +7,7 @@ import { ColorModeContext } from './AppTheme';
 import './ColorModeSelect.css';
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
-  width: 62,
+  width: 59,
   height: 34,
   padding: 7,
   '& .MuiSwitch-switchBase': {

@@ -28,7 +28,7 @@ export default function AppTheme({ children }) {
     const link = document.createElement('link');
     link.id = id;
     link.rel = 'stylesheet';
-    link.href = `/theme/${mode === 'dark' ? 'Dark.css' : 'Light.css'}`;
+    link.href = `/theme/${mode === 'dark' ? 'Dark.css' : 'Light.css'}?v=${Date.now()}`;
     document.head.appendChild(link);
   }, [mode]);
 

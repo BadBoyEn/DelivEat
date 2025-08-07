@@ -11,15 +11,15 @@ import {
   Typography
 } from '@mui/material';
 
-import { SignUpContainer, StyledCard } from './SignUpContainer';
-import { useSignUpLogic } from './SignUpLogic';
+import { SignInContainer, StyledCard } from './SignInContainer';
+import { useSignInLogic } from './SignInLogic';
 import { GoogleIcon, SitemarkIcon } from './CustomIcons';
-import ColorModeSelect from '../theme/ColorModeSelect';
-import AppTheme from '../theme/AppTheme';
+import ColorModeSelect from '../../theme/ColorModeSelect';
+import AppTheme from '../../theme/AppTheme';
 
-import './SignUpCard.css';
+import './GestionePersonale.css';
 
-export default function SignUp(props) {
+export default function SignIn(props) {
   const {
     emailError,
     emailErrorMessage,
@@ -27,13 +27,12 @@ export default function SignUp(props) {
     passwordErrorMessage,
     validateInputs,
     handleSubmit
-  } = useSignUpLogic();
+  } = useSignInLogic();
 
   return (
     <AppTheme {...props}>
       <CssBaseline enableColorScheme />
-
-      <SignUpContainer direction="column" justifyContent="center" className="container">
+      <SignInContainer direction="column" justifyContent="center" className="signin-card-container">
         <StyledCard variant="outlined" className="card">
           <Box className="logo-container">
             <SitemarkIcon />
@@ -44,7 +43,7 @@ export default function SignUp(props) {
           </Box>
 
           <Typography component="h1" variant="h4.5" className="title">
-            Registrati
+            Accedi
           </Typography>
 
           <Box component="form" onSubmit={handleSubmit} className="form">
@@ -88,25 +87,16 @@ export default function SignUp(props) {
             <Typography sx={{ color: 'text.secondary' }}>o</Typography>
           </Divider>
 
-          <Box className="google-buttons">
+          <Box className="reg-button">
             <Button
               fullWidth
               variant="outlined"
-              onClick={() => alert('Sign up with Google')}
-              startIcon={<GoogleIcon />}
             >
-              REGISTRATI CON GOOGLE
+              REGISTRATI
             </Button>
-
-            <Typography className="link-container">
-              Hai già un account?{' '}
-              <Link href="/sign-in" variant="body2">
-                Accedi subito
-              </Link>
-            </Typography>
           </Box>
         </StyledCard>
-      </SignUpContainer>
+      </SignInContainer>
     </AppTheme>
   );
 }
