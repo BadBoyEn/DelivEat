@@ -1,0 +1,10 @@
+.card {
+  padding: 2rem;
+  gap: 1rem;
+  width: clamp(300px, 90vw, 550px);
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: visible;
+}

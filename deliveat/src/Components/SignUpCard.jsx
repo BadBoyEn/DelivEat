@@ -1,31 +1,57 @@
 import * as React from 'react';
-import { Box, Button, CssBaseline, Divider, FormControl, FormLabel, Link, TextField, Typography } from '@mui/material';
-import { Card, SignUpContainer } from './SignUpContainer';
+import {
+  Box,
+  Button,
+  CssBaseline,
+  Divider,
+  FormControl,
+  FormLabel,
+  Link,
+  TextField,
+  Typography
+} from '@mui/material';
+
+import { SignUpContainer, StyledCard } from './SignUpContainer';
 import { useSignUpLogic } from './SignUpLogic';
 import { GoogleIcon, SitemarkIcon } from './CustomIcons';
 import ColorModeSelect from '../theme/ColorModeSelect';
 import AppTheme from '../theme/AppTheme';
 
-export default function SignUp(props) { 
+import './SignUpCard.css';
+
+export default function SignUp(props) {
   const {
-    emailError, emailErrorMessage,
-    passwordError, passwordErrorMessage,
-    validateInputs, handleSubmit
+    emailError,
+    emailErrorMessage,
+    passwordError,
+    passwordErrorMessage,
+    validateInputs,
+    handleSubmit
   } = useSignUpLogic();
 
   return (
     <AppTheme {...props}>
       <CssBaseline enableColorScheme />
-      <SignUpContainer direction="column" justifyContent="center">
-      <Card variant="outlined" sx={{ p: 3, position: 'relative', overflow: 'visible' }}>  
+      
+      {/* container con classe CSS */}
+      <SignUpContainer direction="column" justifyContent="center" className="container">
+        {/* card con classe CSS */}
+        <StyledCard variant="outlined" className="card">
           <SitemarkIcon />
+
           <Box sx={{ position: 'absolute', top: 5, right: 2, bgcolor: 'background.paper' }}>
             <ColorModeSelect />
           </Box>
-          <Typography component="h1" variant="h4.5" sx={{  }}>
+
+          <Typography component="h1" variant="h4.5">
             Registrati
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}
+          >
             <FormControl>
               <FormLabel htmlFor="email">Email</FormLabel>
               <TextField
@@ -40,6 +66,7 @@ export default function SignUp(props) {
                 helperText={emailErrorMessage}
               />
             </FormControl>
+
             <FormControl>
               <FormLabel htmlFor="password">Password</FormLabel>
               <TextField
@@ -55,25 +82,39 @@ export default function SignUp(props) {
                 helperText={passwordErrorMessage}
               />
             </FormControl>
-            <Button type="submit" fullWidth variant="contained" onClick={validateInputs}>
+
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              onClick={validateInputs}
+            >
               Registrati
             </Button>
           </Box>
+
           <Divider>
             <Typography sx={{ color: 'text.secondary' }}>o</Typography>
           </Divider>
+
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-            <Button fullWidth variant="outlined" onClick={() => alert('Sign up with Google')} startIcon={<GoogleIcon />}>
-              Registrati con Google
+            <Button
+              fullWidth
+              variant="outlined"
+              onClick={() => alert('Sign up with Google')}
+              startIcon={<GoogleIcon />}
+            >
+              REGISTRATI CON GOOGLE
             </Button>
-            <Typography sx={{ textAlign: 'center', marginTop: 1}}>
+
+            <Typography sx={{ textAlign: 'center', marginTop: 1 }}>
               Hai già un account?{' '}
               <Link href="/sign-in" variant="body2">
                 Accedi subito
               </Link>
             </Typography>
           </Box>
-        </Card>
+        </StyledCard>
       </SignUpContainer>
     </AppTheme>
   );
