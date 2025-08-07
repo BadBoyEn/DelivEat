@@ -1,0 +1,82 @@
+/* ACCESSO GESTIONE PERSONALE! */
+
+/* CustomIcons.jsx */
+
+.logo-img {
+  width: 160px;
+  height: 160px;
+  display: block;
+  margin: 0 auto;
+  object-fit: contain;
+  transform: scale(1.1);
+}
+
+/* SignInCard.jsx */
+
+.signin-card-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.card {
+  width: 90%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  padding: 2rem;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.title {
+  text-align: center;
+  font-size: clamp(2rem, 10vw, 2.15rem);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.link-container {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+/* SignInContainer.jsx */
+
+.signin-container-wrapper {
+  height: 100vh;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.signin-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.signin-card {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* REGISTRAZIONE GESTIONE PERSONALE */

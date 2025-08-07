@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export function useSignUpLogic() {
+export function useSignInLogic() {
   const [emailError, setEmailError] = useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = useState('');
   const [passwordError, setPasswordError] = useState(false);
