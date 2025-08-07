@@ -79,7 +79,7 @@ export default function SignIn(props) {
             </FormControl>
 
             <Button type="submit" fullWidth variant="contained" onClick={validateInputs}>
-              Registrati
+              Accedi
             </Button>
           </Box>
 
