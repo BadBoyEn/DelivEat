@@ -32,26 +32,22 @@ export default function SignUp(props) {
   return (
     <AppTheme {...props}>
       <CssBaseline enableColorScheme />
-      
-      {/* container con classe CSS */}
-      <SignUpContainer direction="column" justifyContent="center" className="container">
-        {/* card con classe CSS */}
-        <StyledCard variant="outlined" className="card">
-          <SitemarkIcon />
 
-          <Box sx={{ position: 'absolute', top: 5, right: 2, bgcolor: 'background.paper' }}>
+      <SignUpContainer direction="column" justifyContent="center" className="container">
+        <StyledCard variant="outlined" className="card">
+          <Box className="logo-container">
+            <SitemarkIcon />
+          </Box>
+
+          <Box className="color-switch">
             <ColorModeSelect />
           </Box>
 
-          <Typography component="h1" variant="h4.5">
+          <Typography component="h1" variant="h4.5" className="title">
             Registrati
           </Typography>
 
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}
-          >
+          <Box component="form" onSubmit={handleSubmit} className="form">
             <FormControl>
               <FormLabel htmlFor="email">Email</FormLabel>
               <TextField
@@ -83,12 +79,7 @@ export default function SignUp(props) {
               />
             </FormControl>
 
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              onClick={validateInputs}
-            >
+            <Button type="submit" fullWidth variant="contained" onClick={validateInputs}>
               Registrati
             </Button>
           </Box>
@@ -97,7 +88,7 @@ export default function SignUp(props) {
             <Typography sx={{ color: 'text.secondary' }}>o</Typography>
           </Divider>
 
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+          <Box className="google-buttons">
             <Button
               fullWidth
               variant="outlined"
@@ -107,7 +98,7 @@ export default function SignUp(props) {
               REGISTRATI CON GOOGLE
             </Button>
 
-            <Typography sx={{ textAlign: 'center', marginTop: 1 }}>
+            <Typography className="link-container">
               Hai già un account?{' '}
               <Link href="/sign-in" variant="body2">
                 Accedi subito

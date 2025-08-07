@@ -4,6 +4,8 @@ import Switch from '@mui/material/Switch';
 import { useTheme } from '@mui/material/styles';
 import { ColorModeContext } from './AppTheme';
 
+import './ColorModeSelect.css';
+
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
   height: 34,
@@ -61,8 +63,8 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 }));
 
 export default function ColorModeSelect(props) {
-  const theme = useTheme(); 
-  const colorMode = React.useContext(ColorModeContext); 
+  const theme = useTheme();
+  const colorMode = React.useContext(ColorModeContext);
 
   const handleChange = () => {
     colorMode.toggleColorMode(theme.palette.mode === 'light' ? 'dark' : 'light');
@@ -70,9 +72,10 @@ export default function ColorModeSelect(props) {
 
   return (
     <MaterialUISwitch
-     checked={theme.palette.mode === 'dark'}
-     onChange={handleChange}
-     {...props}
+      checked={theme.palette.mode === 'dark'}
+      onChange={handleChange}
+      className="color-switch"
+      {...props}
     />
-  );   
+  );
 }
