@@ -5,13 +5,10 @@ export function useSignInLogic() {
   const [emailErrorMessage, setEmailErrorMessage] = useState('');
   const [passwordError, setPasswordError] = useState(false);
   const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
-  const [nameError, setNameError] = useState(false);
-  const [nameErrorMessage, setNameErrorMessage] = useState('');
 
   const validateInputs = () => {
     const email = document.getElementById('email');
     const password = document.getElementById('password');
-    const name = document.getElementById('name');
 
     let isValid = true;
 
@@ -37,14 +34,12 @@ export function useSignInLogic() {
   };
 
   const handleSubmit = (event) => {
-    if (nameError || emailError || passwordError) {
+    if (!validateInputs()) {
       event.preventDefault();
       return;
     }
     const data = new FormData(event.currentTarget);
     console.log({
-      name: data.get('name'),
-      lastName: data.get('lastName'),
       email: data.get('email'),
       password: data.get('password'),
     });
@@ -53,7 +48,6 @@ export function useSignInLogic() {
   return {
     emailError, emailErrorMessage,
     passwordError, passwordErrorMessage,
-    nameError, nameErrorMessage,
     validateInputs,
     handleSubmit
   };

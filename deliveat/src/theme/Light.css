@@ -1,22 +1,23 @@
-body {
-  background-color:#f5f5f5 ;
-  color: #1a1a1a;
+html.theme-light {
+  --bg: #e91010;
+  --text: #000000;
+  --card-bg: #d5ec04;
+  --shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+
+  --input-bg: #ffffff;
+  --input-text: #000000;
+  --input-border: #cccccc;
+
+  --accent: #1976d2;
+  --accent-contrast: #ffffff;
+
+  --switch-track: #aab4be;
+  --switch-thumb: #1976d2;
+  --switch-thumb-checked: #1976d2;
+  --switch-icon-color: #1976d2;
 }
 
-.container {
-  background: radial-gradient(ellipse at 50% 50%, white(0, 100%, 97%), white(0, 0%, 100%));
-}
-
-.card {
-  background-color: white;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-}
-
-input,
-button,
-label,
-.MuiFormLabel-root {
-  color: #1a1a1a;
-  background-color: #ffffff;
-  border-color: #ccc;
+html.theme-light, html.theme-light body, html.theme-light #root {
+  background-color: var(--bg) !important;
+  color: var(--text);
 }

@@ -1,7 +1,4 @@
-/* ACCESSO GESTIONE PERSONALE! */
-
-/* CustomIcons.jsx */
-
+/* ====== LOGO ====== */
 .logo-img {
   width: 160px;
   height: 160px;
@@ -11,76 +8,56 @@
   transform: scale(1.1);
 }
 
-/* SignInCard.jsx */
-
-.signin-card-container {
+/* ====== LAYOUT PAGINA AUTENTICAZIONE ====== */
+.auth-page {
+  min-height: 100vh;
+  padding: 2rem;
   display: flex;
-  align-items: center;
   justify-content: center;
-  height: 100vh;
+  align-items: center;
 }
 
-.card {
-
-  padding: 2rem;
-  gap: 1rem;
-  width: clamp(150px, 70vw, 550px);
-  width: 90%;
-  max-width: 420px;
+/* ====== CARD AUTENTICAZIONE ====== */
+.auth-card {
+  width: min(90vw, 420px);
   display: flex;
   flex-direction: column;
-  align-self: center;
+  gap: 1rem;
   padding: 2rem;
   box-sizing: border-box;
   position: relative;
+
+  /* Colori presi dal tema */
+  background-color: var(--card-bg) !important;
+  box-shadow: var(--shadow);
+  color: var(--text);
 }
 
+/* ====== ELEMENTI INTERNI ====== */
 .logo-container {
   display: flex;
   justify-content: center;
   margin-bottom: 1rem;
 }
 
-.title {
+.auth-title {
   text-align: center;
   font-size: clamp(2rem, 10vw, 2.15rem);
 }
 
-.form {
+.auth-form {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   width: 100%;
 }
 
-.link-container {
-  text-align: center;
+.color-switch {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.reg-button {
   margin-top: 1rem;
 }
-
-/* SignInContainer.jsx */
-
-.signin-container-wrapper {
-  height: 100vh;
-  padding: 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.signin-container {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.signin-card {
-  width: 100%;
-  max-width: 400px;
-  display: flex;
-  flex-direction: column;
-}
-
-
-/* REGISTRAZIONE GESTIONE PERSONALE */
