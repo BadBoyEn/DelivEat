@@ -5,7 +5,7 @@
   display: block;
   margin: 0 auto;
   object-fit: contain;
-  transform: scale(1.1);
+  transform: scale(1.2);
 }
 
 /* ====== LAYOUT PAGINA AUTENTICAZIONE ====== */
@@ -15,6 +15,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-Image: var(--backgroundImage);
 }
 
 /* ====== CARD AUTENTICAZIONE ====== */
@@ -31,8 +32,6 @@
   background-color: var(--card-bg) !important;
   box-shadow: var(--shadow);
   color: var(--text);
-  background-Image: var(--backgroundImage);
-      
 
 }
 
@@ -40,12 +39,12 @@
 .logo-container {
   display: flex;
   justify-content: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0.2rem;
 }
 
 .auth-title {
   text-align: center;
-  font-size: clamp(2rem, 10vw, 2.15rem);
+  font-size: clamp(1.25rem, 8vw, 1.7rem);
 }
 
 .auth-form {
@@ -57,10 +56,10 @@
 
 .color-switch {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 0.75rem;
+  right: 0.80rem;
 }
 
 .reg-button {
-  margin-top: 1rem;
+  margin-top: 0rem;
 }
