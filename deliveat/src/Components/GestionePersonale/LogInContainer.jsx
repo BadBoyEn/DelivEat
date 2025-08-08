@@ -3,7 +3,7 @@ import MuiCard from '@mui/material/Card';
 
 import './GestionePersonale.css';
 
-export const SignInContainer = (props) => (
+export const LogInContainer = (props) => (
   <Stack className="auth-page" {...props} />
 );
 

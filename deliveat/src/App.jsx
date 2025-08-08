@@ -1,7 +1,8 @@
-import SignIn from './Components/GestionePersonale/SignInCard';
+import LogIn from './Components/GestionePersonale/LogInCard';
+import SignUp from './Components/GestionePersonale/SignUpCard';
 
 function App() {
-  return <SignIn />
+  return <SignUp />
 }
 
 export default App

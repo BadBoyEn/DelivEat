@@ -10,15 +10,15 @@ import {
   Typography
 } from '@mui/material';
 
-import { SignInContainer, StyledCard } from './SignInContainer';
-import { useSignInLogic } from './SignInLogic';
+import { LogInContainer, StyledCard } from './LogInContainer';
+import { useLogInLogic } from './LogInLogic';
 import { SitemarkIcon } from './CustomIcons';
 import ColorModeSelect from '../../theme/ColorModeSelect';
 import AppTheme from '../../theme/AppTheme';
 
 import './GestionePersonale.css';
 
-export default function SignIn(props) {
+export default function LogIn(props) {
   const {
     emailError,
     emailErrorMessage,
@@ -26,12 +26,12 @@ export default function SignIn(props) {
     passwordErrorMessage,
     validateInputs,
     handleSubmit
-  } = useSignInLogic();
+  } = useLogInLogic();
 
   return (
     <AppTheme {...props}>
       <CssBaseline enableColorScheme />
-      <SignInContainer direction="column" justifyContent="center">
+      <LogInContainer direction="column" justifyContent="center">
         <StyledCard variant="outlined">
           <Box className="color-switch">
             <ColorModeSelect />
@@ -92,7 +92,7 @@ export default function SignIn(props) {
             </Button>
           </Box>
         </StyledCard>
-      </SignInContainer>
+      </LogInContainer>
     </AppTheme>
   );
 }
