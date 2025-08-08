@@ -41,8 +41,8 @@ export default function SignIn(props) {
             <SitemarkIcon />
           </Box>
 
-          <Typography component="h1" variant="h4" className="auth-title">
-            Accedi
+          <Typography component="h2" variant="h4" className="auth-title">
+            Accesso Riservato
           </Typography>
 
           <Box component="form" onSubmit={handleSubmit} className="auth-form">

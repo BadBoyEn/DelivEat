@@ -1,14 +1,14 @@
 html.theme-light {
-  --bg: #e91010;
+  --bg: hsl(210, 100%, 97%);
   --text: #000000;
-  --card-bg: #d5ec04;
+  --card-bg: hsl(0, 0%, 100%);
   --shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
 
   --input-bg: #ffffff;
   --input-text: #000000;
   --input-border: #cccccc;
 
-  --accent: #1976d2;
+  --accent: #e9ebed;
   --accent-contrast: #ffffff;
 
   --switch-track: #aab4be;
