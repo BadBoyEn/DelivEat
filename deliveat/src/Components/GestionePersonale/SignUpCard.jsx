@@ -4,13 +4,13 @@ import {
   Box,
   Button,
   CssBaseline,
-  Divider,
   FormControl,
   FormLabel,
   TextField,
   MenuItem,
   Typography,
-  InputLabel
+  Checkbox,
+  FormControlLabel
 } from '@mui/material';
 import { SignUpContainer, StyledCard } from './SignUpContainer';
 import { useSignUpLogic } from './SignUpLogic';
@@ -29,6 +29,10 @@ export default function SignUp(props) {
     FirstNameErrorMessage,
     LastNameError,
     LastNameErrorMessage,
+    EmailError,
+    EmailErrorMessage,
+    PasswordErrorMessage,
+    PasswordError,
     validateInputs,
     handleSubmit    
   } = useSignUpLogic();
@@ -67,7 +71,7 @@ export default function SignUp(props) {
                         />
                         </FormControl>
                        </Grid>
-                     <Grid item xs={12} sm={6}>
+                     <Grid item xs={6}>
                       <FormControl fullWidth>
                        <FormLabel htmlFor="lastname">Cognome</FormLabel>
                      <TextField
@@ -81,14 +85,15 @@ export default function SignUp(props) {
                     fullWidth
                     sx={{ minWidth: 205 }}
                     />
-                      </FormControl>
+                  </FormControl>
                   </Grid>
-                  <Grid item xs={12}>
+                  <Grid item xs={12} className="grid-role">
                       <FormControl fullWidth variant="outlined">
                           <FormLabel htmlFor="Occupation">Occupazione</FormLabel>
                           <Select
-                            labelId="demo-simple-select-outlined-label"
-                            htmlFor="Occupation"
+                            fullWidth
+                            labelId="occupation-label"
+                            id="Occupation"
                             /*onChange={handleChange}*/
                             name="occupation">
                             {options.map((item) => (
@@ -99,37 +104,109 @@ export default function SignUp(props) {
                           </Select>
                         </FormControl>
                     </Grid>
+                   <Grid container spacing={3}>
+                  <Grid item xs={12} sm={6} >
+                    <FormControl fullWidth>
+                        <FormLabel htmlFor="phone">Numero di telefono</FormLabel>
+                        <TextField
+                        required
+                        id="phone"
+                        name="phone"
+                        placeholder="+39 123 456 7890"
+                        variant="outlined"
+                        fullWidth
+                        sx={{ minWidth: 205 }}
+                       />
+                     </FormControl>
+                    </Grid>
+
+                   <Grid item xs={6}>
+                  <FormControl fullWidth>
+                    <FormLabel htmlFor="birthdate">Data di nascita</FormLabel>
+                    <TextField
+                    required
+                    id="birthdate"
+                    name="birthdate"
+                    type="date"
+                    variant="outlined"
+                    InputLabelProps={{ shrink: true }}
+                    fullWidth
+                    sx={{ minWidth: 205 }}
+                   />
+                  </FormControl>
+                 </Grid>
+
+<Grid item xs={12} sm={6}>
+  <FormControl fullWidth>
+    <FormLabel htmlFor="city">Città</FormLabel>
+    <TextField
+      required
+      id="city"
+      name="city"
+      placeholder="Roma"
+      variant="outlined"
+      sx={{ minWidth: 205 }}
+    />
+  </FormControl>
+</Grid>
+
+<Grid item xs={6}>
+  <FormControl fullWidth>
+    <FormLabel htmlFor="address">Indirizzo</FormLabel>
+    <TextField
+      required
+      id="address"
+      name="address"
+      placeholder="Via Roma 10"
+      variant="outlined"
+      sx={{ minWidth: 205 }}
+    />
+  </FormControl>
+</Grid> 
+                      <Grid item xs={12} sm={6}>
+                        <FormControl fullWidth>
+                         <FormLabel htmlFor="email">Email</FormLabel>
+                        <TextField
+                         required
+                         id="email"
+                         placeholder="tua@email.com"
+                         name="email"
+                         variant="outlined"
+                         error={EmailError}
+                         helperText={EmailErrorMessage}
+                         fullWidth
+                         sx={{ minWidth: 205 }}
+                        />
+                        </FormControl>
+                       </Grid>
+                     <Grid item xs={6}>
+                      <FormControl fullWidth>
+                       <FormLabel htmlFor="password">Password</FormLabel>
+                     <TextField
+                     required
+                     id="password"
+                     placeholder="******"
+                     name="password"
+                     variant="outlined"
+                     error={PasswordError}
+                     helperText={PasswordErrorMessage}
+                    fullWidth
+                    sx={{ minWidth: 205 }}
+                    />
+                  </FormControl>
+                  </Grid>
+               </Grid>
+               <FormControlLabel
+              control={<Checkbox value="allowExtraEmails" color="primary" />}
+              label="I want to receive updates via email."
+            />
+               <Button type="submit" fullWidth variant="contained" className="signup-button" onClick={validateInputs}>
+                              Registrati
+                            </Button>      
                  </Grid>
                 </Box>         
-      </StyledCard>            
-
-
-
-
-
-
-
-
-
-
-
+      </StyledCard>          
       </SignUpContainer>
-
-
-
-
-
-
-
-
-
-
     </AppTheme>
-  )
-
-
-
-
-
-               
+  )         
 }

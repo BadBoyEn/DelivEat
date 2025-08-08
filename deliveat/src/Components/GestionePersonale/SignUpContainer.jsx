@@ -4,7 +4,7 @@ import MuiCard from '@mui/material/Card';
 import './GestionePersonale.css';
 
 export const SignUpContainer = (props) => (
-  <Stack className="auth-page" {...props} />
+  <Stack className="auth-page-signup" {...props} />
 );
 
 export const StyledCard = (props) => (
