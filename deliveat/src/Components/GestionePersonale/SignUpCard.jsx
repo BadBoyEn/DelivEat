@@ -169,46 +169,46 @@ export default function SignUp(props) {
         <Box component="form" onSubmit={handleSubmit} className="signup-form">
          <Grid container spacing={2}>
           <Grid item xs={12} sm={6} lg={4} className="grid-marginfix">
-                        <FormControl fullWidth>
-                         <FormLabel htmlFor="email">Email</FormLabel>
-                          <TextField
-                           required
-                           id="email"
-                           placeholder="tua@email.com"
-                           name="email"
-                           variant="outlined"
-                           error={EmailError}
-                           helperText={EmailErrorMessage}
-                           fullWidth
-                          />
-                         </FormControl>
-                        </Grid>
-                       <Grid item xs={12} sm={6} lg={4} className="grid-marginfix">
-                        <FormControl fullWidth>
-                         <FormLabel htmlFor="password">Password</FormLabel>
-                          <TextField
-                           required
-                           id="password"
-                           placeholder="******"
-                           name="password"
-                           variant="outlined"
-                           error={PasswordError}
-                           helperText={PasswordErrorMessage}
-                           fullWidth
-                          />
-                         </FormControl>
-                        </Grid>
-         </Grid>
-        </Box>
-        <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-              label="I want to receive updates via email."
+           <FormControl fullWidth>
+            <FormLabel htmlFor="email">Email</FormLabel>
+             <TextField
+              required
+              id="email"
+              placeholder="tua@email.com"
+              name="email"
+              variant="outlined"
+              error={EmailError}
+              helperText={EmailErrorMessage}
+              fullWidth                   
+             />
+            </FormControl>
+           </Grid>
+          <Grid item xs={12} sm={6} lg={4} className="grid-marginfix">
+           <FormControl fullWidth>
+            <FormLabel htmlFor="password">Password</FormLabel>
+             <TextField
+              required
+              id="password"
+              placeholder="******"
+              name="password"
+              variant="outlined"
+              error={PasswordError}
+              helperText={PasswordErrorMessage}                 
+              fullWidth
             />
-               <Button type="submit" fullWidth variant="contained" className="signup-button" onClick={validateInputs}>
-                              Registrati
-                            </Button>              
-       </StyledCard>          
-      </SignUpContainer>
-    </AppTheme>
+          </FormControl>
+         </Grid>
+        </Grid>
+       </Box>
+       <FormControlLabel
+        control={<Checkbox value="allowExtraEmails" color="primary" />}
+        label="I want to receive updates via email."
+       />             
+       <Button type="submit" fullWidth variant="contained" className="signup-button" onClick={validateInputs}>
+        Registrati
+       </Button>              
+      </StyledCard>          
+    </SignUpContainer>
+  </AppTheme>
   )         
 }
