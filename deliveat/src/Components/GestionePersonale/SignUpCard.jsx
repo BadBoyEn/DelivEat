@@ -9,6 +9,7 @@ import {
   TextField,
   MenuItem,
   Typography,
+  Link,
   Checkbox,
   FormControlLabel
 } from '@mui/material';
@@ -202,11 +203,21 @@ export default function SignUp(props) {
        </Box>
        <FormControlLabel
         control={<Checkbox value="allowExtraEmails" color="primary" />}
-        label="I want to receive updates via email."
+        label="Voglio ricevere aggiornamenti via email."
        />             
        <Button type="submit" fullWidth variant="contained" className="signup-button" onClick={validateInputs}>
         Registrati
-       </Button>              
+       </Button>
+       <Typography sx={{ textAlign: 'center' }}>
+              Hai già un account?{' '}
+              <Link
+                href="/material-ui/getting-started/templates/sign-in/"
+                variant="body2"
+                sx={{ alignSelf: 'center' }}
+              >
+                Accedi subito
+              </Link>
+            </Typography>              
       </StyledCard>          
     </SignUpContainer>
   </AppTheme>
