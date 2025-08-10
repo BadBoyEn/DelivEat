@@ -3,7 +3,7 @@ import {
   Box,
   Button,
   CssBaseline,
-  Divider,
+  Link,
   FormControl,
   FormLabel,
   TextField,
@@ -82,15 +82,16 @@ export default function LogIn(props) {
             </Button>
           </Box>
 
-          <Divider>
-            <Typography sx={{ color: 'text.secondary' }}>o</Typography>
-          </Divider>
-
-          <Box className="reg-button">
-            <Button fullWidth variant="outlined">
-              REGISTRATI
-            </Button>
-          </Box>
+          <Typography sx={{ textAlign: 'center' }}>
+              Non hai un account?{' '}
+              <Link
+                href="/material-ui/getting-started/templates/sign-in/"
+                variant="body2"
+                sx={{ alignSelf: 'center' }}
+              >
+                Registrati
+              </Link>
+            </Typography>
         </StyledCard>
       </LogInContainer>
     </AppTheme>

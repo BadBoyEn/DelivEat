@@ -215,7 +215,7 @@ export default function SignUp(props) {
                 variant="body2"
                 sx={{ alignSelf: 'center' }}
               >
-                Accedi subito
+                Accedi
               </Link>
             </Typography>              
       </StyledCard>          
