@@ -1,5 +1,4 @@
-import * as React from 'react';
-import SvgIcon from '@mui/material/SvgIcon';
+//import SvgIcon from '@mui/material/SvgIcon';
 import DelivEat_logo from '../../Images/DelivEat_logo.png';
 
 import './GestionePersonale.css';
