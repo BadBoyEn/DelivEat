@@ -1,8 +1,14 @@
-import LogIn from './Components/GestionePersonale/LogInCard';
-import SignUp from './Components/GestionePersonale/SignUpCard';
+import { BrowserRouter as Router, Routes, Route } from 'react-router';
+import SignUpPage from './pages/SignUpPage';
 
 function App() {
-  return <SignUp />
+  return (
+    <Router>
+      <Routes>
+        <Route path="/signup" element={<SignUpPage />} />
+      </Routes>
+    </Router>
+  )
 }
 
 export default App
