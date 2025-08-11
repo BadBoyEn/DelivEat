@@ -1,5 +1,8 @@
+import AppTheme from '../theme/AppTheme.jsx'
 import LogIn from '../Components/GestionePersonale/LogInCard'
 
 export default function LogInPage() {
-    return <LogIn />;
+    return <AppTheme>
+        <LogIn />
+    </AppTheme>;
 }

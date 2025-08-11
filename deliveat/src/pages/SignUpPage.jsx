@@ -1,5 +1,8 @@
+import AppTheme from '../theme/AppTheme.jsx'
 import SignUp from '../Components/GestionePersonale/SignUpCard'
 
 export default function SignUpPage() {
-    return <SignUp />;
+    return <AppTheme>
+        <SignUp />
+    </AppTheme>;
 }
