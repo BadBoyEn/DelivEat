@@ -10,8 +10,6 @@ import {
   MenuItem,
   Typography,
   Link,
-  Checkbox,
-  FormControlLabel
 } from '@mui/material';
 import { SignUpContainer, StyledCard } from './SignUpContainer';
 import { useSignUpLogic } from './SignUpLogic';
