@@ -200,11 +200,7 @@ export default function SignUp(props) {
           </FormControl>
          </Grid>
         </Grid>
-       </Box>
-       <FormControlLabel
-        control={<Checkbox value="allowExtraEmails" color="primary" />}
-        label="Voglio ricevere aggiornamenti via email."
-       />             
+       </Box>            
        <Button type="submit" fullWidth variant="contained" className="signup-button" onClick={validateInputs}>
         Registrati
        </Button>

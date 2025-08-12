@@ -3,7 +3,7 @@ import SignUpPage from './pages/SignUpPage';
 import LogInPage from './pages/LogInPage';
 import HomePage from './pages/HomePage';
 
-function App() {
+export default function App() {
   return (
     <Router>
       <Routes>
@@ -14,6 +14,3 @@ function App() {
     </Router>
   )
 }
-
-
-export default App;
