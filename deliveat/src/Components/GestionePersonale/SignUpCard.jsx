@@ -47,7 +47,7 @@ export default function SignUp(props) {
           <Box className="logo-container-signup">
             <SitemarkIcon />
           </Box>
-          <Typography component="h2" variant="h4.5" className="signup-title">
+          <Typography component="h2" variant="h4" className="signup-title">
             Registazione Staff
           </Typography>
 
@@ -84,16 +84,15 @@ export default function SignUp(props) {
                     </FormControl>
                 </Grid>
              </Grid>
-         </Box>
-         <Grid item xs={12} sm={6} lg={4} className="grid-role">
-          <FormControl fullWidth variant="outlined">
-           <FormLabel htmlFor="Occupation">Occupazione</FormLabel>
-            <Select
+          </Box>
+          <Grid item xs={12} sm={6} lg={4} className="grid-role">
+           <FormControl fullWidth variant="outlined">
+            <FormLabel htmlFor="Occupation">Occupazione</FormLabel>
+             <Select
              required
              fullWidth
              labelId="occupation-label"
              id="Occupation"
-             /*onChange={handleChange}*/
              name="occupation">
              {options.map((item) => (
              <MenuItem key={item.value} value={item.value}>
@@ -129,7 +128,7 @@ export default function SignUp(props) {
                  variant="outlined"
                  InputLabelProps={{ shrink: true }}                   
                  fullWidth
-                 sx={{ minWidth: 223 }}
+                 sx={{ minWidth: 203 }}
                 />
                </FormControl>
               </Grid>
