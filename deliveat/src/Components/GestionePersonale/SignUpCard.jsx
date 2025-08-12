@@ -44,10 +44,10 @@ export default function SignUp(props) {
           <Box className="color-switch">
             <ColorModeSelect />
           </Box>
-          <Box className="logo-container-signup">
+          <Box className="logo-container logo-container--tight">
             <SitemarkIcon />
           </Box>
-          <Typography component="h2" variant="h4" className="signup-title">
+          <Typography component="h2" variant="h4" className="auth-title">
             Registazione Staff
           </Typography>
 

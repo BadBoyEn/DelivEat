@@ -15,37 +15,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-Image: var(--backgroundImage);
-}
-
-.auth-page-signup {
-  min-height: 100vh;
-  padding: 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-Image: var(--backgroundImage);
+  background-image: var(--backgroundImage);
 }
 
 /* ====== CARD AUTENTICAZIONE ====== */
 .auth-card {
   width: min(90vw, 420px);
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding: 2rem;
-  box-sizing: border-box;
-  position: relative;
-
-  /* Colori presi dal tema */
-  background-color: var(--card-bg) !important;
-  box-shadow: var(--shadow);
-  color: var(--text);
-
-}
-
-.auth-card-signup {
-  min-width: 500px;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -67,18 +42,7 @@
   margin-bottom: 0.2rem;
 }
 
-.logo-container-signup {
-  display: flex;
-  justify-content: center;
-  margin-bottom: -0.5rem;
-}
-
 .auth-title {
-  text-align: center;
-  font-size: clamp(1.25rem, 8vw, 1.7rem);
-}
-
-.signup-title {
   text-align: center;
   font-size: clamp(1.25rem, 8vw, 1.7rem);
 }
@@ -116,4 +80,13 @@
 
 .grid-marginfix {
   margin-top: -3px;
+}
+
+/* ====== MODIFICATORI ====== */
+.auth-card--wide {
+  min-width: 500px;
+}
+
+.logo-container--tight {
+  margin-bottom: -0.5rem;
 }
