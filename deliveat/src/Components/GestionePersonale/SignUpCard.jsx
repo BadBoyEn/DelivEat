@@ -48,7 +48,7 @@ export default function SignUp(props) {
             <SitemarkIcon />
           </Box>
           <Typography component="h2" variant="h4" className="auth-title">
-            Registazione Staff
+            Registrazione Staff
           </Typography>
 
           <Box component="form" onSubmit={handleSubmit} className="signup-form">

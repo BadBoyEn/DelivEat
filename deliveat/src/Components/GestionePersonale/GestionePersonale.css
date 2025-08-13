@@ -64,7 +64,8 @@
 
 .grid-role {
   margin-top: -3px;
-  flex-grow: 1;
+  /*flex-grow: 1;*/
+  margin-right: 11px;
 }
 
 .color-switch {
@@ -75,7 +76,7 @@
 
 .signup-button {
   display: block;
-  width: 90%; 
+  width: 90%;
 }
 
 .grid-marginfix {
@@ -89,4 +90,5 @@
 
 .logo-container--tight {
   margin-bottom: -0.5rem;
+  border-right: -10rem;
 }
