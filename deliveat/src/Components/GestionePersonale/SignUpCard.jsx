@@ -10,6 +10,7 @@ import {
   MenuItem,
   Typography,
   Link,
+  FormHelperText
 } from '@mui/material';
 import { SignUpContainer, StyledCard } from './SignUpContainer';
 import { useSignUpLogic } from './SignUpLogic';
@@ -44,7 +45,8 @@ export default function SignUp(props) {
     PasswordError,
     PasswordErrorMessage,
     handleSubmit,
-    validateInputs    
+    validateInputs,
+    handleChange    
   } = useSignUpLogic();
 
   return (
@@ -97,7 +99,7 @@ export default function SignUp(props) {
              </Grid>
           </Box>
           <Grid item xs={12} sm={6} lg={4} className="grid-role">
-           <FormControl fullWidth variant="outlined">
+           <FormControl fullWidth variant="outlined" error={OccupationError}>
             <FormLabel htmlFor="occupation">Occupazione</FormLabel>
              <Select
               required
@@ -105,14 +107,18 @@ export default function SignUp(props) {
               labelId="occupation-label"
               id="occupation"
               name="occupation"
-              error={OccupationError}
-              helperText={OccupationErrorMessage}>
+              onChange={handleChange}>
               {options.map((item) => (
               <MenuItem key={item.value} value={item.value}>
                 {item.label}
               </MenuItem>
               ))}
               </Select>
+              {OccupationError && (
+                <FormHelperText>
+                  {OccupationErrorMessage}
+                </FormHelperText>
+              )}
            </FormControl>
          </Grid>
         <Box component="form" onSubmit={handleSubmit} className="signup-form">

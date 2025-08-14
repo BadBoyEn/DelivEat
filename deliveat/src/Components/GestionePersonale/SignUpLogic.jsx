@@ -64,14 +64,15 @@ export function useSignUpLogic() {
     }
 
     // Occupazione
-    if (!nameRegex.test(occupation.value)) {
-      setOccupationError(true);
-      setOccupationErrorMessage('Inserisci un\'occupazione valida.');
-      isValid = false;
-    } else {
-      setOccupationError(false);
-      setOccupationErrorMessage('');
-    }
+    const allowedOccupations = ['manager', 'cameriere'];
+if (!allowedOccupations.includes(occupation.value)) {
+  setOccupationError(true);
+  setOccupationErrorMessage('Seleziona un\'occupazione valida.');
+  isValid = false;
+} else {
+  setOccupationError(false);
+  setOccupationErrorMessage('');
+}
 
     // Telefono: solo numeri, almeno 7 cifre
     if (!/^\d{7,}$/.test(phone.value)) {
