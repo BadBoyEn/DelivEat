@@ -18,6 +18,7 @@ import ColorModeSelect from '../../theme/ColorModeSelect';
 import { SitemarkIcon } from './CustomIcons';
 
 const options = [
+
   { label: "Cameriere", value: "cameriere" },
   { label: "Manager", value: "manager" },
 ]
@@ -28,12 +29,22 @@ export default function SignUp(props) {
     FirstNameErrorMessage,
     LastNameError,
     LastNameErrorMessage,
+    OccupationError,
+    OccupationErrorMessage,
+    PhoneError,
+    PhoneErrorMessage,
+    BirthdateError,
+    BirthdateErrorMessage,
+    CityError,
+    CityErrorMessage,
+    AddressError,
+    AddressErrorMessage,
     EmailError,
     EmailErrorMessage,
-    PasswordErrorMessage,
     PasswordError,
-    validateInputs,
-    handleSubmit    
+    PasswordErrorMessage,
+    handleSubmit,
+    validateInputs    
   } = useSignUpLogic();
 
   return (
@@ -77,9 +88,9 @@ export default function SignUp(props) {
                       placeholder="Rossi"
                       name="lastname"
                       variant="outlined"
+                      fullWidth
                       error={LastNameError}
                       helperText={LastNameErrorMessage}
-                      fullWidth
                      />
                     </FormControl>
                 </Grid>
@@ -87,21 +98,23 @@ export default function SignUp(props) {
           </Box>
           <Grid item xs={12} sm={6} lg={4} className="grid-role">
            <FormControl fullWidth variant="outlined">
-            <FormLabel htmlFor="Occupation">Occupazione</FormLabel>
+            <FormLabel htmlFor="occupation">Occupazione</FormLabel>
              <Select
-             required
-             fullWidth
-             labelId="occupation-label"
-             id="Occupation"
-             name="occupation">
-             {options.map((item) => (
-             <MenuItem key={item.value} value={item.value}>
-               {item.label}
-             </MenuItem>
-             ))}
-             </Select>
-          </FormControl>
-        </Grid>
+              required
+              fullWidth
+              labelId="occupation-label"
+              id="occupation"
+              name="occupation"
+              error={OccupationError}
+              helperText={OccupationErrorMessage}>
+              {options.map((item) => (
+              <MenuItem key={item.value} value={item.value}>
+                {item.label}
+              </MenuItem>
+              ))}
+              </Select>
+           </FormControl>
+         </Grid>
         <Box component="form" onSubmit={handleSubmit} className="signup-form">
          <Grid container spacing={2}>
            <Grid item xs={12} sm={6} lg={4} className="grid-marginfix">
@@ -114,7 +127,9 @@ export default function SignUp(props) {
                 placeholder="+39 123 456 7890"
                 variant="outlined"
                 fullWidth
-               />
+                error={PhoneError}
+                helperText={PhoneErrorMessage}
+                />
               </FormControl>
              </Grid>
              <Grid item xs={12} sm={6} lg={4} className="grid-marginfix">
@@ -128,6 +143,8 @@ export default function SignUp(props) {
                  variant="outlined"
                  InputLabelProps={{ shrink: true }}                   
                  fullWidth
+                 error={BirthdateError}
+                 helperText={BirthdateErrorMessage}
                  sx={{ minWidth: 203 }}
                 />
                </FormControl>
@@ -146,6 +163,8 @@ export default function SignUp(props) {
                   placeholder="Roma"
                   variant="outlined"
                   fullWidth
+                  error={CityError}
+                  helperText={CityErrorMessage}
                  />
                 </FormControl>
               </Grid>
@@ -159,6 +178,8 @@ export default function SignUp(props) {
                   placeholder="Via Roma 10"
                   variant="outlined"
                   fullWidth
+                  error={AddressError}
+                  helperText={AddressErrorMessage}
                  />
                 </FormControl>
                </Grid>
@@ -175,9 +196,9 @@ export default function SignUp(props) {
               placeholder="tua@email.com"
               name="email"
               variant="outlined"
+              fullWidth
               error={EmailError}
-              helperText={EmailErrorMessage}
-              fullWidth                   
+              helperText={EmailErrorMessage}                   
              />
             </FormControl>
            </Grid>
@@ -189,10 +210,10 @@ export default function SignUp(props) {
               id="password"
               placeholder="******"
               name="password"
-              variant="outlined"
-              error={PasswordError}
-              helperText={PasswordErrorMessage}                 
+              variant="outlined"               
               fullWidth
+              error={PasswordError}
+              helperText={PasswordErrorMessage}
             />
           </FormControl>
          </Grid>
