@@ -8,9 +8,6 @@ export function useSignUpLogic() {
   const [LastNameError, setLastNameError] = useState(false);
   const [LastNameErrorMessage, setLastNameErrorMessage] = useState('');
   
-  const [OccupationError, setOccupationError] = useState(false);
-  const [OccupationErrorMessage, setOccupationErrorMessage] = useState('');
-  
   const [PhoneError, setPhoneError] = useState(false);
   const [PhoneErrorMessage, setPhoneErrorMessage] = useState('');
   
@@ -32,7 +29,6 @@ export function useSignUpLogic() {
   const validateInputs = () => {
     const firstname = document.getElementById('firstname');
     const lastname = document.getElementById('lastname');
-    const occupation = document.getElementById('occupation');
     const phone = document.getElementById('phone');
     const birthdate = document.getElementById('birthdate');
     const city = document.getElementById('city');
@@ -62,17 +58,6 @@ export function useSignUpLogic() {
       setLastNameError(false);
       setLastNameErrorMessage('');
     }
-
-    // Occupazione
-    const allowedOccupations = ['manager', 'cameriere'];
-if (!allowedOccupations.includes(occupation.value)) {
-  setOccupationError(true);
-  setOccupationErrorMessage('Seleziona un\'occupazione valida.');
-  isValid = false;
-} else {
-  setOccupationError(false);
-  setOccupationErrorMessage('');
-}
 
     // Telefono: solo numeri, almeno 7 cifre
     if (!/^\d{7,}$/.test(phone.value)) {
@@ -159,7 +144,6 @@ if (!allowedOccupations.includes(occupation.value)) {
   return {
     FirstNameError, FirstNameErrorMessage,
     LastNameError, LastNameErrorMessage,
-    OccupationError, OccupationErrorMessage,
     PhoneError, PhoneErrorMessage,
     BirthdateError, BirthdateErrorMessage,
     CityError, CityErrorMessage,

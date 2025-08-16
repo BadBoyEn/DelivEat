@@ -1,16 +1,13 @@
 import {
   Grid,
-  Select,
   Box,
   Button,
   CssBaseline,
   FormControl,
   FormLabel,
   TextField,
-  MenuItem,
   Typography,
-  Link,
-  FormHelperText
+  Link
 } from '@mui/material';
 import { SignUpContainer, StyledCard } from './SignUpContainer';
 import { useSignUpLogic } from './SignUpLogic';
@@ -18,20 +15,12 @@ import AppTheme from '../../theme/AppTheme';
 import ColorModeSelect from '../../theme/ColorModeSelect';
 import { SitemarkIcon } from './CustomIcons';
 
-const options = [
-
-  { label: "Cameriere", value: "cameriere" },
-  { label: "Manager", value: "manager" },
-]
-
 export default function SignUp(props) {
   const {
     FirstNameError,
     FirstNameErrorMessage,
     LastNameError,
     LastNameErrorMessage,
-    OccupationError,
-    OccupationErrorMessage,
     PhoneError,
     PhoneErrorMessage,
     BirthdateError,
@@ -45,8 +34,7 @@ export default function SignUp(props) {
     PasswordError,
     PasswordErrorMessage,
     handleSubmit,
-    validateInputs,
-    handleChange    
+    validateInputs  
   } = useSignUpLogic();
 
   return (
@@ -98,29 +86,6 @@ export default function SignUp(props) {
                 </Grid>
              </Grid>
           </Box>
-          <Grid item xs={12} sm={6} lg={4} className="grid-role">
-           <FormControl fullWidth variant="outlined" error={OccupationError}>
-            <FormLabel htmlFor="occupation">Occupazione</FormLabel>
-             <Select
-              required
-              fullWidth
-              labelId="occupation-label"
-              id="occupation"
-              name="occupation"
-              onChange={handleChange}>
-              {options.map((item) => (
-              <MenuItem key={item.value} value={item.value}>
-                {item.label}
-              </MenuItem>
-              ))}
-              </Select>
-              {OccupationError && (
-                <FormHelperText>
-                  {OccupationErrorMessage}
-                </FormHelperText>
-              )}
-           </FormControl>
-         </Grid>
         <Box component="form" onSubmit={handleSubmit} className="signup-form">
          <Grid container spacing={2}>
            <Grid item xs={12} sm={6} lg={4} className="grid-marginfix">
