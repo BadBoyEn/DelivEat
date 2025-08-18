@@ -1,4 +1,4 @@
-/* ====== LOGO ====== */
+/* -- LOGO -- */
 .logo-img {
   width: 160px;
   height: 160px;
@@ -8,7 +8,7 @@
   transform: scale(1.20);
 }
 
-/* ====== LAYOUT PAGINA AUTENTICAZIONE ====== */
+/* -- LAYOUT PAGINA DI AUTENTICAZIONE -- */
 .auth-page {
   min-height: 100vh;
   padding: 2rem;
@@ -18,7 +18,7 @@
   background-image: var(--backgroundImage);
 }
 
-/* ====== CARD AUTENTICAZIONE ====== */
+/* -- CARTA DI AUTENTICAZIONE -- */
 .auth-card {
   width: min(90vw, 420px);
   display: flex;
@@ -28,14 +28,14 @@
   box-sizing: border-box;
   position: relative;
 
-  /* Colori presi dal tema */
+  /* -- COLORI PRESI DAL TEMA -- */
   background-color: var(--card-bg) !important;
   box-shadow: var(--shadow);
   color: var(--text);
 
 }
 
-/* ====== ELEMENTI INTERNI ====== */
+/* -- ELEMENTI INTERNI -- */
 .logo-container {
   display: flex;
   justify-content: center;
@@ -83,7 +83,7 @@
   margin-top: -3px;
 }
 
-/* ====== MODIFICATORI ====== */
+/* -- MODIFICATORI -- */
 .auth-card--wide {
   min-width: 500px;
 }

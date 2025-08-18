@@ -25,7 +25,6 @@ export default function AppTheme({ children }) {
 
   const [mode, setMode] = useState(getInitial);
 
-  // Toggle robusto: se arriva un evento o un valore non-stringa, fa semplicemente toggle
   const colorMode = useMemo(
     () => ({
       toggleColorMode: (maybeMode) => {
@@ -47,7 +46,6 @@ export default function AppTheme({ children }) {
     []
   );
 
-  // Tema MUI (puoi lasciarlo così: i colori visivi della UI li prendi da CSS vars)
   const theme = useMemo(
     () =>
       createTheme({
@@ -71,7 +69,6 @@ export default function AppTheme({ children }) {
     [mode]
   );
 
-  // Applica la classe all'html per attivare le variabili CSS dei file Dark.css/Light.css
   useEffect(() => {
     document.documentElement.classList.remove('theme-dark', 'theme-light');
     document.documentElement.classList.add(`theme-${mode}`);

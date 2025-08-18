@@ -42,12 +42,15 @@ export default function SignUp(props) {
       <CssBaseline enableColorScheme />
       <SignUpContainer direction="column" justifyContent="center">
         <StyledCard variant="outlined">
+
           <Box className="color-switch">
             <ColorModeSelect />
           </Box>
+
           <Box className="logo-container logo-container--tight">
             <SitemarkIcon />
           </Box>
+
           <Typography component="h2" variant="h4" className="auth-title">
             Registrazione Staff
           </Typography>
@@ -86,6 +89,7 @@ export default function SignUp(props) {
                 </Grid>
              </Grid>
           </Box>
+
         <Box component="form" onSubmit={handleSubmit} className="signup-form">
          <Grid container spacing={2}>
            <Grid item xs={12} sm={6} lg={4} className="grid-marginfix">
@@ -121,7 +125,8 @@ export default function SignUp(props) {
                </FormControl>
               </Grid>
              </Grid>
-        </Box>        
+        </Box>   
+
         <Box component="form" onSubmit={handleSubmit} className="signup-form">
          <Grid container spacing={2}>
           <Grid item xs={12} sm={6} lg={4} className="grid-marginfix">
@@ -156,6 +161,7 @@ export default function SignUp(props) {
                </Grid>
          </Grid> 
         </Box>
+
         <Box component="form" onSubmit={handleSubmit} className="signup-form">
          <Grid container spacing={2}>
           <Grid item xs={12} sm={6} lg={4} className="grid-marginfix">
@@ -189,10 +195,12 @@ export default function SignUp(props) {
           </FormControl>
          </Grid>
         </Grid>
-       </Box>            
+       </Box>   
+
        <Button type="submit" fullWidth variant="contained" className="signup-button" onClick={validateInputs}>
         Registrati
        </Button>
+
        <Typography sx={{ textAlign: 'center' }}>
               Hai già un account?{' '}
               <Link
@@ -202,7 +210,8 @@ export default function SignUp(props) {
               >
                 Accedi
               </Link>
-            </Typography>              
+        </Typography>
+                      
       </StyledCard>          
     </SignUpContainer>
   </AppTheme>

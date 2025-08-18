@@ -91,7 +91,8 @@ export default function LogIn(props) {
               >
                 Registrati
               </Link>
-            </Typography>
+          </Typography>
+          
         </StyledCard>
       </LogInContainer>
     </AppTheme>
