@@ -20,7 +20,7 @@ function MenuList() {
       <div className="db-nav__section">Menu</div>
       <ul className="db-nav__list">
         <li className="db-nav__item db-nav__item--active">Overview</li>
-        <li className="db-nav__item">Ordini</li>
+        <li className="db-nav__item">HomePage</li>
         <li className="db-nav__item">Clienti</li>
         <li className="db-nav__item">Rider</li>
         <li className="db-nav__item">Report</li>
@@ -79,7 +79,7 @@ function PageViewsBarChart() { /* DA CAPIRE SE HA SENSO LASCIARLA */
 /* -- TABELLA -- */
 /* ERA DI PROVA QUESTA */
 function CustomizedDataGrid() {
-  const rows = Array.from({ length: 8 }).map((_, i) => ({
+  const rows = Array.from({ length: 7 }).map((_, i) => ({
     id: i + 1,
     order: `ORD-${1000 + i}`,
     customer: 'Mario Rossi',
