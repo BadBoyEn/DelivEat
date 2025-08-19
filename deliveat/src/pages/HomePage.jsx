@@ -1,7 +1,8 @@
+import AppTheme from '../theme/AppTheme.jsx'
+import Home from '../Components/GestioneHomePage/Home.jsx'
+
 export default function HomePage() {
-    return (
-        <div>
-            <h1>Benvenuto nella Homepage</h1>
-        </div>
-    );
+    return <AppTheme>
+        <Home />
+    </AppTheme>;
 }

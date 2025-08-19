@@ -8,6 +8,11 @@
   transform: scale(1.20);
 }
 
+.logo-home {
+  transform: scale(0.5);
+  margin-bottom: -5px;
+}
+
 /* -- LAYOUT PAGINA DI AUTENTICAZIONE -- */
 .auth-page {
   min-height: 100vh;
@@ -71,7 +76,7 @@
 .color-switch {
   position: absolute;
   top: 0.75rem;
-  right: 0.80rem;
+  right: 0.4rem;
 }
 
 .signup-button {
@@ -90,5 +95,6 @@
 
 .logo-container--tight {
   margin-bottom: -0.5rem;
-  
 }
+
+
