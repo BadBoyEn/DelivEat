@@ -41,7 +41,7 @@ export default function LogIn(props) {
             <SitemarkIcon />
           </Box>
 
-          <Typography component="h2" variant="h4.5" className="auth-title">
+          <Typography component="h2" variant="h4.8" className="auth-title">
             Accesso Riservato
           </Typography>
 
