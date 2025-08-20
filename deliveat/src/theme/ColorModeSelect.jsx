@@ -2,12 +2,14 @@ import * as React from 'react';
 import IconButton from '@mui/material/IconButton';
 import { useTheme } from '@mui/material/styles';
 import { ColorModeContext } from './AppTheme';
+import { ColorModeContext2 } from './AppTheme-Home';
 import Brightness7Icon from '@mui/icons-material/Brightness7'; // ☀️
 import DarkModeIcon from '@mui/icons-material/DarkMode';       // 🌙
 
 export default function ColorModeSelect(props) {
   const theme = useTheme();
   const colorMode = React.useContext(ColorModeContext);
+  const colorMode2 = React.useContext(ColorModeContext2);
 
   return (
     <IconButton
@@ -19,6 +21,7 @@ export default function ColorModeSelect(props) {
         }
       }}
       onClick={() => colorMode.toggleColorMode()}
+      onClick2={() => colorMode2.toggleColorMode()}
       color="inherit"
       aria-label="Toggle color mode"
       {...props}

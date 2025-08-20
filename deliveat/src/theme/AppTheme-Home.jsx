@@ -4,7 +4,7 @@ import { useState, useMemo, createContext, useEffect } from 'react';
 import './Dark.css';
 import './Light.css';
 
-export const ColorModeContext = createContext({
+export const ColorModeContext2 = createContext({
   toggleColorMode: () => {},
 });
 
@@ -52,7 +52,7 @@ export default function AppTheme({ children }) {
         palette: {
           mode,
           primary: {
-            main: mode === 'dark' ? '#90caf9' : '#1976d2',
+            main: mode === 'dark' ? '#90caf9' : '#FFFFFF',
           },
           secondary: {
             main: mode === 'dark' ? '#f48fb1' : '#FF6B00',
@@ -75,8 +75,8 @@ export default function AppTheme({ children }) {
   }, [mode]);
 
   return (
-    <ColorModeContext.Provider value={colorMode}>
+    <ColorModeContext2.Provider value={colorMode}>
       <ThemeProvider theme={theme}>{children}</ThemeProvider>
-    </ColorModeContext.Provider>
+    </ColorModeContext2.Provider>
   );
 }

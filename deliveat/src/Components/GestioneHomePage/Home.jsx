@@ -1,4 +1,4 @@
-import { SitemarkIcon } from '../GestionePersonale/CustomIcons';
+import { SitemarkIcon } from '../GestioneHomePage/CustomIcons.jsx';
 import ColorModeSelect from '../../theme/ColorModeSelect.jsx';
 import {
   AppBar,
@@ -17,7 +17,7 @@ export default function Home() {
   return (
     <Box>
       {/* Header */}
-      <AppBar position="static" color="primary" sx={{ height: "68px", justifyContent: "center" }}>
+      <AppBar position="static" color="primary" sx={{ height: "80px", justifyContent: 'center'}}>
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
         {/* LOGO */}
         <Box className="logo-home">
@@ -25,14 +25,14 @@ export default function Home() {
           </Box>
         {/* LINKS */}
         <Box sx={{ mr: 2.5 }}>
-          <Button color="inherit">Home</Button>
+          <Button color="inherit" className="nav-item">Home</Button>
           <Button color="inherit">Chi siamo</Button>
           <Button color="inherit">Come funziona</Button>
           <Button color="inherit">Supporto</Button>
           <Button color="inherit">Contatti</Button>
           <Button color="inherit">Info Legali</Button>
         </Box>
-        <Box className="color-switch">
+        <Box className="color-switch-home">
             <ColorModeSelect/>
         </Box>
       </Toolbar>
