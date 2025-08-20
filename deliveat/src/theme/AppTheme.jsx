@@ -55,7 +55,7 @@ export default function AppTheme({ children }) {
             main: mode === 'dark' ? '#90caf9' : '#1976d2',
           },
           secondary: {
-            main: mode === 'dark' ? '#f48fb1' : '#FF6B00',
+            main: mode === 'dark' ? '#FF6B00' : '#FF6B00',
           },
           background: {
             default: mode === 'dark' ? '#121212' : '#ffffff',

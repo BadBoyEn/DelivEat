@@ -1,4 +1,4 @@
-import AppTheme from '../theme/AppTheme-Home.jsx'
+import AppTheme from '../theme/AppTheme.jsx'
 import Home from '../Components/GestioneHomePage/Home.jsx'
 
 export default function HomePage() {
