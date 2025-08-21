@@ -54,10 +54,18 @@ export default function AppTheme({ children }) {
           primary: {
             main: mode === 'dark' ? '#90caf9' : '#1976d2',
           },
+          primaryHome: {
+            main: mode === 'dark' ? '#90caf9' : '#ffffff',
+          },
           secondary: {
             main: mode === 'dark' ? '#FF6B00' : '#FF6B00',
+            contrastText: '#FFFFFF',
           },
           background: {
+            default: mode === 'dark' ? '#121212' : '#ffffff',
+            paper: mode === 'dark' ? '#1e1e1e' : '#f5f5f5',
+          },
+          backgroundhome: {
             default: mode === 'dark' ? '#121212' : '#ffffff',
             paper: mode === 'dark' ? '#1e1e1e' : '#f5f5f5',
           },

@@ -4,6 +4,12 @@
   margin-left: -130px;
 }
 
+.logo-body {
+  transform: scale(1);
+  margin-right: 180px;
+  margin-bottom: 100px;
+}
+
 .color-switch-home {
   position: absolute;
   top: 1.1rem;

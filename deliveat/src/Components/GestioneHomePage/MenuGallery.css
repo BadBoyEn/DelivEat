@@ -1,0 +1,85 @@
+.menu-gallery {
+  position: relative;
+  display: inline-block;
+}
+
+.menu-cover {
+  width: 500px;
+  cursor: pointer;
+  display: block;
+  margin: 20px auto;
+  border-radius: 0;
+  margin-left: 170px;
+}
+
+.gallery-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.gallery-frame {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* immagine sempre al centro */
+  gap: 20px; /* spazio uniforme tra immagine e frecce */
+}
+
+.gallery-frame img {
+  width: 85vw;
+  height: 85vh;
+  object-fit: contain;
+  transition: transform 0.35s ease;
+  border-radius: 8px;
+}
+
+/* Effetto ingrandimento */
+.gallery-frame.active img {
+  transform: scale(1.05);
+}
+
+.arrow {
+  background: rgba(255,255,255,0.2);
+  border: none;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.2s;
+  flex-shrink: 0; /* impedisce che il layout si stringa */
+  z-index: 1100;
+}
+
+.arrow.disabled {
+  background: rgba(255,255,255,0.1);
+  cursor: not-allowed;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.arrow:hover {
+  background: rgba(255,255,255,0.5);
+}
+
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 2rem;
+  color: white;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
