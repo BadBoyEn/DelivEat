@@ -1,6 +1,6 @@
 import { SitemarkIcon } from '../GestioneHomePage/CustomIcons.jsx';
 import ColorModeSelect from '../../theme/ColorModeSelect.jsx';
-import logo from '../../Images/DelivEat_logo.png';
+import logo from '../../Images/DelivEat_logo2.png';
 import MenuGallery from './MenuGallery.jsx';
 import {
   AppBar,
@@ -42,10 +42,10 @@ export default function Home() {
 
   <Box sx={{ flex: 1, textAlign: 'center' }}>
     <img src={logo} alt="Logo-body" className="logo-body"/>
-    <Typography variant="h5" sx={{ mb: 1 }}>
+    <Typography variant="h5" className="catchphrase" color="secondary" fontWeight={800}>
       Ordina in pochi click!
     </Typography>
-    <Typography variant="body1">
+    <Typography variant="body1" className="catchphrase2" color="secondary" fontWeight={800}>
       Scopri la comodità di ricevere il tuo cibo preferito direttamente a casa.
     </Typography>
   </Box>
@@ -63,7 +63,7 @@ export default function Home() {
 
       {/* Footer */}
       <Box sx={{ p: 4, backgroundColor: '#212121', color: '#fff', textAlign: 'center' }}>
-        <Typography variant="body2">© 2025 DelivEat. All rights reserved.</Typography>
+        <Typography variant="body2">© 2025 DelivEat. Tutti i diritti riservati.</Typography>
       </Box>
     </Box>
   );

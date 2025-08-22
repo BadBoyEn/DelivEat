@@ -55,7 +55,7 @@ export default function AppTheme({ children }) {
             main: mode === 'dark' ? '#90caf9' : '#1976d2',
           },
           primaryHome: {
-            main: mode === 'dark' ? '#90caf9' : '#ffffff',
+            main: mode === 'dark' ? 'rgba(13, 16, 18, 0.92)' : '#ffffff',
           },
           secondary: {
             main: mode === 'dark' ? '#FF6B00' : '#FF6B00',

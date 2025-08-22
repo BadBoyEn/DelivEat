@@ -6,8 +6,17 @@
 
 .logo-body {
   transform: scale(1);
-  margin-right: 180px;
-  margin-bottom: 100px;
+  /*margin-right: 180px;
+  margin-bottom: 100px;*/
+  transform: translate(-100px, -40px) scale(1.3);
+}
+
+.catchphrase {
+  transform: translate(-105px, 20px) scale(1.3);
+}
+
+.catchphrase2 {
+  transform: translate(-110px, 20px) scale(1.3);
 }
 
 .color-switch-home {
@@ -26,4 +35,5 @@
     opacity: 1;
   }
 }
+
 
