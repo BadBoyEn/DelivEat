@@ -2,6 +2,7 @@ import { SitemarkIcon } from '../GestioneHomePage/CustomIcons.jsx';
 import ColorModeSelect from '../../theme/ColorModeSelect.jsx';
 import logo from '../../Images/DelivEat_logo2.png';
 import MenuGallery from './MenuGallery.jsx';
+import { Link } from "react-router-dom";
 import {
   AppBar,
   Toolbar,
@@ -14,18 +15,18 @@ export default function Home() {
   return (
     <Box>
       {/* Header */}
-      <AppBar position="static" color="primaryHome" sx={{ height: "80px", justifyContent: 'center'}}>
-      <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+      <AppBar position="static" color="primaryHome" className="appbar-custom">
+      <Toolbar className="toolbar-custom">
         {/* LOGO */}
         <Box className="logo-home">
             <SitemarkIcon />
           </Box>
         {/* LINKS */}
-        <Box text="text" sx={{ mr: 3.4, display: 'flex', gap: 1.5 }}>
-          <Button variant='contained' color="secondary">Home</Button>
+        <Box text="text" className="links-box">
+          <Button component={Link} to="/" variant='contained' color="secondary">Home</Button>
           <Button variant='contained' color="secondary">Chi siamo</Button>
           <Button variant='contained' color="secondary">Come funziona</Button>
-          <Button variant='contained' color="secondary">FAQ</Button>
+          <Button component={Link} to="/faq" variant='contained' color="secondary">FAQ</Button>
           <Button variant='contained' color="secondary">Contatti</Button>
           <Button variant='contained' color="secondary">Info Legali</Button>
         </Box>
@@ -34,13 +35,13 @@ export default function Home() {
         </Box>
       </Toolbar>
      </AppBar>
-     <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', p: 4 }}>
+     <Box className="menu-ordina">
   {/* Sezione sinistra: MenuGallery */}
-  <Box sx={{ flex: 1 }}>
-    <MenuGallery />
-  </Box>
+       <Box className="flex-1">
+        <MenuGallery />
+      </Box>
 
-  <Box sx={{ flex: 1, textAlign: 'center' }}>
+    <Box className="logo-grande">
     <img src={logo} alt="Logo-body" className="logo-body"/>
     <Typography variant="h5" className="catchphrase" color="secondary" fontWeight={800}>
       Ordina in pochi click!
@@ -51,20 +52,21 @@ export default function Home() {
   </Box>
 </Box>
        {/* App Promotion */}
-      <Box color="inherit" sx={{ p: 4, textAlign: 'center', boxShadow: "0 6px 18px rgba(0, 0, 0, 0.8)"}}>
+      <Box color="inherit" className="promotion-box">
         <Typography variant="h5">Scarica l'App</Typography>
         <Typography variant="body1">
           Ordina con la nostra App
         </Typography>
-        <Button variant="contained" color="secondary" sx={{ mt: 2 }}>
+        <Button variant="contained" color="secondary" className="download">
           Download
         </Button>
       </Box>
 
       {/* Footer */}
-      <Box sx={{ p: 4, backgroundColor: '#212121', color: '#fff', textAlign: 'center' }}>
+      <Box className="footer-custom">
         <Typography variant="body2">© 2025 DelivEat. Tutti i diritti riservati.</Typography>
       </Box>
     </Box>
   );
 }
+

@@ -4,6 +4,7 @@ html.theme-dark {
   --card-bg: rgba(13, 16, 18, 0.92);
   --shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
   --backgroundImage: radial-gradient(at 50% 50%, hsla(17, 100%, 16%, 0.50), hsla(0, 9%, 4%, 0.50));
+  --backgroundImageHome: #0d1018;
   --input-bg: #1e1e1e;
   --input-text: #f5f5f5;
   --input-border: #444444;

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './MenuGallery.css';
+import './GestioneHomePage.css';
 import galleryImages from '../../assets/galleryImages'; // array con i percorsi delle immagini
 import {
   Box, Button
@@ -37,7 +37,7 @@ export default function MenuGallery() {
         className="menu-cover"
         onClick={() => openGallery(0)}
       />
-      <Box sx={{textAlign: 'center', mb: -1, mt: 2, ml: 21.8 }}>
+      <Box className="ordina-ora">
          <Button variant="contained" color="secondary" size="large">Ordina ora</Button>
       </Box>
 
