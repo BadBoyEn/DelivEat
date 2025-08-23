@@ -6,8 +6,6 @@
 
 .logo-body {
   transform: scale(1);
-  /*margin-right: 180px;
-  margin-bottom: 100px;*/
   transform: translate(-100px, -40px) scale(1.3);
 }
 
