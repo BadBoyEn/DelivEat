@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+const API_BASE = 'http://localhost:5000'; // back dev server
+
 export function useLogInLogic() {
   const [emailError, setEmailError] = useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = useState('');
@@ -11,61 +13,74 @@ export function useLogInLogic() {
     const password = document.getElementById('password');
     let isValid = true;
 
-    if (!email.value || !/\S+@\S+\.\S+/.test(email.value)) {
-      setEmailError(true); setEmailErrorMessage('Please enter a valid email address.');
-      isValid = false;
-    } else { setEmailError(false); setEmailErrorMessage(''); }
+    const e = (email?.value || '').trim();
+    const p = (password?.value || '').trim();
 
-    if (!password.value || password.value.length < 6) {
-      setPasswordError(true); setPasswordErrorMessage('Password must be at least 6 characters long.');
+    if (!e || !/\S+@\S+\.\S+/.test(e)) {
+      setEmailError(true);
+      setEmailErrorMessage('Inserisci una email valida.');
       isValid = false;
-    } else { setPasswordError(false); setPasswordErrorMessage(''); }
+    } else {
+      setEmailError(false);
+      setEmailErrorMessage('');
+    }
+
+    if (!p || p.length < 6) {
+      setPasswordError(true);
+      setPasswordErrorMessage('La password deve avere almeno 6 caratteri.');
+      isValid = false;
+    } else {
+      setPasswordError(false);
+      setPasswordErrorMessage('');
+    }
 
     return isValid;
   };
 
-  const tryManagerLogin = async (email, password) => {
-    const res = await fetch('/api/manager/login', {
+  const postJson = async (url, body) => {
+    const res = await fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password })
+      body: JSON.stringify(body),
     });
-    if (!res.ok) throw new Error('not-manager');
-    return res.json(); // { token, user:{role,email} }
-  };
-
-  const tryRiderLogin = async (email, password) => {
-    const res = await fetch('/api/rider/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password })
-    });
-    if (!res.ok) throw new Error('rider-failed');
-    return res.json();
+    let payload = {};
+    try { payload = await res.json(); } catch {}
+    if (!res.ok) {
+      const msg = payload?.error || payload?.message || 'Errore';
+      const err = new Error(msg);
+      err.status = res.status;
+      throw err;
+    }
+    return payload;
   };
 
   const handleSubmit = async (event) => {
-    if (!validateInputs()) { event.preventDefault(); return; }
     event.preventDefault();
+    if (!validateInputs()) return;
 
     const data = new FormData(event.currentTarget);
-    const email = data.get('email');
-    const password = data.get('password');
+    const email = (data.get('email') || '').toString().trim();
+    const password = (data.get('password') || '').toString().trim();
 
     try {
-      const mgr = await tryManagerLogin(email, password);
-      localStorage.setItem('token', mgr.token);
+      const mg = await postJson(`${API_BASE}/api/manager/login`, { email, password });
+      localStorage.setItem('token', mg.token);
       localStorage.setItem('role', 'manager');
-      window.location.assign('/dashboard'); // mostra Dashboard.jsx
+      window.location.assign('/dashboard'); 
       return;
-    } catch { /* non è manager → prova rider */ }
+    } catch (err) {
+      if (err?.status === 401) {
+        setPasswordError(true);
+        setPasswordErrorMessage('Credenziali manager non valide.');
+      }
+    }
 
     try {
-      const rid = await tryRiderLogin(email, password);
-      localStorage.setItem('token', rid.token);
+      const rd = await postJson(`${API_BASE}/api/rider/login`, { email, password });
+      localStorage.setItem('token', rd.token);
       localStorage.setItem('role', 'rider');
-      // window.location.assign('/rider');
-    } catch {
+      // window.location.assign('/rider'); // mo che avremo la pagina del rider
+    } catch (err) {
       setPasswordError(true);
       setPasswordErrorMessage('Credenziali non valide.');
     }
@@ -74,6 +89,7 @@ export function useLogInLogic() {
   return {
     emailError, emailErrorMessage,
     passwordError, passwordErrorMessage,
-    validateInputs, handleSubmit
+    validateInputs,
+    handleSubmit
   };
 }
