@@ -2,6 +2,7 @@ import { SitemarkIcon } from '../GestioneHomePage/CustomIcons.jsx';
 import ColorModeSelect from '../../theme/ColorModeSelect.jsx';
 import logo from '../../Images/DelivEat_logo2.png';
 import MenuGallery from './MenuGallery.jsx';
+import Contatti from '../GestioneHomePage/GestioneContatti/contatti.jsx';
 import { Link } from "react-router-dom";
 import {
   AppBar,
@@ -27,7 +28,15 @@ export default function Home() {
           <Button variant='contained' color="secondary">Chi siamo</Button>
           <Button variant='contained' color="secondary">Come funziona</Button>
           <Button component={Link} to="/home/faq" variant='contained' color="secondary">FAQ</Button>
-          <Button variant='contained' color="secondary">Contatti</Button>
+          <Button
+                variant="contained"
+                color="secondary"
+                onClick={() => {
+                     const section = document.getElementById('contatti');
+                     section?.scrollIntoView({ behavior: 'smooth' });
+                }}>
+                  Contatti
+                </Button>
           <Button variant='contained' color="secondary">Info Legali</Button>
         </Box>
         <Box className="color-switch-home">

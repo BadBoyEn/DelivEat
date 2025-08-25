@@ -1,0 +1,33 @@
+.chiSiamo {
+    background-color: white;
+    color: black;
+    padding: 60px 20px;
+    font-family: 'Verdana', sans-serif
+}
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+.title {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: orangered;
+}
+.subtitle {
+    font-size: 20px;
+    margin-bottom: 30px;
+    color: orange;
+}
+.content p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+.button {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 12px 24px;
+    background-color: orange;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
