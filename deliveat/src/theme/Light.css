@@ -1,5 +1,5 @@
 html.theme-light {
-  --bg: hsl(210, 100%, 97%);
+  --bg: #ffffff;
   --text: #000000;
   --card-bg: hsl(0, 0%, 100%);
   --shadow: 0 6px 18px rgba(0, 0, 0, 0.1);

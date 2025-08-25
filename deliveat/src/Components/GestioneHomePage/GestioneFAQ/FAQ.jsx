@@ -1,3 +1,5 @@
+import { useState } from "react";
+import SearchIcon from "@mui/icons-material/Search";
 import { SitemarkIcon } from '../CustomIcons.jsx';
 import ColorModeSelect from '../../../theme/ColorModeSelect.jsx';
 import { Link } from "react-router-dom";
@@ -11,11 +13,14 @@ import {
   AccordionDetails,
   AccordionSummary,
   Container,
-  Grid
+  Grid,
+  TextField,
+  InputAdornment
 } from '@mui/material';
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 export default function FAQ() {
+  const [search, setSearch] = useState("");
   const faqs = [
     {
       question: "How do I upgrade / downgrade my workspace plan?",
@@ -58,6 +63,10 @@ export default function FAQ() {
       answer: "We offer support over email, and the best way to contact us is via the in-app help menu.",
     },
   ];
+  const filteredFaqs = faqs.filter(
+    (faq) =>
+      faq.question.toLowerCase().includes(search.toLowerCase()) || faq.answer.toLowerCase().includes(search.toLowerCase())
+  );
   return (
     <Box>
       {/* Header */}
@@ -79,30 +88,50 @@ export default function FAQ() {
         </Box>
       </Toolbar>
      </AppBar>
-     <Container maxWidth="md" sx={{ mt: 5, ml: 12 }} >
-       <Typography variant="h4" gutterBottom color="secondary" fontWeight={800}>
+     <Container maxWidth="md" sx={{ mt: 5, mb: 5 }}>
+       <Typography variant="h4" gutterBottom color="secondary" fontWeight={800} align='center'>
          Frequently asked questions
        </Typography>
-        <Grid container spacing={2}>
-        {faqs.map((faq, index) => (
-          <Grid item xs={12} sm={6} key={index}>
-            <Accordion>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-              >
-                <Typography>{faq.question}</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Typography>{faq.answer}</Typography>
-              </AccordionDetails>
-            </Accordion>
-          </Grid>
-        ))}
-      </Grid>  
-     </Container>
-     <Box className="footer-custom">
+       <TextField
+         fullWidth
+         variant="outlined"
+         placeholder="Cerca domande o risposte..."
+         value={search}
+         onChange={(e) =>
+         setSearch(e.target.value)}
+           sx={{ mb: 3, backgroundColor: "rgba(0,0,0,0.04)", borderRadius: 2, "& .MuiOutlinedInput-root" : {"& fieldset": { border: "none", }} }}
+           InputProps={{
+    startAdornment: (
+      <InputAdornment position="start">
+        <SearchIcon color="action" />
+      </InputAdornment>
+    ),
+  }}
+         />
+        <Grid container spacing={3} justifyContent={"center"} >
+        {filteredFaqs.length > 0 ? (
+          filteredFaqs.map((faq, index) => (
+            <Grid item xs={12} sm={12} key={index}>
+              <Accordion>
+                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                  <Typography color>{faq.question}</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Typography sx={{ color: "#FF6B00", fontWeight: "bold" }}>{faq.answer}</Typography>
+                </AccordionDetails>
+              </Accordion>
+            </Grid>
+          ))
+        ) : (
+          <Typography variant="body1" sx={{ mt: 3 }}>
+            No results found.
+          </Typography>
+        )}
+      </Grid>
+    </Container>
+    <Box className="footer-custom">
         <Typography variant="body2">© 2025 DelivEat. Tutti i diritti riservati.</Typography>
       </Box>
-    </Box>
+   </Box> 
   );
 }
