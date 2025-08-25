@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import LogInPage from './pages/LogInPage.jsx'
 import SignUpPage from './pages/SignUpPage.jsx'
 import HomePage from './pages/HomePage.jsx'
+import FAQPage from './pages/FAQPage.jsx'
 import DashBoardPage from './pages/DashBoardPage.jsx'
 
 export default function App() {
@@ -16,6 +17,7 @@ export default function App() {
         <Route path="/login" element={<LogInPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/home" element={<HomePage />} />
+        <Route path="/home/faq" element={<FAQPage />} />
         <Route path="/dashboard" element={<DashBoardPage />} />
 
         {/* 404 */}
