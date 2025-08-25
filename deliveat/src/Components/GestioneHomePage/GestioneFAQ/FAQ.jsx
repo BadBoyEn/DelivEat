@@ -59,8 +59,8 @@ export default function FAQ() {
       answer: "Yes, invoice emails can be redirected to billing contacts.",
     },
     {
-      question: "How do I contact support?",
-      answer: "We offer support over email, and the best way to contact us is via the in-app help menu.",
+      question: "Come posso contattare l'assistenza?",
+      answer: "Se hai bisogno di aiuto, clicca sul pulsante 'Contatti' nella barra di navigazione e scrivici: ti risponderemo al più presto.",
     },
   ];
   const filteredFaqs = faqs.filter(
