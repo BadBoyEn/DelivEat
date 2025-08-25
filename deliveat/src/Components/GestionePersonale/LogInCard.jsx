@@ -9,6 +9,7 @@ import {
   TextField,
   Typography
 } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
 
 import { LogInContainer, StyledCard } from './LogInContainer';
 import { useLogInLogic } from './LogInLogic';
@@ -41,7 +42,7 @@ export default function LogIn(props) {
             <SitemarkIcon />
           </Box>
 
-          <Typography component="h2" variant="h4.8" className="auth-title">
+          <Typography component="h2" variant="h4.5" className="auth-title">
             Accesso Riservato
           </Typography>
 
@@ -83,16 +84,16 @@ export default function LogIn(props) {
           </Box>
 
           <Typography sx={{ textAlign: 'center' }}>
-              Non hai un account?{' '}
-              <Link
-                href="/signup"
-                variant="body2"
-                sx={{ alignSelf: 'center' }}
-              >
-                Registrati
-              </Link>
+            Non hai un account?{' '}
+            <Link
+              component={RouterLink}
+              to="/signup"
+              variant="body2"
+              sx={{ alignSelf: 'center' }}
+            >
+              Registrati
+            </Link>
           </Typography>
-          
         </StyledCard>
       </LogInContainer>
     </AppTheme>
