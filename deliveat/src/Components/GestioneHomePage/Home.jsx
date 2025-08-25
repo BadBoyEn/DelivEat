@@ -28,7 +28,7 @@ export default function Home() {
           <Button variant='contained' color="secondary">Chi siamo</Button>
           <Button variant='contained' color="secondary">Come funziona</Button>
           <Button component={Link} to="/home/faq" variant='contained' color="secondary">FAQ</Button>
-          <Button variant={Link} to
+          <Button variant='contained' color="secondary">Contatti</Button>
           <Button variant='contained' color="secondary">Info Legali</Button>
         </Box>
         <Box className="color-switch-home">
