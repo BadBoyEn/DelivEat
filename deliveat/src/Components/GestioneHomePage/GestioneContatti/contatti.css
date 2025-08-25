@@ -1,0 +1,16 @@
+.contatti {
+    background-color: white;
+    color: black;
+    padding: 60px 20px;
+}
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+.title {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+.info p {
+    margin: 10px 0;
+}
