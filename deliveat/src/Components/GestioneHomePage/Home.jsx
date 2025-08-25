@@ -2,7 +2,6 @@ import { SitemarkIcon } from '../GestioneHomePage/CustomIcons.jsx';
 import ColorModeSelect from '../../theme/ColorModeSelect.jsx';
 import logo from '../../Images/DelivEat_logo2.png';
 import MenuGallery from './MenuGallery.jsx';
-import Contatti from '../GestioneHomePage/GestioneContatti/contatti.jsx';
 import { Link } from "react-router-dom";
 import {
   AppBar,
