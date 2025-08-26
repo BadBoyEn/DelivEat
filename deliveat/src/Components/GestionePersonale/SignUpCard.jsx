@@ -32,7 +32,7 @@ export default function SignUp(props) {
   return (
     <AppTheme {...props}>
       <CssBaseline enableColorScheme />
-      <SignUpContainer direction="column" justifyContent="center">
+      <SignUpContainer direction="column" justifyContent="center" alignItems="center">
         <StyledCard variant="outlined">
           <Box className="color-switch">
             <ColorModeSelect />
