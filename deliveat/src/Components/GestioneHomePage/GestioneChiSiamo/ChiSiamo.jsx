@@ -9,7 +9,7 @@ import {
   Box,
   Container
 } from '@mui/material';
-export default function ChiSiamo() {
+export default function ChiSiamo () {
     return(
     <Box>
         <AppBar elevation={0} position="relative" color="primaryHome" className="appbar-custom">
