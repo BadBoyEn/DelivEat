@@ -1,5 +1,5 @@
+// src/Components/GestionePersonale/SignUpCard.jsx
 import {
-  Grid,
   Box,
   Button,
   CssBaseline,
@@ -7,7 +7,7 @@ import {
   FormLabel,
   TextField,
   Typography,
-  Link
+  Link,
 } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 
@@ -19,24 +19,15 @@ import { SitemarkIcon } from './CustomIcons';
 
 export default function SignUp(props) {
   const {
-    FirstNameError,
-    FirstNameErrorMessage,
-    LastNameError,
-    LastNameErrorMessage,
-    PhoneError,
-    PhoneErrorMessage,
-    BirthdateError,
-    BirthdateErrorMessage,
-    CityError,
-    CityErrorMessage,
-    AddressError,
-    AddressErrorMessage,
-    EmailError,
-    EmailErrorMessage,
-    PasswordError,
-    PasswordErrorMessage,
+    FirstNameError, FirstNameErrorMessage,
+    LastNameError,  LastNameErrorMessage,
+    PhoneError,     PhoneErrorMessage,
+    BirthdateError, BirthdateErrorMessage,
+    CityError,      CityErrorMessage,
+    AddressError,   AddressErrorMessage,
+    EmailError,     EmailErrorMessage,
+    PasswordError,  PasswordErrorMessage,
     handleSubmit,
-    validateInputs
   } = useSignUpLogic();
 
   return (
@@ -56,44 +47,41 @@ export default function SignUp(props) {
             Registrazione Staff
           </Typography>
 
-          <Box component="form" onSubmit={handleSubmit} className="signup-form">
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6} lg={4}>
+          <Box component="form" onSubmit={handleSubmit}>
+            <div className="form-grid">
+              <div className="field">
                 <FormControl fullWidth>
                   <FormLabel htmlFor="firstname">Nome</FormLabel>
                   <TextField
                     required
                     id="firstname"
-                    placeholder="Mario"
                     name="firstname"
+                    placeholder="Mario"
                     variant="outlined"
                     error={FirstNameError}
                     helperText={FirstNameErrorMessage}
                     fullWidth
                   />
                 </FormControl>
-              </Grid>
-              <Grid item xs={12} sm={6} lg={4}>
+              </div>
+
+              <div className="field">
                 <FormControl fullWidth>
                   <FormLabel htmlFor="lastname">Cognome</FormLabel>
                   <TextField
                     required
                     id="lastname"
-                    placeholder="Rossi"
                     name="lastname"
+                    placeholder="Rossi"
                     variant="outlined"
-                    fullWidth
                     error={LastNameError}
                     helperText={LastNameErrorMessage}
+                    fullWidth
                   />
                 </FormControl>
-              </Grid>
-            </Grid>
-          </Box>
+              </div>
 
-          <Box component="form" onSubmit={handleSubmit} className="signup-form">
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6} lg={4} className="grid-marginfix">
+              <div className="field">
                 <FormControl fullWidth>
                   <FormLabel htmlFor="phone">Numero di telefono</FormLabel>
                   <TextField
@@ -102,13 +90,14 @@ export default function SignUp(props) {
                     name="phone"
                     placeholder="+39 123 456 7890"
                     variant="outlined"
-                    fullWidth
                     error={PhoneError}
                     helperText={PhoneErrorMessage}
+                    fullWidth
                   />
                 </FormControl>
-              </Grid>
-              <Grid item xs={12} sm={6} lg={4} className="grid-marginfix">
+              </div>
+
+              <div className="field">
                 <FormControl fullWidth>
                   <FormLabel htmlFor="birthdate">Data di nascita</FormLabel>
                   <TextField
@@ -118,19 +107,14 @@ export default function SignUp(props) {
                     type="date"
                     variant="outlined"
                     InputLabelProps={{ shrink: true }}
-                    fullWidth
                     error={BirthdateError}
                     helperText={BirthdateErrorMessage}
-                    sx={{ minWidth: 203 }}
+                    fullWidth
                   />
                 </FormControl>
-              </Grid>
-            </Grid>
-          </Box>
+              </div>
 
-          <Box component="form" onSubmit={handleSubmit} className="signup-form">
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6} lg={4} className="grid-marginfix">
+              <div className="field">
                 <FormControl fullWidth>
                   <FormLabel htmlFor="city">Città</FormLabel>
                   <TextField
@@ -139,13 +123,14 @@ export default function SignUp(props) {
                     name="city"
                     placeholder="Roma"
                     variant="outlined"
-                    fullWidth
                     error={CityError}
                     helperText={CityErrorMessage}
+                    fullWidth
                   />
                 </FormControl>
-              </Grid>
-              <Grid item xs={12} sm={6} lg={4} className="grid-marginfix">
+              </div>
+
+              <div className="field">
                 <FormControl fullWidth>
                   <FormLabel htmlFor="address">Indirizzo</FormLabel>
                   <TextField
@@ -154,68 +139,57 @@ export default function SignUp(props) {
                     name="address"
                     placeholder="Via Roma 10"
                     variant="outlined"
-                    fullWidth
                     error={AddressError}
                     helperText={AddressErrorMessage}
+                    fullWidth
                   />
                 </FormControl>
-              </Grid>
-            </Grid>
-          </Box>
+              </div>
 
-          <Box component="form" onSubmit={handleSubmit} className="signup-form">
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6} lg={4} className="grid-marginfix">
+              <div className="field full">
                 <FormControl fullWidth>
                   <FormLabel htmlFor="email">Email</FormLabel>
                   <TextField
                     required
                     id="email"
-                    placeholder="tua@email.com"
                     name="email"
+                    placeholder="tua@email.com"
                     variant="outlined"
-                    fullWidth
                     error={EmailError}
                     helperText={EmailErrorMessage}
+                    fullWidth
                   />
                 </FormControl>
-              </Grid>
-              <Grid item xs={12} sm={6} lg={4} className="grid-marginfix">
+              </div>
+
+              <div className="field full">
                 <FormControl fullWidth>
                   <FormLabel htmlFor="password">Password</FormLabel>
                   <TextField
                     required
                     id="password"
-                    placeholder="******"
                     name="password"
+                    type="password"
+                    placeholder="••••••••"
                     variant="outlined"
-                    fullWidth
                     error={PasswordError}
                     helperText={PasswordErrorMessage}
+                    fullWidth
                   />
                 </FormControl>
-              </Grid>
-            </Grid>
+              </div>
+
+              <div className="field full auth-actions">
+                <Button type="submit" variant="contained" className="btn-full">
+                  REGISTRATI
+                </Button>
+              </div>
+            </div>
           </Box>
 
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            className="signup-button"
-            onClick={validateInputs}
-          >
-            Registrati
-          </Button>
-
-          <Typography sx={{ textAlign: 'center' }}>
+          <Typography sx={{ textAlign: 'center' }} className="auth-footer">
             Hai già un account?{' '}
-            <Link
-              component={RouterLink}
-              to="/login"
-              variant="body2"
-              sx={{ alignSelf: 'center' }}
-            >
+            <Link component={RouterLink} to="/login" variant="body2" sx={{ alignSelf: 'center' }}>
               Accedi
             </Link>
           </Typography>
