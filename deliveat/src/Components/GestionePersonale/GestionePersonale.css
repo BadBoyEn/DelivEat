@@ -11,27 +11,30 @@
 
 /* -- CARD -- */
 .auth-card{
-  width:min(96vw, 760px);    
-  max-height:calc(100vh - 48px);
-  overflow:auto;             
-  padding:32px;
-  border-radius:24px;
-  box-sizing:border-box;
-  display:flex;
-  flex-direction:column;
-  gap:16px;
+  width: min(92vw, 520px);   
+  max-height: calc(100vh - 48px);
+  overflow: auto;
+  padding: 28px;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-sizing: border-box;
+  position: relative;        
+  margin: 0 auto;
+
 }
 
 /* -- LOGO -- */
 .logo-container{
-  display:flex;
-  justify-content:center;
-  margin-top:4px;
-  margin-bottom:8px;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 8px;
 }
 .logo-container svg{
-  max-width:110px;          
-  height:auto;
+  max-width: 88px;           
+  height: auto;
 }
 
 /* -- TITOLO -- */
@@ -41,29 +44,32 @@
   line-height:1.2;
 }
 
+/* -- COLOR THEME -- */
+.color-switch{
+  position: absolute;
+  top: 12px;
+  right: 12px;               
+}
+
 /* -- GRIGLIA FORM -- */
 .form-grid{
-  width:100%;
-  display:grid;
-  grid-template-columns:1fr;
-  gap:16px;
+  display: grid;
+  grid-template-columns: 1fr;  
+  gap: 14px;
 }
+.field{ grid-column: 1 / -1; }
+.field.full{ grid-column: 1 / -1; }
 
-/* Ogni “field” occupa una colonna; .full prende tutta la riga */
-.field{ grid-column:1 / -1; }
-.field.full{ grid-column:1 / -1; }
-
-@media (min-width:700px){
+@media (min-width: 520px){
   .form-grid{
-    grid-template-columns:1fr 1fr; /* due colonne uguali */
-    column-gap:20px;
-    row-gap:16px;
+    grid-template-columns: 1fr 1fr; 
+    column-gap: 16px;
+    row-gap: 14px;
   }
-  .field{ grid-column:auto; }     
-  .field.full{ grid-column:1 / -1; }
+  .field{ grid-column: auto; }
+  .field.full{ grid-column: 1 / -1; } 
 }
 
-/* Assicura che gli input riempiano la cella */
 .field .MuiFormControl-root,
 .field .MuiTextField-root,
 .field input,
@@ -80,3 +86,4 @@
 
 /* Footer (link Accedi/Registrati) */
 .auth-footer{ text-align:center; margin-top:8px; }
+
