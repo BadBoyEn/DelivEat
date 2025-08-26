@@ -39,18 +39,18 @@
   justify-content: center;      /* centrato */
   align-items: center;
   margin-top: 6px;
-  margin-bottom: 0;             /* niente spazio sotto il logo */
+  margin-bottom: 0;
 }
 
 /* se usi l’SVG direttamente */
 .logo-container svg{
-  max-width: 110px;
+  max-width: 120px;
   height: auto;
 }
 
 /* versione <img> usata da SitemarkIcon className="logo-img" */
 .logo-img{
-  width: clamp(96px, 10vw, 124px);  /* leggermente più grande */
+  width: clamp(110px, 12vw, 140px);  /* 👈 più grande di prima */
   height: auto;
   display: block;
   margin: 0 auto;                   /* centrato */
@@ -61,14 +61,14 @@
 /* ====== TITOLO ====== */
 .auth-title{
   text-align: center;
-  margin: 4px 0 18px;            /* ↑ più spazio prima delle label */
+  margin: 6px 0 28px;              /* 👈 più spazio sotto il titolo */
   line-height: 1.2;
 }
 
 /* ====== GRIGLIA FORM ====== */
 .form-grid{
   display: grid;
-  grid-template-columns: 1fr;    /* mobile: una colonna */
+  grid-template-columns: 1fr;      /* mobile: una colonna */
   gap: 14px;
 }
 .field{ grid-column: 1 / -1; }
