@@ -8,6 +8,7 @@ import ChiSiamoPage from './pages/ChiSiamoPage.jsx'
 import FAQPage from './pages/FAQPage.jsx'
 import ContattiPage from './pages/ContattiPage.jsx'
 import InfoLegaliPage from './pages/InfoLegaliPage.jsx'
+import OrdinaPage from './pages/OrdinaPage.jsx'
 import DashBoardPage from './pages/DashBoardPage.jsx'
 
 export default function App() {
@@ -24,6 +25,7 @@ export default function App() {
         <Route path="/home/faq" element={<FAQPage />} />
         <Route path="/home/contatti" element={<ContattiPage/>}/>
         <Route path="/home/info" element={<InfoLegaliPage />} />
+        <Route path="/home/ordina" element={<OrdinaPage />} />
         <Route path="/dashboard" element={<DashBoardPage />} />
 
         {/* 404 */}

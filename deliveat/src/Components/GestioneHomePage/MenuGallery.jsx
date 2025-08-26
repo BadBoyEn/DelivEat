@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './GestioneHomePage.css';
+import { Link } from "react-router-dom";
 import galleryImages from '../../assets/galleryImages'; // array con i percorsi delle immagini
 import {
   Box, Button
@@ -38,7 +39,7 @@ export default function MenuGallery() {
         onClick={() => openGallery(0)}
       />
       <Box className="ordina-ora">
-         <Button variant="contained" color="secondary" size="large">Ordina ora</Button>
+         <Button component={Link} to="/home/ordina" variant="contained" color="secondary" size="large">Ordina ora</Button>
       </Box>
 
       {/* Overlay gallery */}

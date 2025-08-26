@@ -25,6 +25,12 @@
   right: 0.4rem;
 }
 
+.color-switch-ordina {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
+}
+
 /* Altezza AppBar */
 .appbar-custom {
   height: 80px;
@@ -256,4 +262,26 @@ html body {
 
 .info-legal {
   margin-top: 32px;
+}
+
+/*Ordinazione*/
+
+.box-ordina {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-ordina {
+  max-width: 100%;
+  height: auto;
+  margin-top: -25px;
+  transform: scale(0.6);
+}
+
+.text-ordina {
+  color: rgb(51, 51, 51);
+  font-weight: 600 !important;
+  font-family: "Times New Roman", Times, serif !important;
 }
