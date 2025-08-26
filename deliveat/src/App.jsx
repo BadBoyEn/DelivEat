@@ -5,6 +5,7 @@ import LogInPage from './pages/LogInPage.jsx'
 import SignUpPage from './pages/SignUpPage.jsx'
 import HomePage from './pages/HomePage.jsx'
 import FAQPage from './pages/FAQPage.jsx'
+import ContattiPage from './pages/ContattiPage.jsx'
 import InfoLegaliPage from './pages/InfoLegaliPage.jsx'
 import DashBoardPage from './pages/DashBoardPage.jsx'
 
@@ -19,6 +20,7 @@ export default function App() {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/home/faq" element={<FAQPage />} />
+        <Route path="/home/contatti" element={<ContattiPage/>}/>
         <Route path="/home/info" element={<InfoLegaliPage />} />
         <Route path="/dashboard" element={<DashBoardPage />} />
 
