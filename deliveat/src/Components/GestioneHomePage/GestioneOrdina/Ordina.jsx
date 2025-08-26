@@ -11,22 +11,24 @@ import {
 
 export default function Ordina() {
   return (
-    <Box>
-        <Box className="color-switch-ordina">
-            <ColorModeSelect/>
-        </Box> 
-      <Container maxWidth="md" className="box-ordina">
+    <Box className="page-container">
+      <Box className="color-switch-ordina">
+        <ColorModeSelect />
+      </Box> 
+      <Container maxWidth="md" className="box-ordina content">
         <img src={logo} alt="Logo-body" className="logo-ordina" />
         <Typography variant="h4" className="text-ordina">
-            ORDINAZIONE DA ASPORTO
+          ORDINAZIONE DA ASPORTO
         </Typography>
         <Box>
-            <OrdinaStepper/>
+          <OrdinaStepper />
         </Box>
       </Container>
-      <Box className="footer-custom">
-        <Typography variant="body2">© 2025 DelivEat. All Rights Reserved.</Typography>
+      <Box className="footer2-custom">
+        <Typography variant="body2">
+          © 2025 DelivEat. All Rights Reserved.
+        </Typography>
       </Box>
-    </Box>  
+    </Box>
   )  
 }

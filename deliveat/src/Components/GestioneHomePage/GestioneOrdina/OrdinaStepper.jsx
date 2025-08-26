@@ -8,6 +8,9 @@ import {
   TextField,
   Typography
 } from "@mui/material";
+import { LocalizationProvider, DatePicker, TimePicker } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import dayjs from 'dayjs';
 
 function OrangeStepIcon({ active, completed, icon }) {
   const [activeStep, setActiveStep] = useState(0);
@@ -62,8 +65,8 @@ export default function OrdinaStepper() {
     nome: "",
     cognome: "",
     telefono: "",
-    data: "",
-    ora: "",
+    data: dayjs(),
+    ora: dayjs(),
   });
 
   const handleChange = (e) => {
@@ -82,7 +85,8 @@ export default function OrdinaStepper() {
   };
 
   return (
-    <Box sx={{ maxWidth: "800px", width: "90%", mx: "auto", border: "1px solid #ccc", borderRadius: 2, p: 4, boxShadow: 3, mt: 6, mb: 6 }}>
+  <LocalizationProvider dateAdapter={AdapterDayjs}>
+    <Box sx={{ display: "flex", flexDirection: "column", width: "100%", maxWidth: activeStep === 2 ? 350 : 600, mx: "auto", border: "1px solid #ccc", borderRadius: 2, p: 4, boxShadow: 3, mt: 6, mb: 6 }}>
       {/* Stepper */}
       <Stepper activeStep={activeStep} alternativeLabel>
         {steps.map((label) => (
@@ -92,7 +96,7 @@ export default function OrdinaStepper() {
         ))}
       </Stepper>
 
-      <Box sx={{ mt: 4, maxWidth: 700, mx: "auto" }}>
+      <Box sx={{ mt: 4, width: "100%", mx: "auto" }}>
           {activeStep === 0 && (
             <Box>
               <TextField
@@ -123,48 +127,47 @@ export default function OrdinaStepper() {
           )}
 
           {activeStep === 1 && (
-            <Box>
-              <TextField
-                fullWidth
-                type="date"
-                name="data"
-                value={formData.data}
-                onChange={handleChange}
-                sx={{ mt: 2, width: "100%", flex: 1 }}
-                InputLabelProps={{ shrink: true }}
-              />
-              <TextField
-                fullWidth
-                type="time"
-                name="ora"
-                value={formData.ora}
-                onChange={handleChange}
-                sx={{ mt: 2, width: "100%", flex: 1 }}
-                InputLabelProps={{ shrink: true }}
-              />
+             <Box sx={{ display: "flex", gap: 2, flexDirection: { xs: "column", sm: "row" } }}>
+              <DatePicker
+  label="Data"
+  value={formData.data}
+  onChange={(newValue) => setFormData({ ...formData, data: newValue })}
+  slotProps={{
+    textField: {
+      fullWidth: true,
+      sx: { mt: 2, width: "100%" }
+    },
+  }}
+/>
+
+<TimePicker
+  label="Ora"
+  value={formData.ora}
+  onChange={(newValue) => setFormData({ ...formData, ora: newValue })}
+  slotProps={{
+    textField: {
+      fullWidth: true,
+      sx: { mt: 2, width: "100%" } 
+    },
+  }}
+/>
             </Box>
           )}
 
           {activeStep === 2 && (
             <Box>
+              <Typography sx={{ mt: 2 }}><strong>Nome:</strong> {formData.nome}</Typography>
+              <Typography><strong>Cognome:</strong> {formData.cognome}</Typography>
+              <Typography><strong>Telefono:</strong> {formData.telefono}</Typography>
               <Typography sx={{ mt: 2 }}>
-                <strong>Nome:</strong> {formData.nome}
-              </Typography>
-              <Typography>
-                <strong>Cognome:</strong> {formData.cognome}
-              </Typography>
-              <Typography>
-                <strong>Telefono:</strong> {formData.telefono}
-              </Typography>
-              <Typography sx={{ mt: 2 }}>
-                <strong>Data:</strong> {formData.data}
-              </Typography>
-              <Typography>
-                <strong>Ora:</strong> {formData.ora}
-              </Typography>
+  <strong>Data:</strong> {formData.data ? dayjs(formData.data).format("DD/MM/YYYY") : ""}
+</Typography>
+<Typography>
+  <strong>Ora:</strong> {formData.ora ? dayjs(formData.ora).format("HH:mm") : ""}
+</Typography>
             </Box>
           )}
-        </Box>     
+        </Box>   
       {/* Bottoni di navigazione */}
       <Box sx={{ display: "flex", justifyContent: "space-between", mt: 4 }}>
         <Button color="secondary" disabled={activeStep === 0} onClick={handleBack}>
@@ -181,5 +184,6 @@ export default function OrdinaStepper() {
         )}
       </Box>
     </Box>
+  </LocalizationProvider>
   );
 }

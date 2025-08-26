@@ -91,6 +91,7 @@ html.theme.dark .promotion-box {
   background-color: #121212;
   color: #fff;
   text-align: center;
+  margin-top: auto;
 }
 
 .footer2-custom {
@@ -266,6 +267,21 @@ html body {
 
 /*Ordinazione*/
 
+html, body {
+  height: 100%;   
+  margin: 0;
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; 
+}
+
+.content {
+  flex: 1; 
+}
+
 .box-ordina {
   display: flex !important;
   flex-direction: column;
@@ -273,10 +289,16 @@ html body {
   align-items: center;
 }
 
+.box-ordina > div {
+  width: 100%;
+  max-width: 600px;
+  display: flex !important;
+} 
+
 .logo-ordina {
   max-width: 100%;
   height: auto;
-  margin-top: -25px;
+  margin-top: -29px;
   transform: scale(0.6);
 }
 
