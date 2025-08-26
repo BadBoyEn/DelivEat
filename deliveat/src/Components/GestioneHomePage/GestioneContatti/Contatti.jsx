@@ -19,7 +19,6 @@ export default function Contatti () {
                     </Box>
                     <Box text="text" classname="links-box">
                         <Button component={Link} to="/" variant='contained' color="secondary">Home</Button>
-                        <Button component={Link} to="/home/chisiamo" color="secondary">Chi siamo</Button>
                         <Button variant='contained' color="secondary">Come funziona</Button>
                         <Button component={Link} to="/home/faq" variant='contained' color="secondary">FAQ</Button>
                         <Button component={Link} to="/home/info" variant='contained' color="secondary">Info Legali</Button>
