@@ -81,7 +81,7 @@ export default function FAQ() {
           <Button component={Link} to="/" variant='contained' color="secondary">Home</Button>
           <Button component={Link} to="/home/faq" variant='contained' color="secondary">FAQ</Button>
           <Button variant='contained' color="secondary">Contatti</Button>
-          <Button variant='contained' color="secondary">Info Legali</Button>
+          <Button component={Link} to="/home/info" variant='contained' color="secondary">Info Legali</Button>
         </Box>
         <Box className="color-switch-home">
             <ColorModeSelect/>
