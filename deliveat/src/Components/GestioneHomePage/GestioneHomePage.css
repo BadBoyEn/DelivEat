@@ -216,3 +216,44 @@ html body {
   flex: 1;
   min-height: 100vh;
 }
+
+.faq-quest {
+   flex: 1;
+   margin-top: 32px;
+   margin-bottom: 40px;
+}
+
+.search-custom {
+  margin-bottom: 24px;
+  background-color: rgba(0,0,0,0.04);
+  border-radius: 8px;
+}
+
+/* Rimuove il bordo dell'OutlinedInput */
+.search-custom .MuiOutlinedInput-root fieldset {
+  border: none;
+}
+
+.faq-answer {
+  color: #FF6B00;
+  font-Weight: "bold"
+}
+
+/*InfoLegali*/
+
+.box-info {
+  padding-top: 48px;   /* py: 6 → 6 * 8px = 48px */
+  padding-bottom: 48px; 
+  margin-bottom: 47.2px; /* mb: 5.9 → 5.9 * 8px ≈ 47.2px */
+  padding-left: 48px;  /* px: 6 → 6 * 8px = 48px */
+  padding-right: 48px;
+  text-align: left;
+}
+
+.term-util {
+  margin-top: 40px;
+}
+
+.info-legal {
+  margin-top: 32px;
+}

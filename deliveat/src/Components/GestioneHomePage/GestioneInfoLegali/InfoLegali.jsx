@@ -33,11 +33,11 @@ export default function InfoLegali() {
         </Box>
       </Toolbar>
      </AppBar>
-     <Box maxWidth="md" sx={{ py: 6, mb: 5.9, px: 6, textAlign: "left" }}>
+     <Box maxWidth="md" className="box-info">
      <Typography variant="h4" gutterBottom color="secondary" fontWeight={800}>
          Informazioni Legali
        </Typography>
-       <Box sx={{ mt: 4 }}>
+       <Box className="info-legal">
         <Typography variant="body1" paragraph>
           Ai sensi dell’art. 2250 del Codice Civile e delle normative vigenti, si riportano di seguito i dati identificativi della società:
         </Typography>
@@ -72,7 +72,7 @@ export default function InfoLegali() {
       </Box>
 
       {/* Altre sezioni utili */}
-      <Box sx={{ mt: 5 }}>
+      <Box className="term-util">
         <Typography variant="h6" gutterBottom>
           Termini di utilizzo
         </Typography>

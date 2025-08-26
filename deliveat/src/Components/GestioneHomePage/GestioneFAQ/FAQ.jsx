@@ -88,8 +88,8 @@ export default function FAQ() {
         </Box>
       </Toolbar>
      </AppBar>
-     <Container maxWidth="md" sx={{ mt: 5, mb: 5, flex: 1 }}>
-       <Typography variant="h4" gutterBottom color="secondary" fontWeight={800} align='center'>
+     <Container maxWidth="md" className="faq-quest" >
+       <Typography variant="h4" gutterBottom color="secondary" fontWeight={800} align='center' sx={{ mb: 3.5 }}>
          Frequently asked questions
        </Typography>
        <TextField
@@ -100,7 +100,6 @@ export default function FAQ() {
          value={search}
          onChange={(e) =>
          setSearch(e.target.value)}
-           sx={{ mb: 3, backgroundColor: "rgba(0,0,0,0.04)", borderRadius: 2, "& .MuiOutlinedInput-root" : {"& fieldset": { border: "none", }} }}
            InputProps={{
          startAdornment: (
           <InputAdornment position="start">
@@ -109,7 +108,7 @@ export default function FAQ() {
     ),
   }}
          />
-        <Grid container spacing={3} justifyContent={"center"} >
+        <Grid container spacing={3} justifyContent={"center"} marginTop="0" >
         {filteredFaqs.length > 0 ? (
           filteredFaqs.map((faq, index) => (
             <Grid item xs={12} sm={12} key={index}>
@@ -118,7 +117,7 @@ export default function FAQ() {
                   <Typography color>{faq.question}</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                  <Typography sx={{ color: "#FF6B00", fontWeight: "bold" }}>{faq.answer}</Typography>
+                  <Typography className="faq-answer">{faq.answer}</Typography>
                 </AccordionDetails>
               </Accordion>
             </Grid>
