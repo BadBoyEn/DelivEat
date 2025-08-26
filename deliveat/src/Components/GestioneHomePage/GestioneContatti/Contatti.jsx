@@ -37,7 +37,7 @@ export default function Contatti () {
                     <Typography variant="body1" paragraph>
                         Di seguito trovi i nostri contatti per ricevere assistenza in tempo reale
                     </Typography>
-                    <Typography variant="body2" paragraph>
+                    <Typography variant="body1" paragraph>
                         <strong>Indirizzo email:</strong> info@deliveat.com
                     </Typography>
                     <Typography>
