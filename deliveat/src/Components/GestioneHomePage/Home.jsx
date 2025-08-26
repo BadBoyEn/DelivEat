@@ -24,7 +24,7 @@ export default function Home() {
         {/* LINKS */}
         <Box text="text" className="links-box">
           <Button component={Link} to="/" variant='contained' color="secondary">Home</Button>
-          <Button variant='contained' color="secondary">Chi siamo</Button>
+          <Button component={Link} to="/home/chisiamo" variant='contained' color="secondary">Chi Siamo</Button>
           <Button variant='contained' color="secondary">Come funziona</Button>
           <Button component={Link} to="/home/faq" variant='contained' color="secondary">FAQ</Button>
           <Button component={Link} to="/home/contatti" variant='contained' color="secondary">Contatti</Button>
