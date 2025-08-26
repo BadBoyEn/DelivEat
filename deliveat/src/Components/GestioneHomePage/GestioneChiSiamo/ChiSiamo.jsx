@@ -44,11 +44,11 @@ export default function ChiSiamo () {
                     ispirati alle tradizioni culinarie di tutto il mondo, con un'attenzione costante alla freschezza delle materie prime
                     e alla qualità del servizio.
                 </Typography>
-                <Typography variant="body2" paragraph>
+                <Typography variant="body1" paragraph>
                     <strong>Velocita, sicurezza e gusto</strong> sono i pilastri su cui costruiamo ogni ordine. Perchè crediamo che mangiare
                     bene debba essere semplice, anche quando si sceglie la comodità della consegna
                 </Typography>
-                <Typography variant="body2" paragraph>
+                <Typography variant="body1" paragraph>
                     Scegli <strong>DelivEat</strong> : il meglio della cucina, ovunque tu sia.
                 </Typography>
             </Box>
