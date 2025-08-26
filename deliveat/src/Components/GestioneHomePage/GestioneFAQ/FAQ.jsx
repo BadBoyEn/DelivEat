@@ -70,7 +70,7 @@ export default function FAQ() {
   return (
     <Box>
       {/* Header */}
-      <AppBar position="static" color="primaryHome" className="appbar-custom">
+      <AppBar elevation={0} position="static" color="primaryHome" className="appbar-custom">
       <Toolbar className="toolbar-custom">
         {/* LOGO */}
         <Box className="logo-home">

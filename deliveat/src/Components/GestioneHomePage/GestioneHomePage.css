@@ -29,6 +29,8 @@
 .appbar-custom {
   height: 80px;
   justify-content: center;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.31) !important;
+  z-index: 1200;
 }
 
 /* Toolbar layout */
@@ -68,6 +70,10 @@
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.8);
 }
 
+html.theme.dark .promotion-box {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
+}
+
 /* Bottone con margin-top */
 .download {
   margin-top: 16px !important;
@@ -76,7 +82,7 @@
 /* Footer */
 .footer-custom {
   padding: 2.5rem; 
-  background-color: #212121;
+  background-color: #121212;
   color: #fff;
   text-align: center;
 }
@@ -187,4 +193,10 @@
     transform: scale(1);
     opacity: 1;
   }
+}
+
+html body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }

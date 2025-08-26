@@ -78,7 +78,7 @@ export default function AppTheme({ children }) {
   );
 
   useEffect(() => {
-    document.documentElement.classList.remove('theme-dark', 'theme-light');
+    document.documentElement.classList.remove('theme-dark','theme-light');
     document.documentElement.classList.add(`theme-${mode}`);
   }, [mode]);
 

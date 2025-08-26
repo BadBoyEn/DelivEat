@@ -14,7 +14,7 @@ export default function InfoLegali() {
   return (
     <Box>
       {/* Header */}
-      <AppBar position="static" color="primaryHome" className="appbar-custom">
+      <AppBar elevation={0} position="relative" color="primaryHome" className="appbar-custom">
       <Toolbar className="toolbar-custom">
         {/* LOGO */}
         <Box className="logo-home">
