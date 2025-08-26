@@ -37,6 +37,15 @@
   height: auto;
 }
 
+.logo-img {
+  width: clamp(70px, 8vw, 96px); 
+  height: auto;
+  display: block;
+  margin: 6px auto 6px;          
+  object-fit: contain;
+  transform: none;
+}
+
 /* -- TITOLO -- */
 .auth-title{
   text-align:center;
