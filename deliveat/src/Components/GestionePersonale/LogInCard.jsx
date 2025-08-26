@@ -13,84 +13,90 @@ import { Link as RouterLink } from 'react-router-dom';
 
 import { LogInContainer, StyledCard } from './LogInContainer';
 import { useLogInLogic } from './LogInLogic';
-import { SitemarkIcon } from './CustomIcons';
-import ColorModeSelect from '../../theme/ColorModeSelect';
 import AppTheme from '../../theme/AppTheme';
-
-import './GestionePersonale.css';
+import ColorModeSelect from '../../theme/ColorModeSelect';
+import { SitemarkIcon } from './CustomIcons';
 
 export default function LogIn(props) {
   const {
-    emailError,
-    emailErrorMessage,
-    passwordError,
-    passwordErrorMessage,
-    validateInputs,
+    emailError, emailErrorMessage,
+    passwordError, passwordErrorMessage,
     handleSubmit
   } = useLogInLogic();
 
   return (
     <AppTheme {...props}>
       <CssBaseline enableColorScheme />
-      <LogInContainer direction="column" justifyContent="center">
+      <LogInContainer direction="column" justifyContent="center" alignItems="center">
         <StyledCard variant="outlined">
+
+          {/* -- COLOR THEME -- */}
           <Box className="color-switch">
             <ColorModeSelect />
           </Box>
 
+          {/* -- LOGO -- */}
           <Box className="logo-container">
-            <SitemarkIcon />
+            <SitemarkIcon className="logo-img" />
           </Box>
 
-          <Typography component="h2" variant="h4.5" className="auth-title">
+          {/* -- TITOLO -- */}
+          <Typography component="h2" variant="h4" className="auth-title">
             Accesso Riservato
           </Typography>
 
-          <Box component="form" onSubmit={handleSubmit} className="auth-form">
-            <FormControl>
-              <FormLabel htmlFor="email">Email</FormLabel>
-              <TextField
-                required
-                fullWidth
-                id="email"
-                placeholder="tua@email.com"
-                name="email"
-                autoComplete="email"
-                variant="outlined"
-                error={emailError}
-                helperText={emailErrorMessage}
-              />
-            </FormControl>
+          {/* -- Form: campi a colonna -- */}
+          <Box component="form" onSubmit={handleSubmit}>
+            <div className="form-grid">
+              <div className="field full">
+                <FormControl fullWidth>
+                  <FormLabel htmlFor="email">Email</FormLabel>
+                  <TextField
+                    required
+                    id="email"
+                    name="email"
+                    placeholder="tua@email.com"
+                    variant="outlined"
+                    error={emailError}
+                    helperText={emailErrorMessage}
+                    fullWidth
+                  />
+                </FormControl>
+              </div>
 
-            <FormControl>
-              <FormLabel htmlFor="password">Password</FormLabel>
-              <TextField
-                required
-                fullWidth
-                name="password"
-                placeholder="••••••"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                variant="outlined"
-                error={passwordError}
-                helperText={passwordErrorMessage}
-              />
-            </FormControl>
+              <div className="field full">
+                <FormControl fullWidth>
+                  <FormLabel htmlFor="password">Password</FormLabel>
+                  <TextField
+                    required
+                    id="password"
+                    name="password"
+                    type="password"
+                    placeholder="••••••••"
+                    variant="outlined"
+                    error={passwordError}
+                    helperText={passwordErrorMessage}
+                    fullWidth
+                  />
+                </FormControl>
+              </div>
 
-            <Button type="submit" fullWidth variant="contained" onClick={validateInputs}>
-              Accedi
-            </Button>
+              <div className="field full auth-actions">
+                <Button type="submit" variant="contained" className="btn-full">
+                  ACCEDI
+                </Button>
+              </div>
+            </div>
           </Box>
 
-          <Typography sx={{ textAlign: 'center' }}>
+          {/* -- SEPARATORE E FOOTER --*/}
+          <div className="auth-sep" role="separator" aria-label="oppure">
+            <span>o</span>
+          </div>
+
+          <Typography sx={{ textAlign: 'center' }} className="auth-footer">
             Non hai un account?{' '}
-            <Link
-              component={RouterLink}
-              to="/signup"
-              variant="body2"
-              sx={{ alignSelf: 'center' }}
-            >
+            <Link component={RouterLink} to="/signup" variant="body2" sx={{ alignSelf: 'center' }}>
               Registrati
             </Link>
           </Typography>
