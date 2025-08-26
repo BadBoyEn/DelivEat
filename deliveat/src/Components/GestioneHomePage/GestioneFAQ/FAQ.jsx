@@ -68,9 +68,9 @@ export default function FAQ() {
       faq.question.toLowerCase().includes(search.toLowerCase()) || faq.answer.toLowerCase().includes(search.toLowerCase())
   );
   return (
-    <Box>
+    <Box className="faq-custom">
       {/* Header */}
-      <AppBar elevation={0} position="static" color="primaryHome" className="appbar-custom">
+      <AppBar elevation={0} position="relative" color="primaryHome" className="appbar-custom">
       <Toolbar className="toolbar-custom">
         {/* LOGO */}
         <Box className="logo-home">
@@ -88,11 +88,12 @@ export default function FAQ() {
         </Box>
       </Toolbar>
      </AppBar>
-     <Container maxWidth="md" sx={{ mt: 5, mb: 5 }}>
+     <Container maxWidth="md" sx={{ mt: 5, mb: 5, flex: 1 }}>
        <Typography variant="h4" gutterBottom color="secondary" fontWeight={800} align='center'>
          Frequently asked questions
        </Typography>
        <TextField
+         className="search-custom"
          fullWidth
          variant="outlined"
          placeholder="Cerca domande o risposte..."
@@ -101,10 +102,10 @@ export default function FAQ() {
          setSearch(e.target.value)}
            sx={{ mb: 3, backgroundColor: "rgba(0,0,0,0.04)", borderRadius: 2, "& .MuiOutlinedInput-root" : {"& fieldset": { border: "none", }} }}
            InputProps={{
-    startAdornment: (
-      <InputAdornment position="start">
-        <SearchIcon color="action" />
-      </InputAdornment>
+         startAdornment: (
+          <InputAdornment position="start">
+           <SearchIcon color="action" />
+          </InputAdornment>
     ),
   }}
          />
@@ -129,7 +130,7 @@ export default function FAQ() {
         )}
       </Grid>
     </Container>
-    <Box className="footer-custom">
+    <Box className="footer2-custom">
         <Typography variant="body2">© 2025 DelivEat. Tutti i diritti riservati.</Typography>
       </Box>
    </Box> 

@@ -87,6 +87,13 @@ html.theme.dark .promotion-box {
   text-align: center;
 }
 
+.footer2-custom {
+  padding: 2.5rem; 
+  background-color: #121212;
+  color: #fff;
+  text-align: center;
+}
+
 /*Menu Gallery*/
 
 .ordina-ora {
@@ -199,4 +206,13 @@ html body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+}
+
+/*FAQ*/
+
+.faq-custom {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 100vh;
 }

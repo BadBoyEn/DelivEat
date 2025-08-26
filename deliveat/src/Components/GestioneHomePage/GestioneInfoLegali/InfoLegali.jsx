@@ -12,7 +12,7 @@ import {
 
 export default function InfoLegali() {
   return (
-    <Box>
+    <Box className="faq-custom">
       {/* Header */}
       <AppBar elevation={0} position="relative" color="primaryHome" className="appbar-custom">
       <Toolbar className="toolbar-custom">
@@ -88,7 +88,7 @@ export default function InfoLegali() {
         </Typography>
       </Box>
      </Box>
-     <Box className="footer-custom">
+     <Box className="footer2-custom">
         <Typography variant="body2">© 2025 DelivEat. Tutti i diritti riservati.</Typography>
       </Box>  
     </Box>
