@@ -34,19 +34,22 @@ export default function SignUp(props) {
       <CssBaseline enableColorScheme />
       <SignUpContainer direction="column" justifyContent="center" alignItems="center">
         <StyledCard variant="outlined">
-
+          {/* Luna in alto a destra */}
           <Box className="color-switch">
             <ColorModeSelect />
           </Box>
 
+          {/* Logo centrato */}
           <Box className="logo-container">
             <SitemarkIcon className="logo-img" />
           </Box>
 
-          <Typography component="h2" variant="h4.5" className="auth-title">
+          {/* Titolo */}
+          <Typography component="h2" variant="h4" className="auth-title">
             Registrazione Staff
           </Typography>
 
+          {/* Form responsivo: 1 → 2 colonne */}
           <Box component="form" onSubmit={handleSubmit}>
             <div className="form-grid">
 
@@ -146,6 +149,12 @@ export default function SignUp(props) {
             </div>
           </Box>
 
+          {/*  ------ o ------ --- */}
+          <div className="auth-sep" role="separator" aria-label="oppure">
+            <span>o</span>
+          </div>
+
+          {/* Footer */}
           <Typography sx={{ textAlign: 'center' }} className="auth-footer">
             Hai già un account?{' '}
             <Link component={RouterLink} to="/login" variant="body2" sx={{ alignSelf: 'center' }}>
