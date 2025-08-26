@@ -1,96 +1,40 @@
-.auth-page {
-  --page-pad: clamp(16px, 3vh, 40px);
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;         
-  padding: var(--page-pad) 16px;
-  box-sizing: border-box;
-}
-
-/* --CARD CONTENITORE -- */
+/* --- CARD stretta + altezza adattiva --- */
 .auth-card {
-  width: min(100%, 980px);
-  margin: 0 auto;
-  padding: clamp(16px, 2.5vw, 28px);
-  border-radius: 24px;
-  box-sizing: border-box;
-
-  /* -- ADATTAMENTO ALTEZZA VH E SCROLLING SE NECESSARIO [MOBILE?] -- */
-  max-height: calc(100vh - (var(--page-pad) * 2));
-  overflow: auto;
-}
-
-/* -- HEADER CARD [logo + titolo] -- */
-.auth-header {
+  width: min(90vw, 380px);      
+  max-height: calc(100vh - 4rem);
+  overflow: auto;               
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: clamp(12px, 2vh, 24px);
+  gap: 1rem;
+  padding: 2rem;
+  box-sizing: border-box;
+  position: relative;
+
+  background-color: var(--card-bg) !important;
+  box-shadow: var(--shadow);
+  color: var(--text);
 }
 
-.auth-title {
-  margin: 0;
-  line-height: 1.2;
-  text-align: center;
-}
+/* Logo più contenuto */
+.logo-container { display: flex; justify-content: center; margin-bottom: 0.2rem; }
+.logo-container svg { max-width: 140px; height: auto; }
 
-/* -- GRID FORM TABELLE -- */
+/* --- Griglia del form --- */
 .form-grid {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: clamp(12px, 1.2vw, 20px);
+  grid-template-columns: 1fr;
+  gap: 12px;
 }
+.form-grid .field { grid-column: 1 / -1; }
+.form-grid .field.full { grid-column: 1 / -1; }
 
-.form-grid .field {
-  grid-column: span 6;
-}
-
-.form-grid .field.full {
-  grid-column: 1 / -1;
-}
-
-/* -- MOBILE -- */
-@media (max-width: 900px) {
-  .form-grid .field {
-    grid-column: 1 / -1;
+@media (min-width: 560px) {
+  .form-grid {
+    grid-template-columns: 1fr 1fr; 
+    gap: 14px;
   }
+  .form-grid .field.full { grid-column: 1 / -1; }
 }
 
-/* Gli input riempiono sempre la cella */
-.form-grid .field .MuiFormControl-root,
-.form-grid .field .MuiTextField-root,
-.form-grid .field input,
-.form-grid .field select,
-.form-grid .field textarea {
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.auth-actions {
-  margin-top: clamp(8px, 1.5vh, 16px);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.auth-actions .btn-full {
-  width: 100%;
-}
-
-input[type="date"] {
-  min-height: 44px;
-}
-input[type="tel"],
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-  min-height: 44px;
-}
-
-/* -- SPAZIO BOTTON [HAI GIA ACCOUNT] -- */
-.auth-footer {
-  margin-top: clamp(8px, 1.5vh, 16px);
-  text-align: center;
-}
+/* Pulsante piena larghezza */
+.auth-actions .btn-full { width: 100%; }

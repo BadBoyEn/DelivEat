@@ -8,5 +8,5 @@ export const SignUpContainer = (props) => (
 );
 
 export const StyledCard = (props) => (
-  <MuiCard className="auth-card auth-card--wide" {...props} />
+  <MuiCard className="auth-card" {...props} />
 );

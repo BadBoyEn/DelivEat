@@ -1,4 +1,3 @@
-// src/Components/GestionePersonale/SignUpCard.jsx
 import {
   Box,
   Button,
@@ -39,7 +38,7 @@ export default function SignUp(props) {
             <ColorModeSelect />
           </Box>
 
-          <Box className="logo-container logo-container--tight">
+          <Box className="logo-container">
             <SitemarkIcon />
           </Box>
 
@@ -47,144 +46,75 @@ export default function SignUp(props) {
             Registrazione Staff
           </Typography>
 
-          <Box component="form" onSubmit={handleSubmit}>
-            <div className="form-grid">
-              <div className="field">
-                <FormControl fullWidth>
-                  <FormLabel htmlFor="firstname">Nome</FormLabel>
-                  <TextField
-                    required
-                    id="firstname"
-                    name="firstname"
-                    placeholder="Mario"
-                    variant="outlined"
-                    error={FirstNameError}
-                    helperText={FirstNameErrorMessage}
-                    fullWidth
-                  />
-                </FormControl>
-              </div>
+          <Box component="form" onSubmit={handleSubmit} className="signup-form">
+            <FormControl fullWidth>
+              <FormLabel htmlFor="firstname">Nome</FormLabel>
+              <TextField
+                required id="firstname" name="firstname" placeholder="Mario"
+                variant="outlined" error={FirstNameError} helperText={FirstNameErrorMessage}
+              />
+            </FormControl>
 
-              <div className="field">
-                <FormControl fullWidth>
-                  <FormLabel htmlFor="lastname">Cognome</FormLabel>
-                  <TextField
-                    required
-                    id="lastname"
-                    name="lastname"
-                    placeholder="Rossi"
-                    variant="outlined"
-                    error={LastNameError}
-                    helperText={LastNameErrorMessage}
-                    fullWidth
-                  />
-                </FormControl>
-              </div>
+            <FormControl fullWidth>
+              <FormLabel htmlFor="lastname">Cognome</FormLabel>
+              <TextField
+                required id="lastname" name="lastname" placeholder="Rossi"
+                variant="outlined" error={LastNameError} helperText={LastNameErrorMessage}
+              />
+            </FormControl>
 
-              <div className="field">
-                <FormControl fullWidth>
-                  <FormLabel htmlFor="phone">Numero di telefono</FormLabel>
-                  <TextField
-                    required
-                    id="phone"
-                    name="phone"
-                    placeholder="+39 123 456 7890"
-                    variant="outlined"
-                    error={PhoneError}
-                    helperText={PhoneErrorMessage}
-                    fullWidth
-                  />
-                </FormControl>
-              </div>
+            <FormControl fullWidth>
+              <FormLabel htmlFor="phone">Numero di telefono</FormLabel>
+              <TextField
+                required id="phone" name="phone" placeholder="+39 123 456 7890"
+                variant="outlined" error={PhoneError} helperText={PhoneErrorMessage}
+              />
+            </FormControl>
 
-              <div className="field">
-                <FormControl fullWidth>
-                  <FormLabel htmlFor="birthdate">Data di nascita</FormLabel>
-                  <TextField
-                    required
-                    id="birthdate"
-                    name="birthdate"
-                    type="date"
-                    variant="outlined"
-                    InputLabelProps={{ shrink: true }}
-                    error={BirthdateError}
-                    helperText={BirthdateErrorMessage}
-                    fullWidth
-                  />
-                </FormControl>
-              </div>
+            <FormControl fullWidth>
+              <FormLabel htmlFor="birthdate">Data di nascita</FormLabel>
+              <TextField
+                required id="birthdate" name="birthdate" type="date"
+                variant="outlined" InputLabelProps={{ shrink: true }}
+                error={BirthdateError} helperText={BirthdateErrorMessage}
+              />
+            </FormControl>
 
-              <div className="field">
-                <FormControl fullWidth>
-                  <FormLabel htmlFor="city">Città</FormLabel>
-                  <TextField
-                    required
-                    id="city"
-                    name="city"
-                    placeholder="Roma"
-                    variant="outlined"
-                    error={CityError}
-                    helperText={CityErrorMessage}
-                    fullWidth
-                  />
-                </FormControl>
-              </div>
+            <FormControl fullWidth>
+              <FormLabel htmlFor="city">Città</FormLabel>
+              <TextField
+                required id="city" name="city" placeholder="Roma"
+                variant="outlined" error={CityError} helperText={CityErrorMessage}
+              />
+            </FormControl>
 
-              <div className="field">
-                <FormControl fullWidth>
-                  <FormLabel htmlFor="address">Indirizzo</FormLabel>
-                  <TextField
-                    required
-                    id="address"
-                    name="address"
-                    placeholder="Via Roma 10"
-                    variant="outlined"
-                    error={AddressError}
-                    helperText={AddressErrorMessage}
-                    fullWidth
-                  />
-                </FormControl>
-              </div>
+            <FormControl fullWidth>
+              <FormLabel htmlFor="address">Indirizzo</FormLabel>
+              <TextField
+                required id="address" name="address" placeholder="Via Roma 10"
+                variant="outlined" error={AddressError} helperText={AddressErrorMessage}
+              />
+            </FormControl>
 
-              <div className="field full">
-                <FormControl fullWidth>
-                  <FormLabel htmlFor="email">Email</FormLabel>
-                  <TextField
-                    required
-                    id="email"
-                    name="email"
-                    placeholder="tua@email.com"
-                    variant="outlined"
-                    error={EmailError}
-                    helperText={EmailErrorMessage}
-                    fullWidth
-                  />
-                </FormControl>
-              </div>
+            <FormControl fullWidth>
+              <FormLabel htmlFor="email">Email</FormLabel>
+              <TextField
+                required id="email" name="email" placeholder="tua@email.com"
+                variant="outlined" error={EmailError} helperText={EmailErrorMessage}
+              />
+            </FormControl>
 
-              <div className="field full">
-                <FormControl fullWidth>
-                  <FormLabel htmlFor="password">Password</FormLabel>
-                  <TextField
-                    required
-                    id="password"
-                    name="password"
-                    type="password"
-                    placeholder="••••••••"
-                    variant="outlined"
-                    error={PasswordError}
-                    helperText={PasswordErrorMessage}
-                    fullWidth
-                  />
-                </FormControl>
-              </div>
+            <FormControl fullWidth>
+              <FormLabel htmlFor="password">Password</FormLabel>
+              <TextField
+                required id="password" name="password" type="password" placeholder="••••••••"
+                variant="outlined" error={PasswordError} helperText={PasswordErrorMessage}
+              />
+            </FormControl>
 
-              <div className="field full auth-actions">
-                <Button type="submit" variant="contained" className="btn-full">
-                  REGISTRATI
-                </Button>
-              </div>
-            </div>
+            <Button type="submit" variant="contained" className="btn-full">
+              REGISTRATI
+            </Button>
           </Box>
 
           <Typography sx={{ textAlign: 'center' }} className="auth-footer">
