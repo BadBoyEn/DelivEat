@@ -1,40 +1,80 @@
-/* --- CARD stretta + altezza adattiva --- */
-.auth-card {
-  width: min(90vw, 380px);      
-  max-height: calc(100vh - 4rem);
-  overflow: auto;               
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding: 2rem;
-  box-sizing: border-box;
-  position: relative;
-
-  background-color: var(--card-bg) !important;
-  box-shadow: var(--shadow);
-  color: var(--text);
+.auth-page{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  padding:24px 16px;
+  box-sizing:border-box;
 }
 
-/* Logo più contenuto */
-.logo-container { display: flex; justify-content: center; margin-bottom: 0.2rem; }
-.logo-container svg { max-width: 140px; height: auto; }
-
-/* --- Griglia del form --- */
-.form-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
+/* -- CARD -- */
+.auth-card{
+  width:min(96vw, 760px);    
+  max-height:calc(100vh - 48px);
+  overflow:auto;             
+  padding:32px;
+  border-radius:24px;
+  box-sizing:border-box;
+  display:flex;
+  flex-direction:column;
+  gap:16px;
 }
-.form-grid .field { grid-column: 1 / -1; }
-.form-grid .field.full { grid-column: 1 / -1; }
 
-@media (min-width: 560px) {
-  .form-grid {
-    grid-template-columns: 1fr 1fr; 
-    gap: 14px;
+/* -- LOGO -- */
+.logo-container{
+  display:flex;
+  justify-content:center;
+  margin-top:4px;
+  margin-bottom:8px;
+}
+.logo-container svg{
+  max-width:110px;          
+  height:auto;
+}
+
+/* -- TITOLO -- */
+.auth-title{
+  text-align:center;
+  margin:4px 0 14px;
+  line-height:1.2;
+}
+
+/* -- GRIGLIA FORM -- */
+.form-grid{
+  width:100%;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:16px;
+}
+
+/* Ogni “field” occupa una colonna; .full prende tutta la riga */
+.field{ grid-column:1 / -1; }
+.field.full{ grid-column:1 / -1; }
+
+@media (min-width:700px){
+  .form-grid{
+    grid-template-columns:1fr 1fr; /* due colonne uguali */
+    column-gap:20px;
+    row-gap:16px;
   }
-  .form-grid .field.full { grid-column: 1 / -1; }
+  .field{ grid-column:auto; }     
+  .field.full{ grid-column:1 / -1; }
 }
 
-/* Pulsante piena larghezza */
-.auth-actions .btn-full { width: 100%; }
+/* Assicura che gli input riempiano la cella */
+.field .MuiFormControl-root,
+.field .MuiTextField-root,
+.field input,
+.field select,
+.field textarea{
+  width:100%;
+  box-sizing:border-box;
+  min-height:44px;
+}
+
+/* -- AZIONI -- */
+.auth-actions{ margin-top:8px; }
+.auth-actions .btn-full{ width:100%; }
+
+/* Footer (link Accedi/Registrati) */
+.auth-footer{ text-align:center; margin-top:8px; }
