@@ -86,7 +86,7 @@ export default function OrdinaStepper() {
 
   return (
   <LocalizationProvider dateAdapter={AdapterDayjs}>
-    <Box sx={{ display: "flex", flexDirection: "column", width: "100%", maxWidth: activeStep === 2 ? 350 : 600, mx: "auto", border: "1px solid #ccc", borderRadius: 2, p: 4, boxShadow: 3, mt: 6, mb: 6 }}>
+    <Box sx={{ backgroundColor: "#fff", display: "flex", flexDirection: "column", width: "100%", maxWidth: activeStep === 2 ? 350 : 600, mx: "auto", border: "1px solid #ccc", borderRadius: 2, p: 4, boxShadow: 3, mt: 6, mb: 6 }}>
       {/* Stepper */}
       <Stepper activeStep={activeStep} alternativeLabel>
         {steps.map((label) => (

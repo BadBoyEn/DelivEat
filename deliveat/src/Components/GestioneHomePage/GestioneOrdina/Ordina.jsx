@@ -1,6 +1,5 @@
 import { SitemarkIcon } from '../../GestioneHomePage/CustomIcons.jsx';
-import ColorModeSelect from '../../../theme/ColorModeSelect.jsx';
-import logo from '../../../Images/DelivEat_logo2.png';
+import logo from '../../../Images/D2.png';
 import OrdinaStepper from './OrdinaStepper.jsx';
 import { Link } from "react-router-dom";
 import {
@@ -12,9 +11,6 @@ import {
 export default function Ordina() {
   return (
     <Box className="page-container">
-      <Box className="color-switch-ordina">
-        <ColorModeSelect />
-      </Box> 
       <Container maxWidth="md" className="box-ordina content">
         <img src={logo} alt="Logo-body" className="logo-ordina" />
         <Typography variant="h4" className="text-ordina">

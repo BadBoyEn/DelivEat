@@ -99,6 +99,7 @@ html.theme.dark .promotion-box {
   background-color: #121212;
   color: #fff;
   text-align: center;
+  margin-top: auto;
 }
 
 /*Menu Gallery*/
@@ -275,11 +276,12 @@ html, body {
 .page-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; 
+  min-height: 100vh;
+  background-color: #fc7922;
 }
 
 .content {
-  flex: 1; 
+  flex: 1;
 }
 
 .box-ordina {
@@ -287,19 +289,24 @@ html, body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  max-width: 960px !important;
 }
 
 .box-ordina > div {
-  width: 100%;
   max-width: 600px;
-  display: flex !important;
-} 
+  display: flex !important;;
+}
+
+.box-ordina > .MuiBox-root.css-0 {
+  width: 100%;
+  /* max-width: 600px; */  /* puoi tenerlo o rimuoverlo, a seconda del design */
+}
 
 .logo-ordina {
-  max-width: 100%;
+  width: 25%;
   height: auto;
-  margin-top: -29px;
-  transform: scale(0.6);
+  margin-top: 15px;
+  margin-bottom: 30px;
 }
 
 .text-ordina {
@@ -307,3 +314,4 @@ html, body {
   font-weight: 600 !important;
   font-family: "Times New Roman", Times, serif !important;
 }
+
