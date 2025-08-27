@@ -19,7 +19,7 @@ export default function ChiSiamo () {
                 </Box>
                 <Box test="text" className="links-box">
                     <Button component={Link} to="/" variant='contained' color="secondary">Home</Button>
-                    <Button variant='contained' color="secondary">Come funziona</Button>
+                    <Button component={Link} to="/home/comefunziona" variant='contained' color="secondary">Come Funziona</Button>
                     <Button component={Link} to="/home/faq" variant='contained' color="secondary">FAQ</Button>
                     <Button component={Link} to="/home/contatti" variant='contained' color="secondary">Contatti</Button>
                     <Button component={Link} to="/home/info" variant='contained' color="secondary">Info Legali</Button>
