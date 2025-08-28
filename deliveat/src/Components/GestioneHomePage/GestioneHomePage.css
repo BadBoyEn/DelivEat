@@ -1,4 +1,6 @@
-/*Homepage*/
+/* ===========================
+   HOMEPAGE
+   =========================== */
 
 .logo-home {
   transform: scale(0.45);
@@ -31,7 +33,7 @@
   right: 0.4rem;
 }
 
-/* Altezza AppBar */
+/* AppBar */
 .appbar-custom {
   height: 80px;
   justify-content: center;
@@ -39,27 +41,34 @@
   z-index: 1200;
 }
 
-/* Toolbar layout */
 .toolbar-custom {
   display: flex;
   justify-content: space-between;
 }
 
-/* Links box */
 .links-box {
-  margin-right: 1.7rem;  /* mr: 3.4 */
+  margin-right: 1.7rem;
   display: flex;
   gap: 1.2rem;
 }
 
+/* Layout sezione ordina */
 .menu-ordina {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
+  flex-wrap: wrap;
 }
 
-/* Box con flex 1 */
+.menu-gallery,
+.logo-grande,
+.catchphrase,
+.catchphrase2,
+.logo-body {
+  transition: all 0.4s ease-in-out;
+}
+
 .flex-1 {
   flex: 1;
 }
@@ -69,7 +78,7 @@
   text-align: center;
 }
 
-/* App promotion box */
+/* App promotion */
 .promotion-box {
   padding: 1.8rem;
   text-align: center;
@@ -80,29 +89,23 @@ html.theme.dark .promotion-box {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
 }
 
-/* Bottone con margin-top */
 .download {
   margin-top: 16px !important;
 }
 
 /* Footer */
-.footer-custom {
-  padding: 2.5rem; 
-  background-color: #121212;
-  color: #fff;
-  text-align: center;
-  margin-top: auto;
-}
-
+.footer-custom,
 .footer2-custom {
-  padding: 2.5rem; 
+  padding: 2.5rem;
   background-color: #121212;
   color: #fff;
   text-align: center;
   margin-top: auto;
 }
 
-/*Menu Gallery*/
+/* ===========================
+   MENU GALLERY
+   =========================== */
 
 .ordina-ora {
   text-align: center;
@@ -130,20 +133,20 @@ html.theme.dark .promotion-box {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   background: rgba(0,0,0,0.85);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 2000;
 }
 
 .gallery-frame {
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: center; /* immagine sempre al centro */
-  gap: 20px; /* spazio uniforme tra immagine e frecce */
+  justify-content: center;
+  gap: 20px;
 }
 
 .gallery-frame img {
@@ -154,7 +157,6 @@ html.theme.dark .promotion-box {
   border-radius: 8px;
 }
 
-/* Effetto ingrandimento */
 .gallery-frame.active img {
   transform: scale(1.05);
 }
@@ -172,7 +174,7 @@ html.theme.dark .promotion-box {
   justify-content: center;
   align-items: center;
   transition: background 0.2s;
-  flex-shrink: 0; /* impedisce che il layout si stringa */
+  flex-shrink: 0;
   z-index: 1100;
 }
 
@@ -197,8 +199,7 @@ html.theme.dark .promotion-box {
   cursor: pointer;
 }
 
-
-
+/* Effetto ingrandimento */
 @keyframes zoomIn {
   from {
     transform: scale(0.8);
@@ -210,13 +211,24 @@ html.theme.dark .promotion-box {
   }
 }
 
+/* ===========================
+   RESET & BASE
+   =========================== */
+
 html body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
 }
 
-/*FAQ*/
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+/* ===========================
+   FAQ
+   =========================== */
 
 .faq-custom {
   display: flex;
@@ -226,9 +238,9 @@ html body {
 }
 
 .faq-quest {
-   flex: 1;
-   margin-top: 32px;
-   margin-bottom: 40px;
+  flex: 1;
+  margin-top: 32px;
+  margin-bottom: 40px;
 }
 
 .search-custom {
@@ -243,20 +255,21 @@ html body {
 
 .faq-answer {
   color: #FF6B00;
-  font-Weight: "bold"
+  font-Weight: "bold";
 }
 
-/*InfoLegali*/
+/* ===========================
+   INFO LEGALI
+   =========================== */
 
 .box-info {
-  padding-top: 48px;   /* py: 6 → 6 * 8px = 48px */
-  padding-bottom: 48px; 
-  margin-bottom: 47.2px; /* mb: 5.9 → 5.9 * 8px ≈ 47.2px */
-  padding-left: 48px;  /* px: 6 → 6 * 8px = 48px */
+  padding-top: 48px;
+  padding-bottom: 48px;
+  margin-bottom: 47.2px;
+  padding-left: 48px;
   padding-right: 48px;
   text-align: left;
 }
-
 .term-util {
   margin-top: 40px;
 }
@@ -265,12 +278,9 @@ html body {
   margin-top: 32px;
 }
 
-/*Ordinazione*/
-
-html, body {
-  height: 100%;   
-  margin: 0;
-}
+/* ===========================
+   ORDINAZIONE
+   =========================== */
 
 .page-container {
   display: flex;
@@ -298,7 +308,6 @@ html, body {
 
 .box-ordina > .MuiBox-root.css-0 {
   width: 100%;
-  /* max-width: 600px; */  /* puoi tenerlo o rimuoverlo, a seconda del design */
 }
 
 .logo-ordina {
@@ -314,6 +323,88 @@ html, body {
   font-family: "Times New Roman", Times, serif !important;
 }
 
-/*Chi Siamo*/
+/* ===========================
+   RESPONSIVE HOME
+   =========================== */
+
+/* Mobile */
+@media (max-width: 600px) {
+  .menu-ordina {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .catchphrase {
+    font-size: 1.2rem;
+  }
+
+  .catchphrase2 {
+    font-size: 0.95rem;
+  }
+}
+
+/* Tablet */
+@media (min-width: 601px) and (max-width: 960px) {
+  .menu-ordina {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .logo-body {
+    max-width: 200px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 961px) {
+  .menu-ordina {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .catchphrase {
+    font-size: 1.8rem;
+  }
+
+  .catchphrase2 {
+    font-size: 1.1rem;
+  }
+}
+
+/* Quando lo schermo diventa più stretto del desktop grande */
+@media (max-width: 1200px) {
+  .menu-ordina {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  /* MenuGallery si centra in alto */
+  .menu-gallery {
+    margin: 0 auto 20px auto;
+  }
+
+  /* Logo e catchphrase vanno sotto */
+  .logo-grande {
+    margin-top: 20px;
+  }
+
+  .catchphrase,
+  .catchphrase2 {
+    transform: none; /* elimina i translate per mobile/tablet */
+    display: block;
+    margin-top: 10px;
+  }
+
+  .logo-body {
+    transform: none; /* niente translate strano */
+    max-width: 250px;
+    width: 100%;
+    height: auto;
+  }
+}
 
 

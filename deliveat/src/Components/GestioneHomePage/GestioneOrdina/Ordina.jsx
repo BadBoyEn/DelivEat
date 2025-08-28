@@ -33,7 +33,7 @@ export default function Ordina() {
           <OrdinaStepper />
         </ThemeProvider>
       </Container>
-      <Box className="footer2-custom">
+      <Box className="footer-custom">
         <Typography variant="body2">
           © 2025 DelivEat. All Rights Reserved.
         </Typography>
