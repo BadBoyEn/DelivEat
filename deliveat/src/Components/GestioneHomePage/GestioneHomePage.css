@@ -327,12 +327,66 @@ html, body {
    RESPONSIVE HOME
    =========================== */
 
-/* Mobile */
-@media (max-width: 600px) {
+/* Schermo stretto e tablet */
+@media (max-width: 1200px) {
   .menu-ordina {
     flex-direction: column;
     align-items: center;
     text-align: center;
+  }
+
+  .menu-gallery {
+    margin: 0 auto 20px auto;
+  }
+
+  .logo-grande {
+    margin-top: 20px;
+  }
+
+  .catchphrase,
+  .catchphrase2 {
+    transform: none;
+    display: block;
+    margin-top: 10px;
+  }
+
+  .logo-body {
+    transform: none;
+    max-width: 250px;
+    width: 100%;
+    height: auto;
+  }
+
+  .menu-cover {
+    margin-left: 40px;
+  }
+
+  .ordina-ora {
+    margin-left: 40px;
+  }
+}
+
+/* Desktop medio (1400px) */
+@media (max-width: 1400px) {
+  .menu-cover {
+    margin-left: 100px;
+  }
+
+  .ordina-ora {
+    margin-left: 100px;
+  }
+}
+
+/* Mobile / tablet molto stretto */
+@media (max-width: 960px) {
+  .menu-cover,
+  .ordina-ora {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .logo-body {
+    max-width: 200px;
   }
 
   .catchphrase {
@@ -344,20 +398,7 @@ html, body {
   }
 }
 
-/* Tablet */
-@media (min-width: 601px) and (max-width: 960px) {
-  .menu-ordina {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .logo-body {
-    max-width: 200px;
-  }
-}
-
-/* Desktop */
+/* Desktop > 960px */
 @media (min-width: 961px) {
   .menu-ordina {
     flex-direction: row;
@@ -373,38 +414,3 @@ html, body {
     font-size: 1.1rem;
   }
 }
-
-/* Quando lo schermo diventa più stretto del desktop grande */
-@media (max-width: 1200px) {
-  .menu-ordina {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  /* MenuGallery si centra in alto */
-  .menu-gallery {
-    margin: 0 auto 20px auto;
-  }
-
-  /* Logo e catchphrase vanno sotto */
-  .logo-grande {
-    margin-top: 20px;
-  }
-
-  .catchphrase,
-  .catchphrase2 {
-    transform: none; /* elimina i translate per mobile/tablet */
-    display: block;
-    margin-top: 10px;
-  }
-
-  .logo-body {
-    transform: none; /* niente translate strano */
-    max-width: 250px;
-    width: 100%;
-    height: auto;
-  }
-}
-
-
