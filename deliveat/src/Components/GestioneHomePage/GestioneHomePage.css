@@ -293,7 +293,7 @@ html, body {
 }
 
 .box-ordina > div {
-  max-width: 600px;
+  max-width: 500px !important;
   display: flex !important;;
 }
 

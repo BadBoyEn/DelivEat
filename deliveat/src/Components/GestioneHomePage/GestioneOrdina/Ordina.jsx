@@ -1,4 +1,3 @@
-import { SitemarkIcon } from '../../GestioneHomePage/CustomIcons.jsx';
 import logo from '../../../Images/D2.png';
 import OrdinaStepper from './OrdinaStepper.jsx';
 import { Link } from "react-router-dom";
@@ -8,6 +7,19 @@ import {
   Container  
 } from '@mui/material';
 
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#FF6B00", // arancione personalizzato
+    },
+    secondary: {
+      main: "#ccc", // esempio grigio
+    },
+  },
+});
+
 export default function Ordina() {
   return (
     <Box className="page-container">
@@ -16,9 +28,9 @@ export default function Ordina() {
         <Typography variant="h4" className="text-ordina">
           ORDINAZIONE DA ASPORTO
         </Typography>
-        <Box>
+        <ThemeProvider theme={theme}>
           <OrdinaStepper />
-        </Box>
+        </ThemeProvider>
       </Container>
       <Box className="footer2-custom">
         <Typography variant="body2">
