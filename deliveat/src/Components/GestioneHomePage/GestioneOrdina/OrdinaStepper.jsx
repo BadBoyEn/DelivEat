@@ -273,11 +273,11 @@ export default function OrdinaStepper() {
           Indietro
         </Button>
         {activeStep < steps.length - 1 ? (
-          <Button color="primary" variant="contained" onClick={handleNext}>
+          <Button color="primary" variant="contained"  onClick={handleNext}>
             Avanti
           </Button>
         ) : (
-          <Button variant="contained" color="success" onClick={handleSubmit}>
+          <Button variant="contained" color="success" >
             Conferma
           </Button>
         )}

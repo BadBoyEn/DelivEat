@@ -29,7 +29,7 @@ export default function ComeFunziona () {
                     </Box>
                 </Toolbar>
             </AppBar>
-            <Box maxWidth="md" sx={{ py: 6, mb: 5.9, px: 6, textAlign: "left" }}>
+            <Box maxWidth="md" sx={{ py: 6, mb: 5.9, px: 6, textAlign: "left" }} className="comefun-custom">
                 <Typography variant="h4" gutterBottom color="secondary" fontWeight={800}>
                     Come funziona DelivEat
                 </Typography>
@@ -81,7 +81,7 @@ export default function ComeFunziona () {
                     </Typography>
                 </Box>
             </Box>
-            <Box className="footer-custom">
+            <Box className="footer2-custom">
                 <Typography variant="body2">© DelivEat. Tutti i diritti riservati.</Typography>
             </Box>
         </Box>
