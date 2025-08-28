@@ -237,7 +237,6 @@ html body {
   border-radius: 8px;
 }
 
-/* Rimuove il bordo dell'OutlinedInput */
 .search-custom .MuiOutlinedInput-root fieldset {
   border: none;
 }
@@ -294,7 +293,7 @@ html, body {
 
 .box-ordina > div {
   max-width: 500px !important;
-  display: flex !important;;
+  display: flex !important;
 }
 
 .box-ordina > .MuiBox-root.css-0 {
@@ -314,4 +313,7 @@ html, body {
   font-weight: 600 !important;
   font-family: "Times New Roman", Times, serif !important;
 }
+
+/*Chi Siamo*/
+
 

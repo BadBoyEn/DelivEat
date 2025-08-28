@@ -1,3 +1,5 @@
+import cibo from '../../../Images/pietanze_2-750x500.jpg';
+import rider from '../../../Images/fattorino.jpg';
 import { SitemarkIcon } from '../CustomIcons.jsx';
 import ColorModeSelect from '../../../theme/ColorModeSelect.jsx';
 import { Link } from "react-router-dom";
@@ -29,7 +31,8 @@ export default function ChiSiamo () {
                 </Box>
             </Toolbar>
         </AppBar>
-        <Box maxWidth="md" sx={{ py: 6, mb: 5.9, px: 6, textAlign: "left" }}>
+        <Box  sx={{ display: "flex", flex: 1, gap: 4, flexWrap: "wrap" }} className="chi-siamo-custom">
+         <Box  sx={{ flex: 1, py: 6, mb: 5.9, px: 6, textAlign: "left" }}>
             <Typography variant="h4" gutterBottom color="secondary" fontWeight={800}>
                 Chi siamo
             </Typography>
@@ -51,7 +54,7 @@ export default function ChiSiamo () {
                 <Typography variant="body1" paragraph>
                     Scegli <strong>DelivEat</strong> : il meglio della cucina, ovunque tu sia.
                 </Typography>
-            </Box>
+             </Box>
             <Box sx={{ mt: 5 }}>
                 <Typography variant="h6" gutterbottom>
                     Termini di utilizzo
@@ -66,8 +69,45 @@ export default function ChiSiamo () {
                     DelivEat tratta i dati personali degli utenti nel rispetto del regolamento europeo 2016/679 (GDPR). Per maggiori dettagli consultare la nostra <a href="/privacy">Privacy Policy</a>
                 </Typography>
             </Box>
-        </Box>
-        <Box className="footer-custom">
+         </Box>
+                                                  <Box
+    sx={{
+      flex: 1,
+      minWidth: 300,
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+      gap: 1.9,
+    }}
+  >
+    <Box sx={{ width: "90%", maxWidth: 400, mt: 2.5 }}>
+      <img
+        src={cibo}
+        alt="Cibo"
+        style={{
+          width: "100%",
+          height: "auto",
+          objectFit: "cover",
+          borderRadius: 8,
+        }}
+      />
+    </Box>
+    <Box sx={{ width: "80%", maxWidth: 300, mb: 1.8 }}>
+      <img
+        src={rider}
+        alt="Rider-foto"
+        style={{
+          width: "100%",
+          height: "auto",
+          objectFit: "cover",
+          borderRadius: 8,
+        }}
+      />
+    </Box>
+  </Box>                 
+     </Box>         
+        <Box className="footer2-custom">
             <Typography variant="body2">© DelivEat. Tutti i diritti riservati.</Typography>
         </Box>
     </Box>

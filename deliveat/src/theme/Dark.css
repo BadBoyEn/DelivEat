@@ -47,6 +47,11 @@ html.theme-dark .menu-ordina {
   color: var(--dark-text);
 }
 
+html.theme-dark .chi-siamo-custom {
+  background-color: var(--dark-bg);
+  color: var(--dark-text);
+}
+
 html.theme-dark .info-custom {
   background-color: var(--dark-bg);
   color: var(--dark-text);
