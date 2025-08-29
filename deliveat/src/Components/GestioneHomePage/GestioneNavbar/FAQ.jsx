@@ -130,7 +130,7 @@ export default function FAQ() {
       </Grid>
     </Container>
     <Box className="footer2-custom">
-        <Typography variant="body2">© 2025 DelivEat. Tutti i diritti riservati.</Typography>
+        <Typography variant="body2">© 2025 DelivEat. All Rights Reserved.</Typography>
       </Box>
    </Box> 
   );

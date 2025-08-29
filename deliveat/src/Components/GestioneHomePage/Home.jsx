@@ -36,7 +36,6 @@ export default function Home() {
       </Toolbar>
      </AppBar>
      <Box className="menu-ordina">
-  {/* Sezione sinistra: MenuGallery */}
        <Box className="flex-1">
         <MenuGallery />
       </Box>
@@ -49,8 +48,12 @@ export default function Home() {
     <Typography variant="body1" className="catchphrase2" color="secondary" fontWeight={800}>
       Scopri la comodità di ricevere il tuo cibo preferito direttamente a casa.
     </Typography>
-  </Box>
-</Box>
+    </Box>
+       {/*    
+        <div className="triangle-top"></div>
+        <div className="triangle-bottom"></div>
+       */}
+     </Box>
        {/* App Promotion */}
       <Box color="inherit" className="promotion-box">
         <Typography variant="h5">Scarica l'App</Typography>
@@ -64,7 +67,7 @@ export default function Home() {
 
       {/* Footer */}
       <Box className="footer-custom">
-        <Typography variant="body2">© 2025 DelivEat. Tutti i diritti riservati.</Typography>
+        <Typography variant="body2">© 2025 DelivEat. All Rights Reserved.</Typography>
       </Box>
     </Box>
   );

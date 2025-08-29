@@ -82,7 +82,7 @@ export default function ComeFunziona () {
                 </Box>
             </Box>
             <Box className="footer2-custom">
-                <Typography variant="body2">© DelivEat. Tutti i diritti riservati.</Typography>
+                <Typography variant="body2">© DelivEat. All Rights Reserved.</Typography>
             </Box>
         </Box>
     );

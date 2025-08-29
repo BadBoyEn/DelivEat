@@ -11,32 +11,9 @@ import {
 import { LocalizationProvider, DatePicker, TimePicker } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
+import axios from 'axios';
 
 function OrangeStepIcon({ active, completed, icon }) {
-  const [activeStep, setActiveStep] = useState(0);
-  // Stato dei campi del form
-  const [formData, setFormData] = useState({
-    nome: "",
-    cognome: "",
-    telefono: "",
-    data: "",
-    ora: "",
-  });
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleNext = () => {
-    setActiveStep((prev) => prev + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prev) => prev - 1);
-  };  
   return (
     <div
       style={{
@@ -118,6 +95,16 @@ export default function OrdinaStepper() {
   const handleBack = () => {
     setActiveStep((prev) => prev - 1);
   };
+
+  const handleSubmit = async () => {
+  try {
+    const payload = { ...formData };
+    const response = await axios.post("/api/ordini", payload);
+    console.log("Ordine inviato:", response.data);
+  } catch (error) {
+    console.error("Errore nell'invio dell'ordine:", error);
+  }
+};
 
   return (
   <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -273,11 +260,11 @@ export default function OrdinaStepper() {
           Indietro
         </Button>
         {activeStep < steps.length - 1 ? (
-          <Button color="primary" variant="contained"  onClick={handleNext}>
+          <Button color="primary" variant="contained" onClick={handleNext}>
             Avanti
           </Button>
         ) : (
-          <Button variant="contained" color="success" >
+          <Button variant="contained" color="success" onClick={handleSubmit}>
             Conferma
           </Button>
         )}

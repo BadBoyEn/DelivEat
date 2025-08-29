@@ -11,14 +11,26 @@
 .logo-body {
   transform: scale(1);
   transform: translate(-100px, -40px) scale(1.3);
+
 }
 
 .catchphrase {
   transform: translate(-105px, 20px) scale(1.3);
+  font-size: 1.8rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #FF6B00, #FFA500);
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; 
+  background-clip: text;          
+  color: transparent;              
 }
 
 .catchphrase2 {
   transform: translate(-110px, 20px) scale(1.3);
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #333;
 }
 
 .color-switch-home {
@@ -31,6 +43,28 @@
   position: absolute;
   top: 0.4rem;
   right: 0.4rem;
+}
+
+.triangle-top {
+  position: absolute;
+  top: 80px;   
+  right: -20px;
+  width: 0;
+  height: 0;
+  border-left: 150px solid transparent;
+  border-bottom: 150px solid #FF6B00;
+   transform: rotate(270deg);
+}
+
+.triangle-bottom {
+  position: absolute;
+  bottom: 0;    
+  right: 0;
+  width: 0;
+  height: 0;
+  border-left: 150px solid transparent;
+  border-bottom: 120px solid #FF6B00;
+  transform: rotate(0deg);
 }
 
 /* AppBar */
@@ -76,6 +110,15 @@
 .logo-grande {
   flex: 1;
   text-align: center;
+  margin: 30px auto 0 auto;
+  position: relative;
+}
+
+.logo-grande img {
+  max-width: 425px;
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease;
 }
 
 /* App promotion */
@@ -126,6 +169,7 @@ html.theme.dark .promotion-box {
   margin: 20px auto;
   border-radius: 0;
   margin-left: 170px;
+  border: 2px solid #dadada;
 }
 
 .gallery-overlay {
@@ -286,7 +330,7 @@ html, body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #fc7922;
+  background-color: #fe7f0d;
 }
 
 .content {
@@ -321,6 +365,10 @@ html, body {
   color: rgb(51, 51, 51);
   font-weight: 600 !important;
   font-family: "Times New Roman", Times, serif !important;
+}
+
+.css-5c3gtf-MuiButtonBase-root-MuiButton-root {
+   color: #ffffff !important;
 }
 
 /* ===========================

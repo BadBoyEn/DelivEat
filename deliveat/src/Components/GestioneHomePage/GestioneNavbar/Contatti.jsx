@@ -62,7 +62,7 @@ export default function Contatti () {
                 </Box>
             </Box>
             <Box className="footer-custom">
-                <Typography variant="body2">© DelivEat. Tutti i diritti riservati.</Typography>
+                <Typography variant="body2">© DelivEat. All Rights Reserved.</Typography>
             </Box>
         </Box>
     );
