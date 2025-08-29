@@ -33,7 +33,7 @@ html.theme-dark {
   --dark-shadow: rgba(0, 0, 0, 0.6); /* Ombre leggera */
 }
 
-html.theme-dark, html.theme-dark body, html.theme-dark #root {
+html.theme-dark, html.theme-dark body {
   background-color: var(--bg) !important;
   color: var(--text);
 }
