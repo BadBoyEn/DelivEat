@@ -6,13 +6,17 @@ import {
   Button,
   Box,
   TextField,
-  Typography
+  Typography,
+  Tooltip
 } from "@mui/material";
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
 import { LocalizationProvider, DatePicker, TimePicker } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
 import socketIOClient from 'socket.io-client';
 import axios from 'axios';
+import carbonara from '../../../Images/carbonara.jpg'
 
 function OrangeStepIcon({ active, completed, icon }) {
   return (
@@ -60,28 +64,60 @@ export default function OrdinaStepper() {
   });
 
   const piattiDisponibili = [
-    "Primo1",
-    "Primo2",
-    "Primo3",
-    "Secondo1",
-    "Secondo2",
-    "Secondo3",
-    "Dolce1",
-    "Dolce2",
-    "Dolce3"
-  ];
+  {
+    img: carbonara,
+    title: 'Spaghetti alla carbonara',
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d',
+    title: 'Penne alla panna e speck',
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1522770179533-24471fcdba45',
+    title: 'Fusilli al pesto',
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c',
+    title: 'Cotoletta milanese',
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1533827432537-70133748f5c8',
+    title: 'Frittura di pesce',
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62',
+    title: 'Insalata',
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1516802273409-68526ee1bdd6',
+    title: 'Soufflè al cioccolato',
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1518756131217-31eb79b20e8f',
+    title: 'Tiramisù',
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1597645587822-e99fa5d45d25',
+    title: 'Sorbetto',
+  },
+];
 
-  const togglePiatto = (piatto) => {
-    setFormData((prev) => {
-      const alreadySelected = prev.piatti.includes(piatto);
-      return {
-        ...prev,
-        piatti: alreadySelected
-          ? prev.piatti.filter((p) => p !== piatto) // se già selezionato → lo tolgo
-          : [...prev.piatti, piatto]               // se non c’è → lo aggiungo
-      };
-    });
-  };
+const categorie = [
+  { titolo: "Primi", piatti: piattiDisponibili.slice(0, 3) },
+  { titolo: "Secondi", piatti: piattiDisponibili.slice(3, 6) },
+  { titolo: "Dolci", piatti: piattiDisponibili.slice(6, 9) },
+];
+
+  const togglePiatto = (piattoTitle) => {
+  setFormData((prev) => {
+    const alreadySelected = prev.piatti.includes(piattoTitle);
+    const newPiatti = alreadySelected
+      ? prev.piatti.filter((p) => p !== piattoTitle)
+      : [...prev.piatti, piattoTitle];
+    console.log("Selezionati:", newPiatti);
+    return { ...prev, piatti: newPiatti };
+  });
+};
 
   const handleChange = (e) => {
     setFormData({
@@ -151,7 +187,7 @@ export default function OrdinaStepper() {
         ))}
       </Stepper>
 
-      <Box sx={{ mt: 4, width: "100%", mx: "auto" }}>
+      <Box sx={{ mt: 2, width: "100%", mx: "auto" }}>
           {activeStep === 0 && (
             <Box>
               <TextField
@@ -212,41 +248,43 @@ export default function OrdinaStepper() {
 />
             </Box>
           )}
-
-           {activeStep === 1 && (
-        <Box
+          {activeStep === 1 && categorie.map((cat) => (
+  <Box key={cat.titolo} sx={{ mb: 2 }}>
+    <Typography variant="h8" sx={{ mb: 1 }}>
+      {cat.titolo}
+    </Typography>
+    <ImageList sx={{ mt: 0.5 }} cols={3}>
+      {cat.piatti.map((piatto) => (
+        <ImageListItem
+          key={piatto.img}
+          onClick={() => togglePiatto(piatto.title)}
           sx={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: 2,
-            mt: 0.8,
-            mb: 3,
+            border: formData.piatti.includes(piatto.title)
+            ? "3px solid #fe7f0d"
+            : "1px solid #ccc",
+            borderRadius: 2,
+            p: 1,
+            textAlign: "center",
+            cursor: "pointer",
+            "&:hover": {
+              boxShadow: "0 0 12px rgba(0,0,0,0.2)"
+            },
           }}
         >
-          {piattiDisponibili.map((piatto) => (
-            <Box
-              key={piatto}
-              onClick={() => togglePiatto(piatto)}
-              sx={{
-                border: formData.piatti.includes(piatto)
-                  ? "2px solid #FF6B00"
-                  : "1px solid #ccc",
-                borderRadius: 2,
-                p: 2,
-                textAlign: "center",
-                cursor: "pointer",
-                transition: "0.3s",
-                "&:hover": {
-                  boxShadow: "0 0 10px rgba(0,0,0,0.2)"
-                },
-              }}
-            >
-              <Typography variant="body1">{piatto}</Typography>
-            </Box>
-          ))}
-        </Box>
-      )}
-
+        <Tooltip title={piatto.title} arrow>
+          <img
+            srcSet={`${piatto.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+            src={`${piatto.img}?w=164&h=164&fit=crop&auto=format`}
+            alt={piatto.title}
+            loading="lazy"
+            style={{ width: "100%", aspectRatio: "1 / 1", objectFit: "cover", display: "block" }}
+          />
+          </Tooltip>
+        </ImageListItem>
+      ))}
+    </ImageList>
+  </Box>
+))}
           {activeStep === 1 && (
              <Box sx={{ display: "flex", gap: 2, flexDirection: { xs: "column", sm: "row" } }}>
               <DatePicker
@@ -312,22 +350,24 @@ export default function OrdinaStepper() {
               <Typography sx={{ mt: 2 }}><strong>Nome:</strong> {formData.nome}</Typography>
               <Typography><strong>Cognome:</strong> {formData.cognome}</Typography>
               <Typography><strong>Telefono:</strong> {formData.telefono}</Typography>
-              <Typography sx={{ mt: 2 }}>
+              <Box sx={{ mt: 2 }}>
                 <Typography sx={{ mt: 2 }}>
       <strong>Piatti selezionati:</strong>
     </Typography>
     {formData.piatti.length > 0 ? (
       <ul>
-        {formData.piatti.map((piatto, idx) => (
+        {formData.piatti.filter(Boolean).map((piatto, idx) => (
           <li key={idx}>{piatto}</li>
         ))}
       </ul>
     ) : (
       <Typography sx={{ mb: 2 }}>Nessun piatto selezionato</Typography>
     )}
-  <strong>Data:</strong> {formData.data ? dayjs(formData.data).format("DD/MM/YYYY") : ""}
-</Typography>
+</Box>
 <Typography>
+  <strong>Data:</strong> {formData.data ? dayjs(formData.data).format("DD/MM/YYYY") : ""}
+  </Typography>
+  <Typography>
   <strong>Ora:</strong> {formData.ora ? dayjs(formData.ora).format("HH:mm") : ""}
 </Typography>
             </Box>
