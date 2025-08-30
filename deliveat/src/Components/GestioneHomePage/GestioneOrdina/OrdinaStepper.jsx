@@ -11,6 +11,7 @@ import {
 import { LocalizationProvider, DatePicker, TimePicker } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
+import socketIOClient from 'socket.io-client';
 import axios from 'axios';
 
 function OrangeStepIcon({ active, completed, icon }) {
@@ -120,7 +121,7 @@ export default function OrdinaStepper() {
   const handleBack = () => {
     setActiveStep((prev) => prev - 1);
   };
-
+  const socket = socketIOClient('http://localhost:3000');
   const handleSubmit = async () => {
   try {
     const payload = { ...formData };
@@ -130,7 +131,14 @@ export default function OrdinaStepper() {
     console.error("Errore nell'invio dell'ordine:", error);
   }
 };
-
+  socket.emit('new_order', ordineData);
+  socket.on('order_token', (data) => {
+    console.log('Token Ordine:', data.token); // Mostra il token ricevuto
+  });
+  socket.on('order_token', (data) => {
+    console.log('Token Ordine:', data.status); // Mostra il token ricevuto
+  });
+  setActiveStep(steps.length);
   return (
   <LocalizationProvider dateAdapter={AdapterDayjs}>
     <Box sx={{ backgroundColor: "#fff", display: "flex", flexDirection: "column", maxWidth: activeStep === 2 ? 400 : 500, minWidth: activeStep === 2 ? 300 : "auto", mx: "auto", border: "1px solid #ccc", borderRadius: 2, p: 4, boxShadow: 3, mt: 6, mb: 6 }}>
