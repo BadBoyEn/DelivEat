@@ -168,7 +168,8 @@ const categorie = [
     console.error("Errore nell'invio dell'ordine:", error);
   }
 };
-  /*socket.emit('new_order', ordineData);
+  /*
+  socket.emit('new_order', ordineData);
   socket.on('order_token', (data) => {
     console.log('Token Ordine:', data.token); // Mostra il token ricevuto
   });

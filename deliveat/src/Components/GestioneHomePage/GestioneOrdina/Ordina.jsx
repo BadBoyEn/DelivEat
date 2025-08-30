@@ -24,7 +24,7 @@ const theme = createTheme({
 });
 
 export default function Ordina() {
-  /*const [token, setToken] = useState('');
+  const [token, setToken] = useState('');
   const [status, setStatus] = useState('');
   const socket = socketIOClient('http://localhost: 3000'); //Creo la connessione Socket.IO al server
   const inviaOrdine = (ordineData) => {
@@ -37,7 +37,7 @@ export default function Ordina() {
     socket.on('order_status', (data) => {
       setStatus(data.status);
     });
-  };*/
+  };
   return (
     <Box className="page-container">
       <Container maxWidth="md" className="box-ordina content">
