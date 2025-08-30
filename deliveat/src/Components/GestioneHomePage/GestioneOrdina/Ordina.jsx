@@ -1,4 +1,6 @@
 import logo from '../../../Images/D2.png';
+import socketIOClient from 'socket.io-client';
+import React, {useState } from 'react';
 import OrdinaStepper from './OrdinaStepper.jsx';
 import { Link } from "react-router-dom";
 import {
@@ -22,6 +24,20 @@ const theme = createTheme({
 });
 
 export default function Ordina() {
+  const [token, setToken] = useState('');
+  const [status, setStatus] = useState('');
+  const socket = socketIOClient('http://localhost: 3000'); //Creo la connessione Socket.IO al server
+  const inviaOrdine = (ordineData) => {
+    socket.emit('nuovo_ordine', ordineData);
+    //Resto in ascolto della risposta
+    socket.on('order_token', (data) => {
+      setToken(data.token);
+    });
+    //Resto in ascolto degli aggiornamenti sullo stato dell'ordine
+    socket.on('order_status', (data) => {
+      setStatus(data.status);
+    });
+  };
   return (
     <Box className="page-container">
       <Container maxWidth="md" className="box-ordina content">
@@ -30,7 +46,7 @@ export default function Ordina() {
           ORDINAZIONE DA ASPORTO
         </Typography>
         <ThemeProvider theme={theme}>
-          <OrdinaStepper />
+          <OrdinaStepper inviaOrdine ={inviaOrdine} />
         </ThemeProvider>
       </Container>
       <Box className="footer-custom">
