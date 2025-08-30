@@ -371,6 +371,10 @@ html, body {
    color: #ffffff !important;
 }
 
+.font-cibo {
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
+
 /* ===========================
    RESPONSIVE HOME
    =========================== */

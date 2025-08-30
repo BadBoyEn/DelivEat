@@ -17,6 +17,7 @@ import dayjs from 'dayjs';
 import socketIOClient from 'socket.io-client';
 import axios from 'axios';
 import carbonara from '../../../Images/carbonara.jpg'
+import panna from '../../../Images/panna.jpg'
 
 function OrangeStepIcon({ active, completed, icon }) {
   return (
@@ -44,6 +45,7 @@ export default function OrdinaStepper() {
     nome: false,
     cognome: false,
     telefono: false,
+    indirizzo: false
   });
 
   const [errorStep2, setErrorStep2] = useState({
@@ -58,6 +60,7 @@ export default function OrdinaStepper() {
     nome: "",
     cognome: "",
     telefono: "",
+    indirizzo: "",
     piatti: [],
     data: dayjs(),
     ora: dayjs(),
@@ -69,7 +72,7 @@ export default function OrdinaStepper() {
     title: 'Spaghetti alla carbonara',
   },
   {
-    img: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d',
+    img: panna,
     title: 'Penne alla panna e speck',
   },
   {
@@ -132,6 +135,7 @@ const categorie = [
       nome: !formData.nome,
       cognome: !formData.cognome,
       telefono: !formData.telefono,
+      indirizzo: !formData.indirizzo,
     };
     setError(newError);
 
@@ -248,6 +252,24 @@ const categorie = [
     },
   }}
 />
+        <TextField
+  fullWidth
+  name="indirizzo"
+  placeholder="Indirizzo di consegna"
+  value={formData.indirizzo}
+  onChange={handleChange}
+  onBlur={() => setError(prev => ({ ...prev, indirizzo: !formData.indirizzo }))}
+  error={error.indirizzo}
+  helperText={error.indirizzo ? "Campo obbligatorio" : ""}
+  sx={{
+    mt: 2,
+    "& .MuiOutlinedInput-root": {
+      "&.Mui-focused fieldset": {
+        borderColor: error.indirizzo ? "red" : "#ccc",
+      },
+    },
+  }}
+/>
             </Box>
           )}
           {activeStep === 1 && categorie.map((cat) => (
@@ -267,8 +289,8 @@ const categorie = [
             borderRadius: 2,
             p: 1,
             textAlign: "center",
-            cursor: "pointer",
-            "&:hover": {
+             cursor: "pointer",
+             "&:hover": {
               boxShadow: "0 0 12px rgba(0,0,0,0.2)"
             },
           }}
@@ -352,12 +374,13 @@ const categorie = [
               <Typography sx={{ mt: 2 }}><strong>Nome:</strong> {formData.nome}</Typography>
               <Typography><strong>Cognome:</strong> {formData.cognome}</Typography>
               <Typography><strong>Telefono:</strong> {formData.telefono}</Typography>
+              <Typography><strong>Indirizzo di consegna:</strong> {formData.indirizzo}</Typography>
               <Box sx={{ mt: 2 }}>
                 <Typography sx={{ mt: 2 }}>
       <strong>Piatti selezionati:</strong>
     </Typography>
     {formData.piatti.length > 0 ? (
-      <ul>
+      <ul className="font-cibo">
         {formData.piatti.filter(Boolean).map((piatto, idx) => (
           <li key={idx}>{piatto}</li>
         ))}
