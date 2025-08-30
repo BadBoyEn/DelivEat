@@ -67,13 +67,13 @@ export default function ComeFunziona () {
                      </Typography>
                 </Box>
                 <Box sx={{ mt: 5 }}>
-                    <Typography variant="h6" gutterbottom>
+                    <Typography variant="h6" gutterBottom>
                         Termini di utilizzo
                     </Typography>
                     <Typography variant="body2" paragraph>
                         L'accesso e l'utilizzo della piattaforma DelivEat implicano l'accettazione dei termini e condizioni di servizio
                     </Typography>
-                    <Typography variant="h6" gutterbottom>
+                    <Typography variant="h6" gutterBottom>
                         Privacy
                     </Typography>
                     <Typography variant="body2" paragraph>
