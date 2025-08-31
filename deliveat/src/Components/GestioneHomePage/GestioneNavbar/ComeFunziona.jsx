@@ -1,4 +1,4 @@
-import { SitemarkIcon } from '../CustomIcons.jsx';
+import CustomIcons, { SitemarkIcon } from "../../CustomIcons.jsx";
 import ColorModeSelect from '../../../theme/ColorModeSelect.jsx';
 import { Link } from "react-router-dom";
 import {

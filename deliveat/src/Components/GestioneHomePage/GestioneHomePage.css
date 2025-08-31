@@ -1,7 +1,3 @@
-/* ===========================
-   HOMEPAGE
-   =========================== */
-
 .logo-home {
   transform: scale(0.45);
   margin-bottom: -5px;
@@ -9,28 +5,25 @@
 }
 
 .logo-body {
-  transform: scale(1);
   transform: translate(-100px, -40px) scale(1.3);
-
 }
 
 .catchphrase {
-  transform: translate(-105px, 20px) scale(1.3);
   font-size: 1.8rem;
   font-weight: 700;
-  background: linear-gradient(90deg, #FF6B00, #FFA500);
-
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent; 
-  background-clip: text;          
-  color: transparent;              
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  transform: translate(-105px, 20px) scale(1.3);
 }
 
 .catchphrase2 {
-  transform: translate(-110px, 20px) scale(1.3);
   font-size: 1.2rem;
   font-weight: 500;
-  color: #333;
+  color: var(--text-muted);
+  transform: translate(-110px, 20px) scale(1.3);
 }
 
 .color-switch-home {
@@ -47,23 +40,23 @@
 
 .triangle-top {
   position: absolute;
-  top: 80px;   
+  top: 80px;
   right: -20px;
   width: 0;
   height: 0;
   border-left: 150px solid transparent;
-  border-bottom: 150px solid #FF6B00;
-   transform: rotate(270deg);
+  border-bottom: 150px solid var(--accent);
+  transform: rotate(270deg);
 }
 
 .triangle-bottom {
   position: absolute;
-  bottom: 0;    
+  bottom: 0;
   right: 0;
   width: 0;
   height: 0;
   border-left: 150px solid transparent;
-  border-bottom: 120px solid #FF6B00;
+  border-bottom: 120px solid var(--accent);
   transform: rotate(0deg);
 }
 
@@ -71,8 +64,10 @@
 .appbar-custom {
   height: 80px;
   justify-content: center;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.31) !important;
+  box-shadow: var(--elevation-3) !important;
   z-index: 1200;
+  background-color: var(--appbar-bg);
+  color: var(--appbar-fg);
 }
 
 .toolbar-custom {
@@ -86,13 +81,14 @@
   gap: 1.2rem;
 }
 
-/* Layout sezione ordina */
+/* -- SEZIONE ORDINA (layout) -- */
+
 .menu-ordina {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(16px, 3vw, 32px);
   align-items: center;
   padding: 1rem;
-  flex-wrap: wrap;
 }
 
 .menu-gallery,
@@ -103,12 +99,9 @@
   transition: all 0.4s ease-in-out;
 }
 
-.flex-1 {
-  flex: 1;
-}
+.flex-1 { flex: 1; }
 
 .logo-grande {
-  flex: 1;
   text-align: center;
   margin: 30px auto 0 auto;
   position: relative;
@@ -121,40 +114,32 @@
   transition: transform 0.3s ease;
 }
 
-/* App promotion */
+/* Box promo app */
 .promotion-box {
   padding: 1.8rem;
   text-align: center;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.8);
+  box-shadow: var(--elevation-3);
+  background-color: var(--surface);
+  color: var(--text);
 }
 
-html.theme.dark .promotion-box {
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
-}
-
-.download {
-  margin-top: 16px !important;
-}
+.download { margin-top: 16px !important; }
 
 /* Footer */
 .footer-custom,
 .footer2-custom {
   padding: 2.5rem;
-  background-color: #121212;
-  color: #fff;
+  background-color: var(--footer-bg);
+  color: var(--footer-fg);
   text-align: center;
   margin-top: auto;
 }
 
-/* ===========================
-   MENU GALLERY
-   =========================== */
+/* -- MENU GALLERY -- */
 
 .ordina-ora {
   text-align: center;
-  margin-bottom: 5px;
-  margin-top: 16px;
-  margin-left: 174.4px;
+  margin: 16px auto 5px auto;
 }
 
 .menu-gallery {
@@ -163,22 +148,20 @@ html.theme.dark .promotion-box {
 }
 
 .menu-cover {
-  width: 500px;
+  width: clamp(260px, 45vw, 520px);
   cursor: pointer;
   display: block;
   margin: 20px auto;
   border-radius: 0;
-  margin-left: 170px;
-  border: 2px solid #dadada;
+  border: 2px solid var(--border-weak);
 }
 
 .gallery-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100vw;
   height: 100%;
-  background: rgba(0,0,0,0.85);
+  background: var(--overlay-bg);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -194,26 +177,25 @@ html.theme.dark .promotion-box {
 }
 
 .gallery-frame img {
-  width: 85vw;
+  width: min(85vw, 1200px);
   height: 85vh;
   object-fit: contain;
   transition: transform 0.35s ease;
   border-radius: 8px;
+  background: var(--surface);
 }
 
-.gallery-frame.active img {
-  transform: scale(1.05);
-}
+.gallery-frame.active img { transform: scale(1.05); }
 
 .arrow {
-  background: rgba(255,255,255,0.2);
+  background: var(--overlay-arrow-bg);
   border: none;
   border-radius: 50%;
   width: 45px;
   height: 45px;
   font-size: 1.5rem;
   cursor: pointer;
-  color: white;
+  color: var(--overlay-arrow-fg);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -223,21 +205,19 @@ html.theme.dark .promotion-box {
 }
 
 .arrow.disabled {
-  background: rgba(255,255,255,0.1);
+  background: var(--overlay-arrow-disabled-bg);
   cursor: not-allowed;
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--overlay-arrow-disabled-fg);
 }
 
-.arrow:hover {
-  background: rgba(255,255,255,0.5);
-}
+.arrow:hover { background: var(--overlay-arrow-hover-bg); }
 
 .close-btn {
   position: absolute;
   top: 20px;
   right: 20px;
   font-size: 2rem;
-  color: white;
+  color: var(--overlay-arrow-fg);
   background: transparent;
   border: none;
   cursor: pointer;
@@ -245,97 +225,35 @@ html.theme.dark .promotion-box {
 
 /* Effetto ingrandimento */
 @keyframes zoomIn {
-  from {
-    transform: scale(0.8);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
+  from { transform: scale(0.8); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
 }
 
-/* ===========================
-   RESET & BASE
-   =========================== */
+/* -- RESET & BASE -- */
+html body { margin: 0; padding: 0; overflow-x: hidden; }
+html, body { height: 100%; margin: 0; }
 
-html body {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-}
+/* -- FAQ -- */
+.faq-custom { display: flex; flex-direction: column; flex: 1; min-height: 100vh; }
+.faq-quest  { flex: 1; margin-top: 32px; margin-bottom: 40px; }
+.search-custom { margin-bottom: 24px; background-color: var(--search-bg); border-radius: 8px; }
+.search-custom .MuiOutlinedInput-root fieldset { border: none; }
+.faq-answer { color: var(--accent); font-weight: bold; }
 
-html, body {
-  height: 100%;
-  margin: 0;
-}
+/* -- INFO LEGALI -- */
+.box-info { padding: 48px; margin-bottom: 47.2px; text-align: left; }
+.term-util { margin-top: 40px; }
+.info-legal { margin-top: 32px; }
 
-/* ===========================
-   FAQ
-   =========================== */
-
-.faq-custom {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-height: 100vh;
-}
-
-.faq-quest {
-  flex: 1;
-  margin-top: 32px;
-  margin-bottom: 40px;
-}
-
-.search-custom {
-  margin-bottom: 24px;
-  background-color: rgba(0,0,0,0.04);
-  border-radius: 8px;
-}
-
-.search-custom .MuiOutlinedInput-root fieldset {
-  border: none;
-}
-
-.faq-answer {
-  color: #FF6B00;
-  font-Weight: "bold";
-}
-
-/* ===========================
-   INFO LEGALI
-   =========================== */
-
-.box-info {
-  padding-top: 48px;
-  padding-bottom: 48px;
-  margin-bottom: 47.2px;
-  padding-left: 48px;
-  padding-right: 48px;
-  text-align: left;
-}
-.term-util {
-  margin-top: 40px;
-}
-
-.info-legal {
-  margin-top: 32px;
-}
-
-/* ===========================
-   ORDINAZIONE
-   =========================== */
-
+/* -- ORDINAZIONE -- */
 .page-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #fe7f0d;
+  background-color: var(--page-ordina-bg);
 }
 
-.content {
-  flex: 1;
-}
+.content { flex: 1; }
 
 .box-ordina {
   display: flex !important;
@@ -350,9 +268,7 @@ html, body {
   display: flex !important;
 }
 
-.box-ordina > .MuiBox-root.css-0 {
-  width: 100%;
-}
+.box-ordina > .MuiBox-root.css-0 { width: 100%; }
 
 .logo-ordina {
   width: 25%;
@@ -362,107 +278,27 @@ html, body {
 }
 
 .text-ordina {
-  color: rgb(51, 51, 51);
+  color: var(--text-strong);
   font-weight: 600 !important;
   font-family: "Times New Roman", Times, serif !important;
 }
 
-.css-5c3gtf-MuiButtonBase-root-MuiButton-root {
-   color: #ffffff !important;
-}
+.css-5c3gtf-MuiButtonBase-root-MuiButton-root { color: var(--on-accent) !important; }
+.font-cibo { font-family: "Roboto", "Helvetica", "Arial", sans-serif; }
 
-.font-cibo {
-  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-}
-
-/* ===========================
-   RESPONSIVE HOME
-   =========================== */
-
-/* Schermo stretto e tablet */
+/* -- RESPONSIVE -- */
 @media (max-width: 1200px) {
-  .menu-ordina {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .menu-gallery {
-    margin: 0 auto 20px auto;
-  }
-
-  .logo-grande {
-    margin-top: 20px;
-  }
-
-  .catchphrase,
-  .catchphrase2 {
-    transform: none;
-    display: block;
-    margin-top: 10px;
-  }
-
-  .logo-body {
-    transform: none;
-    max-width: 250px;
-    width: 100%;
-    height: auto;
-  }
-
-  .menu-cover {
-    margin-left: 40px;
-  }
-
-  .ordina-ora {
-    margin-left: 40px;
-  }
+  .menu-ordina { grid-template-columns: 1fr; }
+  .logo-body, .catchphrase, .catchphrase2 { transform: none; }
+  .logo-body { max-width: 250px; width: 100%; height: auto; margin: 0 auto; }
 }
 
-/* Desktop medio (1400px) */
-@media (max-width: 1400px) {
-  .menu-cover {
-    margin-left: 100px;
-  }
-
-  .ordina-ora {
-    margin-left: 100px;
-  }
-}
-
-/* Mobile / tablet molto stretto */
 @media (max-width: 960px) {
-  .menu-cover,
-  .ordina-ora {
-    margin-left: 0;
-    margin-right: 0;
-  }
-
-  .logo-body {
-    max-width: 200px;
-  }
-
-  .catchphrase {
-    font-size: 1.2rem;
-  }
-
-  .catchphrase2 {
-    font-size: 0.95rem;
-  }
+  .catchphrase { font-size: 1.2rem; }
+  .catchphrase2 { font-size: 0.95rem; }
 }
 
-/* Desktop > 960px */
 @media (min-width: 961px) {
-  .menu-ordina {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .catchphrase {
-    font-size: 1.8rem;
-  }
-
-  .catchphrase2 {
-    font-size: 1.1rem;
-  }
+  .catchphrase { font-size: 1.8rem; }
+  .catchphrase2 { font-size: 1.1rem; }
 }

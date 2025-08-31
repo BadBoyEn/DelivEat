@@ -1,6 +1,6 @@
 import cibo from '../../../Images/pietanze_2-750x500.jpg';
 import rider from '../../../Images/fattorino.jpg';
-import { SitemarkIcon } from '../CustomIcons.jsx';
+import CustomIcons, { SitemarkIcon } from "../../CustomIcons.jsx";
 import ColorModeSelect from '../../../theme/ColorModeSelect.jsx';
 import { Link } from "react-router-dom";
 import {

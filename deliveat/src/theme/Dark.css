@@ -1,87 +1,39 @@
-html.theme-dark {
-  --bg: hsla(220, 30%, 5%, 0.5) 0px 5px 15px 0px;
-  --text: #ffffff;
-  --card-bg: rgba(13, 16, 18, 0.92);
-  --shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
-  --backgroundImage: radial-gradient(at 50% 50%, hsla(17, 100%, 16%, 0.50), hsla(0, 9%, 4%, 0.50));
-  --backgroundImageHome: #0d1018;
-  --input-bg: #1e1e1e;
-  --input-text: #f5f5f5;
-  --input-border: #444444;
-  --accent: #90caf9;
-  --accent-contrast: #0b0b0b;
-  --switch-track: #8796A5;
-  --switch-thumb: #90caf9;
-  --switch-thumb-checked: #90caf9;
-  --switch-icon-color: #90caf9;
+:root.theme-dark {
+  /* -- PALETTE DI BASE -- */
+  --bg: #0f0f0f;
+  --surface: #121212;
+  --text: #e8e8e8;
+  --text-muted: #c9c9c9;
+  --text-strong: #f2f2f2;
 
-  /* -- DASHBOARD -- */
-  
-  --surface: var(--card-bg);
-  --surface-2: var(--card-bg);
-  --border: var(--input-border);
-  --muted: #94a3b8;
-  --positive: #22c55e;
-  --negative: #ef4444;
-  --appbar-height: 56px;
-  --sidebar-width: 260px;
+  /* -- ACCENTI (brand) -- */
+  --accent: #FF6B00;
+  --accent-2: #FFA500;
+  --on-accent: #ffffff;
+
+  /* -- BORDI E OMBRE -- */
+  --border-weak: #2a2a2a;
+  --elevation-2: 0 6px 16px rgba(0,0,0,0.55);
+  --elevation-3: 0 10px 25px rgba(0,0,0,0.8);
+
+  /* -- APPBAR/FOOTER -- */
+  --appbar-bg: #121212;
+  --appbar-fg: #e8e8e8;
+  --footer-bg: #121212;
+  --footer-fg: #ffffff;
+
+  /* -- OVERLAY GALLERY -- */
+  --overlay-bg: rgba(0,0,0,0.9);
+  --overlay-arrow-bg: rgba(255,255,255,0.18);
+  --overlay-arrow-hover-bg: rgba(255,255,255,0.45);
+  --overlay-arrow-disabled-bg: rgba(255,255,255,0.08);
+  --overlay-arrow-fg: #ffffff;
+  --overlay-arrow-disabled-fg: rgba(255,255,255,0.35);
+
+  /* -- FORM / DANGER -- */
+  --danger: #ef5350;
+  --search-bg: rgba(255,255,255,0.07);
+
+  /* -- PAGINE SPECIFICHE -- */
+  --page-ordina-bg: #151515; 
 }
-
-:root {
-  --dark-bg: #121212;          /* Sfondo principale */
-  --dark-surface: #1e1e1e;     /* Blocchi/card più chiari */   
-  --dark-shadow: rgba(0, 0, 0, 0.6);
-  --dark-text: #ffffff;                               /* Ombre leggera */
-}
-
-html.theme-dark .appbar-custom {
-  background-color: #1e1e1e;
-}
-
-html.theme-dark .menu-ordina {
-  background-color: var(--dark-bg);
-  color: var(--dark-text);
-}
-
-html.theme-dark .chi-siamo-custom {
-  background-color: var(--dark-bg);
-  color: var(--dark-text);
-}
-
-html.theme-dark .comefun-custom {
-  background-color: var(--dark-bg);
-  color: var(--dark-text);
-}
-
-html.theme-dark .info-custom {
-  background-color: var(--dark-bg);
-  color: var(--dark-text);
-}
-
-html.theme-dark .promotion-box {
-  background-color: #1e1e1e;
-  color: var(--dark-text);
-}
-
-html.theme-dark .footer-custom {
-  background-color: var(--dark-bg);
-  color: var(--dark-text);
-}
-
-html.theme-dark .footer2-custom {
-  background-color: var(--dark-bg);
-  color: var(--dark-text);
-  box-shadow: 0 -2px 10px rgba(0,0,0,0.5);
-}
-
-html.theme-dark .search-custom {
-  background-color: #1e1e1e;
-  background-image: linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05));
-}
-
-html.theme-dark .faq-custom {
-  background-color: var(--dark-bg);
-  color: var(--dark-text);
-}
-
-

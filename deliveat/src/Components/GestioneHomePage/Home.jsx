@@ -1,4 +1,4 @@
-import { SitemarkIcon } from '../GestioneHomePage/CustomIcons.jsx';
+import CustomIcons, { SitemarkIcon } from '../CustomIcons.jsx';
 import ColorModeSelect from '../../theme/ColorModeSelect.jsx';
 import logo from '../../Images/DelivEat_logo2.png';
 import MenuGallery from './MenuGallery.jsx';

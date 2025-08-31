@@ -1,31 +1,39 @@
-html.theme-light {
+:root.theme-light {
+  /* -- PALETTE DI BASE -- */
   --bg: #ffffff;
-  --text: #000000;
-  --card-bg: hsl(0, 0%, 100%);
-  --shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-  --input-bg: #ffffff;
-  --input-text: #000000;
-  --input-border: #cccccc;
-  --accent: #e9ebed;
-  --accent-contrast: #ffffff;
-  --switch-track: #aab4be;
-  --switch-thumb: #1976d2;
-  --switch-thumb-checked: #1976d2;
-  --switch-icon-color: #1976d2;
+  --surface: #ffffff;
+  --text: #1a1a1a;
+  --text-muted: #333333;
+  --text-strong: #333333;
 
-  /* -- DASHBOARD -- */
-  
-  --surface: var(--card-bg);
-  --surface-2: var(--bg);
-  --border: var(--input-border);
-  --muted: #6b7280;
-  --positive: #16a34a;
-  --negative: #dc2626;
-  --appbar-height: 56px;
-  --sidebar-width: 260px;
-}
+  /* -- ACCENTI (brand) -- */
+  --accent: #FF6B00;
+  --accent-2: #FFA500;
+  --on-accent: #ffffff;
 
-html.theme-light, html.theme-light body, html.theme-light #root {
-  background-color: var(--bg) !important;
-  color: var(--text);
+  /* -- BORDI E OMBRE -- */
+  --border-weak: #dadada;
+  --elevation-2: 0 4px 12px rgba(0,0,0,0.12);
+  --elevation-3: 0 6px 18px rgba(0,0,0,0.15);
+
+  /* -- APPBAR/FOOTER -- */
+  --appbar-bg: #ffffff;
+  --appbar-fg: #1a1a1a;
+  --footer-bg: #f5f5f5;
+  --footer-fg: #111111;
+
+  /* -- OVERLAY GALLERY -- */
+  --overlay-bg: rgba(0,0,0,0.85);
+  --overlay-arrow-bg: rgba(255,255,255,0.2);
+  --overlay-arrow-hover-bg: rgba(255,255,255,0.5);
+  --overlay-arrow-disabled-bg: rgba(255,255,255,0.1);
+  --overlay-arrow-fg: #ffffff;
+  --overlay-arrow-disabled-fg: rgba(255,255,255,0.4);
+
+  /* -- FORM / DANGER -- */
+  --danger: #d32f2f;
+  --search-bg: rgba(0,0,0,0.04);
+
+  /* -- PAGINE SPECIFICHE -- */
+  --page-ordina-bg: #fe7f0d; 
 }
