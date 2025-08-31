@@ -1,8 +1,5 @@
-import AppTheme from '../theme/AppTheme.jsx'
-import InfoLegali from '../Components/GestioneHomePage/GestioneNavbar/InfoLegali.jsx'
+import InfoLegali from "../Components/GestioneHomePage/GestioneNavbar/InfoLegali.jsx";
 
-export default function LogInPage() {
-    return <AppTheme>
-        <InfoLegali />
-    </AppTheme>;
+export default function InfoLegaliPage() {
+  return <InfoLegali />;
 }

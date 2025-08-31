@@ -14,7 +14,7 @@ import { SignUpContainer, StyledCard } from './SignUpContainer';
 import { useSignUpLogic } from './SignUpLogic';
 import AppTheme from '../../theme/AppTheme';
 import ColorModeSelect from '../../theme/ColorModeSelect';
-import CustomIcons, { SitemarkIcon } from '../CustomIcons.jsx';
+import SitemarkIcon from '../GestioneIcons/SistemarkIcon.jsx';
 
 export default function SignUp(props) {
   const {

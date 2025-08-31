@@ -1,7 +1,2 @@
-import AppTheme from '../theme/AppTheme.jsx'
-import Contatti from '../Components/GestioneHomePage/GestioneNavbar/Contatti.jsx'
-export default function ContattiPage () {
-    return <AppTheme>
-        <Contatti/>
-    </AppTheme>
-}
+import Contatti from '../Components/GestioneHomePage/GestioneNavbar/Contatti.jsx';
+export default function ContattiPage() { return <Contatti />; }

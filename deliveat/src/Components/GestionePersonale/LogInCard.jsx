@@ -15,7 +15,7 @@ import { LogInContainer, StyledCard } from './LogInContainer';
 import { useLogInLogic } from './LogInLogic';
 import AppTheme from '../../theme/AppTheme';
 import ColorModeSelect from '../../theme/ColorModeSelect';
-import CustomIcons, { SitemarkIcon } from '../CustomIcons.jsx';
+import SitemarkIcon from '../GestioneIcons/SistemarkIcon.jsx';
 
 export default function LogIn(props) {
   const {

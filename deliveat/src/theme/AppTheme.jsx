@@ -1,4 +1,4 @@
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider, CssBaseline } from '@mui/material';
 import { useState, useMemo, createContext, useEffect } from 'react';
 
 import './Dark.css';
@@ -9,17 +9,11 @@ export const ColorModeContext = createContext({
 });
 
 export default function AppTheme({ children }) {
-  // Inizializza dal localStorage o dal prefers-color-scheme
   const getInitial = () => {
-    const saved =
-      typeof window !== 'undefined' ? localStorage.getItem('color-mode') : null;
+    if (typeof window === 'undefined') return 'light';
+    const saved = localStorage.getItem('color-mode');
     if (saved === 'light' || saved === 'dark') return saved;
-
-    const prefersDark =
-      typeof window !== 'undefined' &&
-      window.matchMedia &&
-      window.matchMedia('(prefers-color-scheme: dark)').matches;
-
+    const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches;
     return prefersDark ? 'dark' : 'light';
   };
 
@@ -27,18 +21,10 @@ export default function AppTheme({ children }) {
 
   const colorMode = useMemo(
     () => ({
-      toggleColorMode: (maybeMode) => {
-        setMode((prev) => {
-          const next =
-            typeof maybeMode === 'string'
-              ? maybeMode
-              : prev === 'light'
-              ? 'dark'
-              : 'light';
-
-          if (typeof window !== 'undefined') {
-            localStorage.setItem('color-mode', next);
-          }
+      toggleColorMode: () => {
+        setMode(prev => {
+          const next = prev === 'light' ? 'dark' : 'light';
+          if (typeof window !== 'undefined') localStorage.setItem('color-mode', next);
           return next;
         });
       },
@@ -46,45 +32,38 @@ export default function AppTheme({ children }) {
     []
   );
 
+  useEffect(() => {
+    const root = document.documentElement; // <html>
+    root.classList.remove('theme-dark', 'theme-light');
+    root.classList.add(`theme-${mode}`);
+    root.style.colorScheme = mode; // 'light' | 'dark' 
+  }, [mode]);
+
   const theme = useMemo(
     () =>
       createTheme({
         palette: {
           mode,
-          primary: {
-            main: mode === 'dark' ? '#90caf9' : '#1976d2',
-          },
           primaryHome: {
-            main: mode === 'dark' ? 'rgba(13, 16, 18, 0.92)' : '#ffffff',
+            main: 'var(--appbar-bg)',
+            contrastText: 'var(--appbar-fg)',
           },
-          secondary: {
-            main: mode === 'dark' ? '#FF6B00' : '#FF6B00',
-            contrastText: '#FFFFFF',
-          },
-          background: {
-            default: mode === 'dark' ? '#121212' : '#ffffff',
-            paper: mode === 'dark' ? '#1e1e1e' : '#f5f5f5',
-          },
-          backgroundhome: {
-            default: mode === 'dark' ? '#121212' : '#ffffff',
-            paper: mode === 'dark' ? '#1e1e1e' : '#f5f5f5',
-          },
-          text: {
-            primary: mode === 'dark' ? '#ffffff' : '#000000',
+          footer: {
+            main: 'var(--footer-bg)',
+            contrastText: 'var(--footer-fg)',
           },
         },
+        shape: { borderRadius: 12 },
       }),
     [mode]
   );
 
-  useEffect(() => {
-    document.documentElement.classList.remove('theme-dark','theme-light');
-    document.documentElement.classList.add(`theme-${mode}`);
-  }, [mode]);
-
   return (
     <ColorModeContext.Provider value={colorMode}>
-      <ThemeProvider theme={theme}>{children}</ThemeProvider>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        {children}
+      </ThemeProvider>
     </ColorModeContext.Provider>
   );
 }

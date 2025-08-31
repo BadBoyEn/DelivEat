@@ -1,4 +1,4 @@
-import CustomIcons, { SitemarkIcon } from "../../CustomIcons.jsx";
+import SitemarkIcon from '../../GestioneIcons/SistemarkIcon.jsx';
 import ColorModeSelect from '../../../theme/ColorModeSelect.jsx';
 import { Link } from "react-router-dom";
 import {
@@ -9,6 +9,7 @@ import {
   Box,
   Container
 } from '@mui/material';
+
 export default function Contatti () {
     return(
         <Box>
@@ -17,11 +18,12 @@ export default function Contatti () {
                     <Box className="logo-home">
                         <SitemarkIcon/>
                     </Box>
-                    <Box text="text" classname="links-box">
+                    <Box text="text" classname="links-box">             
                         <Button component={Link} to="/" variant='contained' color="secondary">Home</Button>
+                        <Button component={Link} to="/home/chisiamo" variant='contained' color="secondary">Chi Siamo</Button>
                         <Button component={Link} to="/home/comefunziona" variant='contained' color="secondary">Come Funziona</Button>
                         <Button component={Link} to="/home/faq" variant='contained' color="secondary">FAQ</Button>
-                        <Button component={Link} to="/home/info" variant='contained' color="secondary">Info Legali</Button>
+                        <Button component={Link} to="/home/infolegali" variant='contained' color="secondary">Info Legali</Button>
                     </Box>
                     <Box className="color-switch-home">
                         <ColorModeSelect/>

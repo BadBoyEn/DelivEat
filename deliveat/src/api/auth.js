@@ -1,6 +1,6 @@
 import api from './client';
 
-// -- ACCESSO MANAGER
+// -- ACCESSO MANAGER --
 export async function loginManager({ email, password }) {
   const { data } = await api.post('/manager/login', { email, password });
   // data = { message, token }

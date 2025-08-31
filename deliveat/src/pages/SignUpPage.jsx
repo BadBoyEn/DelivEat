@@ -1,8 +1,2 @@
-import AppTheme from '../theme/AppTheme.jsx'
-import SignUp from '../Components/GestionePersonale/SignUpCard'
-
-export default function SignUpPage() {
-    return <AppTheme>
-        <SignUp />
-    </AppTheme>;
-}
+import SignUp from '../Components/GestionePersonale/SignUpCard.jsx';
+export default function SignUpPage() { return <SignUp />; }
