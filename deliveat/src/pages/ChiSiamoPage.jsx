@@ -1,2 +1,5 @@
-import ChiSiamo from '../Components/GestioneHomePage/GestioneNavbar/ChiSiamo.jsx';
-export default function ChiSiamoPage() { return <ChiSiamo />; }
+import ChiSiamo from '../Components/GestioneHomePage/GestioneNavbar/ChiSiamo';
+
+export default function ChiSiamoPage() {
+  return <ChiSiamo />;
+}

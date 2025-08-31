@@ -1,15 +1,18 @@
 html.theme-dark {
+  /* -- PALETTE DI BASE -- */
   --bg: #0d1018;
   --text: #e8e8e8;
 
+  /* -- SUPERFICI -- */
   --card-bg: rgba(13,16,18,0.92);
   --surface: var(--card-bg);
   --surface-2: #0f1115;
   --border-weak: #2a2a2a;
   --text-muted: #b0b8c1;
 
-  --accent: #FF6B00;
-  --accent-2: #FFA500;
+  /* -- ACCENTI (brand) -- */
+  --accent: #BA68C8;      /* viola chiaro */
+  --accent-2: #F06292;    /* rosa chiaro */
   --on-accent: #ffffff;
 
   /* -- SFUMATURA NIGHT SOFT -- */
@@ -17,7 +20,18 @@ html.theme-dark {
     radial-gradient(1000px 500px at 80% -10%, rgba(33, 67, 120, 0.18), rgba(33, 67, 120, 0) 60%),
     linear-gradient(180deg, #0d1018 0%, #0f1115 100%);
 
-  --elevation-3: 0 10px 20px rgba(0,0,0,0.35);
+  /* -- APPBAR (Navbar superiore) -- */
+  --appbar-bg: #1a1a1a;   /* sfondo AppBar in tema scuro */
+  --appbar-fg: #eeeeee;   /* testo/icona chiaro */
+
+  /* -- FOOTER -- */
+  --footer-bg: #4A148C;   /* viola profondo */
+  --footer-fg: #ffffff;   /* testo chiaro */
+
+  /* -- ELEVATION -- */
+  --elevation-1: 0 2px 8px rgba(0,0,0,0.5);
+  --elevation-2: 0 4px 12px rgba(0,0,0,0.6);
+  --elevation-3: 0 10px 20px rgba(0,0,0,0.7);
 }
 
 html.theme-dark,

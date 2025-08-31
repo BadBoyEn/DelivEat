@@ -1,2 +1,5 @@
-import ComeFunziona from '../Components/GestioneHomePage/GestioneNavbar/ComeFunziona.jsx';
-export default function ComeFunzionaPage() { return <ComeFunziona />; }
+import ComeFunziona from '../Components/GestioneHomePage/GestioneNavbar/ComeFunziona';
+
+export default function ComeFunzionaPage() {
+  return <ComeFunziona />;
+}

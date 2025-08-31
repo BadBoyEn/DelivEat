@@ -1,0 +1,139 @@
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1;
+}
+
+/* -- COMMENTO -- Wrapper contenuti centrati */
+.box-ordina {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 960px !important;
+  margin: 0 auto;
+  gap: 12px;
+}
+
+.box-ordina > div {
+  max-width: 500px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+/* -- COMMENTO -- Titolo */
+.title-ordina {
+  text-align: center;
+  margin-top: -6px !important;
+  margin-bottom: 12px !important;
+  font-weight: 800 !important;
+}
+
+/* -- COMMENTO -- Griglia menu */
+.menu-ordina {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(12px, 2vw, 18px);
+  margin: 12px 0 8px 0;
+}
+
+/* -- COMMENTO -- Card piatto */
+.menu-card {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 14px;
+}
+
+.menu-card .image {
+  height: 110px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.menu-card .image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.menu-card .name {
+  font-weight: 800;
+  margin-top: 4px;
+}
+
+.menu-card .desc {
+  font-size: 0.92rem;
+  line-height: 1.3;
+}
+
+.menu-card .bottom {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.menu-card .qty {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+/* -- COMMENTO -- Stepper riepilogo */
+.stepper-ordina {
+  margin-top: 14px;
+  padding: 12px;
+  border-radius: 16px;
+}
+
+.stepper-ordina .row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.stepper-ordina .totale {
+  font-weight: 800;
+}
+
+/* -- COMMENTO -- Card indirizzo */
+.address-card {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 14px;
+}
+
+.address-card .row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px;
+}
+
+/* -- COMMENTO -- Card conferma */
+.confirm-card {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border-radius: 16px;
+  text-align: center;
+}
+
+.confirm-card .big {
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+/* -- COMMENTO -- Responsive */
+@media (max-width: 720px) {
+  .menu-ordina { grid-template-columns: 1fr; }
+}

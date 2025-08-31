@@ -3,6 +3,8 @@ import { Box, Typography, Container } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { io } from 'socket.io-client';
 
+import './GestioneOrdina.css';
+
 import AppTheme from '../../../theme/AppTheme.jsx';                   
 import logo from '../../../Images/D2.png';
 import OrdinaStepper from './OrdinaStepper.jsx';

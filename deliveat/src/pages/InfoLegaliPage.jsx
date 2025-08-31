@@ -1,4 +1,4 @@
-import InfoLegali from "../Components/GestioneHomePage/GestioneNavbar/InfoLegali.jsx";
+import InfoLegali from '../Components/GestioneHomePage/GestioneNavbar/InfoLegali';
 
 export default function InfoLegaliPage() {
   return <InfoLegali />;

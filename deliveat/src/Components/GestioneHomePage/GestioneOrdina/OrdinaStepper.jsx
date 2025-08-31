@@ -19,6 +19,9 @@ import axios from 'axios';
 import carbonara from '../../../Images/carbonara.jpg';
 import panna from '../../../Images/panna.jpg';
 
+import './GestioneOrdina.css';
+
+
 function OrangeStepIcon({ active, completed, icon }) {
   return (
     <div
