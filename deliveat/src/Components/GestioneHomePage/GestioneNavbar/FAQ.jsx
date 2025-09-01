@@ -39,7 +39,7 @@ export default function FAQ() {
           </AccordionSummary>
           <AccordionDetails>
             <Typography variant="body2">
-              Finché l’ordine non è stato preso in carico dalla cucina puoi modificarlo o annullarlo dalla sezione
+              Finché l'ordine non è stato preso in carico dalla cucina puoi modificarlo o annullarlo dalla sezione
               <strong> I miei ordini</strong>.
             </Typography>
           </AccordionDetails>
