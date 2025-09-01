@@ -17,6 +17,7 @@ export default function GestioneNavbar({ children }) {
     { label: "Chi Siamo", to: "/home/chisiamo" },
     { label: "Come Funziona", to: "/home/comefunziona" },
     { label: "FAQ", to: "/home/faq" },
+    { label: "Contatti", to: "/home/contatti" },
     { label: "Info Legali", to: "/home/infolegali" },
   ];
 

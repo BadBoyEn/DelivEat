@@ -18,6 +18,13 @@ import axios from 'axios';
 
 import carbonara from '../../../Images/carbonara.jpg';
 import panna from '../../../Images/panna.jpg';
+import pesto from '../../../Images/pesto.jpg';
+import cotoletta from '../../../Images/cotoletta.jpg';
+import frittura from '../../../Images/frittura.jpg';
+import insalata from '../../../Images/insalata.jpg';
+import ciocco from '../../../Images/ciocco.jpg';
+import tiramisu from '../../../Images/tiramisu.jpg';
+import sorbetto from '../../../Images/sorbetto.jpg';
 
 import './GestioneOrdina.css';
 
@@ -72,13 +79,13 @@ export default function OrdinaStepper() {
   const piattiDisponibili = [
     { img: carbonara, title: 'Spaghetti alla carbonara' },
     { img: panna, title: 'Penne alla panna e speck' },
-    { img: 'https://images.unsplash.com/photo-1522770179533-24471fcdba45', title: 'Fusilli al pesto' },
-    { img: 'https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c', title: 'Cotoletta milanese' },
-    { img: 'https://images.unsplash.com/photo-1533827432537-70133748f5c8', title: 'Frittura di pesce' },
-    { img: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62', title: 'Insalata' },
-    { img: 'https://images.unsplash.com/photo-1516802273409-68526ee1bdd6', title: 'Soufflè al cioccolato' },
-    { img: 'https://images.unsplash.com/photo-1518756131217-31eb79b20e8f', title: 'Tiramisù' },
-    { img: 'https://images.unsplash.com/photo-1597645587822-e99fa5d45d25', title: 'Sorbetto' },
+    { img: pesto, title: 'Fusilli al pesto' },
+    { img: cotoletta, title: 'Cotoletta milanese' },
+    { img: frittura, title: 'Frittura di pesce' },
+    { img: insalata, title: 'Insalata' },
+    { img: ciocco, title: 'Soufflè al cioccolato' },
+    { img: tiramisu, title: 'Tiramisù' },
+    { img: sorbetto, title: 'Sorbetto' },
   ];
 
   const categorie = [

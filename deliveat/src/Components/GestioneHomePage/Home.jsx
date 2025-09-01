@@ -1,7 +1,8 @@
 import { Box, Typography, Button } from '@mui/material';
 import GestioneNavbar from './GestioneNavbar/GestioneNavbar';
 import './GestioneNavbar/GestioneNavbar.css';   // layout navbar & footer
-import './GestioneHomePage.css';                // layout home + gallery
+import './GestioneHomePage.css';
+import MenuGallery from './MenuGallery.jsx';                // layout home + gallery
 
 export default function Home() {
   return (
@@ -20,7 +21,7 @@ export default function Home() {
           </Typography>
 
           <Box className="home-cta">
-            <Button size="large" variant="contained" color="secondary" href="/ordina">
+            <Button size="large" variant="contained" color="secondary" href="/home/ordina">
               Ordina ora
             </Button>
             <Button size="large" variant="outlined" color="secondary" href="/home/chisiamo">
@@ -37,7 +38,7 @@ export default function Home() {
 
           <ul className="news-list">
             <li>Carbonara</li>
-            <li>Pinsa romana</li>
+            <li>Cotoletta milanese</li>
             <li>Tiramisù</li>
           </ul>
 

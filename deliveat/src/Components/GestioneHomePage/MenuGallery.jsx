@@ -1,10 +1,6 @@
 import { useState } from 'react';
 import './GestioneHomePage.css';
-import { Link } from "react-router-dom";
 import galleryImages from '../../assets/galleryImages'; // array con i percorsi delle immagini
-import {
-  Box, Button
-} from '@mui/material';
 
 export default function MenuGallery() {
   const [isOpen, setIsOpen] = useState(false); 
@@ -38,9 +34,6 @@ export default function MenuGallery() {
         className="menu-cover"
         onClick={() => openGallery(0)}
       />
-      <Box className="ordina-ora">
-         <Button component={Link} to="/home/ordina" variant="contained" color="secondary" size="large">Ordina ora</Button>
-      </Box>
 
       {/* Overlay gallery */}
       {isOpen && (

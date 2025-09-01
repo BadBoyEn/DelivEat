@@ -9,6 +9,13 @@ export default function InfoLegali() {
         <Typography variant="h4" gutterBottom color="secondary" fontWeight={800}>
           Informazioni Legali
         </Typography>
+        <Box sx={{ mt: 3 }}>
+         <Typography variant="body1" paragraph><strong>Partita IVA:</strong> 10356780965</Typography>
+         <Typography variant="body1" paragraph><strong>Codice Fiscale:</strong> 10455867504</Typography>
+         <Typography variant="body1" sx={{ mb: 2 }}><strong>REA:</strong> MI - 5768572</Typography>
+         <Typography variant="body1" sx={{ mb: 2 }}><strong>Capitale Sociale:</strong> € 25.000,00 i.v.</Typography>
+         <Typography variant="body1" ><strong>PEC:</strong> deliveat@pec.it</Typography>
+        </Box>
 
         <Typography variant="h6" gutterBottom sx={{ mt: 3 }}>
           Termini e condizioni d'uso

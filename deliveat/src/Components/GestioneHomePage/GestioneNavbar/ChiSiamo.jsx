@@ -1,5 +1,7 @@
 import { Typography, Box } from '@mui/material';
 import GestioneNavbar from './GestioneNavbar';
+import cibo from '../../../Images/pietanze_2-750x500.jpg';
+import rider from '../../../Images/fattorino.jpg'
 import './GestioneNavbar.css'; 
 
 export default function ChiSiamo() {
@@ -13,6 +15,26 @@ export default function ChiSiamo() {
           DelivEat è una dark kitchen innovativa, nata per offrire un servizio di ristorazione veloce,
           di qualità e accessibile a tutti. Il nostro team lavora ogni giorno per garantire esperienze culinarie uniche.
         </Typography>
+      </Box>
+      <Box sx={{ display: 'flex', flexDirection: "row", gap: "20px" }}>
+        <Box>
+          <img src={cibo} alt="cibo" style={{
+          width: "100%",
+          height: "auto",
+          objectFit: "cover",
+          borderRadius: 8,
+        }}
+          />
+        </Box>
+        <Box>
+          <img src={rider} alt="rider" style={{
+          width: "100%",
+          height: "auto",
+          objectFit: "cover",
+          borderRadius: 8,
+        }}
+          />
+        </Box>
       </Box>
     </GestioneNavbar>
   );
