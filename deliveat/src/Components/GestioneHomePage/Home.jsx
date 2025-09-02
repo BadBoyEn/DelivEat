@@ -43,7 +43,7 @@ export default function Home() {
           </ul>
 
           <Box className="news-actions">
-            <Button variant="contained" color="secondary" size="small" href="/ordina">
+            <Button variant="contained" color="secondary" size="small" href="/home/ordina">
               Ordina
             </Button>
           </Box>
