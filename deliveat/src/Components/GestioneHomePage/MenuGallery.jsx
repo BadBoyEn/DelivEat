@@ -1,3 +1,7 @@
+//Catalogo da sfogliare, le immagini da images; va a posto di novita' del menu:
+//Metti Titolo
+
+
 import { useState } from 'react';
 import './GestioneHomePage.css';
 import galleryImages from '../../assets/galleryImages'; // array con i percorsi delle immagini

@@ -1,12 +1,42 @@
+/* -- COLORE SOLO DI ORDINA.JSX -- */
+.page-container {
+  --ordina-bg: #0f0f17;               /* sfondo pagina */
+  --ordina-text: #e9e9ee;             /* testo principale */
+  --ordina-text-muted: #b7bcc7;       /* testo secondario */
+
+  --ordina-surface: rgba(18,18,28,0.96);  /* card bg */
+  --ordina-surface-2: #171824;            /* superfici secondarie */
+  --ordina-border: #2a2d3b;               /* bordi */
+
+  /* Accenti brand (violetto/rosa) */
+  --ordina-accent: #BA68C8;
+  --ordina-accent-2: #F06292;
+  --ordina-on-accent: #ffffff;
+
+  --ordina-shadow-1: 0 2px 12px rgba(0,0,0,0.45);
+  --ordina-shadow-2: 0 10px 24px rgba(0,0,0,0.55);
+
+  --ordina-chip-bg: #241d2a;
+  --ordina-chip-text: #e2c8ea;
+
+  --ordina-success: #34d399;
+  --ordina-warning: #f59e0b;
+  --ordina-danger:  #ef4444;
+
+  --ordina-hero-bg: linear-gradient(180deg, #0f0f17 0%, #121427 60%, #0f0f17 100%);
+}
+
+/* -- STRUTTURA PAGINA -- */
+
 .page-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background: var(--ordina-bg);
+  color: var(--ordina-text);
 }
 
-.content {
-  flex: 1;
-}
+.content { flex: 1; }
 
 /* -- COMMENTO -- Wrapper contenuti centrati */
 .box-ordina {
@@ -14,118 +44,150 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  max-width: 960px !important;
-  margin: 0 auto;
-  gap: 12px;
+  gap: 18px;
+  padding: 24px 16px;
+  background: var(--ordina-hero-bg);
 }
 
-.box-ordina > div {
-  max-width: 500px !important;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-}
-
-/* -- COMMENTO -- Titolo */
+/* -- COMMENTO -- Titolo e descrizioni */
 .title-ordina {
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--ordina-accent);
   text-align: center;
-  margin-top: -6px !important;
-  margin-bottom: 12px !important;
-  font-weight: 800 !important;
+}
+
+.desc {
+  color: var(--ordina-text-muted);
+  text-align: center;
+  max-width: 920px;
 }
 
 /* -- COMMENTO -- Griglia menu */
 .menu-ordina {
+  width: min(1200px, 96vw);
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(12px, 2vw, 18px);
-  margin: 12px 0 8px 0;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
 }
 
-/* -- COMMENTO -- Card piatto */
-.menu-card {
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  gap: 8px;
-  padding: 12px;
-  border-radius: 14px;
+/* -- COMMENTO -- Card base (menu, indirizzo, conferma) */
+.menu-card,
+.address-card,
+.confirm-card {
+  background: var(--ordina-surface);
+  border: 1px solid var(--ordina-border);
+  border-radius: 16px;
+  box-shadow: var(--ordina-shadow-1);
+  padding: 16px;
 }
 
+/* -- COMMENTO -- Card menu: immagine + testi */
 .menu-card .image {
-  height: 110px;
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.menu-card .image img {
   width: 100%;
-  height: 100%;
+  height: 200px;
   object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid var(--ordina-border);
+  box-shadow: var(--ordina-shadow-1);
 }
 
 .menu-card .name {
-  font-weight: 800;
-  margin-top: 4px;
+  font-weight: 600;
+  margin-top: 10px;
+  color: var(--ordina-text);
 }
 
 .menu-card .desc {
-  font-size: 0.92rem;
-  line-height: 1.3;
-}
-
-.menu-card .bottom {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  gap: 8px;
+  color: var(--ordina-text-muted);
   margin-top: 4px;
 }
 
-.menu-card .qty {
+/* -- COMMENTO -- Riga bottom della card (prezzo/azioni) */
+.menu-card .bottom {
   display: flex;
-  gap: 6px;
   align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 12px;
 }
 
-/* -- COMMENTO -- Stepper riepilogo */
+/* -- COMMENTO -- Quantità e chip */
+.qty {
+  min-width: 36px;
+  height: 32px;
+  padding: 0 10px;
+  border-radius: 10px;
+  background: var(--ordina-chip-bg);
+  color: var(--ordina-chip-text);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+
+/* -- COMMENTO -- Bottoni primari/secondari (compatibili anche con MUI) */
+.page-container .btn-primary,
+.page-container .MuiButton-root.btn-primary {
+  background: var(--ordina-accent);
+  color: var(--ordina-on-accent);
+  border: 1px solid transparent;
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-weight: 600;
+  box-shadow: var(--ordina-shadow-1);
+  transition: filter 0.2s ease, transform 0.06s ease;
+}
+.page-container .btn-primary:hover,
+.page-container .MuiButton-root.btn-primary:hover {
+  filter: brightness(1.05);
+}
+.page-container .btn-primary:active,
+.page-container .MuiButton-root.btn-primary:active {
+  transform: translateY(1px);
+}
+
+.page-container .btn-secondary,
+.page-container .MuiButton-root.btn-secondary {
+  background: var(--ordina-surface-2);
+  color: var(--ordina-text);
+  border: 1px solid var(--ordina-border);
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-weight: 600;
+  box-shadow: var(--ordina-shadow-1);
+}
+
+/* -- COMMENTO -- Stato/feedback (success/warn/danger) */
+.page-container .is-success { color: var(--ordina-success); }
+.page-container .is-warning { color: var(--ordina-warning); }
+.page-container .is-danger  { color: var(--ordina-danger); }
+
+/* -- COMMENTO -- Stepper */
 .stepper-ordina {
-  margin-top: 14px;
-  padding: 12px;
+  width: min(1000px, 96vw);
+  background: var(--ordina-surface);
+  border: 1px solid var(--ordina-border);
   border-radius: 16px;
+  box-shadow: var(--ordina-shadow-2);
+  padding: 16px;
 }
 
-.stepper-ordina .row {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 10px;
+/* -- COMMENTO -- Card di conferma riepilogo */
+.confirm-card .row {
+  display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px dashed var(--ordina-border);
 }
+.confirm-card .row:last-child { border-bottom: 0; }
 
-.stepper-ordina .totale {
-  font-weight: 800;
-}
-
-/* -- COMMENTO -- Card indirizzo */
-.address-card {
-  display: grid;
-  gap: 8px;
-  padding: 12px;
-  border-radius: 14px;
-}
-
-.address-card .row {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 8px;
-}
-
-/* -- COMMENTO -- Card conferma */
-.confirm-card {
-  display: grid;
-  gap: 10px;
-  padding: 14px;
-  border-radius: 16px;
-  text-align: center;
+.confirm-card .totale {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--ordina-accent-2);
 }
 
 .confirm-card .big {
@@ -133,7 +195,21 @@
   text-align: center;
 }
 
+/* -- COMMENTO -- Footer pagina */
+.footer-custom {
+  margin-top: 24px;
+  padding: 18px 0;
+  border-top: 1px solid var(--ordina-border);
+  color: var(--ordina-text-muted);
+  text-align: center;
+  background: transparent;
+}
+
 /* -- COMMENTO -- Responsive */
-@media (max-width: 720px) {
+@media (max-width: 900px) {
   .menu-ordina { grid-template-columns: 1fr; }
+}
+@media (max-width: 720px) {
+  .stepper-ordina { padding: 12px; }
+  .menu-card, .address-card, .confirm-card { padding: 12px; }
 }
