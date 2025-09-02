@@ -1,52 +1,35 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Box, Typography, Container } from '@mui/material';
-import { Link } from 'react-router-dom';
-import { io } from 'socket.io-client';
+// -- COMMENTO -- Pagina Ordina: colori e card gestiti SOLO da GestioneOrdina.css
+import React from 'react';
+import { Box, Typography } from '@mui/material';
 
-import './GestioneOrdina.css';
+import AppTheme from '../../../theme/AppTheme.jsx';   // -- COMMENTO -- deve restare!!
+import './GestioneOrdina.css';                         // -- COMMENTO -- import DOPO AppTheme
 
-import AppTheme from '../../../theme/AppTheme.jsx';                   
 import logo from '../../../Images/D2.png';
 import OrdinaStepper from './OrdinaStepper.jsx';
 
-export default function Ordina() {
-
-  const [token, setToken] = useState('');
-  const [status, setStatus] = useState('');
-  const socketRef = useRef(null);
-
-  useEffect(() => {
-    // -- COMMENTO -- connessione Socket.IO al BACKEND (porta 5000)
-    socketRef.current = io('http://localhost:5000', { withCredentials: true });
-
-    // -- COMMENTO -- listener standard per eventuali notifiche globali
-    socketRef.current.on('order_token', (data) => setToken(data?.token || ''));
-    socketRef.current.on('order_status', (data) => setStatus(data?.status || ''));
-
-    return () => {
-      socketRef.current?.disconnect();
-    };
-  }, []);
-
-  const inviaOrdineViaSocket = (ordineData) => {
-    socketRef.current?.emit('new_order', ordineData);
-  };
-
+export default function Ordina(){
   return (
     <AppTheme>
-      <Box className="page-container">
-        <Container maxWidth="md" className="box-ordina content">
-          <img src={logo} alt="Logo-body" className="logo-ordina" />
-          <Typography variant="h4" className="text-ordina">
-            ORDINAZIONE DA ASPORTO
-          </Typography>
-          <OrdinaStepper/>
-        </Container>
+      <Box className="page-container ordina-scope">
+        <Box className="box-ordina">
+          {/* -- COMMENTO -- Logo + titolo */}
+          <Box sx={{ display:'flex', flexDirection:'column', alignItems:'center', gap:2 }}>
+            <img src={logo} alt="DelivEat" style={{ width:88, height:'auto', opacity:.9 }} />
+            <Typography variant="h4" className="title-ordina">
+              ORDINAZIONE DA ASPORTO
+            </Typography>
+          </Box>
 
+          {/* -- COMMENTO -- unica CARD bianca: lo stepper */}
+          <Box className="stepper-ordina" sx={{ mt:3, width:'100%', maxWidth:700 }}>
+            <OrdinaStepper />
+          </Box>
+        </Box>
+
+        {/* -- COMMENTO -- footer (rimane come impostazioni attuali) */}
         <Box className="footer-custom">
-          <Typography variant="body2">
-            © 2025 DelivEat. All Rights Reserved.
-          </Typography>
+          <Typography variant="body2">© 2025 DelivEat. All Rights Reserved.</Typography>
         </Box>
       </Box>
     </AppTheme>

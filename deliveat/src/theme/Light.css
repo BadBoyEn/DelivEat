@@ -1,62 +1,65 @@
-html.theme-light {
-  /* -- PALETTE DI BASE -- */
-  --bg: #ffffff;
-  --surface: #ffffff;
-  --surface-2: #f7f7f7;
-  --text: #1a1a1a;
-  --text-muted: #333333;
-  --text-strong: #111111;
+html.theme-light{
+  /* -- COMMENTO -- Superfici e testo */
+  --bg:#ffffff;                 /* sfondo pagina */
+  --surface:#ffffff;            /* card / pannelli */
+  --surface-2:#f7f7f7;          /* superfici secondarie */
+  --text:#1a1a1a;               /* testo principale */
+  --text-muted:#333333;         /* testo secondario */
 
-  /* -- ACCENTI (brand) -- */
-  --accent: #8E24AA;       /* viola principale */
-  --accent-2: #D81B60;     /* rosa acceso */
-  --on-accent: #ffffff;
+  /* -- COMMENTO -- Accenti generali del tema */
+  --accent:#8E24AA;             /* viola brand (CTA, link, ecc.) */
+  --accent-2:#D81B60;           /* viola/rosa alternativo */
+  --on-accent:#ffffff;          /* testo su accento */
 
-  /* -- BORDI / OMBRE -- */
-  --border-weak: #dadada;
-  --elevation-1: 0 2px 8px rgba(0,0,0,0.08);
-  --elevation-2: 0 4px 12px rgba(0,0,0,0.12);
-  --elevation-3: 0 10px 20px rgba(0,0,0,0.16);
+  /* -- COMMENTO -- Bordi ed elevazioni */
+  --border-weak:#dadada;
+  --elevation-1:0 2px 8px rgba(0,0,0,0.06);
+  --elevation-2:0 6px 18px rgba(0,0,0,0.10);
+  --elevation-3:0 10px 24px rgba(0,0,0,0.12);
 
-  /* -- SFUMATURA DI SFONDO -- */
-  --bg-gradient:
-    linear-gradient(120deg, #ffffff 0%, #f8fbff 40%, #f3f6ff 100%);
+  /* -- COMMENTO -- Gradiente di sfondo (opzionale) */
+  --bg-gradient:linear-gradient(180deg,#ffffff 0%,#fbf7fd 60%,#ffffff 100%);
 
-  /* -- COMPONENTI GENERICI -- */
-  --card-bg: #ffffff;
-  --input-bg: #ffffff;
-  --input-border: #cfcfcf;
-  --input-placeholder: #6b6b6b;
-  --link: #8E24AA;
+  /* -- COMMENTO -- NAVBAR */
+  --nav-bg:#ffffff;             /* sfondo navbar */
+  --nav-text:#1a1a1a;           /* testo/icona navbar */
+  --nav-pill-bg:#8E24AA;        /* sfondo pulsanti/chip navbar */
+  --nav-pill-text:#ffffff;      /* testo pulsanti/chip navbar */
 
-  /* -- APPBAR (Navbar superiore) -- */
-  --appbar-bg: #e0b9ec;   /* sfondo AppBar in tema chiaro */
-  --appbar-fg: #1a1a1a;   /* testo/icona */
-
-  /* -- FOOTER -- */
-  --footer-bg: #6A1B9A;   /* viola intenso */
-  --footer-fg: #ffffff;   /* testo bianco */
-
-  /* -- OVERLAY / FORM / SPECIFICHE -- */
-  --overlay-bg: rgba(0,0,0,0.85);
-  --overlay-arrow-bg: rgba(255,255,255,0.2);
-  --overlay-arrow-hover-bg: rgba(255,255,255,0.5);
-  --overlay-arrow-disabled-bg: rgba(255,255,255,0.1);
-  --overlay-arrow-fg: #ffffff;
-  --overlay-arrow-disabled-fg: rgba(255,255,255,0.4);
-  --danger: #d32f2f;
-  --search-bg: rgba(0,0,0,0.04);
-
-  /* -- SFONDO PAGINA ORDINA -- */
-  --page-ordina-bg: #ffffff;
+  /* -- COMMENTO -- FOOTER */
+  --footer-bg:#f6f6f6;          /* sfondo footer */
+  --footer-text:#666666;        /* testo footer */
+  --footer-border:#e5e5e5;      /* bordo superiore footer */
 }
 
-html.theme-light,
-html.theme-light body,
-html.theme-light #root {
-  background: var(--bg-gradient, var(--bg)) !important;
-  background-attachment: fixed;
-  color: var(--text);
+/* -- COMMENTO -- Applica superfici base del tema */
+html.theme-light, html.theme-light body, html.theme-light #root{
+  background:var(--bg-gradient, var(--bg)) !important;
+  background-attachment:fixed;
+  color:var(--text);
 }
 
-html.theme-light { color-scheme: light; }
+/* -- COMMENTO -- Navbar / Header */
+.MuiAppBar-root,
+.navbar, .header{
+  background:var(--nav-bg) !important;
+  color:var(--nav-text) !important;
+  box-shadow:var(--elevation-1) !important;
+}
+
+/* -- COMMENTO -- Pulsanti/chip nella navbar */
+.navbar .btn-pill,
+.navbar .MuiButton-contained,
+.navbar .MuiChip-root,
+.header .btn-primary{
+  background:var(--nav-pill-bg) !important;
+  color:var(--nav-pill-text) !important;
+  border-color:transparent !important;
+}
+
+/* -- COMMENTO -- Footer (N.B. Ordina ha override locale) */
+.footer-custom{
+  background:var(--footer-bg);
+  color:var(--footer-text);
+  border-top:1px solid var(--footer-border);
+}

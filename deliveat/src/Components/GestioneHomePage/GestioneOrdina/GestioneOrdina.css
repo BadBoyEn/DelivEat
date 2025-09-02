@@ -1,215 +1,133 @@
-/* -- COLORE SOLO DI ORDINA.JSX -- */
+/* -- COLORE FISSO DI ORDINA -- */
 .page-container {
-  --ordina-bg: #0f0f17;               /* sfondo pagina */
-  --ordina-text: #e9e9ee;             /* testo principale */
-  --ordina-text-muted: #b7bcc7;       /* testo secondario */
+  --ordina-bg: #fe7f0d;           /* sfondo pagina */
+  --ordina-text: #111111;         /* testo base su arancione */
+  --ordina-text-muted: #444444;
 
-  --ordina-surface: rgba(18,18,28,0.96);  /* card bg */
-  --ordina-surface-2: #171824;            /* superfici secondarie */
-  --ordina-border: #2a2d3b;               /* bordi */
-
-  /* Accenti brand (violetto/rosa) */
-  --ordina-accent: #BA68C8;
-  --ordina-accent-2: #F06292;
+  --ordina-accent: #fe7f0d;       /* arancio principale */
+  --ordina-accent-2: #d96a00;     /* arancio scuro */
   --ordina-on-accent: #ffffff;
 
-  --ordina-shadow-1: 0 2px 12px rgba(0,0,0,0.45);
-  --ordina-shadow-2: 0 10px 24px rgba(0,0,0,0.55);
-
-  --ordina-chip-bg: #241d2a;
-  --ordina-chip-text: #e2c8ea;
-
-  --ordina-success: #34d399;
-  --ordina-warning: #f59e0b;
-  --ordina-danger:  #ef4444;
-
-  --ordina-hero-bg: linear-gradient(180deg, #0f0f17 0%, #121427 60%, #0f0f17 100%);
+  --ordina-shadow-1: 0 8px 24px rgba(0,0,0,.12);
+  --ordina-shadow-2: 0 12px 32px rgba(0,0,0,.16);
 }
-
-/* -- STRUTTURA PAGINA -- */
 
 .page-container {
-  display: flex;
+  display: flex;                  /* -- COMMENTO -- per sticky footer */
   flex-direction: column;
   min-height: 100vh;
-  background: var(--ordina-bg);
+  background: var(--ordina-bg) !important;  /* -- COMMENTO -- fisso #fe7f0d */
   color: var(--ordina-text);
 }
-
 .content { flex: 1; }
+.ordina-scope { background: transparent; }   /* -- COMMENTO -- scope locale */
 
-/* -- COMMENTO -- Wrapper contenuti centrati */
-.box-ordina {
+.ordina-scope .MuiContainer-root,
+.ordina-scope .MuiPaper-root:not(.stepper-ordina),
+.ordina-scope .MuiCard-root:not(.stepper-ordina),
+.ordina-scope .box-ordina {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+}
+.ordina-scope .box-ordina {
   display: flex !important;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   gap: 18px;
   padding: 24px 16px;
-  background: var(--ordina-hero-bg);
 }
 
-/* -- COMMENTO -- Titolo e descrizioni */
+.ordina-scope .stepper-ordina {
+  background: transparent !important;   /* -- COMMENTO -- elimina "card bianca" esterna */
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+/* -- COMMENTO -- Card interna (primo figlio) */
+.ordina-scope .stepper-ordina > .MuiBox-root:first-child,
+.ordina-scope .stepper-ordina > .MuiPaper-root:first-child {
+  background: #ffffff !important;        /* -- COMMENTO -- card interna bianca */
+  color: #000000 !important;
+  border: 1px solid #e0e0e0 !important;
+  border-radius: 16px !important;
+  box-shadow: var(--ordina-shadow-1) !important;
+  padding: 16px !important;
+}
+
 .title-ordina {
   font-weight: 700;
-  letter-spacing: 0.5px;
-  color: var(--ordina-accent);
+  letter-spacing: .5px;
+  color: #111111;                   /* -- COMMENTO -- leggibile su arancione */
   text-align: center;
 }
+.desc { color: var(--ordina-text-muted); text-align: center; max-width: 920px; }
 
-.desc {
-  color: var(--ordina-text-muted);
-  text-align: center;
-  max-width: 920px;
-}
+.ordina-scope .MuiInputBase-root { background: #ffffff !important; color: #111111 !important; }
+.ordina-scope .MuiOutlinedInput-notchedOutline { border-color: #e0e0e0 !important; }
 
-/* -- COMMENTO -- Griglia menu */
-.menu-ordina {
-  width: min(1200px, 96vw);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 18px;
-}
-
-/* -- COMMENTO -- Card base (menu, indirizzo, conferma) */
-.menu-card,
-.address-card,
-.confirm-card {
-  background: var(--ordina-surface);
-  border: 1px solid var(--ordina-border);
-  border-radius: 16px;
-  box-shadow: var(--ordina-shadow-1);
-  padding: 16px;
-}
-
-/* -- COMMENTO -- Card menu: immagine + testi */
-.menu-card .image {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 12px;
-  border: 1px solid var(--ordina-border);
-  box-shadow: var(--ordina-shadow-1);
-}
-
-.menu-card .name {
-  font-weight: 600;
-  margin-top: 10px;
-  color: var(--ordina-text);
-}
-
-.menu-card .desc {
-  color: var(--ordina-text-muted);
-  margin-top: 4px;
-}
-
-/* -- COMMENTO -- Riga bottom della card (prezzo/azioni) */
-.menu-card .bottom {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  margin-top: 12px;
-}
-
-/* -- COMMENTO -- Quantità e chip */
-.qty {
-  min-width: 36px;
-  height: 32px;
-  padding: 0 10px;
-  border-radius: 10px;
-  background: var(--ordina-chip-bg);
-  color: var(--ordina-chip-text);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-}
-
-/* -- COMMENTO -- Bottoni primari/secondari (compatibili anche con MUI) */
-.page-container .btn-primary,
-.page-container .MuiButton-root.btn-primary {
-  background: var(--ordina-accent);
-  color: var(--ordina-on-accent);
+/* -- BOTTONI "AVANTI" -- */
+.ordina-scope .MuiButton-contained,
+.ordina-scope .MuiButton-containedPrimary,
+.ordina-scope .btn-primary {
+  background: #fe7f0d !important;
+  color: #ffffff !important;
   border: 1px solid transparent;
   border-radius: 12px;
   padding: 10px 16px;
   font-weight: 600;
   box-shadow: var(--ordina-shadow-1);
-  transition: filter 0.2s ease, transform 0.06s ease;
+  transition: filter .2s, transform .06s;
 }
-.page-container .btn-primary:hover,
-.page-container .MuiButton-root.btn-primary:hover {
-  filter: brightness(1.05);
-}
-.page-container .btn-primary:active,
-.page-container .MuiButton-root.btn-primary:active {
-  transform: translateY(1px);
+.ordina-scope .MuiButton-contained:hover { filter: brightness(1.05); }
+.ordina-scope .MuiButton-contained:active { transform: translateY(1px); }
+
+/* -- COMMENTO -- Cerchi 1/2/3 ARANCIONI in tutti gli stati */
+.ordina-scope .MuiStepLabel-iconContainer .MuiStepIcon-root,
+.ordina-scope .MuiStepIcon-root,
+.ordina-scope svg.MuiStepIcon-root {
+  color: #fe7f0d !important;                  /* cerchio arancione */
 }
 
-.page-container .btn-secondary,
-.page-container .MuiButton-root.btn-secondary {
-  background: var(--ordina-surface-2);
-  color: var(--ordina-text);
-  border: 1px solid var(--ordina-border);
-  border-radius: 12px;
-  padding: 10px 16px;
-  font-weight: 600;
-  box-shadow: var(--ordina-shadow-1);
-}
-
-/* -- COMMENTO -- Stato/feedback (success/warn/danger) */
-.page-container .is-success { color: var(--ordina-success); }
-.page-container .is-warning { color: var(--ordina-warning); }
-.page-container .is-danger  { color: var(--ordina-danger); }
-
-/* -- COMMENTO -- Stepper */
-.stepper-ordina {
-  width: min(1000px, 96vw);
-  background: var(--ordina-surface);
-  border: 1px solid var(--ordina-border);
-  border-radius: 16px;
-  box-shadow: var(--ordina-shadow-2);
-  padding: 16px;
-}
-
-/* -- COMMENTO -- Card di conferma riepilogo */
-.confirm-card .row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 10px 0;
-  border-bottom: 1px dashed var(--ordina-border);
-}
-.confirm-card .row:last-child { border-bottom: 0; }
-
-.confirm-card .totale {
+/* -- COMMENTO -- Numeri BIANCHI e CENTRATI */
+.ordina-scope .MuiStepIcon-text {
+  fill: #ffffff !important;                   /* numero bianco */
   font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  text-anchor: middle;                        /* centratura orizzontale */
+  dominant-baseline: middle;                  /* centratura verticale (se supportata) */
+  transform: translate(0,0);                  /* nessun offset */
+}
+
+/* -- COMMENTO -- Etichette step (pill arancioni con testo bianco) */
+.ordina-scope .MuiStepLabel-label {
+  background: #fe7f0d !important;
+  color: #ffffff !important;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-weight: 600;
+}
+
+/* -- COMMENTO -- Linea connettore */
+.ordina-scope .MuiStepConnector-line { border-color: #e0e0e0 !important; }
+
+/* -- FOOTER -- */
+.ordina-scope .footer-custom {
+  margin-top: auto;
+  padding: 28px 0;
+  border-top: 1px solid #1a1a1a;
+  text-align: center;
+  color: #cc5500;
+  background: #000000;
   font-size: 1.1rem;
-  color: var(--ordina-accent-2);
 }
 
-.confirm-card .big {
-  font-size: 1.8rem;
-  text-align: center;
-}
-
-/* -- COMMENTO -- Footer pagina */
-.footer-custom {
-  margin-top: 24px;
-  padding: 18px 0;
-  border-top: 1px solid var(--ordina-border);
-  color: var(--ordina-text-muted);
-  text-align: center;
-  background: transparent;
-}
-
-/* -- COMMENTO -- Responsive */
-@media (max-width: 900px) {
-  .menu-ordina { grid-template-columns: 1fr; }
-}
+/* -- RESPONSIVE -- */
 @media (max-width: 720px) {
-  .stepper-ordina { padding: 12px; }
-  .menu-card, .address-card, .confirm-card { padding: 12px; }
+  .ordina-scope .stepper-ordina > .MuiBox-root:first-child,
+  .ordina-scope .stepper-ordina > .MuiPaper-root:first-child {
+    padding: 12px !important;
+  }
 }

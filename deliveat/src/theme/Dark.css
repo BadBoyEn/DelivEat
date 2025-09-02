@@ -1,44 +1,65 @@
-html.theme-dark {
-  /* -- PALETTE DI BASE -- */
-  --bg: #0d1018;
-  --text: #e8e8e8;
+html.theme-dark{
+  /* -- COMMENTO -- Superfici e testo */
+  --bg:#0d1018;                    /* sfondo pagina scuro */
+  --surface:rgba(13,16,18,0.92);   /* card / pannelli */
+  --surface-2:#0f1115;             /* superfici secondarie */
+  --text:#e8e8e8;                  /* testo principale */
+  --text-muted:#b0b8c1;            /* testo secondario */
 
-  /* -- SUPERFICI -- */
-  --card-bg: rgba(13,16,18,0.92);
-  --surface: var(--card-bg);
-  --surface-2: #0f1115;
-  --border-weak: #2a2a2a;
-  --text-muted: #b0b8c1;
+  /* -- COMMENTO -- Accenti generali del tema */
+  --accent:#BA68C8;                /* viola brand (CTA, link, ecc.) */
+  --accent-2:#F06292;              /* viola/rosa alternativo */
+  --on-accent:#ffffff;             /* testo su accento */
 
-  /* -- ACCENTI (brand) -- */
-  --accent: #BA68C8;      /* viola chiaro */
-  --accent-2: #F06292;    /* rosa chiaro */
-  --on-accent: #ffffff;
+  /* -- COMMENTO -- Bordi ed elevazioni */
+  --border-weak:#2a2a2a;
+  --elevation-1:0 2px 8px rgba(0,0,0,0.50);
+  --elevation-2:0 4px 12px rgba(0,0,0,0.60);
+  --elevation-3:0 10px 20px rgba(0,0,0,0.70);
 
-  /* -- SFUMATURA NIGHT SOFT -- */
-  --bg-gradient:
-    radial-gradient(1000px 500px at 80% -10%, rgba(33, 67, 120, 0.18), rgba(33, 67, 120, 0) 60%),
-    linear-gradient(180deg, #0d1018 0%, #0f1115 100%);
+  /* -- COMMENTO -- Gradiente di sfondo (opzionale) */
+  --bg-gradient:linear-gradient(180deg,#0d1018 0%,#121427 60%,#0d1018 100%);
 
-  /* -- APPBAR (Navbar superiore) -- */
-  --appbar-bg: #1a1a1a;   /* sfondo AppBar in tema scuro */
-  --appbar-fg: #eeeeee;   /* testo/icona chiaro */
+  /* -- COMMENTO -- NAVBAR */
+  --nav-bg:rgba(13,16,18,0.92);    /* sfondo navbar scuro */
+  --nav-text:#e8e8e8;              /* testo/icona navbar */
+  --nav-pill-bg:#BA68C8;           /* sfondo pulsanti/chip navbar */
+  --nav-pill-text:#ffffff;         /* testo pulsanti/chip navbar */
 
-  /* -- FOOTER -- */
-  --footer-bg: #4A148C;   /* viola profondo */
-  --footer-fg: #ffffff;   /* testo chiaro */
-
-  /* -- ELEVATION -- */
-  --elevation-1: 0 2px 8px rgba(0,0,0,0.5);
-  --elevation-2: 0 4px 12px rgba(0,0,0,0.6);
-  --elevation-3: 0 10px 20px rgba(0,0,0,0.7);
+  /* -- COMMENTO -- FOOTER */
+  --footer-bg:#0f1115;             /* sfondo footer */
+  --footer-text:#b0b8c1;           /* testo footer */
+  --footer-border:#1f2230;         /* bordo superiore footer */
 }
 
-html.theme-dark,
-html.theme-dark body,
-html.theme-dark #root {
-  background: var(--bg-gradient, var(--bg)) !important;
-  color: var(--text);
+/* -- COMMENTO -- Applica superfici base del tema */
+html.theme-dark, html.theme-dark body, html.theme-dark #root{
+  background:var(--bg-gradient, var(--bg)) !important;
+  background-attachment:fixed;
+  color:var(--text);
 }
 
-html.theme-dark { color-scheme: dark; }
+/* -- COMMENTO -- Navbar / Header */
+.MuiAppBar-root,
+.navbar, .header{
+  background:var(--nav-bg) !important;
+  color:var(--nav-text) !important;
+  box-shadow:var(--elevation-1) !important;
+}
+
+/* -- COMMENTO -- Pulsanti/chip nella navbar */
+.navbar .btn-pill,
+.navbar .MuiButton-contained,
+.navbar .MuiChip-root,
+.header .btn-primary{
+  background:var(--nav-pill-bg) !important;
+  color:var(--nav-pill-text) !important;
+  border-color:transparent !important;
+}
+
+/* -- COMMENTO -- Footer (N.B. Ordina ha override locale) */
+.footer-custom{
+  background:var(--footer-bg);
+  color:var(--footer-text);
+  border-top:1px solid var(--footer-border);
+}
