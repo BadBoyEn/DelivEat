@@ -67,6 +67,11 @@ export function useLogInLogic() {
       const rd = await loginRider({ email, password });
       localStorage.setItem('token', rd.token);
       localStorage.setItem('role', 'rider');
+
+      if (rd.user) {
+        localStorage.setItem("rider", JSON.stringify(rd.user));
+      }
+      window.location.assign("/rider");
     } catch (err) {
       setPasswordError(true);
       setPasswordErrorMessage(err?.message || 'Credenziali non valide.');

@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage.jsx';
 import LogInPage from './pages/LogInPage.jsx';
 import SignUpPage from './pages/SignUpPage.jsx';
 import DashBoardPage from './pages/DashBoardPage.jsx';
+import RiderPage from './pages/RiderPage.jsx';
 import ChiSiamoPage from './pages/ChiSiamoPage.jsx';
 import ComeFunzionaPage from './pages/ComeFunzionaPage.jsx';
 import ContattiPage from './pages/ContattiPage.jsx';
@@ -22,6 +23,7 @@ export default function App() {
           <Route path="/login" element={<LogInPage />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/dashboard" element={<DashBoardPage />} />
+          <Route path="/rider" element={<RiderPage />} />
           <Route path="/home/chisiamo" element={<ChiSiamoPage />} />
           <Route path="/home/comefunziona" element={<ComeFunzionaPage />} />
           <Route path="/home/contatti" element={<ContattiPage />} />

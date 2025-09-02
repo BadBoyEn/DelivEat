@@ -88,7 +88,8 @@ export function useSignUpLogic() {
     try {
       await signupRider(payload);
       // -- APPENA SI REGISTRA IL RIDER, REINDIRIZZAMENTO AL LOGIN --
-      window.location.assign('/login');
+      localStorage.setItem("rider", JSON.stringify(payload));
+      navigate("/rider", { state: payload });
     } catch (err) {
       // -- ERRORI --
       const msg = err?.message || 'Errore registrazione';
