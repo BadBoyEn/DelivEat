@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { loginManager, loginRider } from '../../api/auth';
-
+import {socket} from '../GestionePersonale/Socket.jsx';
 export function useLogInLogic() {
   const [emailError, setEmailError] = useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = useState('');
@@ -49,6 +49,7 @@ export function useLogInLogic() {
       const mg = await loginManager({ email, password });
       localStorage.setItem('token', mg.token);
       localStorage.setItem('role', 'manager');
+      socket.emit('managerLoggedIn', {email});
       window.location.assign('/dashboard');
       return;
     } catch (err) {
@@ -70,6 +71,7 @@ export function useLogInLogic() {
 
       if (rd.user) {
         localStorage.setItem("rider", JSON.stringify(rd.user));
+        socket.emit("riderLoggedIn", {email, id: rd.user.id});
       }
       window.location.assign("/rider");
     } catch (err) {

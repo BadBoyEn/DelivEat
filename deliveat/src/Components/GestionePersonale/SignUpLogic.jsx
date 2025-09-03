@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { signupRider } from '../../api/auth';
-
+import {socket} from '../GestionePersonale/Socket.jsx';
 export function useSignUpLogic() {
   const [FirstNameError, setFirstNameError] = useState(false);
   const [FirstNameErrorMessage, setFirstNameErrorMessage] = useState('');
@@ -88,6 +88,10 @@ export function useSignUpLogic() {
     try {
       await signupRider(payload);
       // -- APPENA SI REGISTRA IL RIDER, REINDIRIZZAMENTO AL LOGIN --
+      socket.emit("riderRegistered", payload)
+      socket.once("riderConfirmation", (response) => {
+        console.log("Conferma dal server:", response);
+      });
       localStorage.setItem("rider", JSON.stringify(payload));
       navigate("/rider", { state: payload });
     } catch (err) {
