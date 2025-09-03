@@ -36,7 +36,7 @@ function OrangeStepIcon({ active, completed, icon }) {
         width: 24,
         height: 24,
         borderRadius: '50%',
-        backgroundColor: completed || active ? 'var(--accent)' : 'var(--border-weak)',
+        backgroundColor: completed || active ? '#fe7f0d' : '#e0e0e0',
         color: 'var(--on-accent)',
         display: 'flex',
         justifyContent: 'center',
