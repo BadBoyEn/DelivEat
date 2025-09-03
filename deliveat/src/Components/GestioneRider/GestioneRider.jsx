@@ -1,5 +1,6 @@
 import { useLocation } from "react-router-dom"
 import { useEffect, useState } from "react";
+import { Box, Typography, Button } from '@mui/material';
  
 import ColorModeSelect from '../../theme/ColorModeSelect';
 import './GestioneRider.css';
@@ -25,10 +26,29 @@ function AppNavbar() {
   );
 }
 
+function RiderCard() {
+  return (
+    <Box className="order-card">
+          <Typography className="order-title" variant="subtitle1">
+            Ordine-000
+          </Typography>
+      
+          <Box className="order-actions">
+            <Button variant="contained" color="secondary" size="small">
+              Prendi in carico
+            </Button>
+          </Box>
+        </Box>
+  )
+}
+
 export default function GestioneRider() {
   return (
     <div className="gr-root">
       <AppNavbar />
+      <div>
+        <RiderCard />
+      </div>
     </div>
-  );
+  )
 }

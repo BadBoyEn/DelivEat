@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { loginManager, loginRider } from '../../api/auth';
+import { useNavigate } from 'react-router-dom';
 import {socket} from '../GestionePersonale/Socket.jsx';
 export function useLogInLogic() {
   const [emailError, setEmailError] = useState(false);
@@ -37,12 +38,12 @@ export function useLogInLogic() {
   };
 
   const handleSubmit = async (event) => {
+    const navigate = useNavigate()
     event.preventDefault(); 
     if (!validateInputs()) return;
 
     const data = new FormData(event.currentTarget);
     const email = (data.get('email') || '').toString().trim();
-    const password = (data.get('password') || '').toString().trim();
 
     // 1) -- MANAGER --
     try {

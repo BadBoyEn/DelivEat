@@ -10,3 +10,25 @@
 }
 .gr-appbar__left, .gr-appbar__right { display: flex; align-items: center; gap: 8px; }
 .gr-logo { font-weight: 800; font-size: 1.1rem; }
+
+.order-card {                    
+  width: 300px;                   
+  margin-left: 40px;                       
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+  border-radius: 16px;
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: var(--elevation-2);
+}
+.order-title {
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+.order-actions {
+  display: flex;
+  justify-content: center;
+}

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { signupRider } from '../../api/auth';
 import {socket} from '../GestionePersonale/Socket.jsx';
+import { useNavigate } from 'react-router-dom';
 export function useSignUpLogic() {
   const [FirstNameError, setFirstNameError] = useState(false);
   const [FirstNameErrorMessage, setFirstNameErrorMessage] = useState('');
@@ -69,6 +70,7 @@ export function useSignUpLogic() {
   };
 
   const handleSubmit = async (event) => {
+    const navigate = useNavigate();
     event.preventDefault(); // evita reload
     if (!validateInputs()) return;
 
