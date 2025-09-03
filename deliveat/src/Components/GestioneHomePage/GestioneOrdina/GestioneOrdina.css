@@ -55,6 +55,7 @@
   border-radius: 16px !important;
   box-shadow: var(--ordina-shadow-1) !important;
   padding: 16px !important;
+  margin-top: 25px;
 }
 
 .title-ordina {
@@ -63,6 +64,7 @@
   color: rgb(51, 51, 51);
   font-weight: 700 !important;
   font-family: 'Times New Roman', Times, serif !important;
+  margin-top: 2px;
 }
 .desc { color: var(--ordina-text-muted); text-align: center; max-width: 920px; }
 
