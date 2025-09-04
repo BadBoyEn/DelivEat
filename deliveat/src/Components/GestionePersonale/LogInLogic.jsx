@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { loginManager, loginRider } from '../../api/auth';
 import { useNavigate } from 'react-router-dom';
-import {socket} from '../GestionePersonale/Socket.jsx';
+import { socket } from '../GestionePersonale/Socket.jsx';
+
 export function useLogInLogic() {
   const [emailError, setEmailError] = useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = useState('');
   const [passwordError, setPasswordError] = useState(false);
   const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
+  const navigate = useNavigate();
 
   const validateInputs = () => {
     const email = document.getElementById('email');
@@ -38,20 +40,20 @@ export function useLogInLogic() {
   };
 
   const handleSubmit = async (event) => {
-    const navigate = useNavigate()
     event.preventDefault(); 
     if (!validateInputs()) return;
 
     const data = new FormData(event.currentTarget);
     const email = (data.get('email') || '').toString().trim();
+    const password = (data.get('password') || '').toString().trim();
 
-    // 1) -- MANAGER --
+    // --- Manager login ---
     try {
       const mg = await loginManager({ email, password });
       localStorage.setItem('token', mg.token);
       localStorage.setItem('role', 'manager');
-      socket.emit('managerLoggedIn', {email});
-      window.location.assign('/dashboard');
+      socket.emit('managerLoggedIn', { email });
+      navigate('/dashboard');
       return;
     } catch (err) {
       if (err?.status === 401) {
@@ -64,17 +66,14 @@ export function useLogInLogic() {
       }
     }
 
-    // 2) -- RIDER [IN CASO NON FOSSE MANAGER] --
+    // --- Rider login ---
     try {
       const rd = await loginRider({ email, password });
       localStorage.setItem('token', rd.token);
       localStorage.setItem('role', 'rider');
 
-      if (rd.user) {
-        localStorage.setItem("rider", JSON.stringify(rd.user));
-        socket.emit("riderLoggedIn", {email, id: rd.user.id});
-      }
-      window.location.assign("/rider");
+      // Passo nome e cognome direttamente tramite navigate
+      navigate('/rider', { state: { nome: rd.rider.firstName, cognome: rd.rider.lastName, email: rd.rider.email } });
     } catch (err) {
       setPasswordError(true);
       setPasswordErrorMessage(err?.message || 'Credenziali non valide.');
