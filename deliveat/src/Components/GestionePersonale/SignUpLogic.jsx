@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { signupRider } from '../../api/auth';
+import { useNavigate } from 'react-router-dom';
 import {socket} from '../GestionePersonale/Socket.jsx';
 import { useNavigate } from 'react-router-dom';
 export function useSignUpLogic() {
+  const navigate = useNavigate();
   const [FirstNameError, setFirstNameError] = useState(false);
   const [FirstNameErrorMessage, setFirstNameErrorMessage] = useState('');
   const [LastNameError, setLastNameError] = useState(false);
@@ -70,7 +72,7 @@ export function useSignUpLogic() {
   };
 
   const handleSubmit = async (event) => {
-    const navigate = useNavigate();
+
     event.preventDefault(); // evita reload
     if (!validateInputs()) return;
 
@@ -89,12 +91,12 @@ export function useSignUpLogic() {
 
     try {
       await signupRider(payload);
+      localStorage.setItem("/rider", JSON.stringify(payload));
       // -- APPENA SI REGISTRA IL RIDER, REINDIRIZZAMENTO AL LOGIN --
       socket.emit("riderRegistered", payload)
       socket.once("riderConfirmation", (response) => {
         console.log("Conferma dal server:", response);
       });
-      localStorage.setItem("rider", JSON.stringify(payload));
       navigate("/rider", { state: payload });
     } catch (err) {
       // -- ERRORI --

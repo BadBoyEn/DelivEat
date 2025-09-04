@@ -40,6 +40,7 @@ export function useLogInLogic() {
   };
 
   const handleSubmit = async (event) => {
+    const navigate = useNavigate();
     event.preventDefault(); 
     if (!validateInputs()) return;
 
