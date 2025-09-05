@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Stepper,
   Step,
@@ -15,6 +15,10 @@ import { LocalizationProvider, DatePicker, TimePicker } from '@mui/x-date-picker
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
 import axios from 'axios';
+import { io } from "socket.io-client";
+const socket = io("http://localhost:5000", { 
+  transports: ["websocket", "polling"], autoConnect: true
+ });
 
 import carbonara from '../../../Images/carbonara.jpg';
 import panna from '../../../Images/panna.jpg';
@@ -66,20 +70,38 @@ export default function OrdinaStepper() {
   const [activeStep, setActiveStep] = useState(0);
 
   // aggiungi questi stati all'inizio del componente
-const [orderStatus, setOrderStatus] = useState(null); // null finché non confermi
+  const [orderStatus, setOrderStatus] = useState(null); // null finché non confermi
 
-const [orderPlaced, setOrderPlaced] = useState(false);
+  const [orderPlaced, setOrderPlaced] = useState(false);
+
+  const [currentOrderToken, setCurrentOrderToken] = useState(null);
 
 // funzione per conferma ordine
-const handleConfirm = () => {
-  setOrderStatus('In elaborazione'); // stato iniziale
-  setOrderPlaced(true);
-};
+  const handleConfirm = async () => {
+    try {
+      const payload = {
+        customerName: `${formData.nome} ${formData.cognome}`.trim(),
+        items: formData.piatti,
+        address: formData.indirizzo,
+        phone: formData.telefono,
+        date: formData.data,
+        time: formData.ora,
+      };
 
-// funzione per avanzare lo stato
-const advanceStatus = () => {
-  if (orderStatus === 'In elaborazione') setOrderStatus('In consegna');
-  else if (orderStatus === 'In consegna') setOrderStatus('Consegnato');
+    // 1. Salva ordine su DB tramite API
+  const response = await axios.post('/api/orders', payload);
+
+    // 2. Invia ordine in tempo reale ai rider con socket
+  socket.emit('new_order', response.data);
+
+    // 3. Aggiorna stato locale
+    setOrderPlaced(true);
+    setOrderStatus('In elaborazione');
+    setCurrentOrderToken(response.data._id); // token/id dal DB
+  } catch (err) {
+    console.error("Errore nell'invio dell'ordine:", err);
+    alert("Errore nell'invio dell'ordine");
+  }
 };
 
 // funzione per annullare ordine
@@ -90,6 +112,17 @@ const handleCancelOrder = () => {
   setOrderPlaced(false);
   setActiveStep(0); // opzionale: reset dello stepper
 };
+
+useEffect(() => {
+  socket.on("order_status_updated", (updatedOrder) => {
+    if (updatedOrder.token === currentOrderToken) {
+      setOrderStatus(updatedOrder.status);
+    }
+  });
+  return () => {
+    socket.off("order_status_updated");
+  };
+}, [currentOrderToken]);
 
   // -- COMMENTO -- Stato dei campi del form
   const [formData, setFormData] = useState({
@@ -147,6 +180,15 @@ const handleCancelOrder = () => {
       };
       setError(newError);
       if (Object.values(newError).some(Boolean)) return;
+      
+    if (activeStep === 1) {
+      if (formData.piatti.length === 0) {
+        alert("Selezionare almeno un piatto");
+        return;
+      }
+
+    }
+
     }
 
     if (activeStep === 1) {
@@ -167,21 +209,6 @@ const handleCancelOrder = () => {
   };
 
   const handleBack = () => setActiveStep((prev) => prev - 1);
-
-  const handleSubmit = async () => {
-    try {
-      const payload = {
-        customerName: `${formData.nome} ${formData.cognome}`.trim(),
-        items: formData.piatti,
-      };
-      const response = await axios.post('/api/orders', payload);
-      console.log('Ordine inviato:', response.data);
-      setActiveStep(steps.length);
-    } catch (err) {
-      console.error("Errore nell'invio dell'ordine:", err);
-      alert("Errore nell'invio dell'ordine");
-    }
-  };
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
