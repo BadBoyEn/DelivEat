@@ -40,7 +40,6 @@ export function useLogInLogic() {
   };
 
   const handleSubmit = async (event) => {
-    const navigate = useNavigate();
     event.preventDefault(); 
     if (!validateInputs()) return;
 
@@ -74,7 +73,7 @@ export function useLogInLogic() {
       localStorage.setItem('role', 'rider');
 
       // Passo nome e cognome direttamente tramite navigate
-      navigate('/rider', { state: { nome: rd.rider.firstName, cognome: rd.rider.lastName, email: rd.rider.email } });
+      navigate("/rider", { state: { nome: rd.rider.firstName, cognome: rd.rider.lastName, email: rd.rider.email } });
     } catch (err) {
       setPasswordError(true);
       setPasswordErrorMessage(err?.message || 'Credenziali non valide.');

@@ -1,5 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { socket } from "../GestionePersonale/Socket.jsx";
 import { Box, Typography, Button } from '@mui/material';
 
 import ColorModeSelect from '../../theme/ColorModeSelect';
@@ -60,11 +61,18 @@ export default function GestioneRider() {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    // Simulazione ordini
     setOrders([
       { id: "001", nome: "Mario", cognome: "Rossi", telefono: "3331234567", piatti: ["Carbonara", "Tiramisù"], data: "2025-08-30", ora: "20:30" },
       { id: "002", nome: "Giulia", cognome: "Verdi", telefono: "3339876543", piatti: ["Cotoletta", "Sorbetto"], data: "2025-08-30", ora: "21:00" }
     ]);
+    // Simulazione ordini
+    /*socket.on('assigned_order', (order) => {
+      setOrders((prev) => [...prev, order]);
+    });
+
+    return () => {
+      socket.off('assigned_order');
+    };*/
   }, []);
 
   return (

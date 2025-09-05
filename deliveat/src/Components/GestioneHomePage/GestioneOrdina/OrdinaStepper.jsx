@@ -65,6 +65,32 @@ export default function OrdinaStepper() {
 
   const [activeStep, setActiveStep] = useState(0);
 
+  // aggiungi questi stati all'inizio del componente
+const [orderStatus, setOrderStatus] = useState(null); // null finché non confermi
+
+const [orderPlaced, setOrderPlaced] = useState(false);
+
+// funzione per conferma ordine
+const handleConfirm = () => {
+  setOrderStatus('In elaborazione'); // stato iniziale
+  setOrderPlaced(true);
+};
+
+// funzione per avanzare lo stato
+const advanceStatus = () => {
+  if (orderStatus === 'In elaborazione') setOrderStatus('In consegna');
+  else if (orderStatus === 'In consegna') setOrderStatus('Consegnato');
+};
+
+// funzione per annullare ordine
+const handleCancelOrder = () => {
+  if (orderStatus === 'Consegnato')
+    return
+  setOrderStatus(null);
+  setOrderPlaced(false);
+  setActiveStep(0); // opzionale: reset dello stepper
+};
+
   // -- COMMENTO -- Stato dei campi del form
   const [formData, setFormData] = useState({
     nome: '',
@@ -400,20 +426,39 @@ export default function OrdinaStepper() {
         </Box>
 
         {/* Bottoni di navigazione */}
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 4 }}>
-          <Button variant="outlined" disabled={activeStep === 0} onClick={handleBack}>
-            Indietro
-          </Button>
-          {activeStep < steps.length - 1 ? (
-            <Button variant="contained" onClick={handleNext} sx={{ backgroundColor: 'var(--accent)', color: 'var(--on-accent)' }}>
-              Avanti
-            </Button>
-          ) : (
-            <Button variant="contained" color="success" onClick={handleSubmit}>
-              Conferma
-            </Button>
-          )}
-        </Box>
+        <Box sx={{ display: 'flex', mt: 4, width: '100%' }}>
+  {!orderPlaced ? (
+    // layout normale dei bottoni di navigazione
+    <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+      <Button variant="outlined" disabled={activeStep === 0} onClick={handleBack}>
+        Indietro
+      </Button>
+      {activeStep < steps.length - 1 ? (
+        <Button
+          variant="contained"
+          onClick={handleNext}
+          sx={{ backgroundColor: 'var(--accent)', color: 'var(--on-accent)' }}
+        >
+          Avanti
+        </Button>
+      ) : (
+        <Button variant="contained" onClick={handleConfirm} color="success">
+          Conferma
+        </Button>
+      )}
+    </Box>
+  ) : (
+    // layout centrato per lo stato e annulla ordine
+    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, width: '100%' }}>
+      <Typography variant="h6">Stato ordine: {orderStatus}</Typography>
+      {orderStatus !== 'Consegnato' && (
+        <Button variant="outlined" color="error" onClick={handleCancelOrder}>
+          Annulla Ordine
+        </Button>
+      )}
+    </Box>
+  )}
+   </Box>
       </Box>
     </LocalizationProvider>
   );

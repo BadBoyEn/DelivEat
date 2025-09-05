@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { signupRider } from '../../api/auth';
 import { useNavigate } from 'react-router-dom';
 import {socket} from '../GestionePersonale/Socket.jsx';
-import { useNavigate } from 'react-router-dom';
 export function useSignUpLogic() {
   const navigate = useNavigate();
   const [FirstNameError, setFirstNameError] = useState(false);
