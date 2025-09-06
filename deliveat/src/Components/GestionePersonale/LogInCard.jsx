@@ -18,15 +18,22 @@ import ColorModeSelect from '../../theme/ColorModeSelect';
 import SitemarkIcon from '../GestioneIcons/SistemarkIcon.jsx';
 
 export default function LogIn(props) {
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.history.replaceState(null, '', '/login');
+    }
+  }, []);
+
   const {
     emailError, emailErrorMessage,
     passwordError, passwordErrorMessage,
-    handleSubmit
+    validateInputs, handleSubmit
   } = useLogInLogic();
 
   return (
-    <AppTheme {...props}>
+    <AppTheme>
       <CssBaseline enableColorScheme />
+
       <LogInContainer direction="column" justifyContent="center" alignItems="center">
         <StyledCard variant="outlined">
 
@@ -46,7 +53,7 @@ export default function LogIn(props) {
           </Typography>
 
           {/* -- Form: campi a colonna -- */}
-          <Box component="form" onSubmit={handleSubmit}>
+          <Box component="form" method="post" noValidate onSubmit={handleSubmit}>
             <div className="form-grid">
               <div className="field full">
                 <FormControl fullWidth>
@@ -60,6 +67,7 @@ export default function LogIn(props) {
                     error={emailError}
                     helperText={emailErrorMessage}
                     fullWidth
+                    autoComplete="email"
                   />
                 </FormControl>
               </div>
@@ -77,11 +85,13 @@ export default function LogIn(props) {
                     error={passwordError}
                     helperText={passwordErrorMessage}
                     fullWidth
+                    autoComplete="current-password"
                   />
                 </FormControl>
               </div>
 
-              <div className="field full auth-actions">
+              {/* -- AZIONI -- */}
+              <div className="actions">
                 <Button type="submit" variant="contained" className="btn-full">
                   ACCEDI
                 </Button>

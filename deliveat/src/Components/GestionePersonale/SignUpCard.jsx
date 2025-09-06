@@ -1,3 +1,4 @@
+import * as React from 'react';
 import {
   Box,
   Button,
@@ -16,7 +17,13 @@ import AppTheme from '../../theme/AppTheme';
 import ColorModeSelect from '../../theme/ColorModeSelect';
 import SitemarkIcon from '../GestioneIcons/SistemarkIcon.jsx';
 
-export default function SignUp(props) {
+export default function SignUp() {
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.history.replaceState(null, '', '/signup');
+    }
+  }, []);
+
   const {
     FirstNameError, FirstNameErrorMessage,
     LastNameError,  LastNameErrorMessage,
@@ -26,135 +33,188 @@ export default function SignUp(props) {
     AddressError,   AddressErrorMessage,
     EmailError,     EmailErrorMessage,
     PasswordError,  PasswordErrorMessage,
-    handleSubmit,
+    handleSubmit
   } = useSignUpLogic();
 
   return (
-    <AppTheme {...props}>
+    <AppTheme>
       <CssBaseline enableColorScheme />
+
       <SignUpContainer direction="column" justifyContent="center" alignItems="center">
         <StyledCard variant="outlined">
-          {/* Luna in alto a destra */}
+          {/* -- COMMENTO -- Selettore tema */}
           <Box className="color-switch">
             <ColorModeSelect />
           </Box>
 
-          {/* Logo centrato */}
+          {/* -- COMMENTO -- Logo */}
           <Box className="logo-container">
             <SitemarkIcon className="logo-img" />
           </Box>
 
-          {/* Titolo */}
+          {/* -- COMMENTO -- Titolo */}
           <Typography component="h2" variant="h4" className="auth-title">
-            Registrazione Staff
+            Crea il tuo account Rider
           </Typography>
 
-          {/* Form responsivo: 1 → 2 colonne */}
-          <Box component="form" onSubmit={handleSubmit}>
+          {/* -- COMMENTO -- FORM */}
+          <Box component="form" method="post" noValidate onSubmit={handleSubmit}>
             <div className="form-grid">
-
-              {/* Nome / Cognome */}
+              {/* -- COMMENTO -- Nome */}
               <div className="field">
                 <FormControl fullWidth>
-                  <FormLabel htmlFor="firstname">Nome</FormLabel>
+                  <FormLabel htmlFor="firstName">Nome</FormLabel>
                   <TextField
-                    required id="firstname" name="firstname" placeholder="Mario"
-                    variant="outlined" error={FirstNameError} helperText={FirstNameErrorMessage}
+                    required
+                    id="firstName"
+                    name="firstName"
+                    placeholder="Mario"
+                    variant="outlined"
+                    error={FirstNameError}
+                    helperText={FirstNameErrorMessage}
+                    fullWidth
+                    autoComplete="given-name"
                   />
                 </FormControl>
               </div>
 
+              {/* -- COMMENTO -- Cognome */}
               <div className="field">
                 <FormControl fullWidth>
-                  <FormLabel htmlFor="lastname">Cognome</FormLabel>
+                  <FormLabel htmlFor="lastName">Cognome</FormLabel>
                   <TextField
-                    required id="lastname" name="lastname" placeholder="Rossi"
-                    variant="outlined" error={LastNameError} helperText={LastNameErrorMessage}
+                    required
+                    id="lastName"
+                    name="lastName"
+                    placeholder="Rossi"
+                    variant="outlined"
+                    error={LastNameError}
+                    helperText={LastNameErrorMessage}
+                    fullWidth
+                    autoComplete="family-name"
                   />
                 </FormControl>
               </div>
 
-              {/* Telefono / Data di nascita */}
+              {/* -- COMMENTO -- Telefono */}
               <div className="field">
                 <FormControl fullWidth>
-                  <FormLabel htmlFor="phone">Numero di telefono</FormLabel>
+                  <FormLabel htmlFor="phone">Telefono</FormLabel>
                   <TextField
-                    required id="phone" name="phone" placeholder="+39 123 456 7890"
-                    variant="outlined" error={PhoneError} helperText={PhoneErrorMessage}
+                    required
+                    id="phone"
+                    name="phone"
+                    placeholder="3331234567"
+                    variant="outlined"
+                    error={PhoneError}
+                    helperText={PhoneErrorMessage}
+                    fullWidth
+                    autoComplete="tel"
                   />
                 </FormControl>
               </div>
 
+              {/* -- COMMENTO -- Data di nascita */}
               <div className="field">
                 <FormControl fullWidth>
                   <FormLabel htmlFor="birthdate">Data di nascita</FormLabel>
                   <TextField
-                    required id="birthdate" name="birthdate" type="date"
-                    variant="outlined" InputLabelProps={{ shrink: true }}
-                    error={BirthdateError} helperText={BirthdateErrorMessage}
+                    required
+                    id="birthdate"
+                    name="birthdate"
+                    type="date"
+                    variant="outlined"
+                    error={BirthdateError}
+                    helperText={BirthdateErrorMessage}
+                    fullWidth
+                    InputLabelProps={{ shrink: true }}
                   />
                 </FormControl>
               </div>
 
-              {/* Città / Indirizzo */}
+              {/* -- COMMENTO -- Città */}
               <div className="field">
                 <FormControl fullWidth>
                   <FormLabel htmlFor="city">Città</FormLabel>
                   <TextField
-                    required id="city" name="city" placeholder="Roma"
-                    variant="outlined" error={CityError} helperText={CityErrorMessage}
+                    required
+                    id="city"
+                    name="city"
+                    placeholder="Bari"
+                    variant="outlined"
+                    error={CityError}
+                    helperText={CityErrorMessage}
+                    fullWidth
+                    autoComplete="address-level2"
                   />
                 </FormControl>
               </div>
 
+              {/* -- COMMENTO -- Indirizzo */}
               <div className="field">
                 <FormControl fullWidth>
                   <FormLabel htmlFor="address">Indirizzo</FormLabel>
                   <TextField
-                    required id="address" name="address" placeholder="Via Roma 10"
-                    variant="outlined" error={AddressError} helperText={AddressErrorMessage}
+                    required
+                    id="address"
+                    name="address"
+                    placeholder="Via Roma 1"
+                    variant="outlined"
+                    error={AddressError}
+                    helperText={AddressErrorMessage}
+                    fullWidth
+                    autoComplete="street-address"
                   />
                 </FormControl>
               </div>
 
-              {/* Email (full) */}
+              {/* -- COMMENTO -- Email */}
               <div className="field full">
                 <FormControl fullWidth>
                   <FormLabel htmlFor="email">Email</FormLabel>
                   <TextField
-                    required id="email" name="email" placeholder="tua@email.com"
-                    variant="outlined" error={EmailError} helperText={EmailErrorMessage}
+                    required
+                    id="email"
+                    name="email"
+                    placeholder="mario.rossi@email.com"
+                    variant="outlined"
+                    error={EmailError}
+                    helperText={EmailErrorMessage}
+                    fullWidth
+                    autoComplete="email"
                   />
                 </FormControl>
               </div>
 
-              {/* Password (full) */}
+              {/* -- COMMENTO -- Password */}
               <div className="field full">
                 <FormControl fullWidth>
                   <FormLabel htmlFor="password">Password</FormLabel>
                   <TextField
-                    required id="password" name="password" type="password" placeholder="••••••••"
-                    variant="outlined" error={PasswordError} helperText={PasswordErrorMessage}
+                    required
+                    id="password"
+                    name="password"
+                    type="password"
+                    placeholder="••••••••"
+                    variant="outlined"
+                    error={PasswordError}
+                    helperText={PasswordErrorMessage}
+                    fullWidth
+                    autoComplete="new-password"
                   />
                 </FormControl>
               </div>
 
-              {/* Bottone (full) */}
-              <div className="field full auth-actions">
+              {/* -- COMMENTO -- Azioni */}
+              <div className="actions">
                 <Button type="submit" variant="contained" className="btn-full">
-                  REGISTRATI
+                  CREA ACCOUNT
                 </Button>
               </div>
-
             </div>
           </Box>
 
-          {/*  ------ o ------ --- */}
-          <div className="auth-sep" role="separator" aria-label="oppure">
-            <span>o</span>
-          </div>
-
-          {/* Footer */}
+          {/* -- COMMENTO -- Footer */}
           <Typography sx={{ textAlign: 'center' }} className="auth-footer">
             Hai già un account?{' '}
             <Link component={RouterLink} to="/login" variant="body2" sx={{ alignSelf: 'center' }}>
