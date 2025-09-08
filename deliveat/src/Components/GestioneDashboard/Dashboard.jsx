@@ -1,9 +1,11 @@
 import React from 'react';
 import './Dashboard.css';
 import ColorModeSelect from '../../theme/ColorModeSelect';
+import { useDashboard } from './SettingDashboard';
+import SessionsChart from './SessionsChart';
+import RecentOrdersTable from './RecentOrdersTable';
 
 /* -- HEADER-BAR -- */
-
 function AppNavbar() {
   return (
     <header className="db-appbar">
@@ -13,133 +15,80 @@ function AppNavbar() {
   );
 }
 
-/* -- MENU -- */
-function MenuList() {
-  return (
-    <>
-      <div className="db-nav__section">Menu</div>
-      <ul className="db-nav__list">
-        <li className="db-nav__item db-nav__item--active">Overview</li>
-        <li className="db-nav__item">HomePage</li>
-        <li className="db-nav__item">Clienti</li>
-        <li className="db-nav__item">Rider</li>
-        <li className="db-nav__item">Report</li>
-        <li className="db-nav__item">Impostazioni</li>
-      </ul>
-    </>
-  );
-}
-
-/* -- VERSIONE TELEFONO -- */
-function SideMenuInline() {
-  return (
-    <div className="db-menu-box">
-      <MenuList />
-    </div>
-  );
-}
-
-/* -- UTILS CARDS -- */
+/* -- CARD METRICA -- */
 function StatCard({ title, value, hint }) {
   return (
-    <div className="db-card">
-      <div className="db-card__title">{title}</div>
-      <div className="db-card__value">{value}</div>
-      {hint && <div className="db-card__hint">{hint}</div>}
-    </div>
-  );
-}
-function HighlightedCard() {
-  return (
-    <div className="db-card db-card--highlight">
-      <div className="db-card__title">Esplora i tuoi dati</div>
-      <div className="db-card__hint">Scopri insight su performance e visite.</div>
+    <div className="db-panel db-col-3">
+      <div className="db-panel__title">{title}</div>
+      <div className="db-metric">{value}</div>
+      {hint && <div className="db-hint">{hint}</div>}
     </div>
   );
 }
 
-/* -- GRAFICI -- */
-function SessionsChart() {
+/* -- CARD TESTO (senza evidenziato) -- */
+function TextCard({ title, children }) {
   return (
-    <div className="db-panel">
-      <div className="db-card__title">Sessioni</div>
-      <div className="db-card__hint">Inserisci qui il tuo grafico.</div>
-    </div>
-  );
-}
-function PageViewsBarChart() { /* DA CAPIRE SE HA SENSO LASCIARLA */
-  return (
-    <div className="db-panel">
-      <div className="db-card__title">Page Views</div>
-      <div className="db-card__hint">Inserisci qui il tuo bar chart.</div>
+    <div className="db-panel db-col-3">
+      <div className="db-panel__title">{title}</div>
+      <div style={{ opacity: .9 }}>{children}</div>
     </div>
   );
 }
 
-/* -- TABELLA -- */
-/* ERA DI PROVA QUESTA */
-function CustomizedDataGrid() {
-  const rows = Array.from({ length: 7 }).map((_, i) => ({
-    id: i + 1,
-    order: `ORD-${1000 + i}`,
-    customer: 'Mario Rossi',
-    status: 'Consegnato',
-  }));
-
+/* -- MENU LATERALE -- */
+function MenuPanel() {
+  const voci = ['Overview', 'HomePage', 'Clienti', 'Rider', 'Report', 'Impostazioni'];
   return (
-    <div className="db-table">
-      <table className="db-table__table">
-        <thead className="db-table__thead">
-          <tr>
-            <th className="db-table__th">#</th>
-            <th className="db-table__th">Ordine</th>
-            <th className="db-table__th">Cliente</th>
-            <th className="db-table__th">Stato</th>
-          </tr>
-        </thead>
-        <tbody className="db-table__tbody">
-          {rows.map((r) => (
-            <tr key={r.id}>
-              <td className="db-table__td">{r.id}</td>
-              <td className="db-table__td">{r.order}</td>
-              <td className="db-table__td">{r.customer}</td>
-              <td className="db-table__td"><span className="status--ok">{r.status}</span></td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className="db-panel db-col-3">
+      <div className="db-panel__title">Menu</div>
+      <ul className="db-menu">
+        {voci.map(v => <li key={v}>{v}</li>)}
+      </ul>
     </div>
   );
 }
 
 /* -- GRIGLIA PRINCIPALE -- */
 function MainGrid() {
+  const { loading, summary, chartData, recent, ordersDeltaPct } = useDashboard(30);
+
+  const ordini30 = summary?.ordersLastNDays ?? 0;
+  const riderAttivi = summary?.ridersTotal ?? 0;
+  const riderPct = summary?.ridersDeltaPct ?? 0;
+
   return (
-    <div className="db-grid">
-      {/* Cards */}
+    <>
+      {/* Statistiche in alto */}
       <section className="db-grid__row">
-        <StatCard title="Ordini (30 gg)" value="1.240" hint="+12% vs prec." />
-        <StatCard title="Clienti attivi" value="431" hint="+5% vs prec." />
+        <StatCard title="Ordini (30 gg)" value={ordini30.toLocaleString()} hint={`${ordersDeltaPct >= 0 ? '+' : ''}${ordersDeltaPct}% vs prec.`} />
+        <StatCard title="Rider attivi" value={riderAttivi.toLocaleString()} hint={`${riderPct >= 0 ? '+' : ''}${riderPct}% vs prec.`} />
         <StatCard title="Tempo medio consegna" value="27 min" hint="-2 min vs prec." />
-        <HighlightedCard />
+        <TextCard title="Esplora i tuoi dati">Scopri insight su performance e visite.</TextCard>
       </section>
 
       {/* Grafici */}
       <section className="db-grid__row">
-        <div className="db-panel db-col-6"><SessionsChart /></div>
-        <div className="db-panel db-col-6"><PageViewsBarChart /></div>
+        <div className="db-panel db-col-6">
+          <div className="db-panel__title">Sessioni</div>
+          <SessionsChart data={chartData} />
+          <div className="db-legend">
+            <span className="legend current"></span> arancio: ordini 30 giorni &nbsp;&nbsp;
+            <span className="legend previous"></span> verde: ordini mese precedente
+          </div>
+        </div>
+        <div className="db-panel db-col-6">
+          <div className="db-panel__title">Page Views</div>
+          <div style={{opacity:.8}}>Inserisci qui il tuo bar chart.</div>
+        </div>
       </section>
 
-      {/* Dettagli: tabella + menu */}
+      {/* Dettagli */}
       <section className="db-grid__row">
-        <div className="db-panel db-col-9">
-          <CustomizedDataGrid />
-        </div>
-        <div className="db-col-3">
-          <SideMenuInline />
-        </div>
+        <RecentOrdersTable orders={recent} />
+        <MenuPanel />
       </section>
-    </div>
+    </>
   );
 }
 

@@ -84,6 +84,15 @@
 .status--ok  { color: var(--positive); }
 .status--bad { color: var(--negative); }
 
+/* -- COMMENTO -- Legenda grafico */
+
+.db-legend{ display:flex; align-items:center; gap:16px; padding: 4px 0 8px; }
+.db-legend .legend{
+  width:14px; height:14px; display:inline-block; border-radius:3px;
+}
+.db-legend .legend.current{ background: var(--chart-current); }
+.db-legend .legend.previous{ background: var(--chart-previous); }
+
 /* -- RESPONSIVE -- */
 @media (max-width: 1024px) {
   .db-col-9, .db-col-3, .db-col-6 { grid-column: span 12; }
