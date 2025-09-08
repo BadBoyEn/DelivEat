@@ -1,19 +1,19 @@
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { socket } from "../GestionePersonale/Socket.jsx";
-import { Box, Typography, Button } from "@mui/material";
-
+import { Box, Typography } from "@mui/material";
 import ColorModeSelect from "../../theme/ColorModeSelect";
 import "./GestioneRider.css";
 
-// Navbar del rider
+import { socket } from "../GestionePersonale/Socket.jsx";
+import api from "../../api/client";
+import RiderCard from "./RiderCard.jsx";
+
+// -- COMMENTO -- Navbar minimale
 function AppNavbar({ rider }) {
   return (
     <header className="gr-appbar">
       <div className="gr-appbar__left">
-        <div className="gr-logo">
-          {`${rider.nome} ${rider.cognome}`}
-        </div>
+        <div className="gr-logo">{`${rider.nome} ${rider.cognome}`}</div>
       </div>
       <div className="gr-appbar__right">
         <ColorModeSelect />
@@ -22,117 +22,106 @@ function AppNavbar({ rider }) {
   );
 }
 
-// Card singolo ordine
-function RiderCard({ order }) {
-  return (
-    <Box className="order-card">
-      <Typography className="order-title" variant="subtitle1">
-        Ordine - {order.token || "N/A"}
-      </Typography>
-      <Typography>
-        <strong>Cliente:</strong> {order.nome} {order.cognome}
-      </Typography>
-      <Typography>
-        <strong>Telefono:</strong> {order.telefono}
-      </Typography>
-      <Typography>
-        <strong>Piatti:</strong> {order.piatti?.join(", ")}
-      </Typography>
-      <Typography>
-        <strong>Data:</strong> {order.data}
-      </Typography>
-      <Typography>
-        <strong>Ora:</strong> {order.ora}
-      </Typography>
-      <Box className="order-actions" sx={{ mt: 1 }}>
-        <Button variant="contained" color="secondary" size="small">
-          Prendi in carico
-        </Button>
-      </Box>
-    </Box>
-  );
-}
-
-// Componente principale
 export default function GestioneRider() {
   const location = useLocation();
-  const [rider, setRider] = useState({ nome: "", cognome: "", email: "" });
+  const [rider, setRider] = useState({ nome: "", cognome: "", email: "", id: "" });
   const [orders, setOrders] = useState([]);
 
-  // Recupera rider da location o localStorage
+  // -- COMMENTO -- Normalizza sorgente rider: state.rider | state | localStorage
   useEffect(() => {
-    if (location.state) {
-      setRider(location.state);
-      localStorage.setItem("Rider", JSON.stringify(location.state));
-    } else {
-      const savedRider = localStorage.getItem("Rider");
-      if (savedRider) setRider(JSON.parse(savedRider));
+    let src = location?.state || null;
+    if (src && src.rider) src = src.rider;
+
+    if (!src) {
+      try { src = JSON.parse(localStorage.getItem("Rider") || "null"); }
+      catch { src = null; }
     }
-  }, [location.state]);
 
-  // Fetch ordini iniziali dal backend (autenticati con token)
+    if (src) {
+      const norm = {
+        nome: src.nome ?? src.firstName ?? "",
+        cognome: src.cognome ?? src.lastName ?? "",
+        email: src.email ?? "",
+        id: src.id ?? src._id ?? "",
+      };
+      setRider(norm);
+      localStorage.setItem("Rider", JSON.stringify(norm));
+    }
+  }, [location?.state]);
+
+  // -- COMMENTO -- Caricamento iniziale ordini 
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await api.get("/orders"); // in_preparazione
+        const mapped = (data || []).map((o) => ({
+          token: o._id,
+          customerName: o.customerName,
+          items: o.items,
+          status: o.status || "in_preparazione",
+        }));
+        setOrders(mapped);
+      } catch (e) {
+        console.error("❌ GET /orders fallita:", e);
+      }
+    })();
+  }, []);
+
+  // -- COMMENTO -- Socket: registra rider & listeners
   useEffect(() => {
     if (!rider.nome) return;
 
-    const token = localStorage.getItem("token"); // JWT salvato al login
-    if (!token) return;
-
-    fetch("http://localhost:5000/api/orders", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((res) => {
-        if (!res.ok) throw new Error("Errore autenticazione");
-        return res.json();
-      })
-      .then((data) => {
-        setOrders(data.orders || []);
-      })
-      .catch((err) => console.error("Fetch ordini fallito:", err));
-  }, [rider]);
-
-  // Gestione socket
-  useEffect(() => {
-    if (!rider.nome) return;
-
-    const token = localStorage.getItem("token");
-    socket.auth = { name: rider.nome, lastName: rider.cognome, token };
+    // -- COMMENTO -- Handshake auth per il middleware del server
+    socket.auth = { role: "rider", name: rider.nome, lastname: rider.cognome };
     socket.connect();
 
-    socket.emit("riderConnected", { nome: rider.nome, cognome: rider.cognome });
+    const onAssigned = (payload) => {
+      const order = {
+        token: payload.token || payload._id,
+        customerName: payload.customerName,
+        items: payload.items || [],
+        status: payload.status || "in_preparazione",
+      };
+      setOrders((prev) => {
+        if (prev.some((o) => o.token === order.token)) return prev;
+        return [order, ...prev];
+      });
+    };
 
-    socket.on("assigned_order", (order) => {
-      setOrders((prev) => [...prev, order]);
-    });
+    const onStatusUpdated = ({ token, status }) => {
+      setOrders((prev) => prev.map((o) => (o.token === token ? { ...o, status } : o)));
+    };
 
-    socket.on("order_status_updated", (updatedOrder) => {
-      setOrders((prev) =>
-        prev.map((o) => (o.token === updatedOrder.token ? updatedOrder : o))
-      );
-    });
+    socket.on("assigned_order", onAssigned);
+    socket.on("order_status_updated", onStatusUpdated);
 
     return () => {
-      socket.off("assigned_order");
-      socket.off("order_status_updated");
+      socket.off("assigned_order", onAssigned);
+      socket.off("order_status_updated", onStatusUpdated);
     };
   }, [rider]);
 
+  // -- COMMENTO -- Azione: prendi in carico
+  const handleTakeCharge = (token) => {
+    socket.emit("update_order_status", { token, status: "preso_in_carico" });
+    setOrders((prev) => prev.map((o) => (o.token === token ? { ...o, status: "preso_in_carico" } : o)));
+  };
+
   return (
-    <div className="gr-root">
+    <div className="gr-page">
       <AppNavbar rider={rider} />
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "16px",
-          padding: "16px",
-        }}
-      >
-        {orders.map((order) => (
-          <RiderCard key={order.token} order={order} />
-        ))}
-      </div>
+
+      <Box sx={{ p: 2 }}>
+        {orders.length === 0 ? (
+          <Typography sx={{ opacity: 0.7, mt: 4 }}>Nessun ordine disponibile</Typography>
+        ) : (
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "16px", padding: "16px" }}>
+            {orders.map((order) => (
+              <RiderCard key={order.token} order={order} onTakeCharge={handleTakeCharge} />
+            ))}
+          </div>
+        )}
+      </Box>
     </div>
   );
 }
