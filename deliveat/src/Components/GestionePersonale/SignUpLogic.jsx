@@ -47,7 +47,8 @@ export function useSignUpLogic() {
 
     if (firstName.length < 2) { setFirstNameError(true); setFirstNameErrorMessage('Inserisci un nome valido.'); ok = false; }
     if (lastName.length  < 2) { setLastNameError(true);  setLastNameErrorMessage('Inserisci un cognome valido.'); ok = false; }
-    if (!/^\d{7,15}$/.test(phone)) { setPhoneError(true); setPhoneErrorMessage('Inserisci un telefono valido (solo cifre).'); ok = false; }
+    const cleanedPhone = String(phone).trim();
+    if (!/^\d{7,15}$/.test(cleanedPhone)) { setPhoneError(true); setPhoneErrorMessage('Inserisci un telefono valido (solo cifre).'); ok = false; }
     if (!birthdate) { setBirthdateError(true); setBirthdateErrorMessage('Inserisci la data di nascita.'); ok = false; }
     if (city.length < 2) { setCityError(true); setCityErrorMessage('Inserisci una città valida.'); ok = false; }
     if (address.length < 3) { setAddressError(true); setAddressErrorMessage('Inserisci un indirizzo valido.'); ok = false; }
