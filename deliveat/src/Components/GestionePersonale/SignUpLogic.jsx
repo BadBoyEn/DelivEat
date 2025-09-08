@@ -27,6 +27,10 @@ export function useSignUpLogic() {
     const firstName = document.getElementById('firstName')?.value.trim() || '';
     const lastName  = document.getElementById('lastName')?.value.trim() || '';
     const phone     = document.getElementById('phone')?.value.trim() || '';
+    const isValidPhone = (input) => {
+        const cleaned = input.replace(/[^\d+]/g, ''); // rimuove tutto tranne cifre e "+"
+        return /^\+?\d{7,15}$/.test(cleaned);
+    };
     const birthdate = document.getElementById('birthdate')?.value.trim() || '';
     const city      = document.getElementById('city')?.value.trim() || '';
     const address   = document.getElementById('address')?.value.trim() || '';
@@ -47,8 +51,7 @@ export function useSignUpLogic() {
 
     if (firstName.length < 2) { setFirstNameError(true); setFirstNameErrorMessage('Inserisci un nome valido.'); ok = false; }
     if (lastName.length  < 2) { setLastNameError(true);  setLastNameErrorMessage('Inserisci un cognome valido.'); ok = false; }
-    const cleanedPhone = String(phone).trim();
-    if (!/^\d{7,15}$/.test(cleanedPhone)) { setPhoneError(true); setPhoneErrorMessage('Inserisci un telefono valido (solo cifre).'); ok = false; }
+    if (!isValidPhone(phone)) { setPhoneError(true); setPhoneErrorMessage('Inserisci un telefono valido (solo cifre, opzionale +).'); ok = false; }
     if (!birthdate) { setBirthdateError(true); setBirthdateErrorMessage('Inserisci la data di nascita.'); ok = false; }
     if (city.length < 2) { setCityError(true); setCityErrorMessage('Inserisci una città valida.'); ok = false; }
     if (address.length < 3) { setAddressError(true); setAddressErrorMessage('Inserisci un indirizzo valido.'); ok = false; }
