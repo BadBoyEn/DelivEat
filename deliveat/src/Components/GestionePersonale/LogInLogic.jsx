@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { loginManager, loginRider } from '../../api/auth';
+import { smartLogin } from '../../api/auth'; 
 import { useNavigate } from 'react-router-dom';
-import { socket } from '../GestionePersonale/Socket.jsx';
 
 export function useLogInLogic() {
   const [emailError, setEmailError] = useState(false);
@@ -10,77 +9,97 @@ export function useLogInLogic() {
   const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
   const navigate = useNavigate();
 
+  // -- COMMENTO -- Validazioni minime (DOM id: email, password)
   const validateInputs = () => {
-    const email = document.getElementById('email');
-    const password = document.getElementById('password');
-    let isValid = true;
+    const emailEl = document.getElementById('email');
+    const passEl = document.getElementById('password');
 
-    // -- COMMENTO -- Email
-    const e = (email?.value || '').trim();
-    if (!/^\S+@\S+\.\S+$/.test(e)) {
+    const email = (emailEl?.value || '').trim();
+    const password = passEl?.value || '';
+
+    let ok = true;
+
+    if (!email) {
       setEmailError(true);
-      setEmailErrorMessage('Inserisci un’email valida.');
-      isValid = false;
+      setEmailErrorMessage('Inserisci la email');
+      ok = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setEmailError(true);
+      setEmailErrorMessage('Email non valida');
+      ok = false;
     } else {
       setEmailError(false);
       setEmailErrorMessage('');
     }
 
-    // -- COMMENTO -- Password base
-    const p = (password?.value || '').trim();
-    if (p.length < 6) {
+    if (!password) {
       setPasswordError(true);
-      setPasswordErrorMessage('La password deve avere almeno 6 caratteri.');
-      isValid = false;
+      setPasswordErrorMessage('Inserisci la password');
+      ok = false;
+    } else if (password.length < 6) {
+      setPasswordError(true);
+      setPasswordErrorMessage('La password deve avere almeno 6 caratteri');
+      ok = false;
     } else {
       setPasswordError(false);
       setPasswordErrorMessage('');
     }
 
-    return isValid;
+    return ok;
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    if (typeof window !== 'undefined') {
-      window.history.replaceState(null, '', '/login');
-    }
+  // -- COMMENTO -- Submit: usa smartLogin
+  const handleSubmit = async (e) => {
+    e?.preventDefault?.();
+
+    setEmailError(false); setEmailErrorMessage('');
+    setPasswordError(false); setPasswordErrorMessage('');
+
     if (!validateInputs()) return;
 
-    const data = new FormData(event.currentTarget);
-    const email = (data.get('email') || '').toString().trim();
-    const password = (data.get('password') || '').toString().trim();
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
 
-    // --- Manager login ---
     try {
-      const mg = await loginManager({ email, password });
-      localStorage.setItem('token', mg.token);
-      localStorage.setItem('role', 'manager');
-      socket.emit('managerLoggedIn', { email });
-      navigate('/dashboard', { replace: true });
-      return;
-    } catch (err) {
-      if (err?.status === 401) {
-        setPasswordError(true);
-        setPasswordErrorMessage('Credenziali manager non valide. Provo come rider…');
-      } else {
-        setPasswordError(true);
-        setPasswordErrorMessage(err?.message || 'Errore');
+      const res = await smartLogin({ email, password });
+
+      if (res.role === 'manager') {
+        // -- COMMENTO -- MANAGER OK
+        navigate('/dashboard', { replace: true });
         return;
       }
-    }
 
-    // --- Rider login ---
-    try {
-      const rd = await loginRider({ email, password });
-      localStorage.setItem('token', rd.token);
-      localStorage.setItem('role', 'rider');
+      // -- COMMENTO -- RIDER OK
+      const r = res?.rider || {};
+      navigate('/rider', {
+        replace: true,
+        state: {
+          nome: r.nome ?? r.firstName ?? '',
+          cognome: r.cognome ?? r.lastName ?? '',
+          email: r.email ?? '',
+          id: r.id ?? r._id ?? '',
+        },
+      });
+      return;
 
-      // -- COMMENTO -- passo i dati al RiderPage
-      navigate('/rider', { replace: true, state: { nome: rd.rider.firstName, cognome: rd.rider.lastName, email: rd.rider.email } });
     } catch (err) {
+      // -- COMMENTO -- email == manager ma password sbagliata
+      if (err?.status === 401 && /manager errata/i.test(err?.message || '')) {
+        setPasswordError(true);
+        setPasswordErrorMessage('Password del manager errata');
+        return;
+      }
+
+      // -- COMMENTO -- Credenziali errate (rider o altre 400/401)
+      if (err?.status === 400 || err?.status === 401) {
+        setPasswordError(true);
+        setPasswordErrorMessage(err?.message || 'Email o password errati');
+        return;
+      }
+
+      // -- COMMENTO -- Errori generici (rete/server)
       setPasswordError(true);
-      setPasswordErrorMessage(err?.message || 'Credenziali non valide.');
+      setPasswordErrorMessage(err?.message || 'Errore di accesso');
     }
   };
 
@@ -88,6 +107,6 @@ export function useLogInLogic() {
     emailError, emailErrorMessage,
     passwordError, passwordErrorMessage,
     validateInputs,
-    handleSubmit
+    handleSubmit,
   };
 }

@@ -1,34 +1,6 @@
-/* -- LAYOUT ROOT -- */
-.gr-root { min-height: 100vh; display: flex; flex-direction: column; }
-
-/* -- APP BAR -- */
+.gr-page { min-height: 100vh; }
 .gr-appbar {
-  position: sticky; top: 0; z-index: 20; height: var(--appbar-height);
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 12px; border-bottom: 1px solid var(--border);
-  background: var(--surface); box-shadow: var(--shadow);
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 16px; border-bottom: 1px solid var(--border-weak);
 }
-.gr-appbar__left, .gr-appbar__right { display: flex; align-items: center; gap: 8px; }
-.gr-logo { font-weight: 800; font-size: 1.1rem; }
-
-.order-card {                    
-  width: 300px;                   
-  margin-left: 40px;                       
-  display: grid;
-  gap: 8px;
-  padding: 14px;
-  border-radius: 16px;
-  background: var(--surface);
-  color: var(--text);
-  box-shadow: var(--elevation-2);
-}
-.order-title {
-  font-weight: 800;
-  text-align: center;
-  margin-bottom: 4px;
-}
-
-.order-actions {
-  display: flex;
-  justify-content: center;
-}
+.gr-logo { font-weight: 700; }
