@@ -77,7 +77,7 @@ export default function GestioneRider() {
     const token = localStorage.getItem("token"); // JWT salvato al login
     if (!token) return;
 
-    fetch("http://localhost:5000/api/rider/orders", {
+    fetch("http://localhost:5000/api/orders", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -97,7 +97,7 @@ export default function GestioneRider() {
     if (!rider.nome) return;
 
     const token = localStorage.getItem("token");
-    socket.auth = { role: "rider", name: rider.nome, token };
+    socket.auth = { name: rider.nome, lastName: rider.cognome, token };
     socket.connect();
 
     socket.emit("riderConnected", { nome: rider.nome, cognome: rider.cognome });
