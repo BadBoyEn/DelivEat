@@ -7,7 +7,7 @@ html.theme-light{
   --text-muted:#333333;         /* testo secondario */
 
   /* -- COMMENTO -- Accenti generali del tema */
-  --accent:#8E24AA;             /* viola brand (CTA, link, ecc.) */
+  --accent:#ff7900 !important;             /* viola brand (CTA, link, ecc.) */
   --accent-2:#D81B60;           /* viola/rosa alternativo */
   --on-accent:#ffffff;          /* testo su accento */
 

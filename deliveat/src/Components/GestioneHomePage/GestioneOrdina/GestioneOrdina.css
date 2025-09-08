@@ -64,7 +64,6 @@
   color: rgb(51, 51, 51);
   font-weight: 700 !important;
   font-family: 'Times New Roman', Times, serif !important;
-  margin-top: 2px;
 }
 .desc { color: var(--ordina-text-muted); text-align: center; max-width: 920px; }
 
@@ -113,6 +112,19 @@
 
 /* -- COMMENTO -- Linea connettore */
 .ordina-scope .MuiStepConnector-line { border-color: #e0e0e0 !important; }
+
+input:-webkit-autofill {
+  box-shadow: 0 0 0 100px #e0f0ff inset !important;
+  -webkit-text-fill-color: #111111 !important;
+}
+
+html.theme-dark .MuiStepLabel-label.Mui-active {
+  color: #000 !important;
+}
+
+html.theme-dark .css-3caazb {
+  color: #000 !important;
+}
 
 /* -- FOOTER -- */
 .ordina-scope .footer-custom {

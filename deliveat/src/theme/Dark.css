@@ -7,7 +7,7 @@ html.theme-dark{
   --text-muted:#b0b8c1;            /* testo secondario */
 
   /* -- COMMENTO -- Accenti generali del tema */
-  --accent:#BA68C8;                /* viola brand (CTA, link, ecc.) */
+  --accent:#ff7900;                /* viola brand (CTA, link, ecc.) */
   --accent-2:#F06292;              /* viola/rosa alternativo */
   --on-accent:#ffffff;             /* testo su accento */
 

@@ -55,6 +55,7 @@ function OrangeStepIcon({ active, completed, icon }) {
 const steps = ['Contatti', 'Ordinazione', 'Conferma'];
 
 export default function OrdinaStepper() {
+
   const [error, setError] = useState({
     nome: false,
     cognome: false,
@@ -221,25 +222,35 @@ useEffect(() => {
           maxWidth: activeStep === 2 ? 400 : 500,
           minWidth: activeStep === 2 ? 300 : 'auto',
           mx: 'auto',
-          border: '1px solid var(--border-weak)',
+          border: '1px solid #dadada !important',
           borderRadius: 2,
           p: 4,
           boxShadow: 'var(--elevation-2)',
           mt: 6,
-          mb: 6,
         }}
       >
         {/* Stepper */}
         <Stepper activeStep={activeStep} alternativeLabel>
-          {steps.map((label) => (
-            <Step key={label}>
-              <StepLabel StepIconComponent={OrangeStepIcon} sx={{ '& .MuiStepLabel-label': {
-                color: activeStep >=
-                steps.indexOf(label) ? 'inherit' : '#aaa'
-              }, }}>{label}</StepLabel>
-            </Step>
-          ))}
-        </Stepper>
+  {steps.map((label) => (
+    <Step key={label}>
+      <StepLabel
+        StepIconComponent={OrangeStepIcon}
+        sx={{
+          '& .MuiStepLabel-label': {
+            color:
+              label === 'Contatti'
+                ? '#000 !important'
+                : activeStep >= steps.indexOf(label)
+                ? 'inherit'
+                : '#aaa',
+          },
+        }}
+      >
+        {label}
+      </StepLabel>
+    </Step>
+  ))}
+</Stepper>
 
         <Box sx={{ mt: 2, width: '100%', mx: 'auto' }}>
           {activeStep === 0 && (
@@ -326,7 +337,7 @@ useEffect(() => {
                         sx={{
                           border: formData.piatti.includes(piatto.title)
                             ? '3px solid var(--accent)'
-                            : '1px solid var(--border-weak)',
+                            : '1px solid #dadada',
                           borderRadius: 2,
                           p: 1,
                           textAlign: 'center',
@@ -398,7 +409,7 @@ useEffect(() => {
                     textField: {
                       fullWidth: true,
                       error: errorStep2.ora,
-                      helperText: errorStep2.ora ? 'Campo obbligatorio o Orario passato' : '',
+                      helperText: errorStep2.ora ? 'Campo obbligatorio o Orario passato !important' : '',
                       sx: {
                         mt: 2,
                         '& .MuiOutlinedInput-root': {

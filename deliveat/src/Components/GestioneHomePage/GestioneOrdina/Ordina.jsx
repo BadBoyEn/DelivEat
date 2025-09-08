@@ -15,7 +15,7 @@ export default function Ordina(){
         <Box className="box-ordina">
           {/* -- COMMENTO -- Logo + titolo */}
           <Box sx={{ display:'flex', flexDirection:'column', alignItems:'center', gap:2 }}>
-            <img src={logo} alt="DelivEat" style={{ width:220, height:'auto', opacity:.9 }} />
+            <img src={logo} alt="DelivEat" style={{ width:220, height:'auto', opacity:.9, marginTop: -8 }} />
             <Typography variant="h4" className="title-ordina">
               ORDINAZIONE DA ASPORTO
             </Typography>
