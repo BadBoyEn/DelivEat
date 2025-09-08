@@ -106,7 +106,7 @@
 
 /* -- COMMENTO -- Etichette step (pill arancioni con testo bianco) */
 .ordina-scope .MuiStepLabel-label {
-  color: #000000 !important;
+  color: #000000 ;
   padding: 4px 10px;
   border-radius: 9999px;
 }

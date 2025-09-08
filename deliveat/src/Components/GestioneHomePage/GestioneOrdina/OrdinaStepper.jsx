@@ -233,7 +233,10 @@ useEffect(() => {
         <Stepper activeStep={activeStep} alternativeLabel>
           {steps.map((label) => (
             <Step key={label}>
-              <StepLabel StepIconComponent={OrangeStepIcon}>{label}</StepLabel>
+              <StepLabel StepIconComponent={OrangeStepIcon} sx={{ '& .MuiStepLabel-label': {
+                color: activeStep >=
+                steps.indexOf(label) ? 'inherit' : '#aaa'
+              }, }}>{label}</StepLabel>
             </Step>
           ))}
         </Stepper>
