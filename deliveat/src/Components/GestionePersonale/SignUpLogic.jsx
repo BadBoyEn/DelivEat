@@ -6,6 +6,7 @@ import { socket } from '../GestionePersonale/Socket.jsx';
 export function useSignUpLogic() {
   const navigate = useNavigate();
 
+  // -- COMMENTO -- Errori campo-per-campo
   const [FirstNameError, setFirstNameError] = useState(false);
   const [FirstNameErrorMessage, setFirstNameErrorMessage] = useState('');
   const [LastNameError, setLastNameError] = useState(false);
@@ -23,23 +24,21 @@ export function useSignUpLogic() {
   const [PasswordError, setPasswordError] = useState(false);
   const [PasswordErrorMessage, setPasswordErrorMessage] = useState('');
 
-  const validateInputs = () => {
-    const firstName = document.getElementById('firstName')?.value.trim() || '';
-    const lastName  = document.getElementById('lastName')?.value.trim() || '';
-    const phone     = document.getElementById('phone')?.value.trim() || '';
-    const isValidPhone = (input) => {
-        const cleaned = input.replace(/[^\d+]/g, ''); // rimuove tutto tranne cifre e "+"
-        return /^\+?\d{7,15}$/.test(cleaned);
-    };
-    const birthdate = document.getElementById('birthdate')?.value.trim() || '';
-    const city      = document.getElementById('city')?.value.trim() || '';
-    const address   = document.getElementById('address')?.value.trim() || '';
-    const email     = document.getElementById('email')?.value.trim() || '';
-    const password  = document.getElementById('password')?.value.trim() || '';
+  // -- COMMENTO -- Normalizza telefono: rimuove non-digit e taglia alle ultime 10 (gestisce +39)
+  const normalizePhone = (raw) => {
+    const digits = (raw || '').toString().replace(/\D/g, '');
+    if (digits.startsWith('39') && digits.length > 10) return digits.slice(-10);
+    return digits;
+  };
 
+  // -- COMMENTO -- Valida telefono italiano (10 cifre dopo normalizzazione)
+  const isValidPhone = (raw) => /^\d{10}$/.test(normalizePhone(raw));
+
+  // -- COMMENTO -- Validazione lato client
+  const validateInputs = (values) => {
     let ok = true;
 
-    // -- COMMENTO -- Reset errori
+    // reset
     setFirstNameError(false); setFirstNameErrorMessage('');
     setLastNameError(false);  setLastNameErrorMessage('');
     setPhoneError(false);     setPhoneErrorMessage('');
@@ -49,57 +48,99 @@ export function useSignUpLogic() {
     setEmailError(false);     setEmailErrorMessage('');
     setPasswordError(false);  setPasswordErrorMessage('');
 
-    if (firstName.length < 2) { setFirstNameError(true); setFirstNameErrorMessage('Inserisci un nome valido.'); ok = false; }
-    if (lastName.length  < 2) { setLastNameError(true);  setLastNameErrorMessage('Inserisci un cognome valido.'); ok = false; }
-    if (!isValidPhone(phone)) { setPhoneError(true); setPhoneErrorMessage('Inserisci un telefono valido (solo cifre, opzionale +).'); ok = false; }
-    if (!birthdate) { setBirthdateError(true); setBirthdateErrorMessage('Inserisci la data di nascita.'); ok = false; }
-    if (city.length < 2) { setCityError(true); setCityErrorMessage('Inserisci una città valida.'); ok = false; }
-    if (address.length < 3) { setAddressError(true); setAddressErrorMessage('Inserisci un indirizzo valido.'); ok = false; }
-    if (!/^\S+@\S+\.\S+$/.test(email)) { setEmailError(true); setEmailErrorMessage('Email non valida.'); ok = false; }
-    if (password.length < 6) { setPasswordError(true); setPasswordErrorMessage('Minimo 6 caratteri.'); ok = false; }
+    const { firstName, lastName, phone, birthdate, city, address, email, password } = values;
+
+    if (!firstName || firstName.trim().length < 2) {
+      setFirstNameError(true); setFirstNameErrorMessage('Inserisci un nome valido.'); ok = false;
+    }
+    if (!lastName || lastName.trim().length < 2) {
+      setLastNameError(true); setLastNameErrorMessage('Inserisci un cognome valido.'); ok = false;
+    }
+    if (!isValidPhone(phone)) {
+      setPhoneError(true); setPhoneErrorMessage('Numero di cellulare non valido'); ok = false;
+    }
+    if (!birthdate) {
+      setBirthdateError(true); setBirthdateErrorMessage('La data di nascita è obbligatoria'); ok = false;
+    } else {
+      const d = new Date(birthdate);
+      if (Number.isNaN(d.getTime())) {
+        setBirthdateError(true); setBirthdateErrorMessage('Data di nascita non valida'); ok = false;
+      } else {
+        const today = new Date();
+        let anni = today.getFullYear() - d.getFullYear();
+        const m = today.getMonth() - d.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < d.getDate())) anni--;
+        if (anni < 18) { setBirthdateError(true); setBirthdateErrorMessage('Devi avere almeno 18 anni'); ok = false; }
+      }
+    }
+    if (!city || city.trim().length < 2) {
+      setCityError(true); setCityErrorMessage('Città non valida'); ok = false;
+    }
+    if (!address || address.trim().length < 5) {
+      setAddressError(true); setAddressErrorMessage('Indirizzo troppo corto'); ok = false;
+    }
+    if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
+      setEmailError(true); setEmailErrorMessage('Email non valida'); ok = false;
+    }
+    if (!password || password.length < 8) {
+      setPasswordError(true); setPasswordErrorMessage('Password troppo corta (minimo 8 caratteri)'); ok = false;
+    }
 
     return ok;
   };
 
+  // -- COMMENTO -- Submit con mapping FE->BE
   const handleSubmit = async (event) => {
-    event.preventDefault(); 
-    if (typeof window !== 'undefined') {
-      window.history.replaceState(null, '', '/signup'); 
-    }
-    if (!validateInputs()) return;
+    event.preventDefault();
 
-    const data = new FormData(event.currentTarget);
+    const form = new FormData(event.currentTarget);
+    const values = {
+      firstName: (form.get('firstName') || '').toString().trim(),
+      lastName:  (form.get('lastName')  || '').toString().trim(),
+      phone:     (form.get('phone')     || '').toString().trim(),
+      birthdate: (form.get('birthdate') || '').toString().trim(),
+      city:      (form.get('city')      || '').toString().trim(),
+      address:   (form.get('address')   || '').toString().trim(),
+      email:     (form.get('email')     || '').toString().trim(),
+      password:  (form.get('password')  || '').toString(),
+    };
+
+    if (!validateInputs(values)) return;
 
     const payload = {
-      firstName: (data.get('firstName') || '').toString().trim(),
-      lastName:  (data.get('lastName')  || '').toString().trim(),
-      phone:     (data.get('phone')     || '').toString().trim(),
-      birthdate: (data.get('birthdate') || '').toString().trim(),
-      city:      (data.get('city')      || '').toString().trim(),
-      address:   (data.get('address')   || '').toString().trim(),
-      email:     (data.get('email')     || '').toString().trim(),
-      password:  (data.get('password')  || '').toString().trim(),
+      firstName:   values.firstName,
+      lastName:    values.lastName,
+      numCell:     normalizePhone(values.phone), // <-- mapping telefono
+      dataNascita: values.birthdate,             // <-- mapping
+      citta:       values.city,                  // <-- mapping
+      indirizzo:   values.address,               // <-- mapping
+      email:       values.email,
+      password:    values.password,
     };
 
     try {
-      const res = await signupRider(payload); // -- COMMENTO -- POST via Axios
-      // -- COMMENTO -- opzionale: token/ruolo, in base alla API
-      localStorage.setItem('token', res.token);
-      localStorage.setItem('role', 'rider');
-
-      socket.emit('riderSignedUp', { email: payload.email });
-      navigate('/rider', { replace: true, state: { nome: payload.firstName, cognome: payload.lastName, email: payload.email } });
+      await signupRider(payload);
+      // socket.connect(); socket.emit('rider:signup', { email: payload.email }); // opzionale
+      navigate('/login');
     } catch (err) {
-      const msg = (err?.message || '').toString();
-      // -- COMMENTO -- errori campo-specifici
-      if (msg.toLowerCase().includes('email')) {
-        setEmailError(true); setEmailErrorMessage(msg);
-      } else if (msg.toLowerCase().includes('nascita') || msg.toLowerCase().includes('anni')) {
-        setBirthdateError(true); setBirthdateErrorMessage(msg);
-      } else if (msg.toLowerCase().includes('telefono')) {
-        setPhoneError(true); setPhoneErrorMessage(msg);
+      const msg = (err?.message || '').toString().toLowerCase();
+
+      if (msg.includes('email')) {
+        setEmailError(true); setEmailErrorMessage(err.message);
+      } else if (msg.includes('nascita') || msg.includes('anni')) {
+        setBirthdateError(true); setBirthdateErrorMessage(err.message);
+      } else if (msg.includes('telefono') || msg.includes('cellulare') || msg.includes('cell')) {
+        setPhoneError(true); setPhoneErrorMessage(err.message);
+      } else if (msg.includes('indirizzo')) {
+        setAddressError(true); setAddressErrorMessage(err.message);
+      } else if (msg.includes('citt')) {
+        setCityError(true); setCityErrorMessage(err.message);
+      } else if (msg.includes('password')) {
+        setPasswordError(true); setPasswordErrorMessage(err.message);
+      } else if (!err?.message) {
+        alert('Errore di registrazione. Riprova.');
       } else {
-        alert(msg || 'Errore iscrizione');
+        alert(err.message);
       }
     }
   };
