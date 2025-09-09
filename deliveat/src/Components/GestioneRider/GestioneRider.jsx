@@ -102,10 +102,34 @@ export default function GestioneRider() {
   }, [rider]);
 
   // -- COMMENTO -- Azione: prendi in carico
-  const handleTakeCharge = (token) => {
-    socket.emit("update_order_status", { token, status: "preso_in_carico" });
-    setOrders((prev) => prev.map((o) => (o.token === token ? { ...o, status: "preso_in_carico" } : o)));
-  };
+  const handleTakeCharge = async (token, isTaken, isDelivered) => {
+  try {
+    if (!isTaken) {
+      // Primo click → prendi in carico
+      socket.emit("update_order_status", { token, status: "preso_in_carico" });
+      setOrders((prev) =>
+        prev.map((o) =>
+          o.token === token ? { ...o, status: "preso_in_carico" } : o
+        )
+      );
+    } else if (!isDelivered) {
+      // Secondo click → consegna
+      await api.put(`/orders/${token}/deliver`);
+      setOrders((prev) =>
+        prev.map((o) =>
+          o.token === token ? { ...o, status: "consegnato" } : o
+        )
+      );
+
+      // Rimuovi dopo 5s
+      setTimeout(() => {
+        setOrders((prev) => prev.filter((o) => o.token !== token));
+      }, 5000);
+    }
+  } catch (err) {
+    console.error("❌ Errore in handleTakeCharge:", err);
+  }
+};
 
   return (
     <div className="gr-page">

@@ -2,6 +2,7 @@ import { Card, CardContent, CardActions, Button, Typography, Chip, Stack } from 
 
 export default function RiderCard({ order, onTakeCharge }) {
   const isTaken = order.status === 'preso_in_carico';
+  const isDelivered = order.status === 'consegnato';
 
   return (
     <Card sx={{ width: 340, borderRadius: 3, boxShadow: 'var(--elevation-2)' }}>
@@ -24,7 +25,11 @@ export default function RiderCard({ order, onTakeCharge }) {
         <Typography variant="body2" sx={{ mt: 2 }}>
           Stato:
           <strong style={{ marginLeft: 8 }}>
-            {isTaken ? 'preso già in carico' : 'prendi in carico'}
+            {isDelivered
+              ? 'Consegnato'
+              : isTaken
+              ? 'In gestione'
+              : 'Disponibile'}
           </strong>
         </Typography>
       </CardContent>
@@ -33,10 +38,14 @@ export default function RiderCard({ order, onTakeCharge }) {
         <Button
           fullWidth
           variant="contained"
-          disabled={isTaken}
-          onClick={() => onTakeCharge(order.token)}
+          disabled={isDelivered}
+          onClick={() => onTakeCharge(order.token, isTaken, isDelivered)}
         >
-          {isTaken ? 'In gestione' : 'Prendi in carico'}
+          {isDelivered
+            ? 'Consegnato ✅'
+            : isTaken
+            ? 'In Gestione'
+            : 'Prendi in carico'}
         </Button>
       </CardActions>
     </Card>
