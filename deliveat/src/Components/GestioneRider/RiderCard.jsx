@@ -28,7 +28,7 @@ export default function RiderCard({ order, onTakeCharge }) {
             {isDelivered
               ? 'Consegnato'
               : isTaken
-              ? 'In gestione'
+              ? 'Preso in carico'
               : 'Disponibile'}
           </strong>
         </Typography>

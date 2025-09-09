@@ -75,13 +75,23 @@ export default function GestioneRider() {
     socket.auth = { role: "rider", name: rider.nome, lastname: rider.cognome };
     socket.connect();
 
-    const onAssigned = (payload) => {
-      const order = {
+    const onAssigned = async (payload) => {
+      let order = {
         token: payload.token || payload._id,
         customerName: payload.customerName,
         items: payload.items || [],
         status: payload.status || "in_preparazione",
       };
+
+    if (!order.customerName || !order.items) {
+    try {
+      const { data } = await api.get(`/orders/${order.token}`);
+      order = { ...order, ...data };
+     } catch (e) {
+      console.error("❌ fallback GET /orders/:id fallito", e);
+     }
+    }
+
       setOrders((prev) => {
         if (prev.some((o) => o.token === order.token)) return prev;
         return [order, ...prev];
