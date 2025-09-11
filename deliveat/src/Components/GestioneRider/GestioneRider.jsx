@@ -69,52 +69,50 @@ export default function GestioneRider() {
 
   // -- COMMENTO -- Socket: registra rider & listeners
   useEffect(() => {
-    if (!rider.nome) return;
+  if (!rider.nome) return;
 
-    // -- COMMENTO -- Handshake auth per il middleware del server
-    socket.auth = { role: "rider", name: rider.nome, lastname: rider.cognome };
-    socket.connect();
+  // Handshake auth per il middleware del server
+  socket.auth = { role: "rider", name: rider.nome, lastname: rider.cognome };
+  if (!socket.connected) socket.connect();
 
-    const onAssigned = async (payload) => {
-      let order = {
-        token: payload.token ?? payload._id,
-        customerName: payload.customerName,
-        items: payload.items ?? [],
-        status: payload.status ?? "in_preparazione",
-      };
+  const onAssigned = async (payload) => {
+    let order = {
+      token: payload.token ?? payload._id,
+      customerName: payload.customerName,
+      items: payload.items ?? [],
+      status: payload.status ?? "in_preparazione",
+    };
 
+    // Fallback se mancano dati
     if (!order.customerName || !order.items) {
-    try {
-      const { data } = await api.get(`/orders/${order.token}`);
-      order = { ...order, ...data };
-     } catch (e) {
-      console.error("❌ fallback GET /orders/:id fallito", e);
-     }
+      try {
+        const { data } = await api.get(`/orders/${order.token}`);
+        order = { ...order, ...data };
+      } catch (e) {
+        console.error("❌ fallback GET /orders/:id fallito", e);
+      }
     }
 
-      setOrders((prev) => {
-        if (prev.some((o) => o.token === order.token)) return prev;
-        return [order, ...prev];
-      });
-    };
+    setOrders((prev) => {
+      if (prev.some((o) => o.token === order.token)) return prev;
+      return [order, ...prev]; // aggiunge l’ordine in cima
+    });
+  };
 
-    const onStatusUpdated = ({ token, status }) => {
-      setOrders((prev) => prev.map((o) => (o.token === token ? { ...o, status } : o)));
-    };
+  const onStatusUpdated = ({ token, status }) => {
+    setOrders((prev) =>
+      prev.map((o) => (o.token === token ? { ...o, status } : o))
+    );
+  };
 
-    socket.on("assigned_order", onAssigned);
-    socket.on("order_status_updated", onStatusUpdated);
+  socket.on("assigned_order", onAssigned);
+  socket.on("order_status_updated", onStatusUpdated);
 
-    const interval = setInterval(() => {
-      setOrders((prev) => [...prev]);
-    }, 1000);
-
-    return () => {
-      socket.off("assigned_order", onAssigned);
-      socket.off("order_status_updated", onStatusUpdated);
-      clearInterval(interval);
-    };
-  }, [rider]);
+  return () => {
+    socket.off("assigned_order", onAssigned);
+    socket.off("order_status_updated", onStatusUpdated);
+  };
+}, [rider]);
 
   // -- COMMENTO -- Azione: prendi in carico
   const handleTakeCharge = async (token, isTaken, isDelivered) => {
@@ -130,6 +128,7 @@ export default function GestioneRider() {
     } else if (!isDelivered) {
       // Secondo click → consegna
       await api.put(`/orders/${token}/deliver`);
+      socket.emit("update_order_status", { token, status: "consegnato" });
       setOrders((prev) =>
         prev.map((o) =>
           o.token === token ? { ...o, status: "consegnato" } : o

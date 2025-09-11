@@ -28,7 +28,7 @@ export default function RiderCard({ order, onTakeCharge }) {
             {isDelivered
               ? 'Consegnato'
               : isTaken
-              ? 'In Gestione'
+              ? 'Preso in carico'
               : 'Disponibile'}
           </strong>
         </Typography>
@@ -44,7 +44,7 @@ export default function RiderCard({ order, onTakeCharge }) {
           {isDelivered
             ? 'Consegnato ✅'
             : isTaken
-            ? 'In Gestione'
+            ? 'Consegna'
             : 'Prendi in carico'}
         </Button>
       </CardActions>

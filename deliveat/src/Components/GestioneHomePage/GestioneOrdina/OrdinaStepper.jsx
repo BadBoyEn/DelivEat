@@ -17,7 +17,7 @@ import dayjs from 'dayjs';
 import axios from 'axios';
 import { io } from "socket.io-client";
 const socket = io("http://localhost:5000", { 
-  transports: ["websocket", "polling"], autoConnect: true
+  transports: ["websocket", "polling"], autoConnect: false
  });
 
 import carbonara from '../../../Images/carbonara.jpg';
@@ -128,13 +128,22 @@ const handleCancelOrder = () => {
 };
 
 useEffect(() => {
-  socket.on("order_status_updated", (updatedOrder) => {
-    if (updatedOrder.token === currentOrderToken) {
-      setOrderStatus(updatedOrder.status);
+  // Assicuriamoci che il socket sia connesso
+  if (!socket.connected) socket.connect();
+
+  socket.on("connect", () => console.log("📡 Connesso al server:", socket.id));
+
+  const onStatusUpdated = ({ token, status }) => {
+    if (!currentOrderToken) return;
+    if (token === currentOrderToken) {
+      setOrderStatus(status);
     }
-  });
+  };
+
+  socket.on("order_status_updated", onStatusUpdated);
+
   return () => {
-    socket.off("order_status_updated");
+    socket.off("order_status_updated", onStatusUpdated);
   };
 }, [currentOrderToken]);
 
@@ -505,14 +514,32 @@ useEffect(() => {
     </Box>
   ) : (
     // layout centrato per lo stato e annulla ordine
-    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, width: '100%' }}>
-      <Typography variant="h6">Stato ordine: {orderStatus}</Typography>
-      {orderStatus !== 'Consegnato' && (
-        <Button variant="outlined" color="error" onClick={handleCancelOrder}>
-          Annulla Ordine
-        </Button>
-      )}
-    </Box>
+    <Box
+  sx={{
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: 2,
+    width: "100%",
+  }}
+>
+  <Typography variant="h6">
+    Stato ordine:{" "}
+    {orderStatus === "in_preparazione"
+      ? "In elaborazione"
+      : orderStatus === "preso_in_carico"
+      ? "Preso in carico"
+      : orderStatus === "consegnato"
+      ? "Consegnato"
+      : orderStatus}
+  </Typography>
+
+  {orderStatus !== "consegnato" && (
+    <Button variant="outlined" color="error" onClick={handleCancelOrder}>
+      Annulla Ordine
+    </Button>
+  )}
+</Box>
   )}
    </Box>
       </Box>
