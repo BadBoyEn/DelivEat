@@ -29,7 +29,7 @@ export default function Ordina(){
 
         {/* -- COMMENTO -- footer (rimane come impostazioni attuali) */}
         <Box className="footer-custom">
-          <Typography variant="body2">© 2025 DelivEat. All Rights Reserved.</Typography>
+          <Typography variant="body2">© DelivEat. All Rights Reserved.</Typography>
         </Box>
       </Box>
     </AppTheme>

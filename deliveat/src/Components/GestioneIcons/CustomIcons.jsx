@@ -1,4 +1,4 @@
-export default function CustomIcons({ name, variant = 'primary', size = 40, className = '', ...rest }) {
+export default function CustomIcons({ name, variant = 'primary', size = 40, className = 'logo-home', ...rest }) {
   return (
     <i
       data-icon={name}

@@ -2,7 +2,7 @@ html.theme-light{
   /* -- COMMENTO -- Superfici e testo */
   --bg:#ffffff;                 /* sfondo pagina */
   --surface:#ffffff;            /* card / pannelli */
-  --surface-2:#f7f7f7;          /* superfici secondarie */
+  --surface-2: #f7f7f7;          /* superfici secondarie */
   --text:#1a1a1a;               /* testo principale */
   --text-muted:#333333;         /* testo secondario */
 
@@ -12,7 +12,7 @@ html.theme-light{
   --on-accent:#ffffff;          /* testo su accento */
 
   /* -- COMMENTO -- Bordi ed elevazioni */
-  --border-weak:#dadada;
+  --border-weak:#2a2a2a !important;
   --elevation-1:0 2px 8px rgba(0,0,0,0.06);
   --elevation-2:0 6px 18px rgba(0,0,0,0.10);
   --elevation-3:0 10px 24px rgba(0,0,0,0.12);
@@ -23,12 +23,12 @@ html.theme-light{
   /* -- COMMENTO -- NAVBAR */
   --nav-bg:#ffffff;             /* sfondo navbar */
   --nav-text:#1a1a1a;           /* testo/icona navbar */
-  --nav-pill-bg:#8E24AA;        /* sfondo pulsanti/chip navbar */
+  --nav-pill-bg:#ff7900 !important;        /* sfondo pulsanti/chip navbar */
   --nav-pill-text:#ffffff;      /* testo pulsanti/chip navbar */
 
   /* -- COMMENTO -- FOOTER */
-  --footer-bg:#f6f6f6;          /* sfondo footer */
-  --footer-text:#666666;        /* testo footer */
+  --footer-bg:#FF6B00;          /* sfondo footer */
+  --footer-text:#ffffff;        /* testo footer */
   --footer-border:#e5e5e5;      /* bordo superiore footer */
 }
 

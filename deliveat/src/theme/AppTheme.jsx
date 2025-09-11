@@ -38,25 +38,59 @@ export default function AppTheme({ children }) {
     root.classList.add(`theme-${mode}`);
     root.style.colorScheme = mode; // 'light' | 'dark' 
   }, [mode]);
-
-  const theme = useMemo(
-    () =>
-      createTheme({
-        palette: {
-          mode,
-          primaryHome: {
-            main: 'var(--appbar-bg)',
-            contrastText: 'var(--appbar-fg)',
-          },
-          footer: {
-            main: 'var(--footer-bg)',
-            contrastText: 'var(--footer-fg)',
+  const theme = useMemo(() =>
+  createTheme({
+    palette: { mode },
+    shape: { borderRadius: 12 },
+    components: {
+    MuiOutlinedInput: {
+  styleOverrides: {
+    root: {
+      borderRadius: "12px",
+      backgroundColor: "#fff",
+      color: "#000",
+      "& .MuiPickersOutlinedInput-notchedOutline": {
+        borderColor: "#888888", // default
+      },
+      "&:hover .MuiPickersOutlinedInput-notchedOutline": {
+        borderColor: "#666666", // hover
+      },
+      "&.Mui-focused .MuiPickersOutlinedInput-notchedOutline, &:focus-within .MuiPickersOutlinedInput-notchedOutline": {
+        borderColor: "#FF6B00 !important", // focus arancione
+      },
+    },
+    input: { color: "#000" },
+  },
+},
+      MuiPickersInputBase: {
+        styleOverrides: {
+          root: {
+            color: "#000",
+            backgroundColor: "#fff",
+            "& .MuiPickersOutlinedInput-notchedOutline": {
+              borderColor: "#FF6B00 !important",
+            },
           },
         },
-        shape: { borderRadius: 12 },
-      }),
-    [mode]
-  );
+      },
+      MuiFormLabel: {
+        styleOverrides: {
+          root: { color: "#000", "&.Mui-focused": { color: "#000" } },
+        },
+      },
+      MuiInputAdornment: {
+  styleOverrides: {
+    root: {
+      "& .MuiSvgIcon-root": { color: "#0a0a0aff !important" },
+      // evita che il focus sull’icona cambi il colore
+      "&:focus-within + .MuiOutlinedInput-notchedOutline": { borderColor: "#FF6B00 !important" },
+    },
+  },
+},
+    }
+  }),
+  [mode]
+);
 
   return (
     <ColorModeContext.Provider value={colorMode}>

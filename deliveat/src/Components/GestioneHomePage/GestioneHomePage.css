@@ -208,26 +208,97 @@
 }
 
 /* -- COMMENTO -- MenuGallery.jsx */
-.ordina-ora { text-align: center; margin: 16px auto 5px auto; }
-.menu-gallery { position: relative; display: block; }
-.menu-cover {
-  width: clamp(260px, 45vw, 520px);
-  height: clamp(160px, 30vw, 320px);
-  border-radius: 24px;
-  overflow: hidden;
-  box-shadow: var(--elevation-3);
-  background-color: var(--surface);
+.open-menu-btn {
+  padding: 12px 20px;
+  font-size: 1.2rem;
+  background: #ff5722;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
 }
-.menu-cover img { width: 100%; height: 100%; object-fit: cover; }
-.menu-title {
+
+.open-menu-btn:hover {
+  background: #e64a19;
+}
+
+.gallery-overlay {
+  position: fixed;
+  inset: 0; /* top, right, bottom, left = 0 */
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999; /* sta sopra a tutto */
+}
+
+.gallery-frame {
+  position: relative; /* così i bottoni si posizionano rispetto al frame */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gallery-frame img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Bottoni frecce */
+.gallery-frame button {
   position: absolute;
-  bottom: 10px;
-  left: 16px;
-  font-weight: 800;
-  background: linear-gradient(90deg, var(--accent), var(--accent-2));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 8px rgba(0,0,0,0.1);
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.3rem 0.6rem;
+  border-radius: 50%;
+  transition: background 0.2s ease;
+}
+
+.gallery-frame button:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* Freccia sinistra */
+.gallery-frame .arrow.left {
+  left: -60px; /* spazio fuori dal bordo immagine */
+}
+
+/* Freccia destra */
+.gallery-frame .arrow.right {
+  right: -60px;
+}
+
+.gallery-frame button:disabled {
+  background: rgba(0, 0, 0, 0.2); /* più chiaro */
+  color: rgba(255, 255, 255, 0.5); /* freccia semi-trasparente */
+  cursor: not-allowed; /* puntatore bloccato */
+  transform: translateY(-50%); /* niente effetto hover */
+}
+
+.gallery-frame button:disabled:hover {
+  background: rgba(0, 0, 0, 0.2);
+  transform: translateY(-50%); /* impedisce "scalatura" */
+}
+
+/* Bottone di chiusura */
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
 }
 
 /* -- COMMENTO -- Responsive */
@@ -250,3 +321,25 @@
   .catchphrase { font-size: 1.8rem; }
   .catchphrase2 { font-size: 1.1rem; }
 }
+
+@media (max-width: 720px) {
+  .gallery-frame img {
+    max-width: 82vw;   /* leggermente più piccolo del 90% desktop */
+    max-height: 80vh;  /* più basso per far spazio ai bottoni */
+  }
+
+  /* Ridurre le frecce un po' per mobile */
+  .gallery-frame button {
+    font-size: 1.2rem;
+    padding: 0.2rem 0.4rem;
+  }
+
+  /* Spazio laterale delle frecce */
+  .gallery-frame .arrow.left {
+    left: -30px;
+  }
+  .gallery-frame .arrow.right {
+    right: -30px;
+  }
+}
+

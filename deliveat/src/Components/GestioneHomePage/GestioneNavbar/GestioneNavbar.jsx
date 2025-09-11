@@ -26,7 +26,6 @@ export default function GestioneNavbar({ children }) {
       <AppBar elevation={0} position="relative" color="primaryHome" className="appbar-custom">
         <Toolbar className="toolbar-custom">
           {/* Logo */}
-          <Box className="logo-home"><SitemarkIcon /></Box>
 
           {/* Menu desktop */}
           <Box className="links-box desktop-menu">

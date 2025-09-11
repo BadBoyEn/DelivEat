@@ -4,6 +4,12 @@
   min-height: 100vh;
 }
 
+.icon-DelivEat_logo {
+  background: url("/deliveat/src/Images/DelivEat_logo.png");
+  width: 100px;
+  height: 100px;
+}
+
 /* -- COMMENTO -- Area contenuto che cresce */
 .page-main {
   flex: 1;
@@ -31,9 +37,7 @@
 
 /* -- COMMENTO -- Box del logo a sinistra */
 .logo-home {
-  transform: scale(0.45);
-  margin-bottom: -5px;
-  margin-left: -130px;
+  transform: scale(0.8);
 }
 
 /* -- COMMENTO -- Box pulsanti di navigazione */
@@ -57,7 +61,7 @@
   text-align: center;
   margin-top: auto;
   background-color: var(--footer-bg, var(--surface-2));
-  color: var(--footer-fg, var(--text));
+  color: var(--footer-text);
 }
 
 /* -- COMMENTO -- Responsive navbar */

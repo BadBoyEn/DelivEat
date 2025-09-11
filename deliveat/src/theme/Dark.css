@@ -7,15 +7,15 @@ html.theme-dark{
   --text-muted:#b0b8c1;            /* testo secondario */
 
   /* -- COMMENTO -- Accenti generali del tema */
-  --accent:#ff7900;                /* viola brand (CTA, link, ecc.) */
-  --accent-2:#F06292;              /* viola/rosa alternativo */
+  --accent:#FF6B00;                /* viola brand (CTA, link, ecc.) */
+  --accent-2:#D81B60;              /* viola/rosa alternativo */
   --on-accent:#ffffff;             /* testo su accento */
 
   /* -- COMMENTO -- Bordi ed elevazioni */
-  --border-weak:#2a2a2a;
-  --elevation-1:0 2px 8px rgba(0,0,0,0.50);
-  --elevation-2:0 4px 12px rgba(0,0,0,0.60);
-  --elevation-3:0 10px 20px rgba(0,0,0,0.70);
+  --border-weak:#2a2a2a !important;
+  --elevation-1:0 2px 8px rgba(0,0,0,0.06);
+  --elevation-2:0 6px 18px rgba(0,0,0,0.10);
+  --elevation-3:0 10px 24px rgba(0,0,0,0.12);
 
   /* -- COMMENTO -- Gradiente di sfondo (opzionale) */
   --bg-gradient:linear-gradient(180deg,#0d1018 0%,#121427 60%,#0d1018 100%);
@@ -23,12 +23,12 @@ html.theme-dark{
   /* -- COMMENTO -- NAVBAR */
   --nav-bg:rgba(13,16,18,0.92);    /* sfondo navbar scuro */
   --nav-text:#e8e8e8;              /* testo/icona navbar */
-  --nav-pill-bg:#BA68C8;           /* sfondo pulsanti/chip navbar */
+  --nav-pill-bg:#ff7900;           /* sfondo pulsanti/chip navbar */
   --nav-pill-text:#ffffff;         /* testo pulsanti/chip navbar */
 
   /* -- COMMENTO -- FOOTER */
-  --footer-bg:#0f1115;             /* sfondo footer */
-  --footer-text:#b0b8c1;           /* testo footer */
+  --footer-bg:#FF6B00;             /* sfondo footer */
+  --footer-text:#000000;           /* testo footer */
   --footer-border:#1f2230;         /* bordo superiore footer */
 }
 

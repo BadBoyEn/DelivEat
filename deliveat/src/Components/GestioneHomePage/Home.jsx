@@ -2,17 +2,18 @@ import { Box, Typography, Button } from '@mui/material';
 import GestioneNavbar from './GestioneNavbar/GestioneNavbar';
 import './GestioneNavbar/GestioneNavbar.css';   // layout navbar & footer
 import './GestioneHomePage.css';
-import MenuGallery from './MenuGallery.jsx';                // layout home + gallery
+import DelivEat from "../../Images/DelivEat_logo2.png"
+import MenuGallery from './MenuGallery';
+import { useState } from "react";
 
 export default function Home() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
     <GestioneNavbar>
       <Box className="home-hero">
         {/* -- COLONNA SINISTRA: titolo + CTA -- */}
         <Box>
-          <Typography variant="h2" className="catchphrase" sx={{ fontWeight: 900, mb: 1 }}>
-            DelivEat
-          </Typography>
+          <img src={DelivEat} alt="DelivEat" width={280} height={222}/>
           <Typography variant="h5" color="secondary" fontWeight={800} sx={{ mb: 1 }}>
             Ordina in pochi click!
           </Typography>
@@ -43,9 +44,13 @@ export default function Home() {
           </ul>
 
           <Box className="news-actions">
-            <Button variant="contained" color="secondary" size="small" href="/home/ordina">
-              Ordina
+            <Button variant="contained" color="secondary" size="small" onClick={() =>
+               setIsMenuOpen(true)}
+               className="open-menu-btn">
+               Sfoglia il menù
             </Button>
+            {isMenuOpen && <MenuGallery onClose={() =>
+               setIsMenuOpen(false)} />}
           </Box>
         </Box>
         

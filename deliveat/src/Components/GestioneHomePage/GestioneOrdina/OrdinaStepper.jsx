@@ -239,9 +239,9 @@ useEffect(() => {
           '& .MuiStepLabel-label': {
             color:
               label === 'Contatti'
-                ? '#000 !important'
+                ? '#0d1018 !important'
                 : activeStep >= steps.indexOf(label)
-                ? 'inherit'
+                ? '#0d1018'
                 : '#aaa',
           },
         }}
@@ -325,7 +325,7 @@ useEffect(() => {
           {activeStep === 1 && (
             <>
               {categorie.map((cat) => (
-                <Box key={cat.titolo} sx={{ mb: 2 }}>
+                <Box key={cat.titolo} sx={{ mb: 2, color: "#0d1018" }}>
                   <Typography variant="subtitle1" sx={{ mb: 1 }}>
                     {cat.titolo}
                   </Typography>
@@ -380,6 +380,7 @@ useEffect(() => {
                       fullWidth: true,
                       error: errorStep2.data,
                       helperText: errorStep2.data ? 'Campo obbligatorio o Data precedente a oggi' : '',
+                      className: "campi-picker",
                       sx: {
                         mt: 2,
                         '& .MuiOutlinedInput-root': {
@@ -410,6 +411,7 @@ useEffect(() => {
                       fullWidth: true,
                       error: errorStep2.ora,
                       helperText: errorStep2.ora ? 'Campo obbligatorio o Orario passato !important' : '',
+                      className: "campi-picker",
                       sx: {
                         mt: 2,
                         '& .MuiOutlinedInput-root': {
@@ -470,7 +472,7 @@ useEffect(() => {
         <Box sx={{ display: 'flex', mt: 4, width: '100%' }}>
   {!orderPlaced ? (
     // layout normale dei bottoni di navigazione
-    <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+    <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%', color: 'var(--accent) !important' }}>
       <Button variant="outlined" disabled={activeStep === 0} onClick={handleBack}>
         Indietro
       </Button>
@@ -478,7 +480,7 @@ useEffect(() => {
         <Button
           variant="contained"
           onClick={handleNext}
-          sx={{ backgroundColor: 'var(--accent)', color: 'var(--on-accent)' }}
+          sx={{ backgroundColor: 'var(--accent)', color: '#FF6B00' }}
         >
           Avanti
         </Button>
