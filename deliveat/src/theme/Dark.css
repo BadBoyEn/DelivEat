@@ -63,3 +63,7 @@ html.theme-dark, html.theme-dark body, html.theme-dark #root{
   color:var(--footer-text);
   border-top:1px solid var(--footer-border);
 }
+
+.news-actions .toolbar-custom {
+  box-shadow:var(--elevation-1);
+}

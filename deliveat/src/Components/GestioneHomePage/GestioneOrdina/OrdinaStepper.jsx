@@ -79,29 +79,42 @@ export default function OrdinaStepper() {
 
 // funzione per conferma ordine
   const handleConfirm = async () => {
-    try {
-      const payload = {
-        customerName: `${formData.nome} ${formData.cognome}`.trim(),
-        items: formData.piatti,
-        address: formData.indirizzo,
-        phone: formData.telefono,
-        date: formData.data,
-        time: formData.ora,
-      };
+  try {
+    // 1. Validazioni preliminari
+    const nomeCompleto = `${formData.nome || ""} ${formData.cognome || ""}`.trim();
+    if (!nomeCompleto) return alert("Inserisci nome e cognome");
+    if (!formData.piatti || !Array.isArray(formData.piatti)  || formData.piatti.length === 0)
+      return alert("Seleziona almeno un piatto");
+    if (!formData.indirizzo || formData.indirizzo.trim() === "")
+      return alert("Inserisci un indirizzo");
+    if (!formData.telefono || !/^\d+$/.test(formData.telefono))
+      return alert("Inserisci un numero di telefono valido (solo cifre)");
+    if (!formData.data) return alert("Seleziona una data");
+    if (!formData.ora) return alert("Seleziona un orario");
 
-    // 1. Salva ordine su DB tramite API
-  const response = await axios.post('/api/orders', payload);
+    const payload = {
+      customerName: nomeCompleto,
+      items: formData.piatti,
+      address: formData.indirizzo,
+      phone: formData.telefono,
+      date: formData.data,
+      time: formData.ora,
+    };
 
-    // 2. Invia ordine in tempo reale ai rider con socket
-  socket.emit('new_order', response.data);
+    // 2. Salva ordine su DB tramite API
+    const response = await axios.post('/api/orders', payload);
 
-    // 3. Aggiorna stato locale
+    // 3. Invia ordine in tempo reale ai rider con socket
+    socket.emit('new_order', response.data);
+
+    // 4. Aggiorna stato locale
     setOrderPlaced(true);
     setOrderStatus('In elaborazione');
     setCurrentOrderToken(response.data._id); // token/id dal DB
+
   } catch (err) {
-    console.error("Errore nell'invio dell'ordine:", err);
-    alert("Errore nell'invio dell'ordine");
+    console.error("Errore nell'invio dell'ordine:", err.response?.data || err.message);
+    alert("Errore nell'invio dell'ordine, riprova.");
   }
 };
 
@@ -472,8 +485,8 @@ useEffect(() => {
         <Box sx={{ display: 'flex', mt: 4, width: '100%' }}>
   {!orderPlaced ? (
     // layout normale dei bottoni di navigazione
-    <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%', color: 'var(--accent) !important' }}>
-      <Button variant="outlined" disabled={activeStep === 0} onClick={handleBack}>
+    <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+      <Button variant="outlined" disabled={activeStep === 0} onClick={handleBack} color="secondary">
         Indietro
       </Button>
       {activeStep < steps.length - 1 ? (

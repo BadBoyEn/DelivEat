@@ -97,14 +97,14 @@ export default function AppTheme({ children }) {
       MuiButton: {
     styleOverrides: {
       root: {
-        "&.MuiButton-outlined": {
-          borderColor: "#FF6B00",
-          color: "#FF6B00",
+        "&.MuiButton-outlinedSecondary": {
+          borderColor: "#FF6B00 !important",
+          color: "#FF6B00 !important",
           "&:hover": {
-            backgroundColor: "rgba(255, 107, 0, 0.08)",
+            backgroundColor: "rgba(255, 107, 0, 0.08) !important",
           },
         },
-        "&.MuiButton-outlined.Mui-disabled": {
+        "&.MuiButton-outlinedSecondary.Mui-disabled": {
           borderColor: "transparent !important",
           color: "transparent !important",
           backgroundColor: "transparent !important",

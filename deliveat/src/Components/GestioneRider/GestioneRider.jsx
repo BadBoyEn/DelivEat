@@ -50,7 +50,7 @@ export default function GestioneRider() {
   }, [location?.state]);
 
   // -- COMMENTO -- Caricamento iniziale ordini 
-  useEffect(() => {
+   useEffect(() => {
     (async () => {
       try {
         const { data } = await api.get("/orders"); // in_preparazione
@@ -77,10 +77,10 @@ export default function GestioneRider() {
 
     const onAssigned = async (payload) => {
       let order = {
-        token: payload.token || payload._id,
+        token: payload.token ?? payload._id,
         customerName: payload.customerName,
-        items: payload.items || [],
-        status: payload.status || "in_preparazione",
+        items: payload.items ?? [],
+        status: payload.status ?? "in_preparazione",
       };
 
     if (!order.customerName || !order.items) {
@@ -105,9 +105,14 @@ export default function GestioneRider() {
     socket.on("assigned_order", onAssigned);
     socket.on("order_status_updated", onStatusUpdated);
 
+    const interval = setInterval(() => {
+      setOrders((prev) => [...prev]);
+    }, 1000);
+
     return () => {
       socket.off("assigned_order", onAssigned);
       socket.off("order_status_updated", onStatusUpdated);
+      clearInterval(interval);
     };
   }, [rider]);
 
