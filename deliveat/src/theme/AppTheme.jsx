@@ -36,12 +36,28 @@ export default function AppTheme({ children }) {
     const root = document.documentElement; // <html>
     root.classList.remove('theme-dark', 'theme-light');
     root.classList.add(`theme-${mode}`);
-    root.style.colorScheme = mode; // 'light' | 'dark' 
+    root.style.colorScheme = mode; // 'light' | 'dark'
   }, [mode]);
-  const theme = useMemo(() =>
-  createTheme({
-    palette: { mode },
-    shape: { borderRadius: 12 },
+
+  const theme = useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode,
+          primaryHome: {
+            main: 'var(--appbar-bg)',
+            contrastText: 'var(--appbar-fg)',
+          },
+          footer: {
+            main: 'var(--footer-bg)',
+            contrastText: 'var(--footer-fg)',
+          },
+          secondary: {
+            main: '#FF6B00',
+            contrastText: mode === 'dark' ? 'rgba(13, 16, 18, 0.92)' : '#fff',
+          },
+        },
+        shape: { borderRadius: 12 },
     components: {
     MuiOutlinedInput: {
   styleOverrides: {
@@ -78,10 +94,28 @@ export default function AppTheme({ children }) {
           root: { color: "#000", "&.Mui-focused": { color: "#000" } },
         },
       },
+      MuiButton: {
+    styleOverrides: {
+      root: {
+        "&.MuiButton-outlined": {
+          borderColor: "#FF6B00",
+          color: "#FF6B00",
+          "&:hover": {
+            backgroundColor: "rgba(255, 107, 0, 0.08)",
+          },
+        },
+        "&.MuiButton-outlined.Mui-disabled": {
+          borderColor: "transparent !important",
+          color: "transparent !important",
+          backgroundColor: "transparent !important",
+        },
+      },
+    },
+  },
       MuiInputAdornment: {
   styleOverrides: {
     root: {
-      "& .MuiSvgIcon-root": { color: "#0a0a0aff !important" },
+      "& .MuiSvgIcon-root": { color: "#000 !important" },
       // evita che il focus sull’icona cambi il colore
       "&:focus-within + .MuiOutlinedInput-notchedOutline": { borderColor: "#FF6B00 !important" },
     },
