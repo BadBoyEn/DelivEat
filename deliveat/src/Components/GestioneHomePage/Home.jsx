@@ -29,7 +29,7 @@ export default function Home() {
           <Box className="home-cta">
             <Button
               variant="contained"
-              color="primary"
+              color="secondary"
               size="small"
               onClick={() => navigate('/home/ordina')}
             >
@@ -38,7 +38,7 @@ export default function Home() {
 
             <Button
               variant="outlined"
-              color="primary"
+              color="secondary"
               size="small"
               onClick={() => setShowMenu(true)}     // -- COMMENTO -- apre overlay
               className="open-menu-btn"
