@@ -1,60 +1,56 @@
+// -- COMMENTO -- Home: "Sfoglia il menù" apre overlay in-page (no route)
+import React, { useState } from 'react';
 import { Box, Typography, Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import GestioneNavbar from './GestioneNavbar/GestioneNavbar';
-import './GestioneNavbar/GestioneNavbar.css';   // layout navbar & footer
+import './GestioneNavbar/GestioneNavbar.css';
 import './GestioneHomePage.css';
-import DelivEat from "../../Images/DelivEat_logo2.png"
+import DelivEat from "../../Images/DelivEat_logo2.png";
 import MenuGallery from './MenuGallery';
-import { useState } from "react";
 
 export default function Home() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const [showMenu, setShowMenu] = useState(false); // -- COMMENTO -- stato overlay
+
   return (
     <GestioneNavbar>
       <Box className="home-hero">
-        {/* -- COLONNA SINISTRA: titolo + CTA -- */}
-        <Box>
-          <img src={DelivEat} alt="DelivEat" width={280} height={222}/>
-          <Typography variant="h5" color="secondary" fontWeight={800} sx={{ mb: 1 }}>
+        <Box className="hero-left">
+          <img src={DelivEat} alt="DelivEat" width={280} height={222} />
+
+          <Typography variant="h5" className="catchphrase">
             Ordina in pochi click!
           </Typography>
-          <Typography variant="body1" sx={{ mb: 2 }}>
+
+          <Typography variant="body2" className="subtitle">
             Scopri la comodità di ricevere il tuo cibo preferito direttamente a casa.
           </Typography>
 
           <Box className="home-cta">
-            <Button size="large" variant="contained" color="secondary" href="/home/ordina">
+            <Button
+              variant="contained"
+              color="primary"
+              size="small"
+              onClick={() => navigate('/home/ordina')}
+            >
               Ordina ora
             </Button>
-            <Button size="large" variant="outlined" color="secondary" href="/home/chisiamo">
-              Scopri di più
+
+            <Button
+              variant="outlined"
+              color="primary"
+              size="small"
+              onClick={() => setShowMenu(true)}     // -- COMMENTO -- apre overlay
+              className="open-menu-btn"
+            >
+              Sfoglia il menù
             </Button>
           </Box>
         </Box>
-
-        {/* -- COLONNA DESTRA -- */}
-        <Box className="news-card">
-          <Typography className="news-title" variant="subtitle1">
-            Novità del menù
-          </Typography>
-
-          <ul className="news-list">
-            <li>Carbonara</li>
-            <li>Cotoletta milanese</li>
-            <li>Tiramisù</li>
-          </ul>
-
-          <Box className="news-actions">
-            <Button variant="contained" color="secondary" size="small" onClick={() =>
-               setIsMenuOpen(true)}
-               className="open-menu-btn">
-               Sfoglia il menù
-            </Button>
-            {isMenuOpen && <MenuGallery onClose={() =>
-               setIsMenuOpen(false)} />}
-          </Box>
-        </Box>
-        
       </Box>
+
+      {/* -- COMMENTO -- Overlay MenuGallery in-page */}
+      {showMenu && <MenuGallery onClose={() => setShowMenu(false)} />}
     </GestioneNavbar>
   );
 }

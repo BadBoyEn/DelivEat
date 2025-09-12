@@ -1,52 +1,94 @@
-//Catalogo da sfogliare, le immagini da images; va a posto di novita' del menu:
-import { useState } from "react";
+// -- COMMENTO -- MenuGallery: overlay in-page, 3/2/1 immagini visibili, scroll a blocchi
+// -- COMMENTO -- qua puoi inserire le foto del catagolo menu
+import React, { useMemo, useState, useEffect } from "react";
 import "./GestioneHomePage.css";
-import galleryImages from "../../assets/galleryImages"; // array con le immagini
+
+// -- COMMENTO -- Import immagini (assicurati che i file esistano in src/Images con questi nomi)
+import carbonara from "../../Images/carbonara.jpg";
+import cotoletta from "../../Images/cotoletta.jpg";
+import tiramisu from "../../Images/tiramisu.jpg";
+// import pizza from "../../Images/pizza.jpg"; // -- COMMENTO -- RIMOSSO per evitare ReferenceError
+import insalata from "../../Images/insalata.jpg";
+import frittura from "../../Images/frittura.jpg";
 
 export default function MenuGallery({ onClose }) {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  // -- COMMENTO -- Elenco immagini (nessun riferimento a 'pizza' per evitare errori)
+  const items = useMemo(
+    () => [
+      { title: "Carbonara", src: carbonara },
+      { title: "Cotoletta", src: cotoletta },
+      { title: "Tiramisù", src: tiramisu },
+      { title: "Insalata", src: insalata },
+      { title: "Frittura", src: frittura },
+    ],
+    []
+  );
 
-  const nextImage = () => {
-    if (currentIndex < galleryImages.length - 1) {
-      setCurrentIndex(currentIndex + 1);
-    }
+  // -- COMMENTO -- Quante card mostrare: 3 desktop, 2 tablet, 1 mobile
+  const getVisibleCount = () => {
+    if (typeof window === "undefined") return 3;
+    const w = window.innerWidth;
+    if (w < 600) return 1;
+    if (w < 900) return 2;
+    return 3;
   };
 
-  const prevImage = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
+  const [visibleCount, setVisibleCount] = useState(getVisibleCount());
+  const [start, setStart] = useState(0);
+
+  useEffect(() => {
+    const handler = () => setVisibleCount(getVisibleCount());
+    window.addEventListener("resize", handler);
+    return () => window.removeEventListener("resize", handler);
+  }, []);
+
+  const visibleItems = useMemo(() => {
+    if (!items?.length) return [];
+    const out = [];
+    for (let i = 0; i < Math.min(visibleCount, items.length); i++) {
+      out.push(items[(start + i) % items.length]);
     }
+    return out;
+  }, [start, items, visibleCount]);
+
+  const goPrev = () => {
+    if (!items.length) return;
+    setStart((prev) => (prev - visibleCount + items.length) % items.length);
+  };
+
+  const goNext = () => {
+    if (!items.length) return;
+    setStart((prev) => (prev + visibleCount) % items.length);
   };
 
   return (
-    <div className="gallery-overlay fullscreen">
-      <div className="gallery-frame active">
-       <div className="nav-buttons">
-        <button
-          className={`arrow left ${currentIndex === 0 ? "disabled" : ""}`}
-          onClick={prevImage}
-          disabled={currentIndex === 0}
-        >
-          ◀
-        </button>
+    <div className="mg-overlay">
+      <div
+        className="mg-frame"
+        style={{ "--mg-visible": String(visibleCount) }}  // -- COMMENTO -- CSS var come stringa
+      >
+        <div className="mg-header">
+          <h4 className="mg-title">Catalogo menù</h4>
+        </div>
 
-        <img src={galleryImages[currentIndex]} alt={`Menu ${currentIndex + 1}`} />
+        {visibleItems.length ? (
+          <div className="mg-rail">
+            {visibleItems.map((it, idx) => (
+              <div key={`${it.title}-${idx}`} className="mg-card">
+                <img src={it.src} alt={it.title} className="mg-img" />
+                <div className="mg-caption">{it.title}</div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="mg-empty">Nessuna immagine trovata in <code>src/Images</code>.</div>
+        )}
 
-        <button
-          className={`arrow right ${
-            currentIndex === galleryImages.length - 1 ? "disabled" : ""
-          }`}
-          onClick={nextImage}
-          disabled={currentIndex === galleryImages.length - 1}
-        >
-          ▶
-        </button>
-        </div> 
+        <button type="button" className="mg-arrow mg-left" onClick={goPrev} aria-label="precedente">‹</button>
+        <button type="button" className="mg-arrow mg-right" onClick={goNext} aria-label="successivo">›</button>
+
+        <button className="close-btn" onClick={onClose} aria-label="chiudi">×</button>
       </div>
-
-      <button className="close-btn" onClick={onClose}>
-        ×
-      </button>
     </div>
   );
 }
