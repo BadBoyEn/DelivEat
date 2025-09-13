@@ -5,8 +5,12 @@ import "./GestioneHomePage.css";
 
 // -- COMMENTO -- Import immagini (assicurati che i file esistano in src/Images con questi nomi)
 import carbonara from "../../Images/carbonara.jpg";
+import panna from "../../Images/panna.jpg";
+import pesto from "../../Images/pesto.jpg";
 import cotoletta from "../../Images/cotoletta.jpg";
 import tiramisu from "../../Images/tiramisu.jpg";
+import ciocco from "../../Images/ciocco.jpg";
+import sorbetto from "../../Images/sorbetto.jpg";
 // import pizza from "../../Images/pizza.jpg"; // -- COMMENTO -- RIMOSSO per evitare ReferenceError
 import insalata from "../../Images/insalata.jpg";
 import frittura from "../../Images/frittura.jpg";
@@ -16,10 +20,14 @@ export default function MenuGallery({ onClose }) {
   const items = useMemo(
     () => [
       { title: "Carbonara", src: carbonara },
+      { title: "Panna", src: panna },
+      { title: "Pesto", src: pesto },
       { title: "Cotoletta", src: cotoletta },
-      { title: "Tiramisù", src: tiramisu },
       { title: "Insalata", src: insalata },
       { title: "Frittura", src: frittura },
+      { title: "Tiramisù", src: tiramisu },
+      { title: "Souflè al cioccolato", src: ciocco },
+      { title: "Sorbetto", src: sorbetto },
     ],
     []
   );

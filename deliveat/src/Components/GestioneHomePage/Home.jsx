@@ -16,7 +16,7 @@ export default function Home() {
     <GestioneNavbar>
       <Box className="home-hero">
         <Box className="hero-left">
-          <img src={DelivEat} alt="DelivEat" width={280} height={222} />
+          <img src={DelivEat} alt="DelivEat" width={310} height={252} />
 
           <Typography variant="h5" className="catchphrase">
             Ordina in pochi click!
