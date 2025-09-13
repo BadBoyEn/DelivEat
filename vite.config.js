@@ -1,8 +1,8 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// -- COMMENTO -- Configurazione Vite con alias @ → /src
 export default defineConfig({
+  base: '/DelivEat/',
   plugins: [react()],
   resolve: {
     alias: {
