@@ -1,0 +1,86 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.icon-DelivEat_logo {
+  background-image: url('../../../Images/DelivEat_logo.png');
+  width: 100px;
+  height: 100px;
+}
+
+/* -- COMMENTO -- Area contenuto che cresce */
+.page-main {
+  flex: 1;
+  max-width: 960px;   
+  width: 100%;
+  margin: 0 auto;     
+  padding: 2rem 1.5rem;
+  text-align: center; 
+}
+
+/* -- COMMENTO -- Header (AppBar) */
+.appbar-custom {
+  border-bottom: 1px solid transparent; 
+}
+
+/* -- COMMENTO -- Toolbar centrale con menù */
+.toolbar-custom {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  padding: 16px 12px 18px 12px;
+}
+
+/* -- COMMENTO -- Box del logo a sinistra */
+.logo-home {
+  transform: scale(0.8);
+}
+
+/* -- COMMENTO -- Box pulsanti di navigazione */
+.links-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* -- COMMENTO -- Switch tema in alto a destra */
+.color-switch-home {
+  position: absolute;
+  right: 0.4rem;
+}
+
+/* -- COMMENTO -- Footer in fondo */
+.footer-custom,
+.footer2-custom {
+  padding: 1.5rem;
+  text-align: center;
+  margin-top: auto;
+  background-color: var(--footer-bg, var(--surface-2));
+  color: var(--footer-text);
+}
+
+/* -- COMMENTO -- Responsive navbar */
+@media (max-width: 720px) {
+  .toolbar-custom {
+    justify-content: space-between;
+    gap: 0;
+  }
+  .logo-home {
+    transform: scale(0.36);
+    margin-left: -8px;
+  }
+}
+
+/* Desktop: mostra links-box, nascondi mobile */
+.desktop-menu { display: flex; }
+.mobile-menu { display: none; }
+
+/* Mobile: nascondi links-box, mostra icona tre pallini */
+@media (max-width: 720px) {
+  .desktop-menu { display: none; }
+  .mobile-menu { display: block; }
+}

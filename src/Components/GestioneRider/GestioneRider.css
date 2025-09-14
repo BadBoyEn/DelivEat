@@ -1,0 +1,6 @@
+.gr-page { min-height: 100vh; }
+.gr-appbar {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1px 16px; border-bottom: 1px solid var(--border-weak);
+}
+.gr-logo { font-weight: 800; }
