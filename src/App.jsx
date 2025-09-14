@@ -1,7 +1,5 @@
-// -- COMMENTO -- Router con basename per GitHub Pages
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import AppTheme from './theme/AppTheme.jsx';
-
 import HomePage from './pages/HomePage.jsx';
 import LogInPage from './pages/LogInPage.jsx';
 import SignUpPage from './pages/SignUpPage.jsx';
@@ -15,11 +13,9 @@ import InfoLegaliPage from './pages/InfoLegaliPage.jsx';
 import OrdinaPage from './pages/OrdinaPage.jsx';
 
 export default function App() {
-  const BASENAME = (import.meta.env.BASE_URL || '/').replace(/\/$/, ''); 
-
   return (
     <AppTheme>
-      <BrowserRouter basename={BASENAME}>
+      <HashRouter>
         <Routes>
           <Route path="/" element={<Navigate to="/home" replace />} />
           <Route path="/home" element={<HomePage />} />
@@ -35,7 +31,7 @@ export default function App() {
           <Route path="/home/ordina" element={<OrdinaPage />} />
           <Route path="*" element={<div style={{ padding: 24 }}>404 - Pagina non trovata</div>} />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </AppTheme>
   );
 }

@@ -1,6 +1,7 @@
 import { Typography, Box } from '@mui/material';
 import GestioneNavbar from './GestioneNavbar';
 import './GestioneNavbar.css'; 
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 
 export default function Contatti() {
   return (
@@ -26,7 +27,7 @@ export default function Contatti() {
           <Typography variant="h6" gutterBottom>Privacy</Typography>
           <Typography variant="body2">
             DelivEat tratta i dati personali degli utenti nel rispetto del regolamento europeo 2016/679 (GDPR).
-            Per maggiori dettagli consultare la nostra <a href="/privacy">Privacy Policy</a>.
+            Per maggiori dettagli consultare la nostra <link to="/privacy">Privacy Policy</link>.
           </Typography>
         </Box>
       </Box>
