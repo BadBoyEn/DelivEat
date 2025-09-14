@@ -1,3 +1,4 @@
+// -- COMMENTO -- Router con basename per GitHub Pages
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import AppTheme from './theme/AppTheme.jsx';
 
@@ -14,9 +15,11 @@ import InfoLegaliPage from './pages/InfoLegaliPage.jsx';
 import OrdinaPage from './pages/OrdinaPage.jsx';
 
 export default function App() {
+  const BASENAME = (import.meta.env.BASE_URL || '/').replace(/\/$/, ''); 
+
   return (
     <AppTheme>
-      <BrowserRouter>
+      <BrowserRouter basename={BASENAME}>
         <Routes>
           <Route path="/" element={<Navigate to="/home" replace />} />
           <Route path="/home" element={<HomePage />} />

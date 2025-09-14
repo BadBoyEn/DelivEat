@@ -5,7 +5,7 @@
 }
 
 .icon-DelivEat_logo {
-  background: url("/deliveat/src/Images/DelivEat_logo.png");
+  background-image: url('../../../Images/DelivEat_logo.png');
   width: 100px;
   height: 100px;
 }

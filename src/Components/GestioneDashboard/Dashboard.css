@@ -1,3 +1,23 @@
+.db-root{
+  /* -- COMMENTO -- Altezze/larghezze di default se non fornite dal tema */
+  --appbar-height: var(--appbar-height, 56px);
+  --sidebar-width: var(--sidebar-width, 260px);
+
+  /* -- COMMENTO -- Alias verso i token del tema con fallback sicuri */
+  --surface: var(--surface, var(--card-bg, var(--bg)));
+  --surface-2: var(--surface-2, var(--surface));
+  --border: var(--border, var(--border-weak, transparent));
+  --shadow: var(--shadow, var(--elevation-1));
+
+  --muted: var(--muted, var(--text-muted, inherit));
+
+  /* -- COMMENTO -- Stati e colori grafici agganciati al tema */
+  --positive: var(--positive, var(--accent));
+  --negative: var(--negative, var(--accent-2, var(--accent)));
+  --chart-current: var(--chart-current, var(--accent));
+  --chart-previous: var(--chart-previous, var(--accent-2, var(--accent)));
+}
+
 /* -- LAYOUT ROOT -- */
 .db-root { min-height: 100vh; display: flex; flex-direction: column; }
 
@@ -34,6 +54,10 @@
 .db-nav__item:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .db-nav__item--active { box-shadow: inset 0 0 0 2px var(--accent); }
 
+/* -- COMMENTO -- Menu semplice usato in Dashboard.jsx */
+.db-menu { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.db-menu li { padding: 8px 10px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface-2); }
+
 /* -- VERSIONE COMPATTA -- */
 /* quando si rimpicciolisce che mi cambia il box in basso */
 .db-menu-box {
@@ -51,7 +75,7 @@
 .db-col-3 { grid-column: span 3; }
 .db-col-6 { grid-column: span 6; }
 
-/* -- STUFF CARD -- */
+/* -- CARD / PANEL -- */
 .db-card {
   grid-column: span 3;
   background: var(--surface); border: 1px solid var(--border);
@@ -63,9 +87,7 @@
 .db-card__value { font-size: 1.6rem; font-weight: 800; margin-top: 2px; }
 .db-card__hint  { font-size: 0.85rem; color: var(--muted); margin-top: 2px; }
 .db-card--highlight { box-shadow: inset 0 0 0 2px var(--accent); }
-.db-grid__row:first-child .db-card { min-height: 112px; }
 
-/* -- PANEL -- */
 .db-panel {
   background: var(--surface); border: 1px solid var(--border);
   border-radius: 16px; box-shadow: var(--shadow); padding: 14px; min-height: 240px;
@@ -73,11 +95,24 @@
 }
 .db-panel:hover { transform: translateY(-1px); }
 
-/* -- TABLE -- */
-.db-table { background: var(--surface); border: 1px solid var(--border);
-  border-radius: 16px; box-shadow: var(--shadow); padding: 0; overflow: hidden; }
+/* -- COMMENTO -- Titoli e metriche per le panel-statistiche usate in Dashboard.jsx */
+.db-panel__title { font-size: 0.95rem; font-weight: 600; color: var(--muted); margin-bottom: 6px; }
+.db-metric { font-size: 1.6rem; font-weight: 800; }
+.db-hint { font-size: 0.85rem; color: var(--muted); margin-top: 4px; }
 
-.db-table__table { width: 100%; border-collapse: collapse; }
+/* -- Prima riga statistiche: altezza minima delle card */
+.db-grid__row:first-child .db-panel { min-height: 112px; }
+
+/* -- TABLE -- */
+.db-table {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; box-shadow: var(--shadow); padding: 0; overflow: hidden;
+}
+
+/* -- COMMENTO -- Abilita scroll orizzontale su viewport stretti */
+.db-table { overflow-x: auto; }
+.db-table__table { width: 100%; border-collapse: collapse; min-width: 760px; }
+
 .db-table__th, .db-table__td { padding: 10px 12px; border-bottom: 1px solid var(--border); text-align: left; }
 .db-table__thead .db-table__th { background: var(--surface-2); font-weight: 600; }
 .db-table__tbody tr:nth-child(odd) .db-table__td { background: var(--surface-2); }
@@ -85,11 +120,8 @@
 .status--bad { color: var(--negative); }
 
 /* -- COMMENTO -- Legenda grafico */
-
 .db-legend{ display:flex; align-items:center; gap:16px; padding: 4px 0 8px; }
-.db-legend .legend{
-  width:14px; height:14px; display:inline-block; border-radius:3px;
-}
+.db-legend .legend{ width:14px; height:14px; display:inline-block; border-radius:3px; }
 .db-legend .legend.current{ background: var(--chart-current); }
 .db-legend .legend.previous{ background: var(--chart-previous); }
 
@@ -117,4 +149,12 @@
 /* -- MOTION SAFE --*/
 @media (prefers-reduced-motion: reduce) {
   .db-card, .db-panel, .db-nav__item { transition: none; }
+}
+
+/* -- ACCESSIBILITÀ: focus visibile coerente */
+.db-nav__item:focus-visible,
+.db-card:focus-visible,
+.db-panel:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }

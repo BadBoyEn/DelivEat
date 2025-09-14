@@ -1,9 +1,6 @@
-// -- COMMENTO -- MenuGallery: overlay in-page, 3/2/1 immagini visibili, scroll a blocchi
-// -- COMMENTO -- qua puoi inserire le foto del catagolo menu
 import React, { useMemo, useState, useEffect } from "react";
 import "./GestioneHomePage.css";
 
-// -- COMMENTO -- Import immagini (assicurati che i file esistano in src/Images con questi nomi)
 import carbonara from "../../Images/carbonara.jpg";
 import panna from "../../Images/panna.jpg";
 import pesto from "../../Images/pesto.jpg";
@@ -11,7 +8,6 @@ import cotoletta from "../../Images/cotoletta.jpg";
 import tiramisu from "../../Images/tiramisu.jpg";
 import ciocco from "../../Images/ciocco.jpg";
 import sorbetto from "../../Images/sorbetto.jpg";
-// import pizza from "../../Images/pizza.jpg"; // -- COMMENTO -- RIMOSSO per evitare ReferenceError
 import insalata from "../../Images/insalata.jpg";
 import frittura from "../../Images/frittura.jpg";
 

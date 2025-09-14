@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import GestioneNavbar from './GestioneNavbar/GestioneNavbar';
 import './GestioneNavbar/GestioneNavbar.css';
 import './GestioneHomePage.css';
-import DelivEat from "../../Images/DelivEat_logo2.png";
+import logo from "../../Images/DelivEat_logo2.png";
 import MenuGallery from './MenuGallery';
 
 export default function Home() {
@@ -16,7 +16,7 @@ export default function Home() {
     <GestioneNavbar>
       <Box className="home-hero">
         <Box className="hero-left">
-          <img src={DelivEat} alt="DelivEat" width={310} height={252} />
+          <img src={logo} alt="logo" width={310} height={252} />
 
           <Typography variant="h5" className="catchphrase">
             Ordina in pochi click!

@@ -1,9 +1,24 @@
 import axios from 'axios';
 
-const baseURL =
+const IS_DEV  = import.meta.env.DEV;
+const IS_PROD = import.meta.env.PROD;
+
+// -- COMMENTO -- URL letto dalle env (build-time)
+const ENV_URL =
+  (import.meta.env.VITE_API_URL && import.meta.env.VITE_API_URL.trim()) ||
   (import.meta.env.VITE_API_BASE_URL && import.meta.env.VITE_API_BASE_URL.trim()) ||
   (import.meta.env.VITE_API_BASE && import.meta.env.VITE_API_BASE.trim()) ||
-  '/api';
+  '';
+
+// -- COMMENTO -- Fallback hard-coded per PRODUCTION (Render)
+const PROD_FALLBACK = 'https://deliveatbackend.onrender.com/api';
+
+// -- COMMENTO -- In dev uso proxy /api
+const baseURL = IS_DEV ? '/api' : (ENV_URL || PROD_FALLBACK);
+
+if (IS_PROD && !ENV_URL) {
+  console.warn('[API] In produzione manca VITE_API_URL: baseURL=', baseURL);
+}
 
 // -- COMMENTO -- Creazione client
 const api = axios.create({
@@ -20,8 +35,7 @@ const api = axios.create({
 // -- COMMENTO -- Interceptor REQUEST: aggiunge Bearer token se presente (flusso RIDER)
 api.interceptors.request.use(
   (config) => {
-    // -- COMMENTO -- token salvato dal login RIDER (se lo usi con localStorage)
-    const t = localStorage.getItem('token');
+    const t = localStorage.getItem('token'); // -- COMMENTO -- token RIDER
     if (t && !config.headers?.Authorization) {
       config.headers = config.headers || {};
       config.headers.Authorization = `Bearer ${t}`;
@@ -42,8 +56,6 @@ api.interceptors.response.use(
       data?.message ||
       err?.message ||
       'Errore';
-
-    // -- COMMENTO -- ritorna un errore 
     return Promise.reject({ status, message: msg });
   }
 );

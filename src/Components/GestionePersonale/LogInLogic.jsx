@@ -87,6 +87,7 @@ export function useLogInLogic() {
       if (err?.status === 401 && /manager errata/i.test(err?.message || '')) {
         setPasswordError(true);
         setPasswordErrorMessage('Password del manager errata');
+        console.error('Login manager failed:', err);
         return;
       }
 
@@ -94,12 +95,14 @@ export function useLogInLogic() {
       if (err?.status === 400 || err?.status === 401) {
         setPasswordError(true);
         setPasswordErrorMessage(err?.message || 'Email o password errati');
+        console.error('Login manager failed:', err);
         return;
       }
 
       // -- COMMENTO -- Errori generici (rete/server)
       setPasswordError(true);
       setPasswordErrorMessage(err?.message || 'Errore di accesso');
+      console.error('Login manager failed:', err);
     }
   };
 
