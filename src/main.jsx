@@ -1,15 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { HashRouter } from 'react-router-dom'   
+import { HashRouter } from 'react-router-dom'
 import App from './App.jsx'
 import AppTheme from './theme/AppTheme.jsx'
-import ErrorBoundary from './ErrorBoundary.jsx'  
+import ErrorBoundary from './ErrorBoundary.jsx'
+import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <ErrorBoundary>                               
-      <HashRouter>
-        <AppTheme>
+    <ErrorBoundary>                 
+      <HashRouter>                  
+        <AppTheme>                  
           <App />
         </AppTheme>
       </HashRouter>

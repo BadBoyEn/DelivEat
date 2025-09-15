@@ -11,16 +11,13 @@ export default function ColorModeSelect(props) {
 
   return (
     <IconButton
+      onClick={colorMode.toggleColorMode}
       sx={{
         ml: 1,
         transition: 'transform 0.4s ease, color 0.4s ease',
-        '&:active': {
-          transform: 'rotate(180deg)',
-        }
+        '&:hover': { transform: 'scale(1.06)' }
       }}
-      onClick={() => colorMode.toggleColorMode()}
-      color="inherit"
-      aria-label="Toggle color mode"
+      aria-label="Cambia tema"
       {...props}
     >
       <span
