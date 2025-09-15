@@ -37,11 +37,9 @@ function TextCard({ title, children }) {
   );
 }
 
-<<<<<<< HEAD
+
 /* -- COMMENTO -- MENU LATERALE -- */
-=======
-/* -- COMMENTO -- MENU LATERALE (solo 4 voci, con classi per layout responsive 2x2) -- */
->>>>>>> 94aeeb0340c024fda10f3f5219ae8ed7234ed5e4
+
 function MenuPanel() {
   // -- COMMENTO -- RIMOSSI "Clienti" e "Impostazioni" come richiesto
   const voci = [
@@ -75,10 +73,9 @@ function MainGrid() {
 
   const itNum = (n) => Number(n || 0).toLocaleString('it-IT');
 
-<<<<<<< Updated upstream
-=======
+
   // -- COMMENTO -- campi già normalizzati dall'hook
->>>>>>> Stashed changes
+
   const ordini30    = summary?.ordersLastNDays ?? 0;
   const riderAttivi = summary?.ridersActive ?? summary?.ridersTotal ?? 0;
   const riderPct    = summary?.ridersDeltaPct ?? 0;
