@@ -5,7 +5,8 @@ export default defineConfig({
   base: '/DelivEat/',                 
   plugins: [react()],
   resolve: {
-    alias: { '@': '/src' }
+    alias: { '@': '/src' },
+    dedupe: ['react', 'react-dom']     // -- COMMENTO -- evita doppie copie
   },
   server: {
     port: 3000,
@@ -33,5 +34,6 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: true                   
-  }
+  },
+  optimizeDeps: { include: ['react', 'react-dom'] }  // -- COMMENTO -- prebundle esplicito
 })
