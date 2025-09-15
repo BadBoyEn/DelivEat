@@ -15,9 +15,7 @@ export default defineConfig({
       '/api': {
         target: 'http://localhost:5000',
         changeOrigin: true,           // -- COMMENTO -- setta Origin = target (aiuta CORS)
-        secure: false,                // -- COMMENTO -- ok in http locale
-        // -- COMMENTO -- opzionale: se vuoi vedere le richieste proxate in console
-        // configure: (proxy, options) => { proxy.on('proxyReq', (proxyReq) => console.log('[proxy]/api', proxyReq.getHeader('host'))); }
+        secure: false                 // -- COMMENTO -- ok in http locale
       },
 
       // -- COMMENTO -- Proxy WebSocket per Socket.IO
@@ -29,5 +27,8 @@ export default defineConfig({
       }
     }
   },
-  build: { outDir: 'dist' }
+  build: { 
+    outDir: 'dist',
+    sourcemap: true                   // -- COMMENTO -- abilita mappe sorgenti in build prod → stack leggibili
+  }
 })
