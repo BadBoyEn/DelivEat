@@ -8,49 +8,49 @@ export function useDashboard(days = 30) {
   const [summary, setSummary] = useState(null);
   const [recent, setRecent] = useState([]);
 
-  // -- COMMENTO -- Carica riepilogo + ultimi ordini con fallback /recent -> /recent-orders
   const load = async () => {
-  setLoading(true);
-  try {
-    const [s, r] = await Promise.all([
-      api.get(`/dashboard/summary?days=${days}`),
-      api.get('/dashboard/recent-orders?limit=7'), // -- COMMENTO -- QUI il fix definitivo
-    ]);
-    setSummary(s.data);
-    const rows = (r.data || []).map((o, i) => ({ idx: i + 1, ...o }));
-    setRecent(rows);
-  } finally {
-    setLoading(false);
-  }
-};
+    setLoading(true);
+    try {
+      const [s, r] = await Promise.all([
+        api.get(`/dashboard/summary?days=${days}`),
+        // -- COMMENTO -- compat: alcuni BE usano /recent, altri /recent-orders
+        api.get('/dashboard/recent-orders').catch(() => api.get('/dashboard/recent'))
+      ]);
+      setSummary(s.data);
+      setRecent(r.data?.orders || r.data || []);
+    } catch (e) {
+      console.error('useDashboard load error', e);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  useEffect(() => { load(); }, [days]);
-
-  // -- COMMENTO -- Socket: aggiorna stato nella tabella quando cambia dal Rider
   useEffect(() => {
-    const onStatus = ({ token, status }) => {
-      setRecent(prev => prev.map(o => (o.token === token || o.id === token) ? { ...o, status } : o));
-    };
-    if (!socket.connected) socket.connect();
-    socket.on('order_status_updated', onStatus);
-    return () => socket.off('order_status_updated', onStatus);
+    load();
+  }, [days]);
+
+  // -- COMMENTO -- socket live update (se server emette "order:new")
+  useEffect(() => {
+    if (!socket) return;
+    const handler = (order) => setRecent((prev) => [order, ...prev].slice(0, 10));
+    socket.on('order:new', handler);
+    return () => socket.off('order:new', handler);
   }, []);
 
-  // -- COMMENTO -- Dati per il grafico LineChart
+  // -- COMMENTO -- dati per grafico
   const chartData = useMemo(() => {
-    if (!summary) return [];
-    return summary.labels.map((label, i) => ({
-      day: label,
-      current: summary.seriesCurrent[i] || 0,
+    if (!summary?.series || !summary?.seriesPrevious) return [];
+    return summary.series.map((v, i) => ({
+      day: summary.labels?.[i] ?? `D${i+1}`,
+      current: v || 0,
       previous: summary.seriesPrevious[i] || 0,
     }));
   }, [summary]);
 
-  // -- COMMENTO -- % variazione ordini ultimi N giorni vs periodo precedente
   const ordersDeltaPct = useMemo(() => {
     if (!summary) return 0;
-    const { ordersLastNDays, ordersPrevNDays } = summary;
-    if (ordersPrevNDays === 0) return 100;
+    const { ordersLastNDays = 0, ordersPrevNDays = 0 } = summary;
+    if (ordersPrevNDays === 0) return ordersLastNDays > 0 ? 100 : 0;
     return Math.round(((ordersLastNDays - ordersPrevNDays) / ordersPrevNDays) * 100);
   }, [summary]);
 
