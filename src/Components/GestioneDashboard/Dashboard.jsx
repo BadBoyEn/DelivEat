@@ -5,7 +5,7 @@ import { useDashboard } from './SettingDashboard';
 import SessionsChart from './SessionsChart';
 import RecentOrdersTable from './RecentOrdersTable';
 
-/* -- HEADER-BAR -- */
+/* -- COMMENTO -- HEADER-BAR -- */
 function AppNavbar() {
   return (
     <header className="db-appbar">
@@ -15,7 +15,7 @@ function AppNavbar() {
   );
 }
 
-/* -- CARD METRICA -- */
+/* -- COMMENTO -- CARD METRICA -- */
 function StatCard({ title, value, hint }) {
   return (
     <div className="db-panel db-col-3">
@@ -26,7 +26,7 @@ function StatCard({ title, value, hint }) {
   );
 }
 
-/* -- CARD TESTO (senza evidenziato) -- */
+/* -- COMMENTO -- CARD TESTO (senza evidenziato) -- */
 function TextCard({ title, children }) {
   return (
     <div className="db-panel db-col-3">
@@ -36,7 +36,7 @@ function TextCard({ title, children }) {
   );
 }
 
-/* -- MENU LATERALE -- */
+/* -- COMMENTO -- MENU LATERALE -- */
 function MenuPanel() {
   const voci = ['Overview', 'HomePage', 'Clienti', 'Rider', 'Report', 'Impostazioni'];
   return (
@@ -49,25 +49,36 @@ function MenuPanel() {
   );
 }
 
-/* -- GRIGLIA PRINCIPALE -- */
+/* -- COMMENTO -- GRIGLIA PRINCIPALE -- */
 function MainGrid() {
   const { loading, summary, chartData, recent, ordersDeltaPct } = useDashboard(30);
 
-  const ordini30 = summary?.ordersLastNDays ?? 0;
-  const riderAttivi = summary?.ridersTotal ?? 0;
-  const riderPct = summary?.ridersDeltaPct ?? 0;
+  const itNum = (n) => Number(n || 0).toLocaleString('it-IT');
+
+  // -- COMMENTO -- campi già normalizzati dall'hook
+  const ordini30    = summary?.ordersLastNDays ?? 0;
+  const riderAttivi = summary?.ridersActive ?? summary?.ridersTotal ?? 0;
+  const riderPct    = summary?.ridersDeltaPct ?? 0;
 
   return (
     <>
-      {/* Statistiche in alto */}
+      {/* -- COMMENTO -- Statistiche in alto */}
       <section className="db-grid__row">
-        <StatCard title="Ordini (30 gg)" value={ordini30.toLocaleString()} hint={`${ordersDeltaPct >= 0 ? '+' : ''}${ordersDeltaPct}% vs prec.`} />
-        <StatCard title="Rider attivi" value={riderAttivi.toLocaleString()} hint={`${riderPct >= 0 ? '+' : ''}${riderPct}% vs prec.`} />
+        <StatCard
+          title="Ordini (30 gg)"
+          value={loading ? '—' : itNum(ordini30)}
+          hint={loading ? '' : `${ordersDeltaPct >= 0 ? '+' : ''}${ordersDeltaPct}% vs prec.`}
+        />
+        <StatCard
+          title="Rider attivi"
+          value={loading ? '—' : itNum(riderAttivi)}
+          hint={loading ? '' : `${riderPct >= 0 ? '+' : ''}${riderPct}% vs prec.`}
+        />
         <StatCard title="Tempo medio consegna" value="27 min" hint="-2 min vs prec." />
         <TextCard title="Esplora i tuoi dati">Scopri insight su performance e visite.</TextCard>
       </section>
 
-      {/* Grafici */}
+      {/* -- COMMENTO -- Grafici */}
       <section className="db-grid__row">
         <div className="db-panel db-col-6">
           <div className="db-panel__title">Sessioni</div>
@@ -79,11 +90,11 @@ function MainGrid() {
         </div>
         <div className="db-panel db-col-6">
           <div className="db-panel__title">Page Views</div>
-          <div style={{opacity:.8}}>Inserisci qui il tuo bar chart.</div>
+          <div style={{ opacity: .8 }}>Inserisci qui il tuo bar chart.</div>
         </div>
       </section>
 
-      {/* Dettagli */}
+      {/* -- COMMENTO -- Dettagli */}
       <section className="db-grid__row">
         <RecentOrdersTable orders={recent} />
         <MenuPanel />

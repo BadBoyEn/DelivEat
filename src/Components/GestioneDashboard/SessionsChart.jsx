@@ -11,7 +11,7 @@ export default function SessionsChart({ data }) {
           <Tooltip />
           <Legend />
           {/* -- COMMENTO -- Colori dal tema */}
-          <Line type="monotone" dataKey="current" name="Ordini 30 giorni" stroke="var(--chart-current)" strokeWidth={2} dot={false} />
+          <Line type="monotone" dataKey="current"  name="Ordini 30 giorni"       stroke="var(--chart-current)"  strokeWidth={2} dot={false} />
           <Line type="monotone" dataKey="previous" name="Ordini mese precedente" stroke="var(--chart-previous)" strokeWidth={2} dot={false} />
         </LineChart>
       </ResponsiveContainer>
