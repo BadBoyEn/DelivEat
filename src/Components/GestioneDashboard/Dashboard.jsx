@@ -4,8 +4,9 @@ import ColorModeSelect from '../../theme/ColorModeSelect';
 import { useDashboard } from './SettingDashboard';
 import SessionsChart from './SessionsChart';
 import RecentOrdersTable from './RecentOrdersTable';
+import { Link } from 'react-router-dom';   
 
-/* -- COMMENTO -- HEADER-BAR -- */
+/* -- HEADER-BAR -- */
 function AppNavbar() {
   return (
     <header className="db-appbar">
@@ -15,7 +16,7 @@ function AppNavbar() {
   );
 }
 
-/* -- COMMENTO -- CARD METRICA -- */
+/* -- CARD METRICA -- */
 function StatCard({ title, value, hint }) {
   return (
     <div className="db-panel db-col-3">
@@ -26,7 +27,7 @@ function StatCard({ title, value, hint }) {
   );
 }
 
-/* -- COMMENTO -- CARD TESTO (senza evidenziato) -- */
+/* -- CARD TESTO (senza evidenziato) -- */
 function TextCard({ title, children }) {
   return (
     <div className="db-panel db-col-3">
@@ -36,49 +37,57 @@ function TextCard({ title, children }) {
   );
 }
 
-/* -- COMMENTO -- MENU LATERALE -- */
+/* -- MENU LATERALE -- */
 function MenuPanel() {
-  const voci = ['Overview', 'HomePage', 'Clienti', 'Rider', 'Report', 'Impostazioni'];
+  // -- COMMENTO -- metto la voce HomePage come Link
+  const voci = [
+    { label: 'Overview', path: '#' },
+    { label: 'HomePage', path: '/' },        // ⬅️ collegata a /
+    { label: 'Clienti', path: '#' },
+    { label: 'Rider', path: '#' },
+    { label: 'Report', path: '#' },
+    { label: 'Impostazioni', path: '#' },
+  ];
+
   return (
     <div className="db-panel db-col-3">
       <div className="db-panel__title">Menu</div>
       <ul className="db-menu">
-        {voci.map(v => <li key={v}>{v}</li>)}
+        {voci.map(v => (
+          <li key={v.label}>
+            {v.path === '#' ? (
+              v.label
+            ) : (
+              <Link to={v.path}>{v.label}</Link>   {/* ⬅️ Link a HomePage */}
+            )}
+          </li>
+        ))}
       </ul>
     </div>
   );
 }
 
-/* -- COMMENTO -- GRIGLIA PRINCIPALE -- */
+/* -- GRIGLIA PRINCIPALE -- */
 function MainGrid() {
   const { loading, summary, chartData, recent, ordersDeltaPct } = useDashboard(30);
 
   const itNum = (n) => Number(n || 0).toLocaleString('it-IT');
 
-  // -- COMMENTO -- campi già normalizzati dall'hook
   const ordini30    = summary?.ordersLastNDays ?? 0;
   const riderAttivi = summary?.ridersActive ?? summary?.ridersTotal ?? 0;
   const riderPct    = summary?.ridersDeltaPct ?? 0;
 
   return (
     <>
-      {/* -- COMMENTO -- Statistiche in alto */}
+      {/* Statistiche in alto */}
       <section className="db-grid__row">
-        <StatCard
-          title="Ordini (30 gg)"
-          value={loading ? '—' : itNum(ordini30)}
-          hint={loading ? '' : `${ordersDeltaPct >= 0 ? '+' : ''}${ordersDeltaPct}% vs prec.`}
-        />
-        <StatCard
-          title="Rider attivi"
-          value={loading ? '—' : itNum(riderAttivi)}
-          hint={loading ? '' : `${riderPct >= 0 ? '+' : ''}${riderPct}% vs prec.`}
-        />
+        <StatCard title="Ordini (30 gg)" value={loading ? '—' : itNum(ordini30)} hint={`${ordersDeltaPct >= 0 ? '+' : ''}${ordersDeltaPct}% vs prec.`} />
+        <StatCard title="Rider attivi" value={loading ? '—' : itNum(riderAttivi)} hint={`${riderPct >= 0 ? '+' : ''}${riderPct}% vs prec.`} />
         <StatCard title="Tempo medio consegna" value="27 min" hint="-2 min vs prec." />
         <TextCard title="Esplora i tuoi dati">Scopri insight su performance e visite.</TextCard>
       </section>
 
-      {/* -- COMMENTO -- Grafici */}
+      {/* Grafici */}
       <section className="db-grid__row">
         <div className="db-panel db-col-6">
           <div className="db-panel__title">Sessioni</div>
@@ -90,11 +99,11 @@ function MainGrid() {
         </div>
         <div className="db-panel db-col-6">
           <div className="db-panel__title">Page Views</div>
-          <div style={{ opacity: .8 }}>Inserisci qui il tuo bar chart.</div>
+          <div style={{opacity:.8}}>Inserisci qui il tuo bar chart.</div>
         </div>
       </section>
 
-      {/* -- COMMENTO -- Dettagli */}
+      {/* Dettagli */}
       <section className="db-grid__row">
         <RecentOrdersTable orders={recent} />
         <MenuPanel />
