@@ -1,7 +1,10 @@
 import React from 'react';
 
 export default function RecentOrdersTable({ orders }) {
-  const rows = orders || [];
+  const rows = Array.isArray(orders) ? orders : [];
+
+  const safe = (v) => (v ?? '').toString();
+
   return (
     <div className="db-panel db-col-9">
       <div className="db-panel__title">Ultimi ordini</div>
@@ -16,12 +19,12 @@ export default function RecentOrdersTable({ orders }) {
             </tr>
           </thead>
           <tbody className="db-table__tbody">
-            {rows.map((o) => (
-              <tr key={o.id}>
-                <td className="db-table__td">{o.idx}</td>
-                <td className="db-table__td">{`ORD-${String(o.id || '').slice(-4)}`}</td>
-                <td className="db-table__td">{o.customerName || '—'}</td>
-                <td className="db-table__td">{o.status}</td>
+            {rows.map((o, i) => (
+              <tr key={o._id || o.id || i}>
+                <td className="db-table__td">{i + 1}</td>
+                <td className="db-table__td">{safe(o.code || o.orderCode || o._id || o.id)}</td>
+                <td className="db-table__td">{safe(o.customer?.name || o.cliente || o.customerName)}</td>
+                <td className="db-table__td">{safe(o.status || o.stato || '—')}</td>
               </tr>
             ))}
             {rows.length === 0 && (

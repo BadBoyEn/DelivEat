@@ -1,9 +1,6 @@
 import axios from 'axios';
 
 const IS_DEV  = import.meta.env.DEV;
-const IS_PROD = import.meta.env.PROD;
-
-// -- COMMENTO -- URL da env
 const ENV_URL =
   (import.meta.env.VITE_API_URL && import.meta.env.VITE_API_URL.trim()) ||
   (import.meta.env.VITE_API_BASE_URL && import.meta.env.VITE_API_BASE_URL.trim()) ||
@@ -13,23 +10,22 @@ const ENV_URL =
 // -- COMMENTO -- Fallback hard-coded per PRODUCTION (Render)
 const PROD_FALLBACK = 'https://deliveatbackend.onrender.com/api';
 
-// -- COMMENTO -- In dev uso proxy /api
-const baseURL = IS_DEV
-  ? '/api'
-  : (ENV_URL || PROD_FALLBACK);
+// -- COMMENTO -- In dev uso il proxy vite su /api, in prod ENV_URL o fallback
+const baseURL = IS_DEV ? (ENV_URL || '/api') : (ENV_URL || PROD_FALLBACK);
 
+// -- COMMENTO -- Istanza Axios condivisa con cookie
 const api = axios.create({
   baseURL,
-  withCredentials: true, // -- COMMENTO -- cookie HttpOnly dal BE
-  timeout: 15000,
+  withCredentials: true,
+  headers: { 'Content-Type': 'application/json' },
+  timeout: 20000,
 });
 
-// -- COMMENTO -- Interceptor richiesta: se esiste token del rider lo aggiungo (Bearer) per rotte rider
+// -- COMMENTO -- Interceptor richiesta: opzionale bearer se presente in localStorage
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem('token');
-  if (token) {
-    config.headers = config.headers || {};
-    config.headers.Authorization = `Bearer ${token}`;
+  const t = localStorage.getItem('token');
+  if (t && !config.headers.Authorization) {
+    config.headers.Authorization = `Bearer ${t}`;
   }
   return config;
 });
