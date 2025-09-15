@@ -43,7 +43,7 @@ export default function GestioneNavbar({ children }) {
               <MoreVertIcon />
             </IconButton>
             <Menu anchorEl={anchorEl} open={open} onClose={handleMenuClose}>
-              <MenuItem component={Link} to="/login" onClick={handleMenuClose}>Accedi</MenuItem>
+              <MenuItem component={Link} to="/login" onClick={handleMenuClose}>Acced</MenuItem>
               <MenuItem component={Link} to="/signup" onClick={handleMenuClose}>Registrati</MenuItem>
             </Menu>
           </Box>
