@@ -4,9 +4,9 @@ import ColorModeSelect from '../../theme/ColorModeSelect';
 import { useDashboard } from './SettingDashboard';
 import SessionsChart from './SessionsChart';
 import RecentOrdersTable from './RecentOrdersTable';
-import { Link } from 'react-router-dom';   // -- COMMENTO -- Import per i link
+import { Link } from 'react-router-dom';   // -- COMMENTO -- Link per le voci cliccabili
 
-/* -- HEADER-BAR -- */
+/* -- COMMENTO -- HEADER-BAR -- */
 function AppNavbar() {
   return (
     <header className="db-appbar">
@@ -16,7 +16,7 @@ function AppNavbar() {
   );
 }
 
-/* -- CARD METRICA -- */
+/* -- COMMENTO -- CARD METRICA -- */
 function StatCard({ title, value, hint }) {
   return (
     <div className="db-panel db-col-3">
@@ -27,7 +27,7 @@ function StatCard({ title, value, hint }) {
   );
 }
 
-/* -- CARD TESTO (senza evidenziato) -- */
+/* -- COMMENTO -- CARD TESTO (senza evidenziato) -- */
 function TextCard({ title, children }) {
   return (
     <div className="db-panel db-col-3">
@@ -37,15 +37,14 @@ function TextCard({ title, children }) {
   );
 }
 
-/* -- MENU LATERALE -- */
+/* -- COMMENTO -- MENU LATERALE (solo 4 voci, con classi per layout responsive 2x2) -- */
 function MenuPanel() {
+  // -- COMMENTO -- RIMOSSI "Clienti" e "Impostazioni" come richiesto
   const voci = [
-    { label: 'Overview', path: '#' },
-    { label: 'HomePage', path: '/' },   // -- COMMENTO -- HomePage collegata a /
-    { label: 'Clienti', path: '#' },
-    { label: 'Rider', path: '#' },
-    { label: 'Report', path: '#' },
-    { label: 'Impostazioni', path: '#' },
+    { key: 'ov',    label: 'Overview',  path: '#'      },  // -- COMMENTO -- non linkata
+    { key: 'home',  label: 'HomePage',  path: '/'      },  // -- COMMENTO -- link alla home
+    { key: 'rider', label: 'Rider',     path: '#'      },  // -- COMMENTO -- non linkata
+    { key: 'rep',   label: 'Report',    path: '#'      },  // -- COMMENTO -- non linkata
   ];
 
   return (
@@ -53,7 +52,7 @@ function MenuPanel() {
       <div className="db-panel__title">Menu</div>
       <ul className="db-menu">
         {voci.map((v) => (
-          <li key={v.label}>
+          <li key={v.key} className={`db-menu__item db-menu__item--${v.key}`}>
             {v.path === '#' ? (
               v.label
             ) : (
@@ -66,7 +65,7 @@ function MenuPanel() {
   );
 }
 
-/* -- GRIGLIA PRINCIPALE -- */
+/* -- COMMENTO -- GRIGLIA PRINCIPALE -- */
 function MainGrid() {
   const { loading, summary, chartData, recent, ordersDeltaPct } = useDashboard(30);
 

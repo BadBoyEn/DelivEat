@@ -114,7 +114,8 @@
   background: var(--surface-2);
 }
 
-.db-table__th, .db-table__td {
+.db-table__th,
+.db-table__td {
   padding: 8px;
   border-bottom: 1px solid var(--border-weak);
   text-align: left;
@@ -151,4 +152,41 @@
 
 .db-menu a:hover {
   text-decoration: none;
+}
+
+/* -- COMMENTO -- Layout responsive 2x2 del menu sui piccoli schermi
+   Riga 1: Overview | HomePage
+   Riga 2: Rider    | Report
+*/
+@media (max-width: 720px) {
+  .db-menu {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 16px;
+    row-gap: 8px;
+  }
+
+  .db-menu li {
+    margin: 0; /* -- COMMENTO -- tolgo margine verticale standard */
+  }
+
+  .db-menu__item--ov {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .db-menu__item--home {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .db-menu__item--rider {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .db-menu__item--rep {
+    grid-column: 2;
+    grid-row: 2;
+  }
 }
