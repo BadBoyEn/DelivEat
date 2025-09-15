@@ -6,7 +6,7 @@ import SessionsChart from './SessionsChart';
 import RecentOrdersTable from './RecentOrdersTable';
 import { Link } from 'react-router-dom';   // -- COMMENTO -- Import per i link
 
-/* -- HEADER-BAR -- */
+/* -- COMMENTO -- HEADER-BAR -- */
 function AppNavbar() {
   return (
     <header className="db-appbar">
@@ -16,7 +16,7 @@ function AppNavbar() {
   );
 }
 
-/* -- CARD METRICA -- */
+/* -- COMMENTO -- CARD METRICA -- */
 function StatCard({ title, value, hint }) {
   return (
     <div className="db-panel db-col-3">
@@ -27,7 +27,7 @@ function StatCard({ title, value, hint }) {
   );
 }
 
-/* -- CARD TESTO (senza evidenziato) -- */
+/* -- COMMENTO -- CARD TESTO (senza evidenziato) -- */
 function TextCard({ title, children }) {
   return (
     <div className="db-panel db-col-3">
@@ -37,7 +37,7 @@ function TextCard({ title, children }) {
   );
 }
 
-/* -- MENU LATERALE -- */
+/* -- COMMENTO -- MENU LATERALE -- */
 function MenuPanel() {
   const voci = [
     { label: 'Overview', path: '#' },
@@ -66,12 +66,16 @@ function MenuPanel() {
   );
 }
 
-/* -- GRIGLIA PRINCIPALE -- */
+/* -- COMMENTO -- GRIGLIA PRINCIPALE -- */
 function MainGrid() {
   const { loading, summary, chartData, recent, ordersDeltaPct } = useDashboard(30);
 
   const itNum = (n) => Number(n || 0).toLocaleString('it-IT');
 
+<<<<<<< Updated upstream
+=======
+  // -- COMMENTO -- campi già normalizzati dall'hook
+>>>>>>> Stashed changes
   const ordini30    = summary?.ordersLastNDays ?? 0;
   const riderAttivi = summary?.ridersActive ?? summary?.ridersTotal ?? 0;
   const riderPct    = summary?.ridersDeltaPct ?? 0;
@@ -106,7 +110,7 @@ function MainGrid() {
         </div>
         <div className="db-panel db-col-6">
           <div className="db-panel__title">Page Views</div>
-          <div style={{opacity:.8}}>Inserisci qui il tuo bar chart.</div>
+          <div style={{ opacity: .8 }}>Inserisci qui il tuo bar chart.</div>
         </div>
       </section>
 
