@@ -37,7 +37,9 @@ function TextCard({ title, children }) {
   );
 }
 
-/* -- COMMENTO -- MENU LATERALE (solo 4 voci, con classi per layout responsive 2x2) -- */
+
+/* -- COMMENTO -- MENU LATERALE -- */
+
 function MenuPanel() {
   // -- COMMENTO -- RIMOSSI "Clienti" e "Impostazioni" come richiesto
   const voci = [
@@ -70,6 +72,9 @@ function MainGrid() {
   const { loading, summary, chartData, recent, ordersDeltaPct } = useDashboard(30);
 
   const itNum = (n) => Number(n || 0).toLocaleString('it-IT');
+
+
+  // -- COMMENTO -- campi già normalizzati dall'hook
 
   const ordini30    = summary?.ordersLastNDays ?? 0;
   const riderAttivi = summary?.ridersActive ?? summary?.ridersTotal ?? 0;
@@ -105,7 +110,7 @@ function MainGrid() {
         </div>
         <div className="db-panel db-col-6">
           <div className="db-panel__title">Page Views</div>
-          <div style={{opacity:.8}}>Inserisci qui il tuo bar chart.</div>
+          <div style={{ opacity: .8 }}>Inserisci qui il tuo bar chart.</div>
         </div>
       </section>
 
