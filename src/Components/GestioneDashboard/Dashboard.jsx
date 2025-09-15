@@ -4,7 +4,7 @@ import ColorModeSelect from '../../theme/ColorModeSelect';
 import { useDashboard } from './SettingDashboard';
 import SessionsChart from './SessionsChart';
 import RecentOrdersTable from './RecentOrdersTable';
-import { Link } from 'react-router-dom';   
+import { Link } from 'react-router-dom';   // -- COMMENTO -- Import per i link
 
 /* -- HEADER-BAR -- */
 function AppNavbar() {
@@ -39,10 +39,9 @@ function TextCard({ title, children }) {
 
 /* -- MENU LATERALE -- */
 function MenuPanel() {
-  // -- COMMENTO -- metto la voce HomePage come Link
   const voci = [
     { label: 'Overview', path: '#' },
-    { label: 'HomePage', path: '/' },        // ⬅️ collegata a /
+    { label: 'HomePage', path: '/' },   // -- COMMENTO -- HomePage collegata a /
     { label: 'Clienti', path: '#' },
     { label: 'Rider', path: '#' },
     { label: 'Report', path: '#' },
@@ -53,12 +52,12 @@ function MenuPanel() {
     <div className="db-panel db-col-3">
       <div className="db-panel__title">Menu</div>
       <ul className="db-menu">
-        {voci.map(v => (
+        {voci.map((v) => (
           <li key={v.label}>
             {v.path === '#' ? (
               v.label
             ) : (
-              <Link to={v.path}>{v.label}</Link>   {/* ⬅️ Link a HomePage */}
+              <Link to={v.path}>{v.label}</Link>
             )}
           </li>
         ))}
@@ -79,15 +78,23 @@ function MainGrid() {
 
   return (
     <>
-      {/* Statistiche in alto */}
+      {/* -- COMMENTO -- Statistiche in alto */}
       <section className="db-grid__row">
-        <StatCard title="Ordini (30 gg)" value={loading ? '—' : itNum(ordini30)} hint={`${ordersDeltaPct >= 0 ? '+' : ''}${ordersDeltaPct}% vs prec.`} />
-        <StatCard title="Rider attivi" value={loading ? '—' : itNum(riderAttivi)} hint={`${riderPct >= 0 ? '+' : ''}${riderPct}% vs prec.`} />
+        <StatCard
+          title="Ordini (30 gg)"
+          value={loading ? '—' : itNum(ordini30)}
+          hint={loading ? '' : `${ordersDeltaPct >= 0 ? '+' : ''}${ordersDeltaPct}% vs prec.`}
+        />
+        <StatCard
+          title="Rider attivi"
+          value={loading ? '—' : itNum(riderAttivi)}
+          hint={loading ? '' : `${riderPct >= 0 ? '+' : ''}${riderPct}% vs prec.`}
+        />
         <StatCard title="Tempo medio consegna" value="27 min" hint="-2 min vs prec." />
         <TextCard title="Esplora i tuoi dati">Scopri insight su performance e visite.</TextCard>
       </section>
 
-      {/* Grafici */}
+      {/* -- COMMENTO -- Grafici */}
       <section className="db-grid__row">
         <div className="db-panel db-col-6">
           <div className="db-panel__title">Sessioni</div>
@@ -103,7 +110,7 @@ function MainGrid() {
         </div>
       </section>
 
-      {/* Dettagli */}
+      {/* -- COMMENTO -- Dettagli */}
       <section className="db-grid__row">
         <RecentOrdersTable orders={recent} />
         <MenuPanel />
