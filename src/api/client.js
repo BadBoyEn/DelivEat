@@ -1,18 +1,17 @@
-// -- COMMENTO -- Istanza Axios SOLO per ambiente locale o URL esplicito via ENV
+// -- COMMENTO -- Istanza Axios unica, SENZA Render, baseURL '/api' (proxy in dev)
 import axios from 'axios';
 
-// -- COMMENTO -- Se vuoi forzare un URL, imposta VITE_API_URL nello .env, altrimenti usa '/api' (proxy Vite)
 const ENV_URL = (import.meta.env.VITE_API_URL ?? '').trim();
+// -- COMMENTO -- In prod GH-Pages non c'è BE: lascia vuoto VITE_API_URL
 const baseURL = ENV_URL || '/api';
 
 const api = axios.create({
   baseURL,
-  withCredentials: true,                 // -- COMMENTO -- cookie HttpOnly dal BE
+  withCredentials: true,
   timeout: 15000,
   headers: { 'X-Requested-With': 'XMLHttpRequest' }
 });
 
-// -- COMMENTO -- Normalizza errori
 api.interceptors.response.use(
   (r) => r,
   (error) => {

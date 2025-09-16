@@ -1,39 +1,21 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+// vite.config.js
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
-export default defineConfig({
-  base: '/DelivEat/',                 
-  plugins: [react()],
-  resolve: {
-    alias: { '@': '/src' },
-    dedupe: ['react', 'react-dom']     // -- COMMENTO -- evita doppie copie
-  },
-  server: {
-    port: 3000,
-    strictPort: true,                 
-    proxy: {
-      '/api': {
-        target: 'http://localhost:5000',
-        changeOrigin: true,
-        secure: false,
-        configure: (proxy) => {
-          proxy.on('proxyReq', (proxyReq) => {
-            // -- COMMENTO -- abilita cookie da BE
-            proxyReq.setHeader('Origin', 'http://localhost:3000');
-          });
-        }
-      },
-      '/socket.io': {
-        target: 'http://localhost:5000',
-        ws: true,
-        changeOrigin: true,
-        secure: false
+// -- COMMENTO -- Cambia qui se il repo ha un nome diverso
+const REPO = 'DelivEat';
+
+export default defineConfig(() => {
+  const isGhPages = process.env.GH_PAGES === 'true';
+  return {
+    base: isGhPages ? `/${REPO}/` : '/',   // -- COMMENTO -- base giusta per /{repo}/
+    plugins: [react()],
+    server: {
+      port: 3000,
+      strictPort: true,
+      proxy: {
+        '/api': { target: 'http://localhost:5000', changeOrigin: true, secure: false }
       }
     }
-  },
-  build: {
-    outDir: 'dist',
-    sourcemap: true                   
-  },
-  optimizeDeps: { include: ['react', 'react-dom'] }  // -- COMMENTO -- prebundle esplicito
-})
+  };
+});

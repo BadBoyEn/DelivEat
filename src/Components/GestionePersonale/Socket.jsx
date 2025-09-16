@@ -1,4 +1,4 @@
-// -- COMMENTO -- Disabilito Socket.io fuori da localhost (niente Render)
+// -- COMMENTO -- Socket.io abilitato solo in locale
 import { io } from 'socket.io-client';
 
 const isLocal =
@@ -7,7 +7,6 @@ const isLocal =
 
 const SOCKET_URL = isLocal ? 'http://localhost:5000' : null;
 
-// -- COMMENTO -- Se non siamo in locale, non creo nemmeno la connessione
 export const socket = SOCKET_URL
   ? io(SOCKET_URL, {
       path: '/socket.io',
