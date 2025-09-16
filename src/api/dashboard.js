@@ -1,16 +1,10 @@
-import api from './client';
+import client from './client';
 
-export async function getKpis() {
-  const { data } = await api.get('/dashboard/kpis');
-  return data;
-}
+export const getDashboardSummary = () =>
+  client.get('/dashboard/summary').then(r => r.data);
 
-export async function getLastOrders(limit = 7) {
-  const { data } = await api.get('/dashboard/last-orders', { params: { limit } });
-  return data;
-}
+export const getLast7Orders = () =>
+  client.get('/dashboard/orders/last7').then(r => r.data);
 
-export async function getSessions() {
-  const { data } = await api.get('/dashboard/sessions');
-  return data;
-}
+export const getOrdersByDayLast30 = () =>
+  client.get('/dashboard/orders/last30days').then(r => r.data);

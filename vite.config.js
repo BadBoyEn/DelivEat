@@ -2,17 +2,20 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
+<<<<<<< HEAD
   base: '/DelivEat/',
+=======
+  base: '/DelivEat/',                 
+>>>>>>> parent of f0543d57 (init)
   plugins: [react()],
   resolve: {
     alias: { '@': '/src' },
-    dedupe: ['react', 'react-dom'] // -- COMMENTO -- evita doppie copie in HMR
+    dedupe: ['react', 'react-dom']     // -- COMMENTO -- evita doppie copie
   },
   server: {
     port: 3000,
-    strictPort: true,
+    strictPort: true,                 
     proxy: {
-      // -- COMMENTO -- In DEV chiamo /api → backend locale
       '/api': {
         target: 'http://localhost:5000',
         changeOrigin: true,
@@ -24,7 +27,6 @@ export default defineConfig({
           });
         }
       },
-      // -- COMMENTO -- WebSocket (se usi socket.io in dev)
       '/socket.io': {
         target: 'http://localhost:5000',
         ws: true,
@@ -35,7 +37,7 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist',
-    sourcemap: true
+    sourcemap: true                   
   },
-  optimizeDeps: { include: ['react', 'react-dom'] } // -- COMMENTO -- prebundle esplicito
+  optimizeDeps: { include: ['react', 'react-dom'] }  // -- COMMENTO -- prebundle esplicito
 })
