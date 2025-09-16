@@ -1,10 +1,10 @@
-import React from 'react';
-import './Dashboard.css';
-import ColorModeSelect from '../../theme/ColorModeSelect';
-import { useDashboard } from './SettingDashboard';
-import SessionsChart from './SessionsChart';
-import RecentOrdersTable from './RecentOrdersTable';
-import { Link } from 'react-router-dom';   // -- COMMENTO -- Link per le voci cliccabili
+import React from 'react'
+import './Dashboard.css'
+import ColorModeSelect from '../../theme/ColorModeSelect.jsx'
+import { useDashboard } from './SettingDashboard.jsx'
+import SessionsChart from './SessionsChart.jsx'
+import RecentOrdersTable from './RecentOrdersTable.jsx'
+import { Link } from 'react-router-dom'
 
 /* -- COMMENTO -- HEADER-BAR -- */
 function AppNavbar() {
