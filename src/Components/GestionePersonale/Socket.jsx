@@ -1,14 +1,18 @@
+// -- COMMENTO -- Disabilito Socket.io fuori da localhost (niente Render)
 import { io } from 'socket.io-client';
 
-const SOCKET_URL =
-  import.meta.env.VITE_SOCKET_URL
-  || (window.location.hostname === 'localhost'
-        ? 'http://localhost:5000'
-        : 'https://deliveatbackend.onrender.com');
+const isLocal =
+  window.location.hostname === 'localhost' ||
+  window.location.hostname === '127.0.0.1';
 
-export const socket = io(SOCKET_URL, {
-  path: '/socket.io',
-  transports: ['websocket'],
-  withCredentials: true,
-  autoConnect: false,
-});
+const SOCKET_URL = isLocal ? 'http://localhost:5000' : null;
+
+// -- COMMENTO -- Se non siamo in locale, non creo nemmeno la connessione
+export const socket = SOCKET_URL
+  ? io(SOCKET_URL, {
+      path: '/socket.io',
+      transports: ['websocket'],
+      withCredentials: true,
+      autoConnect: false,
+    })
+  : null;

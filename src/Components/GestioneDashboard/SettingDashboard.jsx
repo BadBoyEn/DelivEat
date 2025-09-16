@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import api from '../../api/client.js';
 import { socket } from '../GestionePersonale/Socket.jsx';
 
-/* -- COMMENTO -- Utility */
+/* -- COMMENTO -- Utility -- */
 const num = (v, d = 0) => {
   const n = Number.isFinite(+v) ? +v : 0;
   return d ? n : Math.round(n);
@@ -17,7 +17,7 @@ const arrPick = (obj, keys, def = []) => {
   return Array.isArray(v) ? v : def;
 };
 
-/* -- COMMENTO -- Normalizzo la summary del backend in un formato unico */
+/* -- COMMENTO -- Normalizzo la summary del backend in un formato unico -- */
 function normalizeSummary(raw, days) {
   if (!raw || typeof raw !== 'object') {
     return {
@@ -35,21 +35,15 @@ function normalizeSummary(raw, days) {
   const seriesPrevious  = arrPick(raw, ['seriesPrevious', 'ordersSeriesPrevious', 'prevSeries', 'seriesPrev'], []);
   const labels          = arrPick(raw, ['labels', 'days', 'x', 'dates'], []);
 
-  // -- COMMENTO -- Ordini periodo corrente / precedente
   let ordersLastNDays = pick(raw, ['ordersLastNDays', 'ordersLast30Days', 'ordersLastMonth', 'orders_count_last_period']);
   let ordersPrevNDays = pick(raw, ['ordersPrevNDays', 'ordersPreviousNDays', 'ordersLastNDaysPrev', 'ordersPrev30Days']);
 
-  if (!Number.isFinite(+ordersLastNDays)) {
-    ordersLastNDays = sum(series.slice(-days));
-  }
-  if (!Number.isFinite(+ordersPrevNDays)) {
-    ordersPrevNDays = sum(seriesPrevious.slice(-days));
-  }
+  if (!Number.isFinite(+ordersLastNDays)) ordersLastNDays = sum(series.slice(-days));
+  if (!Number.isFinite(+ordersPrevNDays)) ordersPrevNDays = sum(seriesPrevious.slice(-days));
 
-  // -- COMMENTO -- Rider attivi (o totali come fallback)
-  let ridersActive = pick(raw, ['ridersActive', 'activeRiders', 'ridersOnline', 'ridersTotal', 'ridersCount'], 0);
-  let ridersPrev   = pick(raw, ['ridersPrev', 'prevRidersActive', 'ridersPrevious'], undefined);
-  let ridersDeltaPct = pick(raw, ['ridersDeltaPct', 'ridersChangePct'], undefined);
+  let ridersActive  = pick(raw, ['ridersActive', 'activeRiders', 'ridersOnline', 'ridersTotal', 'ridersCount'], 0);
+  let ridersPrev    = pick(raw, ['ridersPrev', 'prevRidersActive', 'ridersPrevious'], undefined);
+  let ridersDeltaPct= pick(raw, ['ridersDeltaPct', 'ridersChangePct'], undefined);
 
   if (!Number.isFinite(+ridersDeltaPct)) {
     if (Number.isFinite(+ridersPrev) && +ridersPrev !== 0) {
@@ -70,24 +64,44 @@ function normalizeSummary(raw, days) {
   };
 }
 
-/* -- COMMENTO -- Hook dati Dashboard: summary + recent orders + socket live update -- */
+/* -- COMMENTO -- Hook principale usato dalla Dashboard -- */
 export function useDashboard(days = 30) {
   const [loading, setLoading] = useState(true);
-  const [summary, setSummary] = useState(null);
-  const [recent, setRecent] = useState([]);
+  const [summary, setSummary] = useState(normalizeSummary(null, days));
+  const [recent, setRecent]   = useState([]);
 
   const load = async () => {
     setLoading(true);
     try {
-      // -- COMMENTO -- Summary con fallback / dashboard recent con due possibili endpoint
-      const [s, r] = await Promise.all([
-        api.get(`/dashboard/summary?days=${days}`).catch(() => api.get('/dashboard/summary')),
-        api.get('/dashboard/recent-orders').catch(() => api.get('/dashboard/recent')),
+      // -- COMMENTO -- Backend reale:
+      //   /api/dashboard/kpis        -> { ordersLast30, ridersActive, ... }
+      //   /api/dashboard/sessions    -> { days[], current[], previous[] }
+      //   /api/dashboard/last-orders -> { orders: [...] }
+      const [kpisRes, sessionsRes, lastOrdersRes] = await Promise.all([
+        api.get('/dashboard/kpis'),
+        api.get('/dashboard/sessions'),
+        api.get('/dashboard/last-orders')
       ]);
 
-      const normalized = normalizeSummary(s?.data, days);
-      setSummary(normalized);
-      setRecent(Array.isArray(r?.data?.orders) ? r.data.orders : (Array.isArray(r?.data) ? r.data : []));
+      const kpis     = kpisRes?.data || {};
+      const sessions = sessionsRes?.data || {};
+
+      // -- COMMENTO -- Unifico nel formato atteso dal componente
+      const raw = {
+        // KPI
+        ordersLast30Days: kpis.ordersLast30,
+        ridersActive: kpis.ridersActive,
+        avgDeliveryMins: kpis.avgDeliveryMins,
+        // Serie per il grafico
+        labels: sessions.days,
+        series: sessions.current,
+        seriesPrevious: sessions.previous,
+      };
+
+      setSummary(normalizeSummary(raw, days));
+
+      const ordersData = lastOrdersRes?.data;
+      setRecent(Array.isArray(ordersData?.orders) ? ordersData.orders : []);
     } catch (e) {
       console.error('useDashboard load error', e);
       setSummary(normalizeSummary(null, days));
@@ -99,18 +113,15 @@ export function useDashboard(days = 30) {
 
   useEffect(() => { load(); }, [days]);
 
-  // -- COMMENTO -- socket live update (se il server emette "order:new")
+  // -- COMMENTO -- socket live update (solo in locale quando socket !== null)
   useEffect(() => {
     if (!socket) return;
-    try {
-      socket.connect();
-    } catch {}
+    try { socket.connect(); } catch {}
     const handler = (order) => setRecent((prev) => [order, ...prev].slice(0, 10));
     socket.on('order:new', handler);
     return () => socket.off('order:new', handler);
   }, []);
 
-  // -- COMMENTO -- dati per grafico
   const chartData = useMemo(() => {
     if (!summary?.series || !summary?.seriesPrevious) return [];
     return summary.series.map((v, i) => ({
@@ -120,7 +131,6 @@ export function useDashboard(days = 30) {
     }));
   }, [summary]);
 
-  // -- COMMENTO -- delta % ordini periodo corrente vs precedente
   const ordersDeltaPct = useMemo(() => {
     if (!summary) return 0;
     const { ordersLastNDays = 0, ordersPrevNDays = 0 } = summary;
