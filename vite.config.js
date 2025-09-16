@@ -1,9 +1,8 @@
-// -- COMMENTO -- Config Vite: proxy solo in DEV, base corretta per deploy root
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
-  base: '/', // -- COMMENTO -- su Vercel/Netlify la app è alla root
+  base: '/DelivEat/',
   plugins: [react()],
   resolve: {
     alias: { '@': '/src' },
@@ -16,7 +15,14 @@ export default defineConfig({
       // -- COMMENTO -- In DEV chiamo /api → backend locale
       '/api': {
         target: 'http://localhost:5000',
-        changeOrigin: true
+        changeOrigin: true,
+        secure: false,
+        configure: (proxy) => {
+          proxy.on('proxyReq', (proxyReq) => {
+            // -- COMMENTO -- abilita cookie da BE
+            proxyReq.setHeader('Origin', 'http://localhost:3000');
+          });
+        }
       },
       // -- COMMENTO -- WebSocket (se usi socket.io in dev)
       '/socket.io': {
