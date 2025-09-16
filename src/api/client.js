@@ -1,17 +1,23 @@
+// -- COMMENTO -- Client Axios centralizzato DEV/PROD con cookie
 import axios from 'axios';
 
 const IS_DEV  = import.meta.env.DEV;
-const ENV_URL =
+
+// -- COMMENTO -- Raccogliamo possibili env usate nel progetto
+const RAW_ENV_URL =
   (import.meta.env.VITE_API_URL && import.meta.env.VITE_API_URL.trim()) ||
   (import.meta.env.VITE_API_BASE_URL && import.meta.env.VITE_API_BASE_URL.trim()) ||
   (import.meta.env.VITE_API_BASE && import.meta.env.VITE_API_BASE.trim()) ||
   '';
 
-// -- COMMENTO -- Fallback hard-coded per PRODUCTION (Render)
-const PROD_FALLBACK = 'https://deliveatbackend.onrender.com/api';
+// -- COMMENTO -- In DEV usa proxy Vite su /api se non è definita alcuna ENV
+// In PROD l'ENV è obbligatoria: niente fallback hard-coded
+let baseURL = IS_DEV ? (RAW_ENV_URL || '/api') : RAW_ENV_URL;
 
-// -- COMMENTO -- In dev uso il proxy vite su /api, in prod ENV_URL o fallback
-const baseURL = IS_DEV ? (ENV_URL || '/api') : (ENV_URL || PROD_FALLBACK);
+// -- COMMENTO -- Normalizza: se l'URL di prod non termina con /api, aggiungilo
+if (!IS_DEV && baseURL && !/\/api\/?$/.test(baseURL)) {
+  baseURL = baseURL.replace(/\/+$/, '') + '/api';
+}
 
 // -- COMMENTO -- Istanza Axios condivisa con cookie
 const api = axios.create({
