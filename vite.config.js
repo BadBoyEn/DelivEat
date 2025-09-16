@@ -2,11 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
-<<<<<<< HEAD
-  base: '/DelivEat/',
-=======
   base: '/DelivEat/',                 
->>>>>>> parent of f0543d57 (init)
   plugins: [react()],
   resolve: {
     alias: { '@': '/src' },
