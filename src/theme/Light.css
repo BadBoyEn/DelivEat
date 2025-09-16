@@ -2,17 +2,17 @@ html.theme-light{
   /* -- COMMENTO -- Superfici e testo */
   --bg:#ffffff;                 /* sfondo pagina */
   --surface:#ffffff;            /* card / pannelli */
-  --surface-2: #f7f7f7;          /* superfici secondarie */
+  --surface-2:#f7f7f7;          /* superfici secondarie */
   --text:#1a1a1a;               /* testo principale */
   --text-muted:#333333;         /* testo secondario */
 
   /* -- COMMENTO -- Accenti generali del tema */
-  --accent:#ff7900 !important;             /* viola brand (CTA, link, ecc.) */
-  --accent-2:#D81B60;           /* viola/rosa alternativo */
+  --accent:#ff7900 !important;  /* accento brand (CTA, link, ecc.) */
+  --accent-2:#D81B60;           /* accento secondario */
   --on-accent:#ffffff;          /* testo su accento */
 
   /* -- COMMENTO -- Bordi ed elevazioni */
-  --border-weak:#2a2a2a !important;
+  --border-weak:#dadada !important;   /* più chiaro del precedente #2a2a2a */
   --elevation-1:0 2px 8px rgba(0,0,0,0.06);
   --elevation-2:0 6px 18px rgba(0,0,0,0.10);
   --elevation-3:0 10px 24px rgba(0,0,0,0.12);
@@ -21,15 +21,15 @@ html.theme-light{
   --bg-gradient:linear-gradient(180deg,#ffffff 0%,#fbf7fd 60%,#ffffff 100%);
 
   /* -- COMMENTO -- NAVBAR */
-  --nav-bg:#ffffff;             /* sfondo navbar */
-  --nav-text:#1a1a1a;           /* testo/icona navbar */
-  --nav-pill-bg:#ff7900 !important;        /* sfondo pulsanti/chip navbar */
-  --nav-pill-text:#ffffff;      /* testo pulsanti/chip navbar */
+  --nav-bg:#ffffff;                /* sfondo navbar */
+  --nav-text:#1a1a1a;              /* testo/icona navbar */
+  --nav-pill-bg:#ff7900 !important;/* sfondo pulsanti/chip navbar */
+  --nav-pill-text:#ffffff;         /* testo pulsanti/chip navbar */
 
   /* -- COMMENTO -- FOOTER */
-  --footer-bg:#FF6B00;          /* sfondo footer */
-  --footer-text:#ffffff;        /* testo footer */
-  --footer-border:#e5e5e5;      /* bordo superiore footer */
+  --footer-bg:#FF6B00;             /* sfondo footer */
+  --footer-text:#ffffff;           /* testo footer */
+  --footer-border:#e5e5e5;         /* bordo superiore footer */
 }
 
 /* -- COMMENTO -- Applica superfici base del tema */
@@ -39,16 +39,23 @@ html.theme-light, html.theme-light body, html.theme-light #root{
   color:var(--text);
 }
 
+/* -- COMMENTO -- Link default */
+html.theme-light a{ color:var(--accent); }
+html.theme-light a:hover{ opacity:0.9; }
+
 /* -- COMMENTO -- Navbar / Header */
-.MuiAppBar-root,
 .navbar, .header{
-  background:var(--nav-bg) !important;
-  color:var(--nav-text) !important;
-  box-shadow:var(--elevation-1) !important;
+  background:var(--nav-bg);
+  color:var(--nav-text);
 }
 
-/* -- COMMENTO -- Pulsanti/chip nella navbar */
-.navbar .btn-pill,
+.navbar .MuiButton-root,
+.navbar .MuiIconButton-root,
+.header .MuiButton-root,
+.header .MuiIconButton-root{
+  color:var(--nav-text);
+}
+
 .navbar .MuiButton-contained,
 .navbar .MuiChip-root,
 .header .btn-primary{
@@ -62,4 +69,45 @@ html.theme-light, html.theme-light body, html.theme-light #root{
   background:var(--footer-bg);
   color:var(--footer-text);
   border-top:1px solid var(--footer-border);
+}
+
+/* =====================
+   -- COMMENTO -- OVERRIDES MUI (solo via CSS, no colori nel JS)
+   ===================== */
+
+/* AppBar / Toolbar */
+html.theme-light .MuiAppBar-root{
+  background:var(--nav-bg);
+  color:var(--nav-text);
+  border-bottom:1px solid var(--nav-border, var(--border-weak));
+}
+
+/* Button primary */
+html.theme-light .MuiButton-containedPrimary{
+  background:var(--accent);
+  color:var(--on-accent);
+}
+html.theme-light .MuiButton-containedPrimary:hover{
+  filter:brightness(0.95);
+}
+
+/* Link / Button text */
+html.theme-light .MuiButton-textPrimary,
+html.theme-light .MuiLink-root{
+  color:var(--accent);
+}
+
+/* Paper / Card */
+html.theme-light .MuiPaper-root{
+  background:var(--surface);
+  color:var(--text);
+  box-shadow:var(--elevation-1);
+}
+
+/* Input outlined */
+html.theme-light .MuiOutlinedInput-root fieldset{
+  border-color:var(--border-weak);
+}
+html.theme-light .MuiOutlinedInput-root.Mui-focused fieldset{
+  border-color:var(--accent);
 }

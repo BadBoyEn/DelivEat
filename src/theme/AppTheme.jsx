@@ -18,12 +18,12 @@ export default function AppTheme({ children }) {
   }
   const [mode, setMode] = useState(getInitial)
 
-  // -- COMMENTO -- Persisti scelta
+  // -- COMMENTO -- Persisti preferenza
   useEffect(() => {
     try { localStorage.setItem('deliveat-color-mode', mode) } catch {}
   }, [mode])
 
-  // -- COMMENTO -- Applica classi al <html> per i CSS del tema
+  // -- COMMENTO -- Applica classi per i CSS di tema
   useEffect(() => {
     const html = document.documentElement
     html.classList.remove('theme-light', 'theme-dark')
@@ -35,21 +35,8 @@ export default function AppTheme({ children }) {
     []
   )
 
-  // -- COMMENTO -- Palette MUI che usa le CSS variables (i colori restano in Light/Dark.css)
-  const theme = useMemo(() => createTheme({
-    palette: {
-      mode,
-      primary:   { main: 'var(--accent)' },
-      secondary: { main: 'var(--accent-2)' },
-      text:      { primary: 'var(--text)', secondary: 'var(--text-muted)' },
-      background:{ default: 'var(--bg)', paper: 'var(--surface)' },
-    },
-    components: {
-      MuiPaper: { styleOverrides: { root: { background: 'var(--surface)' } } },
-      MuiAppBar:{ styleOverrides: { root: { background: 'var(--nav-bg)', color: 'var(--nav-text)' } } },
-      MuiButton:{ styleOverrides: { root: { textTransform: 'none' } } }
-    }
-  }), [mode])
+  // -- COMMENTO -- NIENTE CSS VAR DENTRO LA PALETTE (evita error #9)
+  const theme = useMemo(() => createTheme({ palette: { mode } }), [mode])
 
   return (
     <ColorModeContext.Provider value={colorMode}>

@@ -7,8 +7,8 @@ html.theme-dark{
   --text-muted:#b0b8c1;            /* testo secondario */
 
   /* -- COMMENTO -- Accenti generali del tema */
-  --accent:#FF6B00;                /* viola brand (CTA, link, ecc.) */
-  --accent-2:#D81B60;              /* viola/rosa alternativo */
+  --accent:#FF6B00;                /* accento brand (CTA, link, ecc.) */
+  --accent-2:#D81B60;              /* accento secondario */
   --on-accent:#ffffff;             /* testo su accento */
 
   /* -- COMMENTO -- Bordi ed elevazioni */
@@ -39,16 +39,23 @@ html.theme-dark, html.theme-dark body, html.theme-dark #root{
   color:var(--text);
 }
 
+/* -- COMMENTO -- Link default */
+html.theme-dark a{ color:var(--accent); }
+html.theme-dark a:hover{ opacity:0.9; }
+
 /* -- COMMENTO -- Navbar / Header */
-.MuiAppBar-root,
 .navbar, .header{
-  background:var(--nav-bg) !important;
-  color:var(--nav-text) !important;
-  box-shadow:var(--elevation-1) !important;
+  background:var(--nav-bg);
+  color:var(--nav-text);
 }
 
-/* -- COMMENTO -- Pulsanti/chip nella navbar */
-.navbar .btn-pill,
+.navbar .MuiButton-root,
+.navbar .MuiIconButton-root,
+.header .MuiButton-root,
+.header .MuiIconButton-root{
+  color:var(--nav-text);
+}
+
 .navbar .MuiButton-contained,
 .navbar .MuiChip-root,
 .header .btn-primary{
@@ -64,6 +71,48 @@ html.theme-dark, html.theme-dark body, html.theme-dark #root{
   border-top:1px solid var(--footer-border);
 }
 
+/* Componenti custom presenti in progetto */
 .news-actions .toolbar-custom {
   box-shadow:var(--elevation-1);
+}
+
+/* =====================
+   -- COMMENTO -- OVERRIDES MUI (solo via CSS, no colori nel JS)
+   ===================== */
+
+/* AppBar / Toolbar */
+html.theme-dark .MuiAppBar-root{
+  background:var(--nav-bg);
+  color:var(--nav-text);
+  border-bottom:1px solid var(--nav-border, var(--border-weak));
+}
+
+/* Button primary */
+html.theme-dark .MuiButton-containedPrimary{
+  background:var(--accent);
+  color:var(--on-accent);
+}
+html.theme-dark .MuiButton-containedPrimary:hover{
+  filter:brightness(1.05);
+}
+
+/* Link / Button text */
+html.theme-dark .MuiButton-textPrimary,
+html.theme-dark .MuiLink-root{
+  color:var(--accent);
+}
+
+/* Paper / Card */
+html.theme-dark .MuiPaper-root{
+  background:var(--surface);
+  color:var(--text);
+  box-shadow:var(--elevation-1);
+}
+
+/* Input outlined */
+html.theme-dark .MuiOutlinedInput-root fieldset{
+  border-color:var(--border-weak);
+}
+html.theme-dark .MuiOutlinedInput-root.Mui-focused fieldset{
+  border-color:var(--accent);
 }
