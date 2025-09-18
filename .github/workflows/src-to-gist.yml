@@ -1,0 +1,82 @@
+# -- COMMENTO -- Workflow: aggiorna un Gist con il tree + contenuti di src/ a ogni push
+name: Sync src to Gist
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - "src/**"
+      - ".github/workflows/src-to-gist.yml"
+  workflow_dispatch:
+
+jobs:
+  sync-src:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install tools
+        run: |
+          # -- COMMENTO -- Servono tree e jq
+          sudo apt-get update
+          sudo apt-get install -y tree jq
+
+      - name: Build src_snapshot.md
+        run: |
+          set -euo pipefail
+          echo "## SRC SNAPSHOT - $(date -u +'%Y-%m-%d %H:%M:%S UTC')" > src_snapshot.md
+          echo >> src_snapshot.md
+          echo '```' >> src_snapshot.md
+          # -- COMMENTO -- Mostra l'albero (esclude cartelle comuni inutili)
+          tree -a -I 'node_modules|dist|.git' src >> src_snapshot.md || true
+          echo '```' >> src_snapshot.md
+          echo -e "\n---\n" >> src_snapshot.md
+
+          # -- COMMENTO -- Aggiunge i contenuti dei file rilevanti
+          while IFS= read -r -d '' file; do
+            rel="${file#./}"
+            ext="${file##*.}"
+            case "$ext" in
+              js)  lang=javascript ;;
+              jsx) lang=jsx ;;
+              ts)  lang=typescript ;;
+              tsx) lang=tsx ;;
+              css) lang=css ;;
+              json) lang=json ;;
+              html) lang=html ;;
+              md)  lang=markdown ;;
+              *)   lang=text ;;
+            esac
+            echo "### $rel" >> src_snapshot.md
+            echo "\`\`\`$lang" >> src_snapshot.md
+            sed 's/\r$//' "$file" >> src_snapshot.md
+            echo "\`\`\`" >> src_snapshot.md
+            echo >> src_snapshot.md
+          done < <(find src -type f \( -name "*.js" -o -name "*.jsx" -o -name "*.ts" -o -name "*.tsx" -o -name "*.css" -o -name "*.json" -o -name "*.html" -o -name "*.md" \) -print0 | sort -z)
+
+          echo "Wrote $(wc -c < src_snapshot.md) bytes"
+
+      - name: Update Gist
+        env:
+          GIST_ID: ${{ vars.GIST_ID }}
+          GH_TOKEN: ${{ secrets.GIST_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ -z "${GIST_ID:-}" ]; then
+            echo "GIST_ID variable is empty. Set it in Settings → Actions → Variables." >&2
+            exit 1
+          fi
+
+          # -- COMMENTO -- Prepara il body JSON con il contenuto del file
+          body=$(jq -Rs '{files: {"src_snapshot.md": {content: .}}}' < src_snapshot.md)
+
+          # -- COMMENTO -- PATCH al Gist
+          url=$(curl -sS -X PATCH \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/gists/${GIST_ID} \
+            -d "${body}" | jq -r '.html_url')
+
+          echo "Gist aggiornato: ${url}"
